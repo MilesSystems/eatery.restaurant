@@ -1,0 +1,55 @@
+1.	 Introduction and Context
+  The purpose of this system is to integrate software and hardware technology into a restaurant to facilitate information sharing between all restaurant staff and allow customers to order food, pay, and directly communicate with the wait staff.  
+
+	Currently customers order food directly from their wait staff.  The wait staff must write down a customers order and produce a copy for the kitchen to in turn prepare the food.   This process is time consuming and prone to errors.  The wait staff must also take care of all customers needs, including being aware of refills, handling payments, and other miscellaneous needs of each customer.
+	The proposed system will consist of 4 components, a customer component, wait staff component, kitchen component, and a component for the manager.  The 4 components will enable information sharing of customer orders, specific customer needs, facilitate and track payments, allow management to monitor wait staff performance and customer transactions, and improve customer service and satisfaction.
+
+
+2.	  Users and Their Goals
+
+The users of this system are restaurant customers and all staff of a restaurant including waiters, kitchen staff, and managers.  They are not required to have more than a minimal understanding of computers.  The goal is to integrate hardware and software into a restaurant to enable direct involvement of the customers in ordering, communicating, and paying for food along with improving the flow of information between restaurant staff and recording transactions.    
+
+
+3.	Functional Requirements
+3.1  The customer component of the system will allow customers to view the restaurants menu consisting of 5 appetizers, 5 entrees, 5 deserts, 5 kids meals, and 5 drinks.
+3.1.1 The customer component and wait staff component will allow the user to select menu items to add to the order.
+3.1.2  The customer component will allow the user to give comments to the waiting staff and chef staff about allegories or desired alterations to their food.
+3.1.3  The customer component  and wait staff component will allow the user to place an order and will receive conformation when successfully placed.
+3.1.4  After the order is placed the customer is directed to a game where they push a button that has a 1/5 chance of displaying they won a free dessert.
+3.2  The wait staff component will display the status of the order: order placed, preparing, or ready.
+	3.2.1  The wait staff component will allow the user to comp items.
+	3.2.2  The wait staff component will keep records of comped items.
+3.3  The customer component will have a refill button on every possible screen that will be specific to each ordered drink.
+3.4  The customer component will have a help button on every possible screen that will alert the waiter to attend the table. 
+3.5 The customer component will have 2 games available for customers to play.
+	3.6  The customer component will allow users to pay directly by credit card.
+3.6.1  The customer component and wait staff component will give the user the ability to split a check up to 4 days by item.
+3.7   The wait staff component will display an alert when a customer’s food is ready to be delivered.
+3.8   The system will null charges for one kids meal for every adult entrée ordered on Sundays.  
+3.9  The wait staff component will show the payment status for an order: pending or complete.
+3.10  The wait staff component will allow the user to make and track payments for the customer.
+3.11  The wait staff component will be able to enter coupons for a customers order.
+3.12  The wait staff component will be able to apply a military discount.
+3.13 The customer component will allow the user to choose between printing a recipe or having it emailed to them.
+3.14  The wait staff component must be logged into by a waiter at the beginning of his or her shift.
+	3.14.1  The wait staff component keeps records on each waiter including the information of what tables they served, sales report, transactions, and tips.
+3.15  The kitchen component will display orders in chronological order.
+  3.15.1  The kitchen component will allow users to mark orders as ready.
+3.16  The manager component must be logged into by a manager to be used.
+3.17  The manager component displays sales reports and item reports. 
+	3.17.1  The manager component can track and manage tips.
+	3.17.2  The manager component tracks transaction ids.
+	3.17.3  The manager component tracks comped items by waiters.
+
+
+4.	  Non-functional Requirements
+4.1  The systems will run on Windows, Mac OS, Apple, and Android devices.
+4.2  The system must have internet access to function.  
+4.3  The system will consist of 16 tablet devices running the customer component, 1 tablet device running the wait staff component, 1 tablet device running the kitchen component, and 1 tablet device running the managers component.  
+4.4  The database …?????
+
+
+
+
+5.	Glossary
+
