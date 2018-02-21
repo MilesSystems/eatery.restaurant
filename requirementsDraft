@@ -12,19 +12,19 @@ The users of this system are restaurant customers and all staff of a restaurant 
 
 3.	Functional Requirements
 3.1  The customer component of the system will allow customers to view the restaurants menu consisting of 5 appetizers, 5 entrees, 5 deserts, 5 kids meals, and 5 drinks.
-3.1.1 The customer component and wait staff component will allow the user to select menu items to add to an order.
-3.1.2  The customer component will allow the user to give comments to the waiting staff and chef staff about allegories or desired alterations to their food.
-3.1.3  The customer component  and wait staff component will allow the user to place an order and will receive conformation when successfully placed.
-3.1.4  After the order is placed the customer is directed to a game where the user pushes a button that has a 1/5 chance of displaying the user won a free dessert.
-3.1.5  The wait staff component will be able to write comments about allegories or special specifications for an order.
+	3.1.1 The customer component and wait staff component will allow the user to select menu items to add to an order.
+	3.1.2  The customer component will allow the user to give comments to the waiting staff and chef staff about allegories or desired alterations to their food.
+	3.1.3  The customer component  and wait staff component will allow the user to place an order and will receive conformation when successfully placed.
+	3.1.4  After the order is placed the customer is directed to a game where the user pushes a button that has a 1/5 chance of displaying the user won a free dessert.
+	3.1.5  The wait staff component will be able to write comments about allegories or special specifications for an order.
 3.2  The wait staff component will display the status of the order: order placed, preparing, or ready.
 	3.2.1  The wait staff component will allow the user to comp items.
 	3.2.2  The wait staff component will keep records of comped items.
 3.3  The customer component will have a refill button on every screen that will be specific to each ordered drink.
 3.4  The customer component will have a help button on every screen that will alert the waiter to attend the table. 
 3.5 The customer component will have 2 open source games available for customers to play.
-	3.6  The customer component will allow users to pay directly by credit card.
-3.6.1  The customer component and wait staff component will give the user the ability to split a check up to 4 ways by item.
+3.6  The customer component will allow users to pay directly by credit card.
+	3.6.1  The customer component and wait staff component will give the user the ability to split a check up to 4 ways by item.
 3.7   The wait staff component will display an alert when a customer’s food is ready to be delivered.
 3.8   The system will null charges for one kids meal for every adult entrée ordered on Sundays.  
 3.9  The wait staff component will show the payment status for an order: pending or complete.
@@ -34,9 +34,9 @@ The users of this system are restaurant customers and all staff of a restaurant 
 3.13 The customer component will allow the user to choose between printing a recipe and having it emailed to them.
 3.14  The wait staff component must be logged into by a waiter at the beginning of his or her shift.
 	3.14.1  The wait staff component keeps records on each waiter including the information of what tables they served, sales report, transactions, and tips.
-	3.15  The kitchen component will display orders in chronological order.
-3.15.1  The kitchen component will allow users to mark orders as ready.
-	3.16  The manager component must be logged into by a manager to be used.
+3.15  The kitchen component will display orders in chronological order.
+	3.15.1  The kitchen component will allow users to mark orders as ready.
+3.16  The manager component must be logged into by a manager to be used.
 3.17  The manager component displays a sales reports and a report of the  number of each item sold.
 		3.17.1  The manager component can track and manage tips.
 		3.17.2  The manager component tracks transaction ids.
