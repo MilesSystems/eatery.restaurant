@@ -1,59 +1,92 @@
 1.	 Introduction and Context
+
 The purpose of this system is to integrate software and hardware technology into a restaurant to facilitate information sharing between all restaurant staff and allow customers to order food, pay, and directly communicate with the wait staff.  
 
 	Currently customers order food directly from their wait staff.  The wait staff must write down a customers order and produce a copy for the kitchen to in turn prepare the food.   This process is time consuming and prone to errors.  The wait staff must also take care of all customers needs, including being aware of refills, handling payments, and other miscellaneous needs of each customer.
-	The proposed system will consist of 4 components, a customer component, wait staff component, kitchen component, and a component for the manager.  The 4 components will enable information sharing of customer orders, specific customer needs, facilitate and track payments, allow management to monitor wait staff performance and customer transactions, and improve customer service and satisfaction.
+	
+The proposed system will consist of 4 components, a customer component, wait staff component, kitchen component, and a component for the manager.  The 4 components will enable information sharing of customer orders, specific customer needs, facilitate and track payments, allow management to monitor wait staff performance and customer transactions, and improve customer service and satisfaction.
 
 
 2.	  Users and Their Goals
 
 The users of this system are restaurant customers and all staff of a restaurant including waiters, kitchen staff, and managers.  They are not required to have more than a minimal understanding of computers.  The goal is to integrate hardware and software into a restaurant to enable direct involvement of the customers in ordering, communicating, and paying for food along with improving the flow of information between restaurant staff and recording transactions.    
-
+•	Customer is able to view the menu, select items from the menu and order them, leave comments for the wait and kitchen staff, request refill and help services, and make payments on their order.
+•	Wait staff is able to view the menu, select items from the menu and order them, leave comments for the kitchen staff, facilitate payments for customers, apply coupons, and military discounts, and reset the customer component for each table.
+•	Kitchen staff is able to view orders in chronological order and mark orders as ready for delivery.
+•	Managers are able to view sales reports and number of each item sold, allocate tips, and view what items each waiter has comped.
 
 3.	Functional Requirements
-3.1  The customer component of the system will allow customers to view the restaurants menu consisting of 5 appetizers, 5 entrees, 5 deserts, 5 kids meals, and 5 drinks.
-	3.1.1 The customer component and wait staff component will allow the user to select menu items to add to an order.
-	3.1.2  The customer component will allow the user to give comments to the waiting staff and chef staff about allegories or desired alterations to their food.
-	3.1.3  The customer component  and wait staff component will allow the user to place an order and will receive conformation when successfully placed.
-	3.1.4  After the order is placed the customer is directed to a game where the user pushes a button that has a 1/5 chance of displaying the user won a free dessert.
-	3.1.5  The wait staff component will be able to write comments about allegories or special specifications for an order.
-3.2  The wait staff component will display the status of the order: order placed, preparing, or ready.
-	3.2.1  The wait staff component will allow the user to comp items.
-	3.2.2  The wait staff component will keep records of comped items.
-3.3  The customer component will have a refill button on every screen that will be specific to each ordered drink.
-3.4  The customer component will have a help button on every screen that will alert the waiter to attend the table. 
-3.5 The customer component will have 2 open source games available for customers to play.
-3.6  The customer component will allow users to pay directly by credit card.
-	3.6.1  The customer component and wait staff component will give the user the ability to split a check up to 4 ways by item.
-3.7   The wait staff component will display an alert when a customer’s food is ready to be delivered.
-3.8   The system will null charges for one kids meal for every adult entrée ordered on Sundays.  
-3.9  The wait staff component will show the payment status for an order: pending or complete.
-3.10  The wait staff component will allow the user to make and track payments for the customer.
-3.11  The wait staff component will be able to enter coupons for a customers order.
-3.12  The wait staff component will be able to apply a military discount.
-3.13 The customer component will allow the user to choose between printing a recipe and having it emailed to them.
-3.14  The wait staff component must be logged into by a waiter at the beginning of his or her shift.
-	3.14.1  The wait staff component keeps records on each waiter including the information of what tables they served, sales report, transactions, and tips.
-3.15  The kitchen component will display orders in chronological order.
-	3.15.1  The kitchen component will allow users to mark orders as ready.
-3.16  The manager component must be logged into by a manager to be used.
-3.17  The manager component displays a sales reports and a report of the  number of each item sold.
-		3.17.1  The manager component can track and manage tips.
-		3.17.2  The manager component tracks transaction ids.
-		3.17.3  The manager component tracks comped items by waiters.
+3.1  The customer component of the system will allow customers to view the restaurants menu.
+3.1.1 The customer can select menu items to add to an order.
+3.1.2  The customer can give comments to the waiting staff and kitchen staff  in a text box at the bottom of the order before submitting it. 
+3.1.3  The customer can place an order and will receive conformation when successfully placed.
+3.1.4  After the order is placed the customer is directed to a game where the user has a 1/5 chance of displaying the user won a free dessert.
+3.1.5  The customer may request a drink specific refill through a button that is available on every screen. 
+3.1.6  The customer may request help through a button that is available on every screen. 
+3.1.7  The customer component will have 2 open source games available for customers to play.
+3.1.8  The can pay directly by credit card.
+3.1.9  The customer can split a check up to 4 ways by item.
+3.1.10  The can choose between printing a receipt and having it emailed to them.
+
+3.2  The wait staff component must be logged into by entering a username and password by each a waiter at the beginning of his or her shift.
+3.2.1  The wait staff can view the restaurants menu.
+3.2.2  Wait staff can select menu items to add to an order.
+3.2.3  The wait staff can comp items by selecting the item in the order and selecting the comp button.
+3.2.4  The wait staff component will keep records of comped items including data on the name of the item and its price.
+3.2.5  The wait staff component will be able to write comments for an order in a text box at the bottom of the order before submitting it.
+3.2.6  The wait staff can place an order and will receive confirmation when successfully placed.
+3.2.7  The wait staff component will display the status of the order: order placed, preparing, or ready.
+3.2.8  The wait staff component will display an alert when a customer’s food is ready to be delivered.
+3.2.9  The system will charge $0.00 for one kids meal ordered with every adult entrée on Sundays.  
+3.2.10  The wait staff component will show the payment status for an order: pending or complete.
+3.2.11  The wait staff can make payments using cash or a customers card for the order.
+3.2.12  The wait staff can enter coupons for a customers order on the customers order page in a text box.
+3.2.13  The wait staff can apply a military discount of 15% on the order page of the customer. 
+3.2.14  The wait staff can split a check up to 4 ways by item.
+3.2.15  The wait staff component keeps records on each waiter including the information of what tables they served, sales report, transactions, and tips.
+3.2.16  The wait staff can reset a tables customer component for new guests to be seated at the table.
+	
+3.3  The kitchen component will display orders in chronological order.
+3.3.1  The kitchen staff can mark orders as ready.
+4.4  The manager component must be logged into through a username and password by a manager to be used.
+4.4.1  The manager can display a sales reports and a report of the  number of each item sold and the total sales of each server.
+		4.4.2  The manager can allocate tips to each server.
+		4.4.3  The manager component stores transaction ids.
+		4.4.4  The manager can display comped items by waiters.
 
 
 4.	  Non-functional Requirements
-4.1  The system will run on Windows, Mac OS, Apple, and Android devices.
-4.2  The system must have internet access to function.  
-4.3  The system will consist of 16 tablet devices running the customer component, 1 tablet device running the wait staff component, 1 tablet device running the kitchen component, and 1 tablet device running the managers component.  
-4.4  The system will be operated by users by a touch screen.
-4.5  The database for each report will be a single file.
+4.1  The system will run on Mac OS.
+4.2  The system must have a private network to function.  
 
 
 
 
 5.	Glossary
+
+Customer:  Patrons who come to the restaurant and order food. 
+
+Wait Staff:  People who are employed at the restaurant to serve customers.
+
+Kitchen:  People who are employed at the restaurant to cook and prepare food.
+
+Manager:  People who are employed at the restaurant to oversee the wait staff and kitchen along with managing sales.
+
+Payments:  Some sort of monetary compensation for a good or service.
+
+Menu Items: consisting of 5 appetizers, 5 entrees, 5 deserts, 5 kids meals, and 5 drinks.
+
+Order: Food/drink request by a customer that the wait staff documents for later compensation.
+
+Database:  Information management system that stores users data.
+
+System:  Compilation of multiple components that function together to accomplish predetermined tasks.
+
+Browser:  A program that displays HTML files through a graphical user interface.
+
+Network:  A system that connects multiple devices together. 
+
+Logged In:  The system knows who is operating a component of the system and can then record information on them and their customers during the users shift.
 
 Component:  Portion of software that drives one of the 4 programs required in the system.
 
@@ -61,11 +94,18 @@ Comped Items:  Items that the wait staff will not charge the customer for.
 
 Open Source:  Software whose source code is created to be free and may be distributed and used without restrictions.
 
-Null:  Make void or 0 when dealing with payment of items.
-
 Sales Report:  A report tracking the value of products and returns as sales are made to customers.
 
 Shift:  Set time in which an employee works each day.
 
 Transactions:  An exchange of money for some service and/or an item.
+
+Locked Down:  The user is confined to a specified URL in a browser preventing them from navigating off or away from the desired system.
+
+
+
+
+
+
+
 
