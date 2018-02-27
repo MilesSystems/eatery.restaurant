@@ -1,0 +1,65 @@
+Risk Management
+
+Risk: Knowledge of PHP
+Severity: High
+Probability of Occurrence: High
+Description of Risk:
+The bulk of our system’s software will be written in PHP.  However, within the UNT computer science community PHP is not a widely mastered language.    Only one member of our team is fluent in PHP.
+Plan to Minimize Risk:
+Dedicate an hour a day to learn PHP until each member is adequately fluent in the language along with using the practice of pair programming.
+
+
+
+Risk: Team Member Dropping the Class
+Severity: Medium
+Probability of Occurrence: Low
+Description of Risk:
+Software Engineering 4444 is a high-level computer science course.  The course requires significant time commitments along with a variety of collaborative skills to be effective developing software in a team environment.  Some students may not have the time or feel ready to take this caliber of a class.  However, the probability is low because the course is almost halfway complete which will decrease the likelihood of students dropping.
+Plan to Minimize Risk:
+Maintain open and active lines of communication with each team member.  This will provide opportunities to minimize situations that would cause a student to drop.  We will also commit code 2 times a week making sure we start early of reaching project milestones.
+
+
+
+Risk: Pushing to a Singular Server
+Severity: High
+Probability of Occurrence: Medium
+Description of Risk:
+When working in a collaborative environment it is possible for multiple group members to write and edit code simultaneously.  This increases the risk of multiple members pushing their edited program to the single server without communicating and collaborating syntax and design.   
+
+
+
+Plan to Minimize Risk:
+Maintain detailed documentation of design and program components.  Also communicate often and clearly when working on the program.  We will also start early on reaching project milestones.
+
+
+
+Risk: Conflicting Team Member Schedules
+Severity: Medium
+Probability: Medium
+Description of Risk:
+Team Members have multiple other classes and commitments that may need more attention or pose a greater importance to their life.  With a team of 4 members it is difficult to arrange time to schedule meetings and lab time in an effort to maintain thorough communication and meet deadlines.
+Plan to Minimize Risk:
+To minimize the risk our team created a GroupMe, which facilitates effective communication between team members and can substitute for in person meetings when necessary.
+
+
+
+Risk: Miscommunication
+Severity: High
+Probability: Medium
+Description of Risk:
+With such a large team project consisting of numerous deadlines, effective and clear communication is important to the overall success of the team.  It is difficult to communicate the responsibilities, expectations, and deadlines of each team member when only meeting for class once a week.
+Plan to Minimize Risk:
+Create multiple avenues of effective communication including a GroupMe and collaborative workspace that contains thorough documentation of the expectations, responsibilities, and deadlines for each team member and their portion of the project.  The platform allows us to monitor progress and set reminders eliminating miscommunication between members about every portion of the project.
+
+
+
+
+
+Risk Management Document
+
+
+
+Michael Ouellette
+Richard Miles
+Ryan Gibeault
+Manny Jandres
