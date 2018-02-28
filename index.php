@@ -2,9 +2,6 @@
 #phpinfo() and exit;
 
 
-
-
-
 /*  TODO - uncomment and continue web frontend development
 
 const DS = DIRECTORY_SEPARATOR; // All folder constants end in a trailing slash /
@@ -20,8 +17,7 @@ if (false === (include SERVER_ROOT . 'Data/Vendors/autoload.php')) {     // Load
 
 */
 
-
-$shed = [
+$schedule = [
     'groups' => [],
     'people' => [
         'Abraham Lincoln' => [
@@ -920,7 +916,7 @@ $shed = [
 
 //var_dump($shed);
 
-print json_encode($shed);
+print json_encode($schedule);
 
 
 // $app = new Carbon\Carbon('Application/Config/Config.php');
