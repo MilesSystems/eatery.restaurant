@@ -1,6 +1,12 @@
 <?php
 #phpinfo() and exit;
 
+
+
+
+
+/*  TODO - uncomment and continue web frontend development
+
 const DS = DIRECTORY_SEPARATOR; // All folder constants end in a trailing slash /
 
 define('SERVER_ROOT', __DIR__ . DS);  // Set our root folder for the application
@@ -10,6 +16,9 @@ const APP_ROOT = SERVER_ROOT;         // I would like to change to only using ap
 if (false === (include SERVER_ROOT . 'Data/Vendors/autoload.php')) {     // Load the autoload() for composer dependencies located in the Services folder
     print '<h1>Loading Composer Failed. See Carbonphp.com for documentation.</h1>' and die;     // Composer autoload
 }
+
+
+*/
 
 
 $shed = [
