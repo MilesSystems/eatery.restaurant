@@ -17,11 +17,27 @@
 
 class Google_Service_DLP_GooglePrivacyDlpV2beta2RecordKey extends Google_Model
 {
+  protected $bigQueryKeyType = 'Google_Service_DLP_GooglePrivacyDlpV2beta2BigQueryKey';
+  protected $bigQueryKeyDataType = '';
   protected $cloudStorageKeyType = 'Google_Service_DLP_GooglePrivacyDlpV2beta2CloudStorageKey';
   protected $cloudStorageKeyDataType = '';
   protected $datastoreKeyType = 'Google_Service_DLP_GooglePrivacyDlpV2beta2DatastoreKey';
   protected $datastoreKeyDataType = '';
 
+  /**
+   * @param Google_Service_DLP_GooglePrivacyDlpV2beta2BigQueryKey
+   */
+  public function setBigQueryKey(Google_Service_DLP_GooglePrivacyDlpV2beta2BigQueryKey $bigQueryKey)
+  {
+    $this->bigQueryKey = $bigQueryKey;
+  }
+  /**
+   * @return Google_Service_DLP_GooglePrivacyDlpV2beta2BigQueryKey
+   */
+  public function getBigQueryKey()
+  {
+    return $this->bigQueryKey;
+  }
   /**
    * @param Google_Service_DLP_GooglePrivacyDlpV2beta2CloudStorageKey
    */

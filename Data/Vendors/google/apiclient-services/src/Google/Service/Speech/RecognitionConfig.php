@@ -18,7 +18,6 @@
 class Google_Service_Speech_RecognitionConfig extends Google_Collection
 {
   protected $collection_key = 'speechContexts';
-  public $enableWordConfidence;
   public $enableWordTimeOffsets;
   public $encoding;
   public $languageCode;
@@ -28,14 +27,6 @@ class Google_Service_Speech_RecognitionConfig extends Google_Collection
   protected $speechContextsType = 'Google_Service_Speech_SpeechContext';
   protected $speechContextsDataType = 'array';
 
-  public function setEnableWordConfidence($enableWordConfidence)
-  {
-    $this->enableWordConfidence = $enableWordConfidence;
-  }
-  public function getEnableWordConfidence()
-  {
-    return $this->enableWordConfidence;
-  }
   public function setEnableWordTimeOffsets($enableWordTimeOffsets)
   {
     $this->enableWordTimeOffsets = $enableWordTimeOffsets;

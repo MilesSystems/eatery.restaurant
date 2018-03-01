@@ -24,6 +24,8 @@ class Google_Service_DLP_GooglePrivacyDlpV2beta2Finding extends Google_Model
   protected $locationType = 'Google_Service_DLP_GooglePrivacyDlpV2beta2Location';
   protected $locationDataType = '';
   public $quote;
+  protected $quoteInfoType = 'Google_Service_DLP_GooglePrivacyDlpV2beta2QuoteInfo';
+  protected $quoteInfoDataType = '';
 
   public function setCreateTime($createTime)
   {
@@ -76,5 +78,19 @@ class Google_Service_DLP_GooglePrivacyDlpV2beta2Finding extends Google_Model
   public function getQuote()
   {
     return $this->quote;
+  }
+  /**
+   * @param Google_Service_DLP_GooglePrivacyDlpV2beta2QuoteInfo
+   */
+  public function setQuoteInfo(Google_Service_DLP_GooglePrivacyDlpV2beta2QuoteInfo $quoteInfo)
+  {
+    $this->quoteInfo = $quoteInfo;
+  }
+  /**
+   * @return Google_Service_DLP_GooglePrivacyDlpV2beta2QuoteInfo
+   */
+  public function getQuoteInfo()
+  {
+    return $this->quoteInfo;
   }
 }

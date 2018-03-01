@@ -76,11 +76,21 @@ class ExecuteSqlRequest extends \Google\Protobuf\Internal\Message
     private $resume_token = '';
     /**
      * Used to control the amount of debugging information returned in
-     * [ResultSetStats][google.spanner.v1.ResultSetStats].
+     * [ResultSetStats][google.spanner.v1.ResultSetStats]. If [partition_token][google.spanner.v1.ExecuteSqlRequest.partition_token] is set, [query_mode][google.spanner.v1.ExecuteSqlRequest.query_mode] can only
+     * be set to [QueryMode.NORMAL][google.spanner.v1.ExecuteSqlRequest.QueryMode.NORMAL].
      *
      * Generated from protobuf field <code>.google.spanner.v1.ExecuteSqlRequest.QueryMode query_mode = 7;</code>
      */
     private $query_mode = 0;
+    /**
+     * If present, results will be restricted to the specified partition
+     * previously created using PartitionQuery().  There must be an exact
+     * match for the values of fields common to this message and the
+     * PartitionQueryRequest message used to create this partition_token.
+     *
+     * Generated from protobuf field <code>bytes partition_token = 8;</code>
+     */
+    private $partition_token = '';
 
     public function __construct() {
         \GPBMetadata\Google\Spanner\V1\Spanner::initOnce();
@@ -289,7 +299,8 @@ class ExecuteSqlRequest extends \Google\Protobuf\Internal\Message
 
     /**
      * Used to control the amount of debugging information returned in
-     * [ResultSetStats][google.spanner.v1.ResultSetStats].
+     * [ResultSetStats][google.spanner.v1.ResultSetStats]. If [partition_token][google.spanner.v1.ExecuteSqlRequest.partition_token] is set, [query_mode][google.spanner.v1.ExecuteSqlRequest.query_mode] can only
+     * be set to [QueryMode.NORMAL][google.spanner.v1.ExecuteSqlRequest.QueryMode.NORMAL].
      *
      * Generated from protobuf field <code>.google.spanner.v1.ExecuteSqlRequest.QueryMode query_mode = 7;</code>
      * @return int
@@ -301,7 +312,8 @@ class ExecuteSqlRequest extends \Google\Protobuf\Internal\Message
 
     /**
      * Used to control the amount of debugging information returned in
-     * [ResultSetStats][google.spanner.v1.ResultSetStats].
+     * [ResultSetStats][google.spanner.v1.ResultSetStats]. If [partition_token][google.spanner.v1.ExecuteSqlRequest.partition_token] is set, [query_mode][google.spanner.v1.ExecuteSqlRequest.query_mode] can only
+     * be set to [QueryMode.NORMAL][google.spanner.v1.ExecuteSqlRequest.QueryMode.NORMAL].
      *
      * Generated from protobuf field <code>.google.spanner.v1.ExecuteSqlRequest.QueryMode query_mode = 7;</code>
      * @param int $var
@@ -311,6 +323,38 @@ class ExecuteSqlRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkEnum($var, \Google\Cloud\Spanner\V1\ExecuteSqlRequest_QueryMode::class);
         $this->query_mode = $var;
+
+        return $this;
+    }
+
+    /**
+     * If present, results will be restricted to the specified partition
+     * previously created using PartitionQuery().  There must be an exact
+     * match for the values of fields common to this message and the
+     * PartitionQueryRequest message used to create this partition_token.
+     *
+     * Generated from protobuf field <code>bytes partition_token = 8;</code>
+     * @return string
+     */
+    public function getPartitionToken()
+    {
+        return $this->partition_token;
+    }
+
+    /**
+     * If present, results will be restricted to the specified partition
+     * previously created using PartitionQuery().  There must be an exact
+     * match for the values of fields common to this message and the
+     * PartitionQueryRequest message used to create this partition_token.
+     *
+     * Generated from protobuf field <code>bytes partition_token = 8;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setPartitionToken($var)
+    {
+        GPBUtil::checkString($var, False);
+        $this->partition_token = $var;
 
         return $this;
     }

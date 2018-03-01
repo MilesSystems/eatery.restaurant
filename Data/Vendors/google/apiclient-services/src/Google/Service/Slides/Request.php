@@ -63,6 +63,8 @@ class Google_Service_Slides_Request extends Google_Model
   protected $replaceAllShapesWithSheetsChartDataType = '';
   protected $replaceAllTextType = 'Google_Service_Slides_ReplaceAllTextRequest';
   protected $replaceAllTextDataType = '';
+  protected $replaceImageType = 'Google_Service_Slides_ReplaceImageRequest';
+  protected $replaceImageDataType = '';
   protected $ungroupObjectsType = 'Google_Service_Slides_UngroupObjectsRequest';
   protected $ungroupObjectsDataType = '';
   protected $unmergeTableCellsType = 'Google_Service_Slides_UnmergeTableCellsRequest';
@@ -417,6 +419,20 @@ class Google_Service_Slides_Request extends Google_Model
   public function getReplaceAllText()
   {
     return $this->replaceAllText;
+  }
+  /**
+   * @param Google_Service_Slides_ReplaceImageRequest
+   */
+  public function setReplaceImage(Google_Service_Slides_ReplaceImageRequest $replaceImage)
+  {
+    $this->replaceImage = $replaceImage;
+  }
+  /**
+   * @return Google_Service_Slides_ReplaceImageRequest
+   */
+  public function getReplaceImage()
+  {
+    return $this->replaceImage;
   }
   /**
    * @param Google_Service_Slides_UngroupObjectsRequest
