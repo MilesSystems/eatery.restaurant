@@ -22,7 +22,9 @@ class Google_Service_Dataflow_RuntimeEnvironment extends Google_Collection
   public $bypassTempDirValidation;
   public $machineType;
   public $maxWorkers;
+  public $network;
   public $serviceAccountEmail;
+  public $subnetwork;
   public $tempLocation;
   public $zone;
 
@@ -58,6 +60,14 @@ class Google_Service_Dataflow_RuntimeEnvironment extends Google_Collection
   {
     return $this->maxWorkers;
   }
+  public function setNetwork($network)
+  {
+    $this->network = $network;
+  }
+  public function getNetwork()
+  {
+    return $this->network;
+  }
   public function setServiceAccountEmail($serviceAccountEmail)
   {
     $this->serviceAccountEmail = $serviceAccountEmail;
@@ -65,6 +75,14 @@ class Google_Service_Dataflow_RuntimeEnvironment extends Google_Collection
   public function getServiceAccountEmail()
   {
     return $this->serviceAccountEmail;
+  }
+  public function setSubnetwork($subnetwork)
+  {
+    $this->subnetwork = $subnetwork;
+  }
+  public function getSubnetwork()
+  {
+    return $this->subnetwork;
   }
   public function setTempLocation($tempLocation)
   {

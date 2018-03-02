@@ -20,6 +20,7 @@ class Google_Service_DLP_GooglePrivacyDlpV2beta2Value extends Google_Model
   public $booleanValue;
   protected $dateValueType = 'Google_Service_DLP_GoogleTypeDate';
   protected $dateValueDataType = '';
+  public $dayOfWeekValue;
   public $floatValue;
   public $integerValue;
   public $stringValue;
@@ -48,6 +49,14 @@ class Google_Service_DLP_GooglePrivacyDlpV2beta2Value extends Google_Model
   public function getDateValue()
   {
     return $this->dateValue;
+  }
+  public function setDayOfWeekValue($dayOfWeekValue)
+  {
+    $this->dayOfWeekValue = $dayOfWeekValue;
+  }
+  public function getDayOfWeekValue()
+  {
+    return $this->dayOfWeekValue;
   }
   public function setFloatValue($floatValue)
   {

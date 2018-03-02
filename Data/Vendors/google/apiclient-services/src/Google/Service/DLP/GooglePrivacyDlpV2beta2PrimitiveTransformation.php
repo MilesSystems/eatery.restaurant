@@ -25,6 +25,8 @@ class Google_Service_DLP_GooglePrivacyDlpV2beta2PrimitiveTransformation extends 
   protected $cryptoHashConfigDataType = '';
   protected $cryptoReplaceFfxFpeConfigType = 'Google_Service_DLP_GooglePrivacyDlpV2beta2CryptoReplaceFfxFpeConfig';
   protected $cryptoReplaceFfxFpeConfigDataType = '';
+  protected $dateShiftConfigType = 'Google_Service_DLP_GooglePrivacyDlpV2beta2DateShiftConfig';
+  protected $dateShiftConfigDataType = '';
   protected $fixedSizeBucketingConfigType = 'Google_Service_DLP_GooglePrivacyDlpV2beta2FixedSizeBucketingConfig';
   protected $fixedSizeBucketingConfigDataType = '';
   protected $redactConfigType = 'Google_Service_DLP_GooglePrivacyDlpV2beta2RedactConfig';
@@ -91,6 +93,20 @@ class Google_Service_DLP_GooglePrivacyDlpV2beta2PrimitiveTransformation extends 
   public function getCryptoReplaceFfxFpeConfig()
   {
     return $this->cryptoReplaceFfxFpeConfig;
+  }
+  /**
+   * @param Google_Service_DLP_GooglePrivacyDlpV2beta2DateShiftConfig
+   */
+  public function setDateShiftConfig(Google_Service_DLP_GooglePrivacyDlpV2beta2DateShiftConfig $dateShiftConfig)
+  {
+    $this->dateShiftConfig = $dateShiftConfig;
+  }
+  /**
+   * @return Google_Service_DLP_GooglePrivacyDlpV2beta2DateShiftConfig
+   */
+  public function getDateShiftConfig()
+  {
+    return $this->dateShiftConfig;
   }
   /**
    * @param Google_Service_DLP_GooglePrivacyDlpV2beta2FixedSizeBucketingConfig

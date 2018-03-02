@@ -17,9 +17,18 @@
 
 class Google_Service_DLP_GooglePrivacyDlpV2beta2OutputStorageConfig extends Google_Model
 {
+  public $outputSchema;
   protected $tableType = 'Google_Service_DLP_GooglePrivacyDlpV2beta2BigQueryTable';
   protected $tableDataType = '';
 
+  public function setOutputSchema($outputSchema)
+  {
+    $this->outputSchema = $outputSchema;
+  }
+  public function getOutputSchema()
+  {
+    return $this->outputSchema;
+  }
   /**
    * @param Google_Service_DLP_GooglePrivacyDlpV2beta2BigQueryTable
    */

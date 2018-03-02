@@ -28,7 +28,7 @@ class Google_Service_Dialogflow_GoogleCloudDialogflowV2Intent extends Google_Col
   public $isFallback;
   protected $messagesType = 'Google_Service_Dialogflow_GoogleCloudDialogflowV2IntentMessage';
   protected $messagesDataType = 'array';
-  public $mlEnabled;
+  public $mlDisabled;
   public $name;
   protected $outputContextsType = 'Google_Service_Dialogflow_GoogleCloudDialogflowV2Context';
   protected $outputContextsDataType = 'array';
@@ -118,13 +118,13 @@ class Google_Service_Dialogflow_GoogleCloudDialogflowV2Intent extends Google_Col
   {
     return $this->messages;
   }
-  public function setMlEnabled($mlEnabled)
+  public function setMlDisabled($mlDisabled)
   {
-    $this->mlEnabled = $mlEnabled;
+    $this->mlDisabled = $mlDisabled;
   }
-  public function getMlEnabled()
+  public function getMlDisabled()
   {
-    return $this->mlEnabled;
+    return $this->mlDisabled;
   }
   public function setName($name)
   {
