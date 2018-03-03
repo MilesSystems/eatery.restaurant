@@ -2,7 +2,7 @@
 #phpinfo() and exit;
 
 
-/*  TODO - uncomment and continue web frontend development
+//  TODO - uncomment and continue web frontend development
 
 const DS = DIRECTORY_SEPARATOR; // All folder constants end in a trailing slash /
 
@@ -13,10 +13,7 @@ const APP_ROOT = SERVER_ROOT;         // I would like to change to only using ap
 if (false === (include SERVER_ROOT . 'Data/Vendors/autoload.php')) {     // Load the autoload() for composer dependencies located in the Services folder
     print '<h1>Loading Composer Failed. See Carbonphp.com for documentation.</h1>' and die;     // Composer autoload
 }
-
-
-*/
-
+/*
 $schedule = [
     'groups' => [],
     'people' => [
@@ -913,13 +910,12 @@ $schedule = [
         ],
     ]
 ];
-
+*/
 //var_dump($shed);
 
-print json_encode($schedule);
+#print json_encode($schedule);
 
-
-// $app = new Carbon\Carbon('Application/Config/Config.php');
+$app = new Carbon\Carbon('Application/Config/Config.php');
 
 /** At one point I returned the invocation of $app to show that
  * the application will not exit on completion, but rather return
@@ -928,7 +924,7 @@ print json_encode($schedule);
  * is returned, the index will re-execute. This turns very bad quickly.
  */
 
-// $app();
+$app();
 
 
 return true;

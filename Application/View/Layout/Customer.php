@@ -45,10 +45,10 @@ $logged_in = $_SESSION['id'] ?? false;
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="<?= $my['user_profile_pic'] ?>" class="img-circle" alt="User Image">
+                    <img src="" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p><?= $my['user_first_last'] ?></p>
+                    <p></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -87,7 +87,7 @@ $logged_in = $_SESSION['id'] ?? false;
 
             </li>
 
-            <li class="treeview"><a href="#"><i class="fa fa-beer"></i><span>Beer</span>
+            <li class="treeview"><a href="#"><i class="fa fa-user"></i><span>Kid's Meals</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
 
                 <ul class="treeview-menu">
@@ -149,18 +149,47 @@ $logged_in = $_SESSION['id'] ?? false;
                     <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
                 </ul>
             </li>
-            <li>
-                <a href="<?= SITE . 'Table' . DS . $_SESSION['table'] . DS . 'Games' ?>">
-                    <i class="fa fa-gamepad"></i><span>Arcade</span>
-                </a>
+
+
+
+            <li class="treeview"><a href="#"><i class="fa fa-gamepad"></i><span>Arcade</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+
+                <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Game 1 </a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Game 2 </a></li>
+                </ul>
+
             </li>
+
+
+
+            <li class="treeview"><a href="#"><i class="fa fa-money"></i><span>Payment</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+
+                <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Pay check </a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Split check </a></li>
+                </ul>
+
+            </li>
+
+
+
+            <li class="treeview"><a href="#"><i class="fa fa-question"></i><span>Help</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+
+                <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Get Refill </a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Get server assistance </a></li>
+                </ul>
+
+            </li>
+
+
             <?php if ($logged_in) : ?>
                 <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-laptop"></i>
-                        <span>Account Overview</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
+
                     <ul class="treeview-menu">
                         <!--
                         <li><a href="#"><i class="fa fa-circle-o"></i> Tournament Finder</a></li>

@@ -22,8 +22,8 @@ const COMPOSER = 'Data' . DS . 'Vendors' . DS;
 const TEMPLATE =  COMPOSER . 'almasaeed2010' . DS . 'adminlte' . DS;
 
 // Facebook
-const FACEBOOK_APP_ID = '';
-const FACEBOOK_APP_SECRET = '';
+const FACEBOOK_APP_ID = '036943173195849';
+const FACEBOOK_APP_SECRET = '3c04808a12f5388e8668b49c3668e414';
 
 // Google
 const GOOGLE_APP_ID = '';
@@ -33,7 +33,7 @@ const GOOGLE_APP_SECRET = '';
 return [
     'DATABASE' => [
 
-        'DB_DSN' =>  APP_LOCAL ? 'mysql:host=127.0.0.1;dbname=C6;' : 'mysql:host=35.224.229.250;dbname=C6;',      // Host and Database get put here
+        'DB_DSN' =>  APP_LOCAL ? 'mysql:host=127.0.0.1;dbname=RootPrerogative;' : 'mysql:host=35.224.229.250;dbname=RootPrerogative',      // Host and Database get put here
 
         'DB_USER' => 'root',                 // User
 
@@ -75,6 +75,7 @@ return [
 
         'CALLBACK' => function () {         // optional variable $reset which would be true if a url is passed to startApplication()
 
+            /*
             if ($_SESSION['id'] ?? ($_SESSION['id'] = false)) {
 
                 global $user;
@@ -89,6 +90,7 @@ return [
                     Table\Messages::All($me,  $_SESSION['id']);
                 }
             }
+            */
         },
     ],
 
@@ -118,7 +120,7 @@ return [
     'VIEW' => [
         'VIEW' => 'Application/View/',  // This is where the MVC() function will map the HTML.PHP and HTML.HBS . See Carbonphp.com/mvc
 
-        'WRAPPER' => 'GoldTeam/Wrapper.php',     // View::content() will produce this
+        'WRAPPER' => 'GoldTeam/Wrapper.hbs',     // View::content() will produce this
     ],
 
 ];

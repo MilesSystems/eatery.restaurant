@@ -5,6 +5,7 @@ namespace Controller;
 use Carbon\Error\PublicAlert;
 use Carbon\Request;
 use Carbon\Session;
+use Table\Users;
 
 class User extends Request
 {
@@ -146,10 +147,31 @@ class User extends Request
      * @return bool
      * @throws PublicAlert
      */
-    public function register() :bool
+    public function register() : ?bool
     {
+
+
+        /*
+
+        Users::Post([
+            'username' => 'Admin',
+            'password' => 'goldteamrules',
+            'email' => 'Tmiles199@gmail.com',
+            'first_name' => 'Dick',
+            'last_name' => 'Miles',
+            'gender' => 'Male'
+        ]);
+
+
+        return null;
+
+
+        */
+
+
+
         if (empty($_POST)) {
-            return false;
+            return null;
         }
 
         global $username, $password, $firstName, $lastName, $gender, $userType, $teamCode, $teamName, $schoolName, $email;
