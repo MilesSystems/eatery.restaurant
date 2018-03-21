@@ -1,919 +1,920 @@
 <?php
 #phpinfo() and exit;
 
-
-//  TODO - uncomment and continue web frontend development
-
 const DS = DIRECTORY_SEPARATOR; // All folder constants end in a trailing slash /
 
 define('SERVER_ROOT', __DIR__ . DS);  // Set our root folder for the application
 
-const APP_ROOT = SERVER_ROOT;         // I would like to change to only using app_root soon
+const APP_ROOT = SERVER_ROOT;  // I would like to change to only using app_root soon
 
-if (false === (include SERVER_ROOT . 'Data/Vendors/autoload.php')) {     // Load the autoload() for composer dependencies located in the Services folder
-    print '<h1>Loading Composer Failed. See Carbonphp.com for documentation.</h1>' and die;     // Composer autoload
+if (false === (include SERVER_ROOT . 'Data/Vendors/autoload.php'))
+{     // Load the autoload() for composer dependencies located in the Services folder
+    print '<h1>Loading Composer Failed. See Carbonphp.com for documentation.</h1>' and die;
+    // Composer autoload
 }
+
 /*
-$schedule = [
-    'groups' => [],
+$shed = [
+    'groups' => ['coordinator', 'cashier', 'ID'],
     'people' => [
         'Abraham Lincoln' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Mother Teresa' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'John F. Kennedy' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator', 'cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0800-1000'],
+                'time_pref' => ['1200-1800'],
+                'pref_not' => ['1900-2200']
             ],
         ],
         'Martin Luther King' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Nelson Mandela' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1000-1200'],
+                'time_pref' => ['1300-2200'],
+                'pref_not' => ['none']
             ],
         ],
         'Winston Churchill' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator', 'cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0800-1000'],
+                'time_pref' => ['1200-1800'],
+                'pref_not' => ['1900-2200']
             ],
         ],
         'Bill Gates' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['2000-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['1430-1800']
             ],
         ],
         'Muhammad Ali' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Mahatma Gandhi' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0700-1500'],
+                'pref_not' => ['none']
             ],
         ],
         'Margaret Thatcher' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Charles de Gaulle' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Christopher Columbus' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'George Orwell' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Charles Darwin' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator', 'cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0800-1000'],
+                'time_pref' => ['1200-1800'],
+                'pref_not' => ['1900-2200']
             ],
         ],
         'Elvis Presley' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
-            ],
+                'cant_work' => ['1000-1200'],
+                'time_pref' => ['1300-2200'],
+                'pref_not' => ['none']
+                ]
         ],
         'Albert Einstein' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Paul McCartney' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Plato' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0700-1500'],
+                'pref_not' => ['none']
             ],
         ],
         'Queen Elizabeth II' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1800-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['0700-0900']
             ],
         ],
         'Queen Victoria' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['2000-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['1430-1800']
             ],
         ],
         'John M Keynes' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Mikhail Gorbachev' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator', 'cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0800-1000'],
+                'time_pref' => ['1200-1800'],
+                'pref_not' => ['1900-2200']
             ],
         ],
         'Jawaharlal Nehru' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1000-1200'],
+                'time_pref' => ['1300-2200'],
+                'pref_not' => ['none']
             ],
         ],
         'Leonardo da Vinci' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Louis Pasteur' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1000-1200'],
+                'time_pref' => ['1300-2200'],
+                'pref_not' => ['none']
             ],
         ],
         'Leo Tolstoy' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1800-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['0700-0900']
             ],
         ],
         'Pablo Picasso' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Vincent Van Gogh' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0700-1500'],
+                'pref_not' => ['none']
             ],
         ],
         'Franklin D. Roosevelt' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1400-1600'],
+                'time_pref' => ['1730-2100'],
+                'pref_not' => ['0700-1000']
             ],
         ],
         'Pope John Paul II' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator', 'cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0800-1000'],
+                'time_pref' => ['1200-1800'],
+                'pref_not' => ['1900-2200']
             ],
         ],
         'Thomas Edison' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['2000-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['1430-1800']
             ],
         ],
         'Rosa Parks' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Aung San Suu Kyi' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1400-1600'],
+                'time_pref' => ['1730-2100'],
+                'pref_not' => ['0700-1000']
             ],
         ],
         'Lyndon Johnson' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1800-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['0700-0900']
             ],
         ],
         'Ludwig Beethoven' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0700-1500'],
+                'pref_not' => ['none']
             ],
         ],
         'Oprah Winfrey' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator', 'cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0800-1000'],
+                'time_pref' => ['1200-1800'],
+                'pref_not' => ['1900-2200']
             ],
         ],
         'Indira Gandhi' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1400-1600'],
+                'time_pref' => ['1730-2100'],
+                'pref_not' => ['0700-1000']
             ],
         ],
         'Eva Peron' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1000-1200'],
+                'time_pref' => ['1300-2200'],
+                'pref_not' => ['none']
             ],
         ],
         'Benazir Bhutto' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Desmond Tutu' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Dalai Lama' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0700-1500'],
+                'pref_not' => ['none']
             ],
         ],
         'Walt Disney' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1000-1200'],
+                'time_pref' => ['1300-2200'],
+                'pref_not' => ['none']
             ],
         ],
         'Neil Armstrong' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator', 'cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0800-1000'],
+                'time_pref' => ['1200-1800'],
+                'pref_not' => ['1900-2200']
             ],
         ],
         'Donald Trump' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Peter Sellers' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0700-1500'],
+                'pref_not' => ['none']
             ],
         ],
         'Barack Obama' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Malcolm X' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'J.K.Rowling' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1800-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['0700-0900']
             ],
         ],
         'Richard Branson' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['2000-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['1430-1800']
             ],
         ],
         'Pele' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator', 'cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0900-1400'],
+                'time_pref' => ['1500-2200'],
+                'pref_not' => ['0700-800']
             ],
         ],
         'Angelina Jolie' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-2200'],
+                'time_pref' => ['none'],
+                'pref_not' => ['none']
             ],
         ],
         'Jesse Owens' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['none']
             ],
         ],
         'Ernest Hemingway' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'John Lennon' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1800-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['0700-0900']
             ],
         ],
         'Henry Ford' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['none']
             ],
         ],
         'Haile Selassie' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Joseph Stalin' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1400-1600'],
+                'time_pref' => ['1730-2100'],
+                'pref_not' => ['0700-1000']
             ],
         ],
         'Lord Baden Powell' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1800-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['0700-0900']
             ],
         ],
         'Michael Jordon' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['none']
             ],
         ],
         'George Bush Jnr' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1000'],
+                'time_pref' => ['1700-2000'],
+                'pref_not' => ['none']
             ],
         ],
         'Vladimir Lenin' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Ingrid Bergman' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Fidel Castro' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['2000-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['1430-1800']
             ],
         ],
         'Oscar Wilde' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1000'],
+                'time_pref' => ['1700-2000'],
+                'pref_not' => ['none']
             ],
         ],
         'Coco Chanel' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1400-1600'],
+                'time_pref' => ['1730-2100'],
+                'pref_not' => ['0700-1000']
             ],
         ],
         'Pope Francis' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0700-1500'],
+                'pref_not' => ['none']
             ],
         ],
         'Amelia Earhart' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['none']
             ],
         ],
         'Adolf Hitler' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Sting' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['0700-1100']
             ],
         ],
         'Mary Magdalene' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0700-1500'],
+                'pref_not' => ['none']
             ],
         ],
         'Alfred Hitchcock' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1400-1600'],
+                'time_pref' => ['1730-2100'],
+                'pref_not' => ['0700-1000']
             ],
         ],
         'Michael Jackson' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['2000-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['1430-1800']
             ],
         ],
         'Madonna' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Mata Hari' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['none']
             ],
         ],
         'Cleopatra' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1000'],
+                'time_pref' => ['1700-2000'],
+                'pref_not' => ['none']
             ],
         ],
         'Grace Kelly' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['0700-1100']
             ],
         ],
         'Steve Jobs' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1400-1600'],
+                'time_pref' => ['1730-2100'],
+                'pref_not' => ['0700-1000']
             ],
         ],
         'Ronald Reagan' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['2000-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['1430-1800']
             ],
         ],
         'Lionel Messi' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['none']
             ],
         ],
         'Babe Ruth' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Bob Geldof' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['0700-1100']
             ],
         ],
         'Leon Trotsky' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1000'],
+                'time_pref' => ['1700-2000'],
+                'pref_not' => ['none']
             ],
         ],
         'Roger Federer' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['2000-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['1430-1800']
             ],
         ],
         'Sigmund Freud' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1400-1600'],
+                'time_pref' => ['1730-2100'],
+                'pref_not' => ['0700-1000']
             ],
         ],
         'Woodrow Wilson' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['none']
             ],
         ],
         'Mao Zedong' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Katherine Hepburn' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
-            ],
+                'cant_work' => ['none'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['0700-1100']
+                ]
         ],
         'Audrey Hepburn' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['2000-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['1430-1800']
             ],
         ],
         'David Beckham' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1400-1600'],
+                'time_pref' => ['1730-2100'],
+                'pref_not' => ['0700-1000']
             ],
         ],
         'Tiger Woods' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['none']
             ],
         ],
         'Usain Bolt' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1000'],
+                'time_pref' => ['1700-2000'],
+                'pref_not' => ['none']
             ],
         ],
         'Carl Lewis' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['0700-1200'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['1200-1700']
             ],
         ],
         'Prince Charles' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['none'],
+                'time_pref' => ['1700-2200'],
+                'pref_not' => ['0700-1100']
             ],
         ],
         'Jacqueline Kennedy Onassis' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['2000-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['1430-1800']
             ],
         ],
         'C.S. Lewis' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1400-1600'],
+                'time_pref' => ['1730-2100'],
+                'pref_not' => ['0700-1000']
             ],
         ],
         'Billie Holiday' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator', 'cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1900-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['0700-0800']
             ],
         ],
         'J.R.R. Tolkien' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['cashier', 'ID'],
+            'groups' => ['cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1800-2200'],
+                'time_pref' => ['0900-1700'],
+                'pref_not' => ['0700-0900']
             ],
         ],
         'Billie Jean King' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['ID'],
+            'groups' => ['ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1400-1600'],
+                'time_pref' => ['1730-2100'],
+                'pref_not' => ['0700-1000']
             ],
         ],
         'Anne Frank' => [
-            'pos_pref' => [],
-            'groups' => [],
+            'pos_pref' => ['coordinator', 'cashier', 'ID'],
+            'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => [],
-                'time_pref' => [],
-                'pref_not' => []
+                'cant_work' => ['1700-2200'],
+                'time_pref' => ['0700-1700'],
+                'pref_not' => ['none']
             ],
         ],
     ]
 ];
-*/
+
 //var_dump($shed);
 
-#print json_encode($schedule);
+print json_encode($shed);
+*/
 
 $app = new Carbon\Carbon('Application/Config/Config.php');
 
@@ -926,7 +927,5 @@ $app = new Carbon\Carbon('Application/Config/Config.php');
 
 $app();
 
-
 return true;
-
 

@@ -9,10 +9,11 @@ use Table\Users;
 
 class User extends Request
 {
-    public static function logout()
+    public static function logout(): bool
     {
         Session::clear();
         startApplication(true);
+        return false;
     }
 
     /**
@@ -21,7 +22,7 @@ class User extends Request
      */
     public function login()
     {
-        global $UserName, $FullName, $UserImage;    // validate cookies
+        global $json, $UserName, $FullName, $UserImage;    // validate cookies
 
         [$UserName, $FullName] = $this->cookie('UserName', 'FullName')->alnum();
 
@@ -35,9 +36,13 @@ class User extends Request
             $this->cookie('username', 'password', 'RememberMe')->clearCookies();
         }
 
+        $json['google_url'] = urlGoogle('SignIn');
+
+        $json['facebook_url'] = urlFacebook('SignIn');
+
         if (empty($_POST)) {
-            return false;           // If forum already submitted
-        }
+            return null;                    // returning null will show the view but not execute the model
+        }  // If forum already submitted
 
         $username = $this->post('username')->alnum();
 
@@ -51,20 +56,40 @@ class User extends Request
     }
 
     /**
+     * @param $service
      * @param null $request
-     * @return mixed
+     * @return array|bool|null|string
      * @throws PublicAlert
      */
-    public function facebook($request = null)
+    public function oAuth($service, &$request = null)
     {
-        global $facebook;
+        global $UserInfo;
 
-        if ($request === 'SignUp' || (array_key_exists('facebook', $_SESSION) && !empty($_SESSION['facebook']))) {
+        [$service, $request] = $this->set($service, $request)->word();
 
-            $facebook = $_SESSION['facebook'] ?? $facebook;  // Pull this from the session
+        $service = strtolower($service);
+
+        if (array_key_exists('UserInfo', $_SESSION) && \is_array($_SESSION['UserInfo'])) {
+            $UserInfo = $_SESSION['UserInfo'];  // Pull this from the session
+        }
+
+        if (!\is_array($UserInfo)) {
+            if ($service === 'google'){
+                $UserInfo = urlGoogle($request);
+            } elseif ($service === 'facebook') {
+                $UserInfo = urlFacebook($request);
+            } else {
+                throw new PublicAlert('HOLY FUCK');
+            }
+
+            return [$service, &$request];    // return the view
+        }
+
+        if ($request === 'SignUp') {
 
             [$username, $first_name, $last_name, $gender]
                 = $this->post('username', 'firstname', 'lastname', 'gender')->alnum();
+
 
             [$password, $verifyPass]
                 = $this->post('password', 'password2')->value();
@@ -105,28 +130,19 @@ class User extends Request
                 throw new PublicAlert('You must agree to the terms and conditions.');
             }
 
-            $facebook['first_name'] = $first_name;
-            $facebook['last_name'] = $last_name;
-            $facebook['gender'] = $gender;
-            $facebook['email'] = $email;
-            $facebook['username'] = $username;
-            $facebook['password'] = $password;
-
-            return (new Request())->set($request)->alnum() ?: true;
+            $UserInfo['first_name'] = $first_name;
+            $UserInfo['last_name'] = $last_name;
+            $UserInfo['gender'] = $gender;
+            $UserInfo['email'] = $email;
+            $UserInfo['username'] = $username;
+            $UserInfo['password'] = $password;
+            $_SESSION['UserInfo'] = $UserInfo;
 
         }
 
-        if ((include SERVER_ROOT . 'Application/Model/Helpers/fb-callback.php') === false) {
-            throw new PublicAlert('Sorry, we could not connect to Facebook. Please try again later.');
-        }
-
-        return (new Request())->set($request)->alnum() ?: true;
+        return [$service, &$request];
     }
 
-    public function google($request)
-    {
-
-    }
 
     public function follow($user_id)
     {
@@ -144,7 +160,7 @@ class User extends Request
     }
 
     /**
-     * @return bool
+     * @return bool|null
      * @throws PublicAlert
      */
     public function register() : ?bool
@@ -183,7 +199,7 @@ class User extends Request
             = $this->post('teamName', 'schoolName')->text();
 
         [$password, $verifyPass]
-            = $this->post('password', 'password2')->value();  // unsanitized
+            = $this->post('password', 'password2')->value();
 
         $email = $this->post('email')->email();
 
@@ -195,10 +211,6 @@ class User extends Request
 
         if (!$gender) {
             throw new PublicAlert('Sorry, please enter your gender.');
-        }
-
-        if ($userType === 'Coach' && !$teamName) {
-            throw new PublicAlert('Sorry, the team name you have entered appears invalid.');
         }
 
         if (!$password || \strlen($password) < 6) {
@@ -220,7 +232,6 @@ class User extends Request
         if (!$lastName) {
             throw new PublicAlert('Please enter your last name!');
         }
-
         if (!$terms) {
             throw new PublicAlert('You must agree to the terms and conditions.');
         }
@@ -242,10 +253,10 @@ class User extends Request
     /**
      * @param null $user_email
      * @param null $user_generated_string
-     * @return array|bool
+     * @return array|null
      * @throws PublicAlert
      */
-    public function recover($user_email = null, $user_generated_string = null)
+    public function recover($user_email = null, $user_generated_string = null): ?array
     {
         if (!empty($user_email) && !empty($user_generated_string)) {
 
@@ -259,7 +270,7 @@ class User extends Request
         }
 
         if (empty($_POST)) {
-            return false;
+            return null;
         }
 
         global $user_email;
@@ -272,25 +283,31 @@ class User extends Request
     }
 
     /**
-     * @param bool $user_id
+     * @param  string|array|mixed $user_id - validating for string
      * @return array|bool|mixed
      * @throws PublicAlert
      */
     public function profile($user_id = false)
     {
-        if ($user_id) {
-            return $this->set($user_id)->alnum();
+        global $json;
+        $user_id = $this->set($user_id)->alnum();
+
+        if (false !== $user_id) {
+            return $user_id;
         }
 
+        $json['myAccountBool'] = true;
+
         if (empty($_POST)) {
-            return false;            // don't go onto the model
+            return null;        // don't go onto the model, but run the view
         }
 
         if (!$this->post('Terms')->int()) {
             throw new PublicAlert('Sorry, you must accept the terms and conditions.', 'warning');
         }
 
-        global $first, $last, $email, $gender, $dob, $password, $profile_pic, $about_me;    // form fields
+        // Our forum variables get put in the public scope
+        global $first, $last, $email, $gender, $dob, $password, $profile_pic, $about_me;
 
         [$first, $last, $gender] = $this->post('first_name', 'last_name', 'gender')->word();
 

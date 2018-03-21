@@ -28,7 +28,7 @@ class User extends GlobalMap
         parent::__construct();
 
         if (!\is_array($this->user)) {
-            $this->user = [];               // TODO - I used to throw an exception
+            $this->user = [];
         }
 
         if ($_SESSION['id'] === $id) {
@@ -45,9 +45,10 @@ class User extends GlobalMap
      * @param $username
      * @param $password
      * @param $rememberMe
+     * @return bool
      * @throws PublicAlert
      */
-    public function login($username, $password, $rememberMe)
+    public function login($username, $password, $rememberMe): bool
     {
         if (!Users::user_exists($username)) {
             throw new PublicAlert('Sorry, this Username and Password combination doesn\'t match out records.', 'warning');
@@ -59,19 +60,18 @@ class User extends GlobalMap
         $stmt->execute([$username]);
         $data = $stmt->fetch();
 
-
         // using the verify method to compare the password with the stored hashed password.
         if (Bcrypt::verify($password, $data['user_password']) === true) {
-            /*
-             * TODO - the mail function doesn't work in google vm
+            /* TODO - make sure email is sending
             if (!Users::email_confirmed($username)) {
-                throw new PublicAlert('Sorry, you need to activate your account. Please check your email!', 'warning');
+                throw new PublicAlert('Sorry, you need to activate your account. Please check your email!');
             }
             */
             $_SESSION['id'] = $data['user_id'];    // returning the user's id.
         } else {
             throw new PublicAlert ('Sorry, the username and password combination you have entered is invalid.', 'warning');
         }
+
 
         if ($rememberMe) {
             Request::setCookie('UserName', $username);
@@ -82,80 +82,84 @@ class User extends GlobalMap
         }
 
         startApplication(true);
-        exit(1);
+
+        return false;
     }
 
     /**
-     * @param $request
-     * @return string
+     * @param string $service
+     * @param string|bool $request will map the the global scope
+     * @return bool|mixed
      * @throws \Carbon\Error\PublicAlert
      */
-    public function facebook($request) : ?string
+    public function oAuth($service, &$request)
     {
-        global $facebook;
+        global $UserInfo, $json;
 
-        Request::changeURI('Facebook/');    // Facebook sends there data in the URL, this will erase it
+        $json['service'] = ucfirst($service);
 
-        if (empty($facebook)) {
-            startApplication('login');     // This will restart the route to the login page
-            exit(1);
-        }
+        $service = "user_{$service}_id";
 
-        $sql = 'SELECT user_id, user_facebook_id FROM carbon_users WHERE user_email = ? OR user_facebook_id =?';
-        $sql = self::fetch($sql, $facebook['email'], $facebook['id']);
+        $sql = "SELECT user_id, $service FROM carbon_users WHERE user_email = ? OR $service = ?";
 
-        $C6_id = $sql['user_id'] ?? false;
-        $fb_id = $sql['user_facebook_id'] ?? false;
+        $sql = self::fetch($sql, $UserInfo['email'], $UserInfo['id']);
 
-        if (!$C6_id && !$fb_id): // This person has needs a new account
-            if ($request === 'SignUp'):          // They asked for a new account
+        $user_id = $sql['user_id'] ?? false;
+
+        $service_id = $sql[$service] ?? false;
+
+        if (!$user_id && !$service_id) { // create new account
+            if ($request === 'SignUp') {                         // This will set the session id
+
+                sortDump([$service,$UserInfo['id']]);
+
                 Users::Post([
-                    'username' => $facebook['username'],
-                    'password' => $facebook['password'],
-                    'facebook_id' => $facebook['id'],
-                    'profile_pic' => $facebook['picture']['url'] ?? '',
-                    'cover_photo' => $facebook['cover']['source'] ?? '',
-                    'email' => $facebook['email'],
-                    'type' => '',
-                    'first_name' => $facebook['first_name'],
-                    'last_name' => $facebook['last_name'],
-                    'gender' => $facebook['gender']
+                    'username' => $UserInfo['username'],
+                    'password' => $UserInfo['password'],
+                    $service => $UserInfo['id'],
+                    'profile_pic' => $UserInfo['picture'] ?? '',
+                    'cover_photo' => $UserInfo['cover'] ?? '',
+                    'email' => $UserInfo['email'],
+                    'type' => 'Athlete',
+                    'first_name' => $UserInfo['first_name'],
+                    'last_name' => $UserInfo['last_name'],
+                    'gender' => $UserInfo['gender']
                 ]);
-            else:       // They wanted to sign in? but you've never logged in this way...
 
-                if (($_SESSION['facebook'] ?? false) && \is_array($_SESSION['facebook'])) {
-                    $facebook = $_SESSION['facebook'];
-                } else {   // were trying to sign in when we should be signing up
-                    $_SESSION['facebook'] = $facebook;
-                }
-                $request = 'SignUp';        // Lets ask them for more info
-                return $request;
-            endif;
-        elseif ($C6_id && !$fb_id):         // We have some matching info with this account
+            } else {
 
-            if ($request === 'SignIn'):     // And they want to link there account
+                $_SESSION['UserInfo'] = $UserInfo;
 
-                $sql = 'UPDATE carbon_user SET user_facebook_id = ? WHERE user_id = ?';     // UPDATE user
-                $this->db->prepare($sql)->execute([$facebook['id'], $_SESSION['id']]);
-                $_SESSION['id'] = $C6_id;
+                $UserInfo['alert'] = 'It appears you do not already have an account with us.'; // Sign into a non-existing account
 
-            else:  //
+                $json = array_merge($json, $UserInfo);
 
-                if ($_SESSION['facebook'] ?? false) {
-                    $facebook = $_SESSION['facebook'];
-                } else {
-                    $_SESSION['facebook'] = $facebook;  // were trying to signup when we need to signin
-                }
-                $request = 'SignIn';
-                return $request;
-            endif;
-        else:
-            $_SESSION['id'] = $C6_id;
-        endif;
+                return true;
+            }
+        } elseif ($user_id && !$service_id) {
 
-        $_SESSION['facebook'] = $facebook = null;
-        startApplication(true);                 // If the session id is set they will be logged in..
-        exit(1);
+            if ($request === 'SignIn') {
+                $_SESSION['id'] = $user_id;
+                $sql = "UPDATE carbon_users SET $service = ? WHERE user_id = ?";     // UPDATE user
+                $this->db->prepare($sql)->execute([$UserInfo['id'], $_SESSION['id']]);
+            } else {
+                $_SESSION['UserInfo'] = $UserInfo;  // were trying to sign up when we need to sign in
+
+                $UserInfo['alert'] = "You're {$UserInfo['service']} email address matches an account that has not previously been linked to this service.";
+
+                $UserInfo['member'] = true;
+
+                $json = array_merge($json, $UserInfo);
+
+                return true;
+            }
+        } else {
+            $_SESSION['id'] = $user_id;
+        }
+        $json = array_merge($json, $UserInfo);
+        $_SESSION['UserInfo'] = $UserInfo = null;
+        startApplication(true);
+        return false;
     }
 
     /**
@@ -176,27 +180,22 @@ class User extends GlobalMap
      * @return bool
      * @throws PublicAlert
      */
-    public function unfollow($user_id) : bool
+    public function unfollow($user_id): bool
     {
         if (!Users::user_exists($user_id)) {
             throw new PublicAlert('That user does not exist?!');
         }
-        return Followers::Delete($this->user[$_SESSION['id']], $user_id);
+        Followers::Delete($this->user[$_SESSION['id']], $user_id);
+
+        return true;
 
     }
 
     /**
-     * @param $request
-     */
-    public function google($request)
-    {
-
-    }
-
-    /**
+     * @return bool
      * @throws PublicAlert
      */
-    public function register()
+    public function register(): bool
     {
         global $username, $password, $email, $firstName, $lastName, $gender;
 
@@ -218,10 +217,14 @@ class User extends GlobalMap
             'gender' => $gender
         ]);
 
-        PublicAlert::success('Welcome to '. SITE_TITLE.'! Please check your email to finish your registration.');
 
-        startApplication(true);
-        exit(1);
+        Stats::Post([]);    // this works
+
+        PublicAlert::success('Welcome to Stats Coach. Please check your email to finish your registration.');
+
+        startApplication('home/');
+
+        return false;
     }
 
     /**
@@ -236,7 +239,7 @@ class User extends GlobalMap
             throw new PublicAlert('Please make sure the Url you have entered is correct.', 'danger');
         }
 
-        $stmt = $this->db->prepare('SELECT COUNT(user_id) FROM StatsCoach.user WHERE user_email = ? AND user_email_code = ?');
+        $stmt = $this->db->prepare('SELECT COUNT(user_id) FROM carbon_users WHERE user_email = ? AND user_email_code = ?');
         $stmt->execute([$email, $email_code]);
 
         if ($stmt->fetch() === 0) {
@@ -244,9 +247,8 @@ class User extends GlobalMap
             return startApplication(true);
         }
 
-        if (!$this->db->prepare('UPDATE carbon_users SET user_email_confirmed = 1 WHERE user_email = ?')->execute(array($email))) {
+        if (!$this->db->prepare('UPDATE carbon_users SET user_email_confirmed = 1 WHERE user_email = ?')->execute(array($email)))
             throw new PublicAlert('The code provided appears to be invalid.', 'danger');
-        }
 
 
         $stmt = $this->db->prepare('SELECT user_id FROM carbon_users WHERE user_email = ?');
@@ -275,12 +277,12 @@ class User extends GlobalMap
         $generated = Bcrypt::genRandomHex(20);
 
         if (empty($generated_string)) {
-            $sql = 'SELECT user_first_name  FROM user WHERE user_email = ?';
+            $sql = 'SELECT user_first_name  FROM carbon_users WHERE user_email = ?';
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$email]);
             $user_first_name = $stmt->fetchColumn();
 
-            $stmt = $this->db->prepare('UPDATE user SET user_generated_string = ? WHERE user_email = ?');
+            $stmt = $this->db->prepare('UPDATE carbon_users SET user_generated_string = ? WHERE user_email = ?');
             if (!$stmt->execute([$generated, $email])) {
                 throw new PublicAlert('Sorry, we failed to recover your account.', 'danger');
             }
@@ -289,13 +291,13 @@ class User extends GlobalMap
                 'Reply-To: Support@Stats.Coach' . "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
 
-            $message = 'Hello ' . $user_first_name . ",
-            \r\nPlease click the link below:\r\n\r\n" . SITE . 'Recover/' . base64_encode($email) . "/" . base64_encode($generated) . "/\r\n\r\n 
+            $message = "Hello " . $user_first_name . ",
+            \r\nPlease click the link below:\r\n\r\n" . SITE . "Recover/" . base64_encode($email) . "/" . base64_encode($generated) . "/\r\n\r\n 
             We will generate a new password for you and send it back to your email.\r\n\r\n--" . SITE_TITLE;
 
             mail($email, $subject, $message, $headers);
 
-            PublicAlert::info('If an account is found, an email will be sent to the account provided.');
+            PublicAlert::info("If an account is found, an email will be sent to the account provided.");
 
         } else {
             $sql = 'SELECT user_id, user_first_name FROM carbon_users WHERE user_email = ? AND user_generated_string = ?';
@@ -320,24 +322,24 @@ class User extends GlobalMap
                 "\n\nPlease change your password once you have logged in using this password.\n\n-- " . SITE_TITLE;
 
             mail($email, $subject, $message, $headers);
-            PublicAlert::success('Your password has been successfully reset.');
+            PublicAlert::success("Your password has been successfully reset.");
         }
-        startApplication('login');
+        startApplication('login/');
 
     }
 
     /**
      * @param bool $user_uri
-     * @return void
+     * @return User|null
      * @throws PublicAlert
      */
-    public function profile($user_uri = false) : void
+    public function profile($user_uri = false)
     {
         if ($user_uri === 'DeleteAccount') {
             Users::Delete($this->user[$_SESSION['id']], $_SESSION['id']);
             Serialized::clear();
             startApplication(true);
-            exit(1);
+            return false;
         }
 
         if ($user_uri) {
@@ -345,14 +347,14 @@ class User extends GlobalMap
             $user_id = Users::user_id_from_uri($user_uri);
             if (!empty($user_id) && $user_id !== $_SESSION['id']) {
                 new User($user_id);
-                return;
+                return true;
             }
         }
 
         Users::All($this->user[$_SESSION['id']], $_SESSION['id']);
 
         if (empty($_POST)) {
-            return;
+            return null;
         }
 
         // we can assume post is active then
@@ -372,20 +374,16 @@ class User extends GlobalMap
         $stmt->bindValue(':user_email_confirmed', $email ? 0 : $my['user_email_confirmed']);
         $stmt->bindValue(':user_about_me', $about_me ?: $my['user_about_me']);
         $stmt->bindValue(':user_id', $_SESSION['id']);
-
         if (!$stmt->execute()) {
             throw new PublicAlert('Sorry, we could not process your information at this time.', 'warning');
         }
-
         if (!empty($password)) {
             Users::change_password($password);
         }
-
         // Remove old picture
         if (!empty($profile_pic) && !empty($my['user_profile_pic']) && $profile_pic !== $my['user_profile_pic']) {
             unlink(SERVER_ROOT . $my['user_profile_pic']);
         }
-
         // Send new activation code
         if (!empty($email) && $email !== $my['user_email']) {
             $subject = 'Please confirm your email';
@@ -394,9 +392,8 @@ class User extends GlobalMap
                 'X-Mailer: PHP/' . PHP_VERSION;
 
             $message = 'Hello ' . ($first ?: $my['user_first_name']) . ",
-            \r\n Please visit the link below so we can activate your account:\r\n\r\n
-             https://www.Stats.Coach/Activate/" . base64_encode($email) . '/' . base64_encode($my['user_email_code']) . "/ \r\n\r\n Happy Golfing \r\n--" . SITE;
-
+            \r\n Please visit the link below so we can activate your account:\r\n\r\n"
+                . SITE . 'Activate/' . base64_encode($email) . '/' . base64_encode($my['user_email_code']) . "/ \r\n\r\n Happy Golfing \r\n--" . SITE;
 
             if (!mail($email ?: $my['user_email'], $subject, $message, $headers)) {
                 throw new PublicAlert('Our email system failed.');
@@ -406,8 +403,6 @@ class User extends GlobalMap
             PublicAlert::success('Your account has been updated!');
         }
         startApplication(true);
-
-        exit(1);
     }
 
 }

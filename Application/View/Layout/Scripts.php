@@ -35,9 +35,6 @@
                     //-- Admin LTE -->
                     $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'dist/js/adminlte.min.js' ?>", () => {
 
-                        //-- AJAX Pace -->
-                        $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'bower_components/PACE/pace.js' ?>", () => $(document).ajaxStart(() => Pace.restart()));
-
                         $.fn.load_backStreach = (img, selector) =>
                             $.fn.CarbonJS("<?=  SITE . APP_VIEW . 'Layout/jquery.backstretch.js' ?>", () =>
                                 $(selector).length ? $(selector).backstretch(img) : $.backstretch(img));
@@ -168,8 +165,11 @@
                                     }))))
                         // <!--?=($_SESSION['id'] ?? false) ? 'wss://stats.coach:8888/' : null?-->
 
+                        //-- AJAX Pace -->
+                        $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'bower_components/PACE/pace.js' ?>", () => $(document).ajaxStart(() => Pace.restart()));
 
                     }))));
+
 
     });
 
