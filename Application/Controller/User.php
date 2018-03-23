@@ -9,6 +9,24 @@ use Table\Users;
 
 class User extends Request
 {
+
+    public function accountType($type) {
+
+        $type = $this->set($type)->word();
+
+        switch ($type) {            // Were just checking the input
+            case 'Manager' :
+            case 'Customer':
+            case 'Kitchen':
+            case 'Waiter':
+                break;
+            default:
+                throw new PublicAlert('Sorry dude, can\'t be that!');
+        }
+        return $type;
+    }
+
+
     public static function logout(): bool
     {
         Session::clear();
@@ -290,6 +308,7 @@ class User extends Request
     public function profile($user_id = false)
     {
         global $json;
+
         $user_id = $this->set($user_id)->alnum();
 
         if (false !== $user_id) {
@@ -297,6 +316,7 @@ class User extends Request
         }
 
         $json['myAccountBool'] = true;
+
 
         if (empty($_POST)) {
             return null;        // don't go onto the model, but run the view

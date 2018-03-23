@@ -8,12 +8,63 @@
 
 namespace Controller;
 
+use Carbon\Error\PublicAlert;
 use Carbon\Request;
 use Table\Messages as Table;
 use Table\Users as U;
 
 class Messages extends Request
 {
+    /**
+     * @return bool
+     * @throws PublicAlert
+     */
+    public function mail(): bool
+    {
+
+        if (empty($_POST)) {
+            return false;
+        }
+
+        if (!$email = $this->post('email')->email()) {
+            throw new PublicAlert('You must provide a valid email!');
+        }
+
+        if (!$subject = $this->post('subject')->noHTML(true)) {
+            throw new PublicAlert('Please set a subject!');
+        }
+
+        if (!$message = $this->post('message')->noHTML(true)) {
+            throw new PublicAlert('Please type out a message to send Richard@Miles.Systems');
+        }
+
+        $message = $email . PHP_EOL . $message;
+
+        $message = wordwrap($message, 70, "\r\n");
+
+        // To send HTML mail, the Content-type header must be set
+        $headers[] = 'MIME-Version: 1.0';
+        $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+        // Additional headers
+        $headers[] = 'To: Richard <Richard@miles.systems>';
+        $headers[] = 'From: WebSender <support@miles.systems>';
+        $headers[] = 'Cc: tmiles199@gmail.com';
+        $headers[] = 'Bcc: Richard@miles.systems';
+
+
+        if (!mail('Richard@miles.systems', $subject, $message, implode("\r\n", $headers))) {
+            PublicAlert::success('Want advice now! Give me a call at 817-789-3294.');
+        } else {
+            PublicAlert::success('Thank you for reaching out, we will get back to you ASAP!');
+        }
+
+        Reports::Post(['level' => 'Mail', 'report' => $message]);       //  TODO - send mail
+
+        // return false;   // There is nothing in the model to run
+    }
+
+
     public function messages() {
         // list($us_id, $messages) = $this->post('user_id','message')->alnum();
         return true;

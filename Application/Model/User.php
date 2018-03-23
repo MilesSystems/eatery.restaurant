@@ -17,6 +17,27 @@ use Carbon\Request;
  */
 class User extends GlobalMap
 {
+
+    /**
+     *  This is for the developer menu at the moment.
+     *  We need a functionality to allow the manager
+     *  to switch account types of every user.
+     * @param $type
+     * @return bool
+     * @throws PublicAlert
+     */
+    public function accountType($type) : bool {
+
+        self::execute('UPDATE carbon_users SET user_type = ? WHERE user_id = ?', $type, $_SESSION['id']);
+
+
+        // TODO - I don't think this alert is showing on our view
+        PublicAlert::success('Good shit!'); // the static call should only set the $alert global variable and not throw an exception
+
+        startApplication(true);     // refresh the view and user data
+
+        return false;
+    }
     /**
      * User constructor.
      * @param string|null $id
@@ -72,7 +93,6 @@ class User extends GlobalMap
             throw new PublicAlert ('Sorry, the username and password combination you have entered is invalid.', 'warning');
         }
 
-
         if ($rememberMe) {
             Request::setCookie('UserName', $username);
             Request::setCookie('FullName', $data['user_first_name'] . ' ' . $data['user_last_name']);
@@ -111,8 +131,6 @@ class User extends GlobalMap
         if (!$user_id && !$service_id) { // create new account
             if ($request === 'SignUp') {                         // This will set the session id
 
-                sortDump([$service,$UserInfo['id']]);
-
                 Users::Post([
                     'username' => $UserInfo['username'],
                     'password' => $UserInfo['password'],
@@ -120,7 +138,7 @@ class User extends GlobalMap
                     'profile_pic' => $UserInfo['picture'] ?? '',
                     'cover_photo' => $UserInfo['cover'] ?? '',
                     'email' => $UserInfo['email'],
-                    'type' => 'Athlete',
+                    'type' => 'Customer',
                     'first_name' => $UserInfo['first_name'],
                     'last_name' => $UserInfo['last_name'],
                     'gender' => $UserInfo['gender']

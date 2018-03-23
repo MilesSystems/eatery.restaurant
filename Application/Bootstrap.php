@@ -37,7 +37,11 @@ class Bootstrap extends App
         parent::__construct($structure);
     }
 
-    public function userSettings() {
+    /**
+     * @throws PublicAlert
+     */
+    public function userSettings()
+    {
         global $user, $json;
 
         // If the user is signed in we need to get the
@@ -69,18 +73,26 @@ class Bootstrap extends App
              * respectively
              */
 
+            $json['body-layout'] = 'skin-green fixed sidebar-mini sidebar-collapse';
+
             switch ($user[$_SESSION['id']]['user_type'] ?? false) {
-                default:
                 case 'Customer':
-                    $json['body-layout'] = 'skin-green fixed sidebar-mini sidebar-collapse';
-                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Layout/Customer.hbs');
+                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Customer.hbs');
                     break;
-                case 'Coach':
-                    $json['body-layout'] = 'skin-green fixed sidebar-mini sidebar-collapse';
-                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'Layout/CoachLayout.hbs');
+                case 'Waiter':
+                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Waiter.hbs');
                     break;
-                #default:
-                 #   throw new PublicAlert('No user type found!!!!');
+                case 'Kitchen':
+                    $json['body-layout'] = 'hold-transition skin-blue layout-top-nav';                // The general elements are top nav
+                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/General.hbs');
+                    break;
+                case 'Manager':
+                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Manager.hbs');
+                    break;
+                default:
+                    $json['body-layout'] = 'hold-transition skin-blue layout-top-nav';                // The general elements are top nav
+                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/General.hbs');
+                    throw new PublicAlert('No user type found!!!!');
             }
         } else {
             $json['body-layout'] = 'stats-wrap';
@@ -89,6 +101,10 @@ class Bootstrap extends App
     }
 
 
+    /** This will be executed if the uri is null, or
+     *  if startApplication does not match the uri
+     * @return mixed
+     */
     public function defaultRoute()
     {
         // Sockets will not execute this
@@ -97,151 +113,95 @@ class Bootstrap extends App
         if (!$_SESSION['id']):
             return MVC('User', 'login');
         else:
-            return $this->wrap()('GoldTeam/Manager/SalesReport.hbs');
+            return MVC('User', 'profile');
         endif;
     }
 
-    /**
+    /** we dont use this return value for anything
      * @param null $uri
      * @return bool
      * @throws \Carbon\Error\PublicAlert
      */
-    public function __invoke($uri = null)
+    public function startApplication($uri = null): ? bool
     {
         if (null !== $uri) {
             $this->userSettings();          // Update the current user
             $this->changeURI($uri);
         }
 
-        $this->structure($this->wrap());
-
-        if ((string)$this->match('Developer/{view}', function ($view){
-
-            print $view and die;
-
-            $_SESSION['layout'] = $view; // TODO - remove before production
-                $this->update();
-                startApplication('login');
-                return null;
-            })) {
-            return true;
-        }
-
-        ################################### Tables / Users
-        if ((string)$this->match('Table/{number}/{page?}', function ($number, $page = null) {
-            $validate = new \Carbon\Request();
-
-            if ($validate->set($number)->int()) {
-                $_SESSION['id'] = $number;           // Our wrapper will modify because this is set
-
-                //$this->update();
-
-
-                if ($validate->set($page)->word()) {
-                    $page = strtolower($page);
-                    if (file_exists(APP_ROOT . $view = (APP_VIEW . 'GoldTeam' . DS . $page . '.php'))) {
-                        View::content($view);
-                        return;
-                    }
-                    if (file_exists(APP_ROOT . $view = (APP_VIEW . 'GoldTeam' . DS . ucfirst($page) . '.php'))) {
-                        View::content($view);
-                        return;
-                    }
-                    if (file_exists(APP_ROOT . $view = (APP_VIEW . 'GoldTeam' . DS . 'Customer' . DS . $page . '.php'))) {
-                        View::content($view);
-                        return;
-                    }
-                    if (file_exists(APP_ROOT . $view = (APP_VIEW . 'GoldTeam' . DS . 'Customer' . DS . ucfirst($page) . '.php'))) {
-                        View::content($view);
-                        return;
-                    }
-                }
-                View::content(APP_VIEW . 'GoldTeam/Home.php');
-
-                return;
-            }
-
-            startApplication(true);
-            exit(1);
-        })) {
-            return true;
-        }
-
-        if ((string)$this->match('Order', 'GoldTeam/Order.php')) {
-            return true;
-        }
-
-        if ((string)$this->match('SalesReport', 'GoldTeam/Manager/SalesReport.hbs') ||
-            (string)$this->match('Compensated', 'GoldTeam/Manager/Compensated.hbs')) {
-            return true;
-        }
-
-        if ((string)$this->match('Schedule', 'GoldTeam/Manager/Calendar.hbs')) {
-            return true;
-        }
-
-        #################################### Gold TEAM
-        if ((string)$this->match('Home', 'GoldTeam/Home.php') ||
-            (string)$this->match('About', 'GoldTeam/About.php') ||
-            (string)$this->match('Tables', 'GoldTeam/Tables.php') ||
-            (string)$this->match('Kitchen', 'GoldTeam/Kitchen.php') ||
-            (string)$this->match('FAQ', 'GoldTeam/FAQ.php') ||
-            (string)$this->match('Trial', 'GoldTeam/Trial.php') ||
-            (string)$this->match('Features', 'GoldTeam/Features.php')
-        ) {
-            return true;
-        }
-
-        $this->structure($this->MVC());
-
-        if ((string)$this->match('Contact', 'Messages', 'Mail')) {
-            return true;
-        }
-
-
-################################### MVC
-        // if (!$_SESSION['id']) {  // Signed out
-
-        if ((string)$this->match('Login/*', 'User', 'login') ||
-            (string)$this->match('oAuth/{service}/{request?}/*', 'User', 'oAuth') ||
-            (string)$this->match('Register/*', 'User', 'Register') ||           // Register
-            (string)$this->match('Recover/{user_email?}/{user_generated_string?}/', 'User', 'recover')) {     // Recover $userId
-            return true;
-        }
-
-        // } else {
-        // Event
-        if (((AJAX && !PJAX) || SOCKET) && (
-                (string)$this->match('Search/{search}/', 'Search', 'all') ||
-                (string)$this->match('Messages/', 'Messages', 'navigation') ||
-                (string)$this->match('Messages/{user_uri}/', 'Messages', 'chat') ||    // chat box widget
-                (string)$this->structure($this->events())->match('Follow/{user_id}/', 'User', 'follow') ||
-                (string)$this->match('Unfollow/{user_id}/', 'User', 'unfollow'))) {
-            return true;         // Event
-        }
-
-        // $url->match('Notifications/*', 'notifications/notifications', ['widget' => '#NavNotifications']);
-
-        // $url->match('tasks/*', 'tasks/tasks', ['widget' => '#NavTasks']);
-
-        if (SOCKET) {
-            return false;
-        }                // Sockets only get json
-
         ################################### MVC
         $this->structure($this->MVC());
-        if ((string)$this->match('Profile/{user_uri?}/', 'User', 'profile') ||   // Profile $user
-            (string)$this->match('Messages/*', 'Messages', 'messages') ||
-            (string)$this->match('Logout/*', function () {
-                User::logout();
-            })) {
-            return true;          // Logout
+
+        if (!$_SESSION['id']) {
+            return $this->match('Login/*', 'User', 'login')() ||
+                $this->match('Contact', 'Messages', 'Mail')() ||
+                $this->match('oAuth/{service}/{request?}/*', 'User', 'oAuth')() ||
+                $this->match('Register/*', 'User', 'Register')() ||           // Register
+                $this->match('Recover/{user_email?}/{user_generated_string?}/', 'User', 'recover')();    // Recover $userId
+
+        }
+        ################################### TODO - Delete developer options
+        $this->match('Developer/{AccountType}', 'User', 'accountType');
+
+
+        ################################### Static / Logged IN
+
+        switch ($user[$_SESSION['id']]['user_type'] ?? false) {
+            case 'Manager':
+
+            case 'Waiter':
+                if ($this->match('Tables/{tables?}/*', '', '')()){
+                    return true;
+                }
+
+            case 'Kitchen':
+                if ($this->match('Kitchen', 'GoldTeam/Kitchen.php')()){
+                    return true;
+                }
+            case 'Customer' :
+                if ($this->structure($this->MVC())->match('Games/{game?}/', 'Customer', 'games')) {
+                    return true;
+                }
+
+            default:
+                ################################### MVC
+                $this->structure($this->MVC());
+
+                if ($this->match('Profile/{user_uri?}/', 'User', 'profile')() ||   // Profile $user
+                    $this->match('Messages/*', 'Messages', 'messages')() ||
+                    $this->match('Logout/*', function () { User::logout(); })()) {
+                    return true;          // Logout
+                }
+
+                #################################### Events
+                if (((AJAX && !PJAX) || SOCKET) && (
+                        $this->match('Search/{search}/', 'Search', 'all')() ||
+                        $this->match('Messages/', 'Messages', 'navigation')() ||
+                        $this->match('Messages/{user_uri}/', 'Messages', 'chat')() ||    // chat box widget
+                        $this->structure($this->events())->match('Follow/{user_id}/', 'User', 'follow')() ||
+                        $this->match('Unfollow/{user_id}/', 'User', 'unfollow')())) {
+                    return true;         // Event
+                }
+
+                // $url->match('Notifications/*', 'notifications/notifications', ['widget' => '#NavNotifications']);
+                // $url->match('tasks/*', 'tasks/tasks', ['widget' => '#NavTasks']);
+
+                #################################### Gold TEAM Static
+                $this->structure($this->wrap());    // TODO - cross over
+                if ($this->match('Home', 'GoldTeam/Static/Home.php')() ||
+                    $this->match('About', 'GoldTeam/Static/About.php')() ||
+                    $this->match('FAQ', 'GoldTeam/Static/FAQ.php')() ||
+                    $this->match('Trial', 'GoldTeam/Static/Trial.php')() ||
+                    $this->match('Features', 'GoldTeam/Static/Features.php')()) {
+                    return true;
+                }
+
+
         }
 
-        // }
-
-        return (string)$this->structure($this->MVC())->match('Activate/{email?}/{email_code?}/', 'User', 'activate') ||  // Activate $email $email_code
-            (string)$this->structure($this->wrap())->match('404/*', 'Error/404error.php') ||
-            (string)$this->match('500/*', 'Error/500error.php');
+        return $this->structure($this->MVC())->match('Activate/{email?}/{email_code?}/', 'User', 'activate')() ||  // Activate $email $email_code
+            $this->structure($this->wrap())->match('404/*', 'Error/404error.php')() ||
+            $this->match('500/*', 'Error/500error.php')();
     }
+
 }
