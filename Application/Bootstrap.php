@@ -83,8 +83,7 @@ class Bootstrap extends App
                     $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Waiter.hbs');
                     break;
                 case 'Kitchen':
-                    $json['body-layout'] = 'hold-transition skin-blue layout-top-nav';                // The general elements are top nav
-                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/General.hbs');
+                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Kitchen.hbs');
                     break;
                 case 'Manager':
                     $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Manager.hbs');
@@ -107,6 +106,7 @@ class Bootstrap extends App
      */
     public function defaultRoute()
     {
+
         // Sockets will not execute this
         View::$forceWrapper = true; // this will hard refresh the wrapper
 
@@ -124,6 +124,7 @@ class Bootstrap extends App
      */
     public function startApplication($uri = null): ? bool
     {
+
         if (null !== $uri) {
             $this->userSettings();          // Update the current user
             $this->changeURI($uri);
@@ -145,9 +146,20 @@ class Bootstrap extends App
 
 
         ################################### Static / Logged IN
+        global $user;
 
         switch ($user[$_SESSION['id']]['user_type'] ?? false) {
             case 'Manager':
+
+                if ($this->match('SalesReport', 'Manager', 'SalesReport')() ||
+                    $this->match('EditMenu','Manager', 'EditMenu')() ||
+                    $this->match('Schedule', 'Schedule', 'Schedule')() ||
+                    $this->match('Employees', 'Manager', 'Employees')() ||
+                    $this->match('Costumers', 'Manager', 'Costumers')() ||
+                    $this->match('Compensated', 'Manager', 'Compensated')() ||
+                    $this->match('Menu', 'Manager', 'Menu')()) {
+                    return true;
+                }
 
             case 'Waiter':
                 if ($this->match('Tables/{tables?}/*', '', '')()){
@@ -155,48 +167,48 @@ class Bootstrap extends App
                 }
 
             case 'Kitchen':
-                if ($this->match('Kitchen', 'GoldTeam/Kitchen.php')()){
+                if ($this->match('Kitchen','Kitchen', 'Orders')()){
                     return true;
                 }
+
             case 'Customer' :
-                if ($this->structure($this->MVC())->match('Games/{game?}/', 'Customer', 'games')) {
+                if ($this->match('Games/{game?}/', 'Customer', 'games')()) {
                     return true;
                 }
 
             default:
-                ################################### MVC
-                $this->structure($this->MVC());
 
-                if ($this->match('Profile/{user_uri?}/', 'User', 'profile')() ||   // Profile $user
-                    $this->match('Messages/*', 'Messages', 'messages')() ||
-                    $this->match('Logout/*', function () { User::logout(); })()) {
-                    return true;          // Logout
-                }
+        }
+        ################################### MVC
+        $this->structure($this->MVC());
 
-                #################################### Events
-                if (((AJAX && !PJAX) || SOCKET) && (
-                        $this->match('Search/{search}/', 'Search', 'all')() ||
-                        $this->match('Messages/', 'Messages', 'navigation')() ||
-                        $this->match('Messages/{user_uri}/', 'Messages', 'chat')() ||    // chat box widget
-                        $this->structure($this->events())->match('Follow/{user_id}/', 'User', 'follow')() ||
-                        $this->match('Unfollow/{user_id}/', 'User', 'unfollow')())) {
-                    return true;         // Event
-                }
+        if ($this->match('Profile/{user_uri?}/', 'User', 'profile')() ||   // Profile $user
+            $this->match('Messages/*', 'Messages', 'messages')() ||
+            $this->match('Logout/*', function () { User::logout(); })()) {
+            return true;          // Logout
+        }
 
-                // $url->match('Notifications/*', 'notifications/notifications', ['widget' => '#NavNotifications']);
-                // $url->match('tasks/*', 'tasks/tasks', ['widget' => '#NavTasks']);
+        #################################### Events
+        if (((AJAX && !PJAX) || SOCKET) && (
+                $this->match('Search/{search}/', 'Search', 'all')() ||
+                $this->match('Messages/', 'Messages', 'navigation')() ||
+                $this->match('Messages/{user_uri}/', 'Messages', 'chat')() ||    // chat box widget
+                $this->structure($this->events())->match('Follow/{user_id}/', 'User', 'follow')() ||
+                $this->match('Unfollow/{user_id}/', 'User', 'unfollow')())) {
+            return true;         // Event
+        }
 
-                #################################### Gold TEAM Static
-                $this->structure($this->wrap());    // TODO - cross over
-                if ($this->match('Home', 'GoldTeam/Static/Home.php')() ||
-                    $this->match('About', 'GoldTeam/Static/About.php')() ||
-                    $this->match('FAQ', 'GoldTeam/Static/FAQ.php')() ||
-                    $this->match('Trial', 'GoldTeam/Static/Trial.php')() ||
-                    $this->match('Features', 'GoldTeam/Static/Features.php')()) {
-                    return true;
-                }
+        // $url->match('Notifications/*', 'notifications/notifications', ['widget' => '#NavNotifications']);
+        // $url->match('tasks/*', 'tasks/tasks', ['widget' => '#NavTasks']);
 
-
+        #################################### Gold TEAM Static
+        $this->structure($this->wrap());    // TODO - cross over
+        if ($this->match('Home', 'GoldTeam/Static/Home.php')() ||
+            $this->match('About', 'GoldTeam/Static/About.php')() ||
+            $this->match('FAQ', 'GoldTeam/Static/FAQ.php')() ||
+            $this->match('Trial', 'GoldTeam/Static/Trial.php')() ||
+            $this->match('Features', 'GoldTeam/Static/Features.php')()) {
+            return true;
         }
 
         return $this->structure($this->MVC())->match('Activate/{email?}/{email_code?}/', 'User', 'activate')() ||  // Activate $email $email_code

@@ -30,10 +30,6 @@ class User extends GlobalMap
 
         self::execute('UPDATE carbon_users SET user_type = ? WHERE user_id = ?', $type, $_SESSION['id']);
 
-
-        // TODO - I don't think this alert is showing on our view
-        PublicAlert::success('Good shit!'); // the static call should only set the $alert global variable and not throw an exception
-
         startApplication(true);     // refresh the view and user data
 
         return false;

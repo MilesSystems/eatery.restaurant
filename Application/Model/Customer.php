@@ -6,7 +6,7 @@
  * Time: 12:33 PM
  */
 
-namespace Controller;
+namespace Model;
 
 
 use Carbon\Request;

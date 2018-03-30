@@ -6,28 +6,24 @@
  * Time: 12:35 PM
  */
 
-namespace Controller;
+namespace Model;
 
+use Model\Helpers\GlobalMap;
 
-use Carbon\Request;
-
-class Manager extends Request
+class Manager extends GlobalMap
 {
+
     public function Compensated() {
-        return null;
+        return true;
     }
 
-
-    public function menu() {
-        return null;
-    }
 
     public function Employees() {
-        return null;
+
     }
 
     public function Costumers() {
-        return null;
+
     }
 
 

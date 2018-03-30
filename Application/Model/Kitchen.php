@@ -6,7 +6,7 @@
  * Time: 12:35 PM
  */
 
-namespace Controller;
+namespace Model;
 
 
 use Carbon\Request;
@@ -14,7 +14,7 @@ use Carbon\Request;
 class Kitchen extends Request
 {
     public function orders() {
-        return null;
+
     }
 
 }

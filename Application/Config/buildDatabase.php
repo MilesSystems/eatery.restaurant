@@ -298,4 +298,6 @@ END;
     print '<br>' . $e->getMessage();
 }
 
+include 'RootPrerogative.php';
+
 print '<br><h4>Done!</h4>';

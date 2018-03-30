@@ -2,8 +2,8 @@
 /**
  * Created by IntelliJ IDEA.
  * User: richardmiles
- * Date: 3/23/18
- * Time: 12:35 PM
+ * Date: 3/30/18
+ * Time: 12:41 AM
  */
 
 namespace Controller;
@@ -11,10 +11,12 @@ namespace Controller;
 
 use Carbon\Request;
 
-class Kitchen extends Request
+class Schedule extends Request
 {
-    public function orders() {
+    public function schedule() {
+
         return null;
+
     }
 
 }

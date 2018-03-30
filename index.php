@@ -8,20 +8,42 @@ define('SERVER_ROOT', __DIR__ . DS);  // Set our root folder for the application
 const APP_ROOT = SERVER_ROOT;  // I would like to change to only using app_root soon
 
 if (false === (include SERVER_ROOT . 'Data/Vendors/autoload.php'))
-{     // Load the autoload() for composer dependencies located in the Services folder
+{   // Load the autoload() for composer dependencies located in the Services folder
     print '<h1>Loading Composer Failed. See Carbonphp.com for documentation.</h1>' and die;
     // Composer autoload
 }
 
-/*
+
 $shed = [
+    'jobs' => [
+        '17589406fa' => [
+            'name' => 'cashier',
+            'time' => ['1600-1700'],
+            'groups' => ['coordinator','cashier'],
+        ],
+        '17589403fa' => [
+            'name' => 'cashier',
+            'time' => ['m'=>'1600-1700'],
+            'groups' => ['coordinator','cashier'],
+        ],
+        '1758978903fa' => [
+            'name' => 'cashier',
+            'time' => ['1700-1800'],
+            'groups' => ['coordinator','cashier'],
+        ],
+    ],
     'groups' => ['coordinator', 'cashier', 'ID'],
     'people' => [
-        'Abraham Lincoln' => [
+        '17589' => [
             'pos_pref' => ['coordinator'],
             'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
-                'cant_work' => ['0700-1200'],
+                'cant_work' => [
+                    'm'=>'1600-1700',
+                    't' => '1600-1700',
+                    'w'=> '1600-1700',
+                    'tr'=>'1600-1700',
+                    'f'=>'1600-1700',],
                 'time_pref' => ['1700-2200'],
                 'pref_not' => ['1200-1700']
             ],
@@ -35,7 +57,7 @@ $shed = [
                 'pref_not' => ['1200-1700']
             ],
         ],
-        'John F. Kennedy' => [
+        '9816e' => [
             'pos_pref' => ['coordinator', 'cashier', 'ID'],
             'groups' => ['coordinator', 'cashier', 'ID'],
             'availability' => [
@@ -913,8 +935,7 @@ $shed = [
 
 //var_dump($shed);
 
-print json_encode($shed);
-*/
+// print_r($shed);
 
 $app = new Carbon\Carbon('Application/Config/Config.php');
 

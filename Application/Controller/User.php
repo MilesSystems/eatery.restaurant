@@ -14,6 +14,7 @@ class User extends Request
 
         $type = $this->set($type)->word();
 
+
         switch ($type) {            // Were just checking the input
             case 'Manager' :
             case 'Customer':
