@@ -16,7 +16,7 @@
  */
 
 /**
- * Service definition for Dialogflow (v2beta1).
+ * Service definition for Dialogflow (v2).
  *
  * <p>
  * An end-to-end development suite for conversational interfaces (e.g.,
@@ -58,7 +58,7 @@ class Google_Service_Dialogflow extends Google_Service
     parent::__construct($client);
     $this->rootUrl = 'https://dialogflow.googleapis.com/';
     $this->servicePath = '';
-    $this->version = 'v2beta1';
+    $this->version = 'v2';
     $this->serviceName = 'dialogflow';
 
     $this->projects = new Google_Service_Dialogflow_Resource_Projects(
@@ -68,7 +68,7 @@ class Google_Service_Dialogflow extends Google_Service
         array(
           'methods' => array(
             'getAgent' => array(
-              'path' => 'v2beta1/{+parent}/agent',
+              'path' => 'v2/{+parent}/agent',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'parent' => array(
@@ -88,7 +88,7 @@ class Google_Service_Dialogflow extends Google_Service
         array(
           'methods' => array(
             'export' => array(
-              'path' => 'v2beta1/{+parent}/agent:export',
+              'path' => 'v2/{+parent}/agent:export',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -98,7 +98,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'import' => array(
-              'path' => 'v2beta1/{+parent}/agent:import',
+              'path' => 'v2/{+parent}/agent:import',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -108,7 +108,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'restore' => array(
-              'path' => 'v2beta1/{+parent}/agent:restore',
+              'path' => 'v2/{+parent}/agent:restore',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -118,7 +118,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'search' => array(
-              'path' => 'v2beta1/{+parent}/agent:search',
+              'path' => 'v2/{+parent}/agent:search',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'parent' => array(
@@ -136,7 +136,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'train' => array(
-              'path' => 'v2beta1/{+parent}/agent:train',
+              'path' => 'v2/{+parent}/agent:train',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -156,7 +156,7 @@ class Google_Service_Dialogflow extends Google_Service
         array(
           'methods' => array(
             'batchDelete' => array(
-              'path' => 'v2beta1/{+parent}/entityTypes:batchDelete',
+              'path' => 'v2/{+parent}/entityTypes:batchDelete',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -166,7 +166,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'batchUpdate' => array(
-              'path' => 'v2beta1/{+parent}/entityTypes:batchUpdate',
+              'path' => 'v2/{+parent}/entityTypes:batchUpdate',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -176,7 +176,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'create' => array(
-              'path' => 'v2beta1/{+parent}/entityTypes',
+              'path' => 'v2/{+parent}/entityTypes',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -190,7 +190,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'delete' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'DELETE',
               'parameters' => array(
                 'name' => array(
@@ -200,7 +200,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'get' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'name' => array(
@@ -214,7 +214,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'list' => array(
-              'path' => 'v2beta1/{+parent}/entityTypes',
+              'path' => 'v2/{+parent}/entityTypes',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'parent' => array(
@@ -236,7 +236,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'patch' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'PATCH',
               'parameters' => array(
                 'name' => array(
@@ -264,7 +264,7 @@ class Google_Service_Dialogflow extends Google_Service
         array(
           'methods' => array(
             'batchCreate' => array(
-              'path' => 'v2beta1/{+parent}/entities:batchCreate',
+              'path' => 'v2/{+parent}/entities:batchCreate',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -274,7 +274,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'batchDelete' => array(
-              'path' => 'v2beta1/{+parent}/entities:batchDelete',
+              'path' => 'v2/{+parent}/entities:batchDelete',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -284,7 +284,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'batchUpdate' => array(
-              'path' => 'v2beta1/{+parent}/entities:batchUpdate',
+              'path' => 'v2/{+parent}/entities:batchUpdate',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -304,7 +304,7 @@ class Google_Service_Dialogflow extends Google_Service
         array(
           'methods' => array(
             'batchDelete' => array(
-              'path' => 'v2beta1/{+parent}/intents:batchDelete',
+              'path' => 'v2/{+parent}/intents:batchDelete',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -314,7 +314,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'batchUpdate' => array(
-              'path' => 'v2beta1/{+parent}/intents:batchUpdate',
+              'path' => 'v2/{+parent}/intents:batchUpdate',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -324,7 +324,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'create' => array(
-              'path' => 'v2beta1/{+parent}/intents',
+              'path' => 'v2/{+parent}/intents',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -342,7 +342,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'delete' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'DELETE',
               'parameters' => array(
                 'name' => array(
@@ -352,7 +352,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'get' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'name' => array(
@@ -370,7 +370,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'list' => array(
-              'path' => 'v2beta1/{+parent}/intents',
+              'path' => 'v2/{+parent}/intents',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'parent' => array(
@@ -396,7 +396,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'patch' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'PATCH',
               'parameters' => array(
                 'name' => array(
@@ -404,15 +404,15 @@ class Google_Service_Dialogflow extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'intentView' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
                 'languageCode' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
                 'updateMask' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'intentView' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -428,7 +428,7 @@ class Google_Service_Dialogflow extends Google_Service
         array(
           'methods' => array(
             'deleteContexts' => array(
-              'path' => 'v2beta1/{+parent}/contexts',
+              'path' => 'v2/{+parent}/contexts',
               'httpMethod' => 'DELETE',
               'parameters' => array(
                 'parent' => array(
@@ -438,7 +438,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'detectIntent' => array(
-              'path' => 'v2beta1/{+session}:detectIntent',
+              'path' => 'v2/{+session}:detectIntent',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'session' => array(
@@ -458,7 +458,7 @@ class Google_Service_Dialogflow extends Google_Service
         array(
           'methods' => array(
             'create' => array(
-              'path' => 'v2beta1/{+parent}/contexts',
+              'path' => 'v2/{+parent}/contexts',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -468,7 +468,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'delete' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'DELETE',
               'parameters' => array(
                 'name' => array(
@@ -478,7 +478,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'get' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'name' => array(
@@ -488,7 +488,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'list' => array(
-              'path' => 'v2beta1/{+parent}/contexts',
+              'path' => 'v2/{+parent}/contexts',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'parent' => array(
@@ -496,17 +496,17 @@ class Google_Service_Dialogflow extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'pageSize' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
               ),
             ),'patch' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'PATCH',
               'parameters' => array(
                 'name' => array(
@@ -530,7 +530,7 @@ class Google_Service_Dialogflow extends Google_Service
         array(
           'methods' => array(
             'create' => array(
-              'path' => 'v2beta1/{+parent}/entityTypes',
+              'path' => 'v2/{+parent}/entityTypes',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -540,7 +540,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'delete' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'DELETE',
               'parameters' => array(
                 'name' => array(
@@ -550,7 +550,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'get' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'name' => array(
@@ -560,7 +560,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'list' => array(
-              'path' => 'v2beta1/{+parent}/entityTypes',
+              'path' => 'v2/{+parent}/entityTypes',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'parent' => array(
@@ -568,17 +568,17 @@ class Google_Service_Dialogflow extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
                 'pageSize' => array(
                   'location' => 'query',
                   'type' => 'integer',
                 ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
               ),
             ),'patch' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'PATCH',
               'parameters' => array(
                 'name' => array(
@@ -602,7 +602,7 @@ class Google_Service_Dialogflow extends Google_Service
         array(
           'methods' => array(
             'deleteContexts' => array(
-              'path' => 'v2beta1/{+parent}/contexts',
+              'path' => 'v2/{+parent}/contexts',
               'httpMethod' => 'DELETE',
               'parameters' => array(
                 'parent' => array(
@@ -612,7 +612,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'detectIntent' => array(
-              'path' => 'v2beta1/{+session}:detectIntent',
+              'path' => 'v2/{+session}:detectIntent',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'session' => array(
@@ -632,7 +632,7 @@ class Google_Service_Dialogflow extends Google_Service
         array(
           'methods' => array(
             'create' => array(
-              'path' => 'v2beta1/{+parent}/contexts',
+              'path' => 'v2/{+parent}/contexts',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -642,7 +642,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'delete' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'DELETE',
               'parameters' => array(
                 'name' => array(
@@ -652,7 +652,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'get' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'name' => array(
@@ -662,7 +662,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'list' => array(
-              'path' => 'v2beta1/{+parent}/contexts',
+              'path' => 'v2/{+parent}/contexts',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'parent' => array(
@@ -680,7 +680,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'patch' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'PATCH',
               'parameters' => array(
                 'name' => array(
@@ -704,7 +704,7 @@ class Google_Service_Dialogflow extends Google_Service
         array(
           'methods' => array(
             'create' => array(
-              'path' => 'v2beta1/{+parent}/entityTypes',
+              'path' => 'v2/{+parent}/entityTypes',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -714,7 +714,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'delete' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'DELETE',
               'parameters' => array(
                 'name' => array(
@@ -724,7 +724,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'get' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'name' => array(
@@ -734,7 +734,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'list' => array(
-              'path' => 'v2beta1/{+parent}/entityTypes',
+              'path' => 'v2/{+parent}/entityTypes',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'parent' => array(
@@ -752,7 +752,7 @@ class Google_Service_Dialogflow extends Google_Service
                 ),
               ),
             ),'patch' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'PATCH',
               'parameters' => array(
                 'name' => array(
@@ -776,7 +776,7 @@ class Google_Service_Dialogflow extends Google_Service
         array(
           'methods' => array(
             'get' => array(
-              'path' => 'v2beta1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'name' => array(

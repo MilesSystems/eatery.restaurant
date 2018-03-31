@@ -66,13 +66,15 @@ class DocGenerator
     public function generate($basePath, $pretty)
     {
         $fileReflectorRegister = new ReflectorRegister();
-        foreach ($this->files as $file) {
 
-            if ($basePath) {
-                $currentFileArr = explode($basePath, trim($file, '/'));
-                if (isset($currentFileArr[1])) {
-                    $currentFile = trim($currentFileArr[1], '/');
-                }
+        $rootPath = realpath(dirname($this->executionPath));
+        foreach ($this->files as $file) {
+            $currentFileArr = $this->isComponent
+                ? explode("/$basePath/", $file)
+                : explode("$rootPath/", $file);
+
+            if (isset($currentFileArr[1])) {
+                $currentFile = str_replace('src/', '', $currentFileArr[1]);
             }
 
             $isPhp = strrpos($file, '.php') == strlen($file) - strlen('.php');
@@ -88,38 +90,28 @@ class DocGenerator
                     $this->isComponent
                 );
             } else {
-                if (strpos($file, '.github') !== false) {
-                    continue;
-                }
-
                 $content = file_get_contents($file);
-                $split = explode('src/', $file);
-                $parser = new MarkdownParser($split[1], $content);
+                $parser = new MarkdownParser($currentFile, $content);
             }
 
             $document = $parser->parse();
             if ($document) {
                 $writer = new Writer($document, $this->outputPath, $pretty);
                 $writer->write($currentFile);
+                $pathInfo = pathinfo($currentFile);
+                $servicePath = $pathInfo['dirname'] === '.'
+                    ? strtolower($pathInfo['filename'])
+                    : strtolower($pathInfo['dirname'] . '/' . $pathInfo['filename']);
+                $id = $this->isComponent
+                    ? strtolower($basePath) . '/' . $servicePath
+                    : $servicePath;
 
                 $this->types->addType([
-                    'id' => $document['id'],
+                    'id' => $id,
                     'title' => $document['title'],
-                    'contents' => ($this->isComponent)
-                        ? $this->prune($document['id'] . '.json')
-                        : $document['id'] . '.json'
+                    'contents' => $servicePath . '.json'
                 ]);
             }
         }
-    }
-
-    private function prune($contentsFileName)
-    {
-        $explode = explode('/', $contentsFileName);
-        if (count($explode) > 1) {
-            array_shift($explode);
-        }
-
-        return implode('/', $explode);
     }
 }

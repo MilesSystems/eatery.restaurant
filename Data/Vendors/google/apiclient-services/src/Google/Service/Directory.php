@@ -1137,6 +1137,14 @@ class Google_Service_Directory extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'maxResults' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
               ),
             ),'patch' => array(
               'path' => 'customer/{customer}/resources/buildings/{buildingId}',
@@ -1332,6 +1340,10 @@ class Google_Service_Directory extends Google_Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ),
+                'maxResults' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
                 ),
                 'pageToken' => array(
                   'location' => 'query',

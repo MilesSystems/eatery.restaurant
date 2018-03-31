@@ -28,6 +28,7 @@ class Google_Service_Dialogflow_GoogleCloudDialogflowV2beta1Intent extends Googl
   public $isFallback;
   protected $messagesType = 'Google_Service_Dialogflow_GoogleCloudDialogflowV2beta1IntentMessage';
   protected $messagesDataType = 'array';
+  public $mlDisabled;
   public $mlEnabled;
   public $name;
   protected $outputContextsType = 'Google_Service_Dialogflow_GoogleCloudDialogflowV2beta1Context';
@@ -117,6 +118,14 @@ class Google_Service_Dialogflow_GoogleCloudDialogflowV2beta1Intent extends Googl
   public function getMessages()
   {
     return $this->messages;
+  }
+  public function setMlDisabled($mlDisabled)
+  {
+    $this->mlDisabled = $mlDisabled;
+  }
+  public function getMlDisabled()
+  {
+    return $this->mlDisabled;
   }
   public function setMlEnabled($mlEnabled)
   {

@@ -14,7 +14,7 @@ if (false === (include SERVER_ROOT . 'Data/Vendors/autoload.php'))
 }
 
 
-$shed = [
+/* $shed = [
     'jobs' => [
         '17589406fa' => [
             'name' => 'cashier',
@@ -933,6 +933,7 @@ $shed = [
     ]
 ];
 
+*/
 //var_dump($shed);
 
 // print_r($shed);

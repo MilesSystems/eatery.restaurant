@@ -33,7 +33,7 @@ class Google_Service_AndroidPublisher_Resource_EditsTracks extends Google_Servic
    * being updated; for example, "com.spiffygame".
    * @param string $editId Unique identifier for this edit.
    * @param string $track The track to read or modify. Acceptable values are:
-   * "alpha", "beta", "production" or "rollout".
+   * "alpha", "beta", "production", "rollout" or "internal".
    * @param array $optParams Optional parameters.
    * @return Google_Service_AndroidPublisher_Track
    */
@@ -68,7 +68,7 @@ class Google_Service_AndroidPublisher_Resource_EditsTracks extends Google_Servic
    * being updated; for example, "com.spiffygame".
    * @param string $editId Unique identifier for this edit.
    * @param string $track The track to read or modify. Acceptable values are:
-   * "alpha", "beta", "production" or "rollout".
+   * "alpha", "beta", "production", "rollout" or "internal".
    * @param Google_Service_AndroidPublisher_Track $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_AndroidPublisher_Track
@@ -88,7 +88,7 @@ class Google_Service_AndroidPublisher_Resource_EditsTracks extends Google_Servic
    * being updated; for example, "com.spiffygame".
    * @param string $editId Unique identifier for this edit.
    * @param string $track The track to read or modify. Acceptable values are:
-   * "alpha", "beta", "production" or "rollout".
+   * "alpha", "beta", "production", "rollout" or "internal".
    * @param Google_Service_AndroidPublisher_Track $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_AndroidPublisher_Track

@@ -33,7 +33,6 @@ class Google_Service_AdExchangeBuyerII_Resource_AccountsCreatives extends Google
    * @param Google_Service_AdExchangeBuyerII_Creative $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string accountId1 The account the creative belongs to.
    * @opt_param string duplicateIdMode Indicates if multiple creatives can share
    * an ID or not. Default is NO_DUPLICATES (one ID per creative).
    * @return Google_Service_AdExchangeBuyerII_Creative
@@ -65,10 +64,6 @@ class Google_Service_AdExchangeBuyerII_Resource_AccountsCreatives extends Google
    * to list all creatives the current user has access to.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string pageToken A token identifying a page of results the server
-   * should return. Typically, this is the value of
-   * ListCreativesResponse.next_page_token returned from the previous call to
-   * 'ListCreatives' method.
    * @opt_param int pageSize Requested page size. The server may return fewer
    * creatives than requested (due to timeout constraint) even if more are
    * available via another call. If unspecified, server will pick an appropriate
@@ -86,6 +81,10 @@ class Google_Service_AdExchangeBuyerII_Resource_AccountsCreatives extends Google
    *
    * Example: 'accountId=12345 AND (dealsStatus:disapproved AND
    * disapprovalReason:unacceptable_content) OR attribute:47'
+   * @opt_param string pageToken A token identifying a page of results the server
+   * should return. Typically, this is the value of
+   * ListCreativesResponse.next_page_token returned from the previous call to
+   * 'ListCreatives' method.
    * @return Google_Service_AdExchangeBuyerII_ListCreativesResponse
    */
   public function listAccountsCreatives($accountId, $optParams = array())
@@ -122,8 +121,6 @@ class Google_Service_AdExchangeBuyerII_Resource_AccountsCreatives extends Google
    * be used to filter the response of the creatives.list method.
    * @param Google_Service_AdExchangeBuyerII_Creative $postBody
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param string accountId1 The account the creative belongs to.
    * @return Google_Service_AdExchangeBuyerII_Creative
    */
   public function update($accountId, $creativeId, Google_Service_AdExchangeBuyerII_Creative $postBody, $optParams = array())

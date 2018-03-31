@@ -18,10 +18,19 @@
 class Google_Service_AndroidEnterprise_Policy extends Google_Collection
 {
   protected $collection_key = 'productPolicy';
+  public $autoUpdatePolicy;
   public $productAvailabilityPolicy;
   protected $productPolicyType = 'Google_Service_AndroidEnterprise_ProductPolicy';
   protected $productPolicyDataType = 'array';
 
+  public function setAutoUpdatePolicy($autoUpdatePolicy)
+  {
+    $this->autoUpdatePolicy = $autoUpdatePolicy;
+  }
+  public function getAutoUpdatePolicy()
+  {
+    return $this->autoUpdatePolicy;
+  }
   public function setProductAvailabilityPolicy($productAvailabilityPolicy)
   {
     $this->productAvailabilityPolicy = $productAvailabilityPolicy;

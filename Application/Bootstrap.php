@@ -73,19 +73,21 @@ class Bootstrap extends App
              * respectively
              */
 
-            $json['body-layout'] = 'skin-green fixed sidebar-mini sidebar-collapse';
-
             switch ($user[$_SESSION['id']]['user_type'] ?? false) {
                 case 'Customer':
+                    $json['body-layout'] = 'skin-green fixed sidebar-mini sidebar-collapse';
                     $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Customer.hbs');
                     break;
                 case 'Waiter':
+                    $json['body-layout'] = 'skin-purple fixed sidebar-mini sidebar-collapse';
                     $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Waiter.hbs');
                     break;
                 case 'Kitchen':
+                    $json['body-layout'] = 'skin-red fixed sidebar-mini sidebar-collapse';
                     $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Kitchen.hbs');
                     break;
                 case 'Manager':
+                    $json['body-layout'] = 'skin-black fixed sidebar-mini sidebar-collapse';
                     $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Manager.hbs');
                     break;
                 default:
@@ -157,7 +159,7 @@ class Bootstrap extends App
                     $this->match('Employees', 'Manager', 'Employees')() ||
                     $this->match('Costumers', 'Manager', 'Costumers')() ||
                     $this->match('Compensated', 'Manager', 'Compensated')() ||
-                    $this->match('Menu', 'Manager', 'Menu')()) {
+                    $this->match('Menu/{forum?}/', 'Manager', 'Menu')()) {
                     return true;
                 }
 

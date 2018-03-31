@@ -36,6 +36,7 @@ class Google_Service_Bigquery_JobStatistics2 extends Google_Collection
   protected $timelineDataType = 'array';
   public $totalBytesBilled;
   public $totalBytesProcessed;
+  public $totalPartitionsProcessed;
   public $totalSlotMs;
   protected $undeclaredQueryParametersType = 'Google_Service_Bigquery_QueryParameter';
   protected $undeclaredQueryParametersDataType = 'array';
@@ -173,6 +174,14 @@ class Google_Service_Bigquery_JobStatistics2 extends Google_Collection
   public function getTotalBytesProcessed()
   {
     return $this->totalBytesProcessed;
+  }
+  public function setTotalPartitionsProcessed($totalPartitionsProcessed)
+  {
+    $this->totalPartitionsProcessed = $totalPartitionsProcessed;
+  }
+  public function getTotalPartitionsProcessed()
+  {
+    return $this->totalPartitionsProcessed;
   }
   public function setTotalSlotMs($totalSlotMs)
   {

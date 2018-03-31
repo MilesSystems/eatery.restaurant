@@ -3468,6 +3468,35 @@ class Google_Service_Compute extends Google_Service
                   'type' => 'string',
                 ),
               ),
+            ),'updateNetworkInterface' => array(
+              'path' => '{project}/zones/{zone}/instances/{instance}/updateNetworkInterface',
+              'httpMethod' => 'PATCH',
+              'parameters' => array(
+                'project' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'zone' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'instance' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'networkInterface' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'requestId' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
             ),
           )
         )
@@ -5809,6 +5838,30 @@ class Google_Service_Compute extends Google_Service
                   'type' => 'string',
                 ),
                 'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
+            ),'patch' => array(
+              'path' => '{project}/regions/{region}/subnetworks/{subnetwork}',
+              'httpMethod' => 'PATCH',
+              'parameters' => array(
+                'project' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'region' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'subnetwork' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'requestId' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),

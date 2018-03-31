@@ -23,11 +23,13 @@ class Google_Service_CloudMachineLearningEngine_GoogleCloudMlV1Version extends G
   public $deploymentUri;
   public $description;
   public $errorMessage;
+  public $framework;
   public $isDefault;
   public $lastUseTime;
   protected $manualScalingType = 'Google_Service_CloudMachineLearningEngine_GoogleCloudMlV1ManualScaling';
   protected $manualScalingDataType = '';
   public $name;
+  public $pythonVersion;
   public $runtimeVersion;
   public $state;
 
@@ -77,6 +79,14 @@ class Google_Service_CloudMachineLearningEngine_GoogleCloudMlV1Version extends G
   {
     return $this->errorMessage;
   }
+  public function setFramework($framework)
+  {
+    $this->framework = $framework;
+  }
+  public function getFramework()
+  {
+    return $this->framework;
+  }
   public function setIsDefault($isDefault)
   {
     $this->isDefault = $isDefault;
@@ -114,6 +124,14 @@ class Google_Service_CloudMachineLearningEngine_GoogleCloudMlV1Version extends G
   public function getName()
   {
     return $this->name;
+  }
+  public function setPythonVersion($pythonVersion)
+  {
+    $this->pythonVersion = $pythonVersion;
+  }
+  public function getPythonVersion()
+  {
+    return $this->pythonVersion;
   }
   public function setRuntimeVersion($runtimeVersion)
   {

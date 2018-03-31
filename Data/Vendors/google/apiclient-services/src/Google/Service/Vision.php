@@ -40,6 +40,7 @@ class Google_Service_Vision extends Google_Service
       "https://www.googleapis.com/auth/cloud-vision";
 
   public $images;
+  public $locations_operations;
   public $operations;
   
   /**
@@ -65,6 +66,26 @@ class Google_Service_Vision extends Google_Service
               'path' => 'v1/images:annotate',
               'httpMethod' => 'POST',
               'parameters' => array(),
+            ),
+          )
+        )
+    );
+    $this->locations_operations = new Google_Service_Vision_Resource_LocationsOperations(
+        $this,
+        $this->serviceName,
+        'operations',
+        array(
+          'methods' => array(
+            'get' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
             ),
           )
         )
@@ -114,6 +135,10 @@ class Google_Service_Vision extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'filter' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
@@ -121,10 +146,6 @@ class Google_Service_Vision extends Google_Service
                 'pageSize' => array(
                   'location' => 'query',
                   'type' => 'integer',
-                ),
-                'filter' => array(
-                  'location' => 'query',
-                  'type' => 'string',
                 ),
               ),
             ),

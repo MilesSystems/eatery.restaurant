@@ -17,6 +17,11 @@ const USER_TASKS = 5;
 const ENTITY_COMMENTS = 6;
 const ENTITY_PHOTOS = 7;
 
+######### Tags below here are defined in the RootPrerogative.php config // database build file
+
+const MENU = 8;
+const ITEMS = 9;
+
 // Template
 const COMPOSER = 'Data' . DS . 'Vendors' . DS;
 const TEMPLATE = COMPOSER . 'almasaeed2010' . DS . 'adminlte' . DS;

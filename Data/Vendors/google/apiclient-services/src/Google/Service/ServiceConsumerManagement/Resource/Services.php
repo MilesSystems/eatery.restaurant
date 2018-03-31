@@ -35,15 +35,15 @@ class Google_Service_ServiceConsumerManagement_Resource_Services extends Google_
    *
    * @opt_param int pageSize The maximum number of results returned by this
    * request. Currently, the default maximum is set to 1000. If page_size is not
-   * provided or provided a number larger than 1000, it will be automatically set
-   * to 1000.
+   * provided or the size provided is a number larger than 1000, it will be
+   * automatically set to 1000.
    *
    * Optional.
    * @opt_param string query Set a query `{expression}` for querying tenancy
    * units. Your `{expression}` must be in the format:
    * `field_name=literal_string`. The `field_name` is the name of the field you
-   * want to compare. Supported fields are `tenant_resources.tag`
-   * and`tenant_resources.resource`.
+   * want to compare. Supported fields are `tenant_resources.tag` and
+   * `tenant_resources.resource`.
    *
    * For example, to search tenancy units that contain at least one tenant
    * resource with given tag 'xyz', use query `tenant_resources.tag=xyz`. To

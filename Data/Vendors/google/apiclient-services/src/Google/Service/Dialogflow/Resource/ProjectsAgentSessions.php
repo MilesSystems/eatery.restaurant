@@ -56,14 +56,14 @@ class Google_Service_Dialogflow_Resource_ProjectsAgentSessions extends Google_Se
    * runtime. It's up to the API caller to choose an appropriate session ID. It
    * can be a random number or some type of user identifier (preferably hashed).
    * The length of the session ID must not exceed 36 bytes.
-   * @param Google_Service_Dialogflow_GoogleCloudDialogflowV2beta1DetectIntentRequest $postBody
+   * @param Google_Service_Dialogflow_GoogleCloudDialogflowV2DetectIntentRequest $postBody
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Dialogflow_GoogleCloudDialogflowV2beta1DetectIntentResponse
+   * @return Google_Service_Dialogflow_GoogleCloudDialogflowV2DetectIntentResponse
    */
-  public function detectIntent($session, Google_Service_Dialogflow_GoogleCloudDialogflowV2beta1DetectIntentRequest $postBody, $optParams = array())
+  public function detectIntent($session, Google_Service_Dialogflow_GoogleCloudDialogflowV2DetectIntentRequest $postBody, $optParams = array())
   {
     $params = array('session' => $session, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('detectIntent', array($params), "Google_Service_Dialogflow_GoogleCloudDialogflowV2beta1DetectIntentResponse");
+    return $this->call('detectIntent', array($params), "Google_Service_Dialogflow_GoogleCloudDialogflowV2DetectIntentResponse");
   }
 }

@@ -283,9 +283,17 @@ class Google_Service_Bigquery extends Google_Service
                   'location' => 'query',
                   'type' => 'boolean',
                 ),
+                'maxCreationTime' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'maxResults' => array(
                   'location' => 'query',
                   'type' => 'integer',
+                ),
+                'minCreationTime' => array(
+                  'location' => 'query',
+                  'type' => 'string',
                 ),
                 'pageToken' => array(
                   'location' => 'query',

@@ -57,17 +57,24 @@ use Carbon\Helpers\Pipe;
 
 abstract class GlobalMap extends Entities
 {
+
     protected $user = array();
+    protected $menu = array();
     
     public function __construct()
     {
         parent::__construct();
-        global $user;
+        global $user, $menu;
         $this->user = &$user;
+        $this->menu = &$menu;
     }
 
     public static function sendUpdate(string $id, string $uri){
         Pipe::send( $uri, SERVER_ROOT . 'Data/Temp/' . $id . '.fifo' );
+    }
+
+    public static function sendSessionUpdate(string $id, string $uri) {
+        Pipe::send($uri, SERVER_ROOT . 'Data/Temp/' . $id . '.fifo' );
     }
 
 }

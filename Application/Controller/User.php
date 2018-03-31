@@ -49,7 +49,7 @@ class User extends Request
 
         $UserImage = file_exists(SERVER_ROOT . $UserImage) ? SITE . $UserImage : false;
 
-        $rememberMe = $this->post('RememberMe')->int();
+        $rememberMe = $this->post('RememberMe')->int(); // TODO - out of order operation
 
         if (!$rememberMe) {
             $this->cookie('username', 'password', 'RememberMe')->clearCookies();
