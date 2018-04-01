@@ -20,7 +20,9 @@ class Manager extends GlobalMap
 
         global $json, $forum;
 
-        $json[] = '';
+        $json['categories'] = [];
+        Menu::All($json['categories'], '');
+        //sortDump($json);
 
         if (empty($forum)) {
             return null;

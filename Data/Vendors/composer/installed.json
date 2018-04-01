@@ -605,65 +605,6 @@
         ]
     },
     {
-        "name": "richardtmiles/carbonphp",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/RichardTMiles/CarbonPHP.git",
-            "reference": "175acd087ed3ea0dad6dd4092e0c36a539a6f66a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/RichardTMiles/CarbonPHP/zipball/175acd087ed3ea0dad6dd4092e0c36a539a6f66a",
-            "reference": "175acd087ed3ea0dad6dd4092e0c36a539a6f66a",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^7.1",
-            "psr/log": "dev-master"
-        },
-        "suggest": {
-            "almasaeed2010/adminlte": "^2.4",
-            "bower-asset/jquery-backstretch": "^2.1.16",
-            "bower-asset/jquery-form": "dev-master",
-            "bower-asset/jquery-pjax": "dev-master",
-            "bower-asset/mustache.js": "dev-master",
-            "mustache/mustache": "dev-master"
-        },
-        "time": "2018-02-04T21:49:37+00:00",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "Carbon\\": "Structure/",
-                "Carbon\\Error\\": "Error/",
-                "Carbon\\Helpers\\": "Helpers/",
-                "Carbon\\Interfaces\\": "Interfaces/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Richard Miles",
-                "email": "Richard@Miles.systems",
-                "homepage": "http://www.CarbonPHP.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "Edit the DOM in PHP. A PHP 7+ tool kit designed for SEO optimization.",
-        "homepage": "https://github.com/richardtmiles/carbonphp",
-        "keywords": [
-            "carbon",
-            "io",
-            "pipes",
-            "sockets"
-        ]
-    },
-    {
         "name": "ramsey/uuid",
         "version": "3.7.3",
         "version_normalized": "3.7.3.0",
@@ -1962,6 +1903,65 @@
         "homepage": "http://twig.sensiolabs.org",
         "keywords": [
             "templating"
+        ]
+    },
+    {
+        "name": "richardtmiles/carbonphp",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/RichardTMiles/CarbonPHP.git",
+            "reference": "73c4416638d67a22413927a3567a70ad2abeb171"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/RichardTMiles/CarbonPHP/zipball/73c4416638d67a22413927a3567a70ad2abeb171",
+            "reference": "73c4416638d67a22413927a3567a70ad2abeb171",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1",
+            "psr/log": "dev-master"
+        },
+        "suggest": {
+            "almasaeed2010/adminlte": "^2.4",
+            "bower-asset/jquery-backstretch": "^2.1.16",
+            "bower-asset/jquery-form": "dev-master",
+            "bower-asset/jquery-pjax": "dev-master",
+            "bower-asset/mustache.js": "dev-master",
+            "mustache/mustache": "dev-master"
+        },
+        "time": "2018-02-25T06:32:19+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Carbon\\": "Structure/",
+                "Carbon\\Error\\": "Error/",
+                "Carbon\\Helpers\\": "Helpers/",
+                "Carbon\\Interfaces\\": "Interfaces/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Richard Miles",
+                "email": "Richard@Miles.systems",
+                "homepage": "http://www.CarbonPHP.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Edit the DOM in PHP. A PHP 7+ tool kit designed for SEO optimization.",
+        "homepage": "https://github.com/richardtmiles/carbonphp",
+        "keywords": [
+            "carbon",
+            "io",
+            "pipes",
+            "sockets"
         ]
     }
 ]

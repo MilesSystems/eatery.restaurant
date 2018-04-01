@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Error\PublicAlert;
 use Carbon\View;
 use Controller\User;
+use Table\Menu;
 
 class Bootstrap extends App
 {
@@ -75,6 +76,8 @@ class Bootstrap extends App
 
             switch ($user[$_SESSION['id']]['user_type'] ?? false) {
                 case 'Customer':
+                    $json['categories'] = [];
+                    Menu::All($json['categories'],'');
                     $json['body-layout'] = 'skin-green fixed sidebar-mini sidebar-collapse';
                     $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Customer.hbs');
                     break;

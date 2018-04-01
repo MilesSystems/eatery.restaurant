@@ -11,8 +11,8 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
     );
 
@@ -67,8 +67,31 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
             'Google\\LongRunning\\' => 19,
             'Google\\Jison\\' => 13,
             'Google\\Iam\\' => 11,
+            'Google\\Cloud\\Vision\\' => 20,
+            'Google\\Cloud\\VideoIntelligence\\' => 31,
             'Google\\Cloud\\Utils\\' => 19,
+            'Google\\Cloud\\Translate\\' => 23,
+            'Google\\Cloud\\Trace\\' => 19,
             'Google\\Cloud\\TestUtils\\' => 23,
+            'Google\\Cloud\\Storage\\' => 21,
+            'Google\\Cloud\\Speech\\' => 20,
+            'Google\\Cloud\\Spanner\\' => 21,
+            'Google\\Cloud\\PubSub\\' => 20,
+            'Google\\Cloud\\OsLogin\\' => 21,
+            'Google\\Cloud\\Monitoring\\' => 24,
+            'Google\\Cloud\\Logging\\' => 21,
+            'Google\\Cloud\\Language\\' => 22,
+            'Google\\Cloud\\Firestore\\' => 23,
+            'Google\\Cloud\\ErrorReporting\\' => 28,
+            'Google\\Cloud\\Dlp\\' => 17,
+            'Google\\Cloud\\Debugger\\' => 22,
+            'Google\\Cloud\\Datastore\\' => 23,
+            'Google\\Cloud\\Dataproc\\' => 22,
+            'Google\\Cloud\\Core\\' => 18,
+            'Google\\Cloud\\Container\\' => 23,
+            'Google\\Cloud\\Bigtable\\' => 22,
+            'Google\\Cloud\\BigQuery\\DataTransfer\\' => 35,
+            'Google\\Cloud\\BigQuery\\' => 22,
             'Google\\Cloud\\' => 13,
             'Google\\Auth\\' => 12,
             'Google\\Api\\' => 11,
@@ -86,11 +109,14 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
         'C' => 
         array (
             'Controller\\' => 11,
-            'Composer\\Installers\\' => 20,
             'Carbon\\Interfaces\\' => 18,
             'Carbon\\Helpers\\' => 15,
             'Carbon\\Error\\' => 13,
             'Carbon\\' => 7,
+        ),
+        'A' => 
+        array (
+            'App\\' => 4,
         ),
     );
 
@@ -203,13 +229,105 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
         array (
             0 => __DIR__ . '/..' . '/google/gax/src/Iam',
         ),
+        'Google\\Cloud\\Vision\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Vision/src',
+        ),
+        'Google\\Cloud\\VideoIntelligence\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/VideoIntelligence/src',
+        ),
         'Google\\Cloud\\Utils\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/cloud-tools/src/Utils',
         ),
+        'Google\\Cloud\\Translate\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Translate/src',
+        ),
+        'Google\\Cloud\\Trace\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Trace/src',
+        ),
         'Google\\Cloud\\TestUtils\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/cloud-tools/src/TestUtils',
+        ),
+        'Google\\Cloud\\Storage\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Storage/src',
+        ),
+        'Google\\Cloud\\Speech\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Speech/src',
+        ),
+        'Google\\Cloud\\Spanner\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Spanner/src',
+        ),
+        'Google\\Cloud\\PubSub\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/PubSub/src',
+        ),
+        'Google\\Cloud\\OsLogin\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/OsLogin/src',
+        ),
+        'Google\\Cloud\\Monitoring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Monitoring/src',
+        ),
+        'Google\\Cloud\\Logging\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Logging/src',
+        ),
+        'Google\\Cloud\\Language\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Language/src',
+        ),
+        'Google\\Cloud\\Firestore\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Firestore/src',
+        ),
+        'Google\\Cloud\\ErrorReporting\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/ErrorReporting/src',
+        ),
+        'Google\\Cloud\\Dlp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Dlp/src',
+        ),
+        'Google\\Cloud\\Debugger\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Debugger/src',
+        ),
+        'Google\\Cloud\\Datastore\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Datastore/src',
+        ),
+        'Google\\Cloud\\Dataproc\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Dataproc/src',
+        ),
+        'Google\\Cloud\\Core\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Core/src',
+        ),
+        'Google\\Cloud\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Container/src',
+        ),
+        'Google\\Cloud\\Bigtable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Bigtable/src',
+        ),
+        'Google\\Cloud\\BigQuery\\DataTransfer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/BigQueryDataTransfer/src',
+        ),
+        'Google\\Cloud\\BigQuery\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/BigQuery/src',
         ),
         'Google\\Cloud\\' => 
         array (
@@ -256,10 +374,6 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
         array (
             0 => __DIR__ . '/../../..' . '/Application/Controller',
         ),
-        'Composer\\Installers\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
-        ),
         'Carbon\\Interfaces\\' => 
         array (
             0 => __DIR__ . '/..' . '/richardtmiles/carbonphp/Interfaces',
@@ -275,6 +389,10 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/richardtmiles/carbonphp/Structure',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../../..' . '/Application',
         ),
     );
 

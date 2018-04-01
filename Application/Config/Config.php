@@ -163,11 +163,11 @@ function urlGoogle($request = null)
 return [
     'DATABASE' => [
 
-        'DB_DSN' => APP_LOCAL ? 'mysql:host=127.0.0.1;dbname=RootPrerogative;' : 'mysql:host=35.224.229.250;dbname=RootPrerogative',      // Host and Database get put here
+        'DB_DSN' => 'mysql:host=35.224.229.250;dbname=RootPrerogative',      // Host and Database get put here
 
         'DB_USER' => 'root',                 // User
 
-        'DB_PASS' => APP_LOCAL ? 'Huskies!99' : 'goldteamrules',          // Password goldteamrules
+        'DB_PASS' => 'goldteamrules',          // Password goldteamrules
 
         'DB_BUILD' => SERVER_ROOT . 'Application/Config/buildDatabase.php',
 
@@ -228,16 +228,17 @@ return [
         },
     ],
 
-    /*          TODO - finish building php websockets
+    /*  TODO - finish building php websockets in ssl
     'SOCKET' => [
-        'WEBSOCKETD' => false,  // if you'd like to use web
+        'WEBSOCKETD' => true,  // if you'd like to use web
         'PORT' => 8888,
         'DEV' => true,
+
         'SSL' => [
             'KEY' => '',
             'CERT' => ''
         ]
-    ],  */
+    ], */
 
 
     // ERRORS on point

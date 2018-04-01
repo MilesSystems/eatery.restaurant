@@ -206,88 +206,25 @@
                 </a>
             </li>
 
-            <li class="treeview"><a href="#"><i class="fa fa-globe"></i><span>Drinks</span>
-                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
 
-                <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Mr. Pibb </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Sprite </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Mountain Dew </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Mug Root Beer </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Pepsi </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Dr Pepper </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coke </a></li>
-                </ul>
+            {{#categories}}
+                <li class="treeview"><a href="#"><i class="fa {{category_tag}}"></i><span>{{category_name}}</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
 
-            </li>
+                    <ul class="treeview-menu">
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Mr. Pibb </a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Sprite </a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Mountain Dew </a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Mug Root Beer </a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Pepsi </a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Dr Pepper </a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Coke </a></li>
+                    </ul>
 
-            <li class="treeview"><a href="#"><i class="fa fa-beer"></i><span>Beer</span>
-                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-
-                <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Bud light. </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> 100. Dale's Pale Ale. </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Brooklyn Brewery Lager. </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Surly Brewing Darkness. </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> New Belgium Fat Tire. </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Gigantic IPA. </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> NoDa Hop Drop n Roll. </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Sam Adams Boston Lager. </a></li>
-                </ul>
-
-            </li>
-
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-flag-o"></i> <span>Appetizers</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                </ul>
-            </li>
+                </li>
+            {{/categories}}
 
 
-            <!-- Entrees -->
-
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-fire"></i> <span>Entrees</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                </ul>
-            </li>
-
-            <!-- Deserts -->
-
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-birthday-cake"></i> <span>Deserts</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Coming Soon </a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="<?= SITE . 'Table' . DS . $_SESSION['table'] . DS . 'Games' ?>">
-                    <i class="fa fa-gamepad"></i><span>Arcade</span>
-                </a>
-            </li>
             <?php if ($logged_in) : ?>
             <li class="treeview">
                 <a href="#">
