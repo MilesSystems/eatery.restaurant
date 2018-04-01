@@ -20,6 +20,12 @@ class Manager extends GlobalMap
 
         global $json, $forum;
 
+        $json[] = '';
+
+        if (empty($forum)) {
+            return null;
+        }
+
         switch ($form) {
             case 1:
                 Menu::Post(

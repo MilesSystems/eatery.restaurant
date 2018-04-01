@@ -18,11 +18,13 @@ class Manager extends Request
         return null;
     }
 
-
     public function menu($form)
     {
+
+
+
         if (empty($_POST)) {
-            return null;
+            return true;
         }
 
         global $forum;
@@ -35,8 +37,6 @@ class Manager extends Request
 
                 $forum['dish'] = $this->post('dish')->alnum();
                 $forum['category'] = $this->post('category')->alnum();
-
-
 
                 if (!$forum['category'] || !$forum['dish']) {
                     throw new PublicAlert('Forum fields must be alpha numberic');
