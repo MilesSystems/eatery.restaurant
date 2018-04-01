@@ -15,12 +15,23 @@ use Table\Menu;
 class Manager extends GlobalMap
 {
 
+    public function accordion() {
+        global $json, $forum;
+
+        $json['categories'] = [];
+        Menu::All($json['categories'], '');
+        return true;
+    }
+
+
     public function menu($form)
     {
 
         global $json, $forum;
 
-        $json[] = '';
+        $json['categories'] = [];
+        Menu::All($json['categories'], '');
+        //sortDump($json);
 
         if (empty($forum)) {
             return null;
@@ -31,7 +42,8 @@ class Manager extends GlobalMap
                 Menu::Post(
                     [
                         'category_name' => $forum['category'],
-                        'category_description' => $forum['description']
+                        'category_description' => $forum['description'],
+                        'category_tag' => $forum['tag']
                     ]
                 );
 

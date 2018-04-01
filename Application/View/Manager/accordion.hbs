@@ -1,0 +1,19 @@
+<div class="box-group" id="accordion">
+    <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+    {{#categories}}
+        <div class="panel box box-success">
+            <div class="box-header with-border">
+                <h4 class="box-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#{{shortName}}">
+                        <i class="fa fa-fw {{category_tag}}"></i> {{category_name}}
+                    </a>
+                </h4>
+            </div>
+            <div id="{{shortName}}" class="panel-collapse collapse">
+                <div class="box-body">
+                    {{category_description}}
+                </div>
+            </div>
+        </div>
+    {{/categories}}
+</div>

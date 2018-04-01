@@ -14,15 +14,20 @@ use Carbon\Request;
 
 class Manager extends Request
 {
+
+    public function accordion() {
+
+        print 'fjsdklaf' . PHP_EOL;
+        return true;
+    }
+
+
     public function Compensated() {
         return null;
     }
 
     public function menu($form)
     {
-
-
-
         if (empty($_POST)) {
             return true;
         }
@@ -35,8 +40,8 @@ class Manager extends Request
             case 2:
                 ################ New Item
 
-                $forum['dish'] = $this->post('dish')->alnum();
-                $forum['category'] = $this->post('category')->alnum();
+                $forum['dish'] = $this->post('dish')->text();
+                $forum['category'] = $this->post('category')->text();
 
                 if (!$forum['category'] || !$forum['dish']) {
                     throw new PublicAlert('Forum fields must be alpha numberic');
@@ -45,8 +50,9 @@ class Manager extends Request
             case 1:
                 ################ New Category
 
-                $forum['category'] = $this->post('category')->alnum();
-                $forum['description'] = $this->post('description')->alnum();
+                $forum['category'] = $this->post('category')->text();
+                $forum['description'] = $this->post('description')->text();
+                $forum['tag'] = $this->post('tag')->text();
 
                 if (!$forum['category']) {
                     throw new PublicAlert('The category name must be alpha numberic');

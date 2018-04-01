@@ -130,6 +130,14 @@ class Bootstrap extends App
         if (null !== $uri) {
             $this->userSettings();          // Update the current user
             $this->changeURI($uri);
+        } else {
+            if (empty($this->uri[0])) {
+                if (SOCKET) {
+                    throw new PublicAlert('$_SERVER["REQUEST_URI"] MUST BE SET IN SOCKET REQUESTS');
+                }
+                $this->matched = true;
+                $this->defaultRoute();
+            }
         }
 
         ################################### MVC
@@ -146,12 +154,20 @@ class Bootstrap extends App
         ################################### TODO - Delete developer options
         $this->match('Developer/{AccountType}', 'User', 'accountType');
 
-
         ################################### Static / Logged IN
         global $user;
 
+        print_r($user[$_SESSION['id']]['user_type']);
+        print PHP_EOL;
+
         switch ($user[$_SESSION['id']]['user_type'] ?? false) {
             case 'Manager':
+
+                if ($this->structure($this->events('accordion'))->match('MenuAccordion', 'Manager', 'accordion')()) {
+                    return true;
+                }
+
+                $this->structure($this->MVC());
 
                 if ($this->match('SalesReport', 'Manager', 'SalesReport')() ||
                     $this->match('EditMenu','Manager', 'EditMenu')() ||

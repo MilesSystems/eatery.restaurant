@@ -384,7 +384,7 @@
                                             $.fn.CarbonJS("{{SITE}}{{APP_VIEW}}bower-asset/jquery-pjax/jquery.pjax.js", () =>
                                                     $.fn.CarbonJS("{{SITE}}{{APP_VIEW}}bower-asset/mustache.js/mustache.js", () =>
                                                             $.fn.CarbonJS("{{SITE}}{{COMPOSER}}richardtmiles/carbonphp/Helpers/Carbon.js", () => {
-                                                                CarbonJS('#pjax-content', '', false)
+                                                                CarbonJS('#pjax-content', 'ws://rootprerogative.com:8888/', false)
                                                                 //-- Activate Left Sidebar Tree Menu
                                                                 $('.sidebar-menu').tree()
                                                             }))))
@@ -395,6 +395,8 @@
 
                                 }))));
 
+
+        // /usr/bin/websocketd --port=8888 --devconsole /var/www/html/Data/Vendors/richardtmiles/carbonphp/Extras/Websocketd.php /var/www/html/ Application/Config/Config.php
 
     });
 

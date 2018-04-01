@@ -24,8 +24,8 @@ class Menu extends Entities implements iTable
     public static function All(array &$array, string $id): bool
     {
         $array = self::fetch('SELECT m.*, i.* FROM RootPrerogative.carbon_menu AS m 
-                            JOIN RootPrerogative.carbon AS c ON m.category_id = c.entity_pk
-                            JOIN RootPrerogative.menu_items AS i ON i.item_id = c.entity_fk ');
+                            LEFT JOIN RootPrerogative.carbon AS c ON m.category_id = c.entity_pk
+                            LEFT JOIN RootPrerogative.menu_items AS i ON i.item_id = c.entity_fk ');
 
         return true;
     }
@@ -57,10 +57,11 @@ class Menu extends Entities implements iTable
      */
     public static function Post(array $array): bool
     {
-        self::execute('INSERT INTO RootPrerogative.carbon_menu (category_id, category_name, category_description) VALUES (?,?,?)',
+        self::execute('INSERT INTO RootPrerogative.carbon_menu (category_id, category_name, category_description, category_tag) VALUES (?,?,?,?)',
             self::beginTransaction(MENU),
             $array['category_name'],
-            $array['category_description']);
+            $array['category_description'],
+            $array['category_tag']);
         return self::commit();
     }
 
