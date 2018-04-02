@@ -18,21 +18,23 @@ class Bootstrap extends App
      */
     public function __construct($structure = null)
     {
-        global $json;
+        global $json, $alert;
 
-        $json = array();
-        $json['SITE'] = SITE;
-        $json['HTTP'] = HTTP;
-        $json['HTTPS'] = HTTPS;
-        $json['SOCKET'] = SOCKET;
-        $json['AJAX'] = AJAX;
-        $json['PJAX'] = PJAX;
-        $json['SITE_TITLE'] = SITE_TITLE;
-        $json['APP_VIEW'] = APP_VIEW;
-        $json['TEMPLATE'] = TEMPLATE;
-        $json['COMPOSER'] = COMPOSER;
-        $json['X_PJAX_Version'] = &$_SESSION['X_PJAX_Version'];
-        $json['FACEBOOK_APP_ID'] = FACEBOOK_APP_ID;
+        $json = [
+            'SITE' => SITE,
+            'HTTP' => HTTP,
+            'HTTPS' => HTTPS,
+            'SOCKET' => SOCKET,
+            'ALERT' => &$alert,
+            'AJAX' => AJAX,
+            'PJAX' => PJAX,
+            'SITE_TITLE' => SITE_TITLE,
+            'APP_VIEW' => APP_VIEW,
+            'TEMPLATE' => TEMPLATE,
+            'COMPOSER' => COMPOSER,
+            'X_PJAX_Version' => &$_SESSION['X_PJAX_Version'],
+            'FACEBOOK_APP_ID' => FACEBOOK_APP_ID
+        ];
 
         $this->userSettings();  // This is the current user state, if the user logs in or changes account types this will need to be refreshed
 
@@ -116,7 +118,6 @@ class Bootstrap extends App
      */
     public function defaultRoute()
     {
-
         // Sockets will not execute this
         View::$forceWrapper = true; // this will hard refresh the wrapper
 
@@ -156,6 +157,17 @@ class Bootstrap extends App
                 $this->matched = true;
                 return $this->defaultRoute();
             }
+        }
+
+
+        #################################### Gold TEAM Static
+        $this->structure($this->wrap());    // TODO - cross over
+        if ($this->match('Home', 'GoldTeam/Static/Home.php')() ||
+            $this->match('About', 'GoldTeam/Static/About.php')() ||
+            $this->match('FAQ', 'GoldTeam/Static/FAQ.php')() ||
+            $this->match('Trial', 'GoldTeam/Static/Trial.php')() ||
+            $this->match('Features', 'GoldTeam/Static/Features.php')()) {
+            return true;
         }
 
         ################################### MVC
@@ -207,8 +219,8 @@ class Bootstrap extends App
                 }
 
             case 'Customer' :
-                if ($this->match('Games/{game?}/', 'Customer', 'games')()||
-                    $this->match('MenuItems/{game?}/', 'Customer', 'games')() ) {
+                if ($this->match('Games/{game?}/', 'Customer', 'games')() ||
+                    $this->match('MenuItems/{game?}/', 'Customer', 'games')()) {
                     return true;
                 }
 
@@ -239,15 +251,6 @@ class Bootstrap extends App
         // $url->match('Notifications/*', 'notifications/notifications', ['widget' => '#NavNotifications']);
         // $url->match('tasks/*', 'tasks/tasks', ['widget' => '#NavTasks']);
 
-        #################################### Gold TEAM Static
-        $this->structure($this->wrap());    // TODO - cross over
-        if ($this->match('Home', 'GoldTeam/Static/Home.php')() ||
-            $this->match('About', 'GoldTeam/Static/About.php')() ||
-            $this->match('FAQ', 'GoldTeam/Static/FAQ.php')() ||
-            $this->match('Trial', 'GoldTeam/Static/Trial.php')() ||
-            $this->match('Features', 'GoldTeam/Static/Features.php')()) {
-            return true;
-        }
 
         return $this->structure($this->MVC())->match('Activate/{email?}/{email_code?}/', 'User', 'activate')() ||  // Activate $email $email_code
             $this->structure($this->wrap())->match('404/*', 'Error/404error.php')() ||

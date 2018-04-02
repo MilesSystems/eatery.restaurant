@@ -233,12 +233,12 @@ return [
         'WEBSOCKETD' => true,  // if you'd like to use web
         'PORT' => 8888,
         'DEV' => true,
-
+        /*
         'SSL' => [
             'KEY' => '',
             'CERT' => ''
         ]
-    ], */
+    ],*/
 
 
     // ERRORS on point
