@@ -207,22 +207,18 @@
             </li>
 
 
-            {{#categories}}
+            {{#menu}}
                 <li class="treeview"><a href="#"><i class="fa {{category_tag}}"></i><span>{{category_name}}</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
 
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Mr. Pibb </a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Sprite </a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Mountain Dew </a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Mug Root Beer </a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Pepsi </a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Dr Pepper </a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Coke </a></li>
+                        {{#item}}
+                        <li><a href="#"><i class="fa fa-circle-o"></i> {{category}} </a></li>
+                        {{/item}}
                     </ul>
 
                 </li>
-            {{/categories}}
+            {{/menu}}
 
 
             <?php if ($logged_in) : ?>

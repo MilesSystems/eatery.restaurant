@@ -21,7 +21,11 @@ class Items extends Entities implements iTable
      */
     public static function All(array &$array, string $id): bool
     {
-        // TODO: Implement All() method.
+            $array = self::fetch('SELECT i.* FROM RootPrerogative.menu_items AS i 
+                            LEFT JOIN RootPrerogative.carbon AS c ON i.item_id = c.entity_pk
+                            LEFT JOIN RootPrerogative.carbon_menu ON carbon_menu.category_id = c.entity_fk
+                            WHERE category_id = ?', $id);
+        return true;
     }
 
     /**
@@ -51,8 +55,10 @@ class Items extends Entities implements iTable
      */
     public static function Post(array $array): bool
     {
+        //sortDump($array['category_id']);
+
         self::execute('INSERT INTO RootPrerogative.menu_items (item_id, item_name, item_description, item_price, item_calories) VALUES (?,?,?,?,?)',
-            self::beginTransaction(ITEMS),
+            self::beginTransaction(ITEMS, $array['category_id']),
             $array['item_name'],
             $array['item_description'],
             $array['item_price'],

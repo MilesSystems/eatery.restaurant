@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Error\PublicAlert;
 use Carbon\View;
 use Controller\User;
+use Table\Items;
 use Table\Menu;
 
 class Bootstrap extends App
@@ -76,8 +77,12 @@ class Bootstrap extends App
 
             switch ($user[$_SESSION['id']]['user_type'] ?? false) {
                 case 'Customer':
-                    $json['categories'] = [];
-                    Menu::All($json['categories'],'');
+                    $json['menu'] = [];
+                    Menu::All($json['menu'], '');
+                    foreach ($json['menu'] as $key => $value) {
+                        $json['menu'][$key]['item'] = array();
+                        Items::All($json['menu'][$key]['item'], $json['menu'][$key]['category_id']);
+                    }
                     $json['body-layout'] = 'skin-green fixed sidebar-mini sidebar-collapse';
                     $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Customer.hbs');
                     break;
@@ -115,6 +120,8 @@ class Bootstrap extends App
         // Sockets will not execute this
         View::$forceWrapper = true; // this will hard refresh the wrapper
 
+        // alert('default');
+
         if (!$_SESSION['id']):
             return MVC('User', 'login');
         else:
@@ -129,10 +136,26 @@ class Bootstrap extends App
      */
     public function startApplication($uri = null): ? bool
     {
+        static $count;
+
+        if (empty($count)) {
+            $count = 0;
+        }
+
+        $count++;
 
         if (null !== $uri) {
             $this->userSettings();          // Update the current user
             $this->changeURI($uri);
+        } else {
+            if (empty($this->uri[0])) {
+
+                if (SOCKET) {
+                    throw new PublicAlert('$_SERVER["REQUEST_URI"] MUST BE SET IN SOCKET REQUESTS');
+                }
+                $this->matched = true;
+                return $this->defaultRoute();
+            }
         }
 
         ################################### MVC
@@ -146,9 +169,10 @@ class Bootstrap extends App
                 $this->match('Recover/{user_email?}/{user_generated_string?}/', 'User', 'recover')();    // Recover $userId
 
         }
+
+
         ################################### TODO - Delete developer options
         $this->match('Developer/{AccountType}', 'User', 'accountType');
-
 
         ################################### Static / Logged IN
         global $user;
@@ -156,8 +180,14 @@ class Bootstrap extends App
         switch ($user[$_SESSION['id']]['user_type'] ?? false) {
             case 'Manager':
 
+                if ($this->structure($this->events('accordion'))->match('accordion', 'Manager', 'accordion')()) {
+                    return true;
+                }
+
+                $this->structure($this->MVC());
+
                 if ($this->match('SalesReport', 'Manager', 'SalesReport')() ||
-                    $this->match('EditMenu','Manager', 'EditMenu')() ||
+                    $this->match('EditMenu', 'Manager', 'EditMenu')() ||
                     $this->match('Schedule', 'Schedule', 'Schedule')() ||
                     $this->match('Employees', 'Manager', 'Employees')() ||
                     $this->match('Costumers', 'Manager', 'Costumers')() ||
@@ -167,17 +197,18 @@ class Bootstrap extends App
                 }
 
             case 'Waiter':
-                if ($this->match('Tables/{tables?}/*', '', '')()){
+                if ($this->match('Tables/{tables?}/*', '', '')()) {
                     return true;
                 }
 
             case 'Kitchen':
-                if ($this->match('Kitchen','Kitchen', 'Orders')()){
+                if ($this->match('Kitchen', 'Kitchen', 'Orders')()) {
                     return true;
                 }
 
             case 'Customer' :
-                if ($this->match('Games/{game?}/', 'Customer', 'games')()) {
+                if ($this->match('Games/{game?}/', 'Customer', 'games')()||
+                    $this->match('MenuItems/{game?}/', 'Customer', 'games')() ) {
                     return true;
                 }
 
@@ -189,7 +220,9 @@ class Bootstrap extends App
 
         if ($this->match('Profile/{user_uri?}/', 'User', 'profile')() ||   // Profile $user
             $this->match('Messages/*', 'Messages', 'messages')() ||
-            $this->match('Logout/*', function () { User::logout(); })()) {
+            $this->match('Logout/*', function () {
+                User::logout();
+            })()) {
             return true;          // Logout
         }
 

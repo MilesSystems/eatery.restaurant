@@ -25,4 +25,9 @@ class Customer extends Request
 
         return null;    // Skip the model and move to the view
     }
+
+
+    public function MenuItems() {
+        return null;
+    }
 }

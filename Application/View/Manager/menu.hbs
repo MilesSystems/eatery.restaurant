@@ -8,22 +8,41 @@
             <div class="box-body">
                 <div class="box-group" id="accordion">
                     <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-                    {{#catigories}}
+                    {{#menu}}
                     <div class="panel box box-success">
                         <div class="box-header with-border">
                             <h4 class="box-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#{{shortName}}">
-                                    {{catigory}}
+                                <a data-toggle="collapse" data-parent="#accordion" href="#{{category_tag}}">
+                                    <i class="fa fa-fw {{category_tag}}"></i> {{category_name}}
                                 </a>
                             </h4>
                         </div>
-                        <div id="{{shortName}}" class="panel-collapse collapse">
+                        <div id="{{category_tag}}" class="panel-collapse collapse">
                             <div class="box-body">
-                                NULL
+                                {{category_description}}
+                                <div class="box-group" id="accordion">
+                                    <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                                    {{#item}}
+                                        <div class="panel box box-success">
+                                            <div class="box-header with-border">
+                                                <h4 class="box-title">
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#{{category_tag}}">
+                                                        <i class="fa fa-fw {{category_tag}}"></i> {{category}}
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="{{category_tag}}" class="panel-collapse collapse">
+                                                <div class="box-body">
+                                                    {{category_description}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {{/item}}
+                                </div>
                             </div>
                         </div>
                     </div>
-                    {{/catigories}}
+                    {{/menu}}
                 </div>
             </div>
             <!-- /.box-body -->
@@ -55,15 +74,29 @@
                             <input type="text" class="form-control" id="description" name="description" placeholder="Description">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="tag" class="col-sm-2 control-label">Tag</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="description" name="tag" placeholder="Tag">
+                        </div>
+                    </div>
 
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <button type="reset" class="btn btn-default">Cancel</button>
-                    <button type="submit" class="btn btn-info pull-right">Submit</button>
+                    <button type="submit" class="btn btn-info pull-right" onclick="">Submit</button>
                 </div>
                 <!-- /.box-footer -->
             </form>
+            <script>
+                Carbon(()=> {
+                    function Collapsible_Accordion () {
+                        $.fn.startApplication('/accordion');
+                    }
+                })
+            </script>
         </div>
         <!-- /.box -->
         <!-- .box -->
@@ -87,6 +120,27 @@
 
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="dish" name="dish" placeholder="Dish Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dish" class="col-sm-2 control-label">Item Description</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="description" name="description" placeholder="Item Description">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dish" class="col-sm-2 control-label">Item Price</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="price" name="price" placeholder="Item Price">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dish" class="col-sm-2 control-label">Item Calories</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="calories" name="calories" placeholder="Item Calories">
                         </div>
                     </div>
                 </div>

@@ -65,11 +65,12 @@ abstract class App extends Route
             }
 
             $json = array_merge($json, [
-                'Errors' => $alert,
+                'Alert' => $alert,
                 'Event' => 'Controller->Model',   // This doesn't do anything.. Its just a mental note when I look at the json's in console (controller->model only)
                 'Model' => $argv,
                 'Mustache' => DS . $file,
-                'Widget' => $selector
+                'Widget' => $selector,
+                'URI' => $_SERVER['REQUEST_URI']
             ]);
 
             header('Content-Type: application/json'); // Send as JSON
