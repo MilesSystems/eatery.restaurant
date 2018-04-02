@@ -23,7 +23,7 @@ class Menu extends Entities implements iTable
      */
     public static function All(array &$array, string $id): bool
     {
-        $array = self::fetch('SELECT * FROM RootPrerogative.carbon_menu');
+        $array = self::fetch('SELECT * FROM RootPrerogative.carbon_category');
 
         return true;
     }
@@ -55,7 +55,7 @@ class Menu extends Entities implements iTable
      */
     public static function Post(array $array): bool
     {
-        self::execute('INSERT INTO RootPrerogative.carbon_menu (category_id, category_name, category_description, category_tag) VALUES (?,?,?,?)',
+        self::execute('INSERT INTO RootPrerogative.carbon_category (category_id, category_name, category_description, category_tag) VALUES (?,?,?,?)',
             self::beginTransaction(MENU),
             $array['category_name'],
             $array['category_description'],

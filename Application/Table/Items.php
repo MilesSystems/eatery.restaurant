@@ -23,7 +23,7 @@ class Items extends Entities implements iTable
     {
             $array = self::fetch('SELECT i.* FROM RootPrerogative.menu_items AS i 
                             LEFT JOIN RootPrerogative.carbon AS c ON i.item_id = c.entity_pk
-                            LEFT JOIN RootPrerogative.carbon_menu ON carbon_menu.category_id = c.entity_fk
+                            LEFT JOIN RootPrerogative.carbon_category ON category_id = c.entity_fk
                             WHERE category_id = ?', $id);
         return true;
     }
