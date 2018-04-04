@@ -116,6 +116,7 @@ class User extends GlobalMap
 
         $service = "user_{$service}_id";
 
+
         $sql = "SELECT user_id, $service FROM carbon_users WHERE user_email = ? OR $service = ?";
 
         $sql = self::fetch($sql, $UserInfo['email'], $UserInfo['id']);
