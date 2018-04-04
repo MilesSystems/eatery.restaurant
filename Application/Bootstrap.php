@@ -6,7 +6,7 @@ use Carbon\Error\PublicAlert;
 use Carbon\View;
 use Controller\User;
 use Table\Items;
-use Table\Menu;
+use Table\Category;
 
 class Bootstrap extends App
 {
@@ -45,7 +45,7 @@ class Bootstrap extends App
      * @throws PublicAlert
      */
     public function userSettings()
-    {
+    { 
         global $user, $json;
 
         // If the user is signed in we need to get the
@@ -79,11 +79,11 @@ class Bootstrap extends App
 
             switch ($user[$_SESSION['id']]['user_type'] ?? false) {
                 case 'Customer':
-                    $json['menu'] = [];
-                    Menu::All($json['menu'], '');
-                    foreach ($json['menu'] as $key => $value) {
-                        $json['menu'][$key]['item'] = array();
-                        Items::All($json['menu'][$key]['item'], $json['menu'][$key]['category_id']);
+                    $json['category'] = [];
+                    Category::All($json['category'], '');
+                    foreach ($json['category'] as $key => $value) {
+                        $json['category'][$key]['item'] = array();
+                        Items::All($json['category'][$key]['item'], $json['category'][$key]['category_id']);
                     }
                     $json['body-layout'] = 'skin-green fixed sidebar-mini sidebar-collapse';
                     $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Customer.hbs');
@@ -118,6 +118,7 @@ class Bootstrap extends App
      */
     public function defaultRoute()
     {
+
         // Sockets will not execute this
         View::$forceWrapper = true; // this will hard refresh the wrapper
 
@@ -137,6 +138,7 @@ class Bootstrap extends App
      */
     public function startApplication($uri = null): ? bool
     {
+
         static $count;
 
         if (empty($count)) {
@@ -219,8 +221,16 @@ class Bootstrap extends App
                 }
 
             case 'Customer' :
+
+                if ($this->structure($this->events('.orderCart'))->match('addToOrder', 'Customer', 'cart')()) {
+                    return true;
+                }
+
+                $this->structure($this->MVC());
                 if ($this->match('Games/{game?}/', 'Customer', 'games')() ||
-                    $this->match('MenuItems/{game?}/', 'Customer', 'games')()) {
+                    $this->match('MenuItems/{game?}/', 'Customer', 'games')() ||
+                    $this->match('Item/{itemId}', 'Customer', 'Item')() ||
+                    $this->match('Order/{itemId}', 'Customer', 'order')()) {
                     return true;
                 }
 

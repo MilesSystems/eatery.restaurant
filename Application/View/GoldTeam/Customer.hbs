@@ -75,47 +75,15 @@
                             <li class="footer"><a href="">View all</a></li>
                         </ul>
                     </li>
+
+                    <script>
+                        Carbon(() => {
+                            $.fn.startApplication('/addToOrder'); // This is a live refresh of the view
+                        });
+                    </script>
+
                     <!-- Tasks: style can be found in dropdown.less -->
-                    <li id="NavTasks" class="dropdown tasks-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-flag-o"></i>
-
-                            {{#newTasks}}
-                                <span class="label label-danger">{{newTasks}}</span>
-                            {{/newTasks}}
-
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have {{total}}{{^total}}0{{/total}} tasks</li>
-                            <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu">
-                                    {{#Tasks}}
-                                        <li><!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    {{task}}
-                                                    <small class="pull-right">{{progress}}%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0"
-                                                         aria-valuemax="100">
-                                                        <span class="sr-only">{{progress}}% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                    {{/Tasks}}
-
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#">View all tasks</a>
-                            </li>
-                        </ul>
-
-                    </li>
+                    <li class="dropdown tasks-menu orderCart" id="NavTasks"></li> 
                     <!-- User Account: style can be found in dropdown.less -->
 
                     <li class="dropdown user user-menu">
@@ -138,7 +106,7 @@
                                     <a href="#">Followers</a>
                                 </div>
                                 <div class="col-xs-4 text-center">
-                                    <a href="<?=SITE?>Rounds/">Rounds</a>
+                                    <a href="{{SITE}}/">Rounds</a>
                                 </div>
                                 <div class="col-xs-4 text-center">
                                     <a href="#">Following</a>
@@ -201,27 +169,27 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree" id="left-sidebar-menu">
             <li>
-                <a href="{{ SITE }}Table/ $_SESSION['table'] . DS . 'Bill' ?>">
+                <a href="{{ SITE }}">
                     <i class="fa fa-edit"></i><span>View Check</span>
                 </a>
             </li>
 
 
-            {{#menu}}
+            {{#category}}
                 <li class="treeview"><a href="#"><i class="fa {{category_tag}}"></i><span>{{category_name}}</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
 
                     <ul class="treeview-menu">
                         {{#item}}
-                        <li><a href="#"><i class="fa fa-circle-o"></i> {{category}} </a></li>
+                        <li><a href="/item/{{item_id}}/"><i class="fa fa-circle-o"></i> {{item_name}} </a></li>
                         {{/item}}
                     </ul>
 
                 </li>
-            {{/menu}}
+            {{/category}}
 
 
-            <?php if ($logged_in) : ?>
+
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-laptop"></i>
@@ -238,7 +206,7 @@
                     <li><a href="#"><i class="fa fa-circle-o"></i> Epselon</a></li>
                 </ul>
             </li>
-            <?php endif; ?>
+
         </ul>
     </section>
     <!-- /.sidebar -->
@@ -318,6 +286,5 @@ Carbon(() => {
             $(this).find('.pushmenu-search-found').show(0);
         });
     });
-
 })
 </script>

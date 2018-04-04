@@ -11,7 +11,7 @@ namespace Model;
 use Carbon\Error\PublicAlert;
 use Model\Helpers\GlobalMap;
 use Table\Items;
-use Table\Menu;
+use Table\Category;
 
 class Manager extends GlobalMap
 {
@@ -21,7 +21,7 @@ class Manager extends GlobalMap
         global $json, $forum;
 
         $json['menu'] = [];
-        Menu::All($json['menu'], '');
+        Category::All($json['menu'], '');
         return true;
     }
 
@@ -33,12 +33,12 @@ class Manager extends GlobalMap
 
         global $json, $forum;
 
-        $json['menu'] = [];
-        Menu::All($json['menu'], '');
-        foreach ($json['menu'] as $key => $value) {
-            $json['menu'][$key]['item'] = array();
+        $json['category'] = [];
+        Category::All($json['category'], '');
+        foreach ($json['category'] as $key => $value) {
+            $json['category'][$key]['item'] = array();
 
-            Items::All($json['menu'][$key]['item'], $json['menu'][$key]['category_id']);
+            Items::All($json['category'][$key]['item'], $json['category'][$key]['category_id']);
         }
 
         if (empty($_POST)) {
@@ -47,7 +47,7 @@ class Manager extends GlobalMap
 
         switch ($id) {
             case 1:
-                Menu::Post(
+                Category::Post(
                     [
                         'category_name' => $forum['category'],
                         'category_description' => $forum['description'],
@@ -73,12 +73,11 @@ class Manager extends GlobalMap
 
             default:
         }
-        $json['menu'] = array();
-        Menu::All($json['menu'], '');
-        foreach ($json['menu'] as $key => $value) {
-            $json['menu'][$key]['item'] = array();
-
-            Items::All($json['menu'][$key]['item'], $json['menu'][$key]['category_id']);
+        $json['category'] = array();
+        Category::All($json['category'], '');
+        foreach ($json['category'] as $key => $value) {
+            $json['category'][$key]['item'] = array();
+            Items::All($json['category'][$key]['item'], $json['menu'][$key]['category_id']);
         }
 
         return true;

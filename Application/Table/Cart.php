@@ -2,8 +2,8 @@
 /**
  * Created by IntelliJ IDEA.
  * User: richardmiles
- * Date: 3/30/18
- * Time: 6:38 PM
+ * Date: 4/2/18
+ * Time: 10:27 PM
  */
 
 namespace Table;
@@ -12,9 +12,8 @@ namespace Table;
 use Carbon\Entities;
 use Carbon\Interfaces\iTable;
 
-class Menu extends Entities implements iTable
+class Cart extends Entities implements iTable
 {
-
 
     /**
      * @param $array - values received will be placed in this array
@@ -23,9 +22,7 @@ class Menu extends Entities implements iTable
      */
     public static function All(array &$array, string $id): bool
     {
-        $array = self::fetch('SELECT * FROM RootPrerogative.carbon_category');
-
-        return true;
+        // TODO: Implement All() method.
     }
 
     /**
@@ -46,7 +43,9 @@ class Menu extends Entities implements iTable
      */
     public static function Get(array &$array, string $id, array $argv): bool
     {
-        // TODO: Implement Get() method.
+        $array = self::fetch('SELECT * FROM RootPrerogative.session_cart WHERE session_id = ?',
+            $id);
+        return true;
     }
 
     /**
@@ -55,12 +54,11 @@ class Menu extends Entities implements iTable
      */
     public static function Post(array $array): bool
     {
-        self::execute('INSERT INTO RootPrerogative.carbon_category (category_id, category_name, category_description, category_tag) VALUES (?,?,?,?)',
-            self::beginTransaction(MENU),
-            $array['category_name'],
-            $array['category_description'],
-            $array['category_tag']);
-        return self::commit();
+        return self::execute('INSERT INTO RootPrerogative.session_cart (session_id, cart_item, cart_notes) VALUES (?,?,?)',
+            session_id(),
+            $array['id'],
+            $array['notes']
+            );
     }
 
     /**

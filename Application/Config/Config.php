@@ -19,8 +19,9 @@ const ENTITY_PHOTOS = 7;
 
 ######### Tags below here are defined in the RootPrerogative.php config // database build file
 
-const MENU = 8;
+const CATEGORY = 8;
 const ITEMS = 9;
+const ORDER = 10;
 
 // Template
 const COMPOSER = 'Data' . DS . 'Vendors' . DS;

@@ -73,9 +73,9 @@ abstract class App extends Route
                 'URI' => $_SERVER['REQUEST_URI']
             ]);
 
-            header('Content-Type: application/json'); // Send as JSON
+            #header('Content-Type: application/json'); // Send as JSON - not good for testing websocketd
 
-            print PHP_EOL . json_encode($json) . PHP_EOL; // new line ensures it sends through the socket
+            print PHP_EOL . json_encode($json) . PHP_EOL . PHP_EOL; // new line ensures it sends through the socket
 
             return true;
         };

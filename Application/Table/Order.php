@@ -2,16 +2,17 @@
 /**
  * Created by IntelliJ IDEA.
  * User: richardmiles
- * Date: 3/30/18
- * Time: 7:36 PM
+ * Date: 4/2/18
+ * Time: 3:01 PM
  */
 
 namespace Table;
 
+
 use Carbon\Entities;
 use Carbon\Interfaces\iTable;
 
-class Items extends Entities implements iTable
+class Order extends Entities implements iTable
 {
 
     /**
@@ -21,11 +22,7 @@ class Items extends Entities implements iTable
      */
     public static function All(array &$array, string $id): bool
     {
-            $array = self::fetch('SELECT i.* FROM RootPrerogative.category_items AS i 
-                            LEFT JOIN RootPrerogative.carbon AS c ON i.item_id = c.entity_pk
-                            LEFT JOIN RootPrerogative.carbon_category ON category_id = c.entity_fk
-                            WHERE category_id = ?', $id);
-        return true;
+        // TODO: Implement All() method.
     }
 
     /**
@@ -46,10 +43,7 @@ class Items extends Entities implements iTable
      */
     public static function Get(array &$array, string $id, array $argv): bool
     {
-        $array = self::fetch('SELECT * FROM RootPrerogative.category_items WHERE item_id = ?',
-            $id);
-        
-        return true;
+        // TODO: Implement Get() method.
     }
 
     /**
@@ -58,14 +52,25 @@ class Items extends Entities implements iTable
      */
     public static function Post(array $array): bool
     {
-        //sortDump($array['category_id']);
+        self::execute('INSERT INTO RootPrerogative.carbon_orders (
+                              order_id,  
+                              order_session, 
+                              order_total, 
+                              order_items, 
+                              order_start, 
+                              order_costumer, 
+                              order_server, 
+                              order_chef, 
+                              order_notes) VALUES (?,?,?,?,?,?,?,?,?)',
+            self::beginTransaction(ORDER),
+            session_id(),
+            $array['order_total'],
+            json_encode($array['order_items']),
+            $array['order_start'],
+            $array['order_costumer'],
+            $array['order_server'] ?? '',
+            $array['order_notes'] ?? '');
 
-        self::execute('INSERT INTO RootPrerogative.category_items (item_id, item_name, item_description, item_price, item_calories) VALUES (?,?,?,?,?)',
-            self::beginTransaction(ITEMS, $array['category_id']),
-            $array['item_name'],
-            $array['item_description'],
-            $array['item_price'],
-            $array['item_calories']);
         return self::commit();
     }
 
