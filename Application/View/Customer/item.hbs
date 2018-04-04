@@ -1,0 +1,79 @@
+<div class="row" style="margin-top: 20px">
+    <div class="col-md-offset-3 col-md-6">
+        <div class="box">
+            <div class="box-header">
+                {{item.item_name}}
+            </div>
+
+            <div class="box-body bg-gray">
+                <form class="form-horizontal" action="{{SITE}}item/{{item.item_id}}/" method="post"
+                      enctype="multipart/form-data">
+
+                    <div class="col-md-12">
+                        <!-- Widget: user widget style 1 -->
+                        <div class="box box-widget widget-user">
+                            <!-- Add the bg color to the header using any of the bg-* classes -->
+                            <div class="widget-user-header bg-aqua-active">
+                                <h3 class="widget-user-username">{{item.item_name}}</h3>
+                                <h5 class="widget-user-desc">Example &amp; Thing</h5>
+                            </div>
+                            <div class="widget-user-image">
+                            </div>
+                            <div class="box-footer">
+                                <div class="row">
+                                    <div class="col-sm-4 border-right">
+                                        <div class="description-block">
+                                            <h5 class="description-header">{{item.item_calories}}</h5>
+                                            <span class="description-text">Calories</span>
+                                        </div>
+                                        <!-- /.description-block -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-sm-4 border-right">
+                                        <div class="description-block">
+                                            <h5 class="description-header">{{item.item_price}}</h5>
+                                            <span class="description-text">Price</span>
+                                        </div>
+                                        <!-- /.description-block -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-sm-4">
+                                        <div class="description-block">
+                                            <h5 class="description-header"># not working yet</h5>
+                                            <span class="description-text">ingredients</span>
+                                        </div>
+                                        <!-- /.description-block -->
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                        </div>
+                        <!-- /.widget-user -->
+
+
+                        <div class="form-group">
+                            <label>Leave a note for the Kitchen</label>
+                            <textarea name="notes"
+                                    class="form-control" rows="3" placeholder="Enter text here ..." data-gramm="true"
+                                      data-txt_gramm_id="65ccac7d-7b5f-0e64-9081-d62e9d59bfbb"
+                                      data-gramm_id="65ccac7d-7b5f-0e64-9081-d62e9d59bfbb" spellcheck="false"
+                                      data-gramm_editor="true"
+                                      style="z-index: auto; position: relative; line-height: 20px; font-size: 14px; transition: none; background-color: transparent !important; background-position: initial initial !important; background-repeat: initial initial !important;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-block btn-info btn-lg">
+                            <i class="fa fa-fw fa-plus-square"></i> ADD TO ORDER
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function addToForum(a) {
+        $.fn.startApplication(a);
+    }
+</script>
