@@ -17,7 +17,11 @@ class Customer extends Request
 
     public function cart()
     {
+<<<<<<< HEAD
         return true;
+=======
+        return null;
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
     }
 
     public function order($itemId)

@@ -116,7 +116,10 @@ class User extends GlobalMap
 
         $service = "user_{$service}_id";
 
+<<<<<<< HEAD
         //sortDump($UserInfo);
+=======
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
 
         $sql = "SELECT user_id, $service FROM carbon_users WHERE user_email = ? OR $service = ?";
 

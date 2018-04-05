@@ -8,7 +8,11 @@
             <div class="box-body">
                 <div class="box-group" id="accordion">
                     <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+<<<<<<< HEAD
                     {{#category}}
+=======
+                    {{#menu}}
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
                     <div class="panel box box-success">
                         <div class="box-header with-border">
                             <h4 class="box-title">
@@ -28,14 +32,23 @@
                                             <div class="box-header with-border">
                                                 <h4 class="box-title">
                                                     <a data-toggle="collapse" data-parent="#accordion" href="#{{category_tag}}">
+<<<<<<< HEAD
                                                         <i class="fa fa-fw {{category_tag}}"></i> {{item_name}}
                                                     </a>
                                                     <i class="fa fa-fw fa-remove pull-right"></i>
+=======
+                                                        <i class="fa fa-fw {{category_tag}}"></i> {{category}}
+                                                    </a>
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
                                                 </h4>
                                             </div>
                                             <div id="{{category_tag}}" class="panel-collapse collapse">
                                                 <div class="box-body">
+<<<<<<< HEAD
                                                     {{item_description}}
+=======
+                                                    {{category_description}}
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
                                                 </div>
                                             </div>
                                         </div>
@@ -44,7 +57,11 @@
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
                     {{/category}}
+=======
+                    {{/menu}}
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
                 </div>
             </div>
             <!-- /.box-body -->

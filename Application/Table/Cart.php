@@ -10,7 +10,10 @@ namespace Table;
 
 
 use Carbon\Entities;
+<<<<<<< HEAD
 use Carbon\Error\PublicAlert;
+=======
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
 use Carbon\Interfaces\iTable;
 
 class Cart extends Entities implements iTable
@@ -44,7 +47,11 @@ class Cart extends Entities implements iTable
      */
     public static function Get(array &$array, string $id, array $argv): bool
     {
+<<<<<<< HEAD
         $array = self::fetch('SELECT * FROM RootPrerogative.carbon_cart WHERE session_id = ?',
+=======
+        $array = self::fetch('SELECT * FROM RootPrerogative.session_cart WHERE session_id = ?',
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
             $id);
         return true;
     }
@@ -55,16 +62,23 @@ class Cart extends Entities implements iTable
      */
     public static function Post(array $array): bool
     {
+<<<<<<< HEAD
         self::execute('INSERT INTO RootPrerogative.carbon_cart (cart_id, session_id, cart_item, cart_notes) VALUES (?,?,?,?)',
             self::beginTransaction(CART),
+=======
+        return self::execute('INSERT INTO RootPrerogative.session_cart (session_id, cart_item, cart_notes) VALUES (?,?,?)',
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
             session_id(),
             $array['id'],
             $array['notes']
             );
+<<<<<<< HEAD
         return self::commit(function () {
             //sortDump('fdsa');
             PublicAlert::success('added to order');
         });
+=======
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
     }
 
     /**

@@ -9,7 +9,11 @@
 namespace Model;
 
 
+<<<<<<< HEAD
 use Model\Helpers\GlobalMap;
+=======
+use Carbon\Request;
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
 use Table\Cart;
 use Table\Items;
 use Table\Order;
@@ -17,6 +21,7 @@ use Table\Order;
 class Customer extends GlobalMap
 {
 
+<<<<<<< HEAD
     public function cart() {
         global $json;
         $json['items'] = [];
@@ -42,6 +47,9 @@ class Customer extends GlobalMap
             Items::Get($json['items'][$key], $value['cart_item'], []);
         }
 
+=======
+    public function cart($id) {
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
         return null;
     }
 
@@ -79,9 +87,12 @@ class Customer extends GlobalMap
                 'notes' => $form['notes']
             ]);
         }
+<<<<<<< HEAD
 
         self::sendUpdate(session_id(), '/cartNotifications');
 
+=======
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
         return null;
     }
 

@@ -37,9 +37,16 @@ class Manager extends GlobalMap
         Category::All($json['category'], '');
         foreach ($json['category'] as $key => $value) {
             $json['category'][$key]['item'] = array();
+<<<<<<< HEAD
             Items::All($json['category'][$key]['item'], $json['category'][$key]['category_id']);
         }
 
+=======
+
+            Items::All($json['category'][$key]['item'], $json['category'][$key]['category_id']);
+        }
+
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
         if (empty($_POST)) {
             return null;
         }
@@ -55,6 +62,7 @@ class Manager extends GlobalMap
                 );
                 break;
             case 2:
+<<<<<<< HEAD
                 $id = self::fetch('SELECT category_id FROM RootPrerogative.carbon_category WHERE category_name = ? LIMIT 1',
                         $forum['category'])['category_id'] ?? false;
 
@@ -64,17 +72,38 @@ class Manager extends GlobalMap
 
                 Items::Post(
                     [
+=======
+                $id = self::fetch('SELECT category_id FROM RootPrerogative.carbon_menu WHERE category_name = ? LIMIT 1',
+                        $forum['category'])['category_id'] ?? false;
+
+                if (!$id) {
+                    throw new PublicAlert('warning');
+                }
+
+                Items::Post([
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
                     'category_id' => $id,
                     'item_name' => $forum['dish'],
                     'item_description' => $forum['description'],
                     'item_price' => $forum['price'],
                     'item_calories' => $forum['calories']
+<<<<<<< HEAD
                     ]
                 );
+=======
+                ]);
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
 
             default:
         }
+        $json['category'] = array();
+        Category::All($json['category'], '');
+        foreach ($json['category'] as $key => $value) {
+            $json['category'][$key]['item'] = array();
+            Items::All($json['category'][$key]['item'], $json['menu'][$key]['category_id']);
+        }
 
+<<<<<<< HEAD
         $json['category'] = array();
         Category::All($json['category'], '');
         foreach ($json['category'] as $key => $value) {
@@ -82,6 +111,8 @@ class Manager extends GlobalMap
             Items::All($json['category'][$key]['item'], $json['category'][$key]['category_id']);
         }
 
+=======
+>>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
         return true;
     }
 
