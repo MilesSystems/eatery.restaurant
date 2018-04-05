@@ -9,34 +9,71 @@
 
 print '<h3>Inserting the Root Prerogative Databases</h3>';
 
-########################### carbon_menu     categories
+
+########################### menu_items
+
 try {
-    $db->prepare('SELECT 1 FROM carbon_menu LIMIT 1;')->execute();
-    print '<br>Table `carbon_menu` already exists';
+    $db->prepare('SELECT 1 FROM carbon_category LIMIT 1;')->execute();
+    print '<br>Table `carbon_category` already exists';
 } catch (PDOException $e) {
     $sql = <<<END
 
-create table carbon_menu
+create table carbon_category
 (
-    category_id VARCHAR(225) NOT NULL,
-	category_name VARCHAR(40) null,
+	category_id varchar(225) not null,
+	category_name varchar(225) null,
 	category_description text null,
-	CONSTRAINT entity_menu_categories_entity_parent_pk_fk
-		FOREIGN KEY (category_id) REFERENCES carbon (entity_pk)
-			ON UPDATE CASCADE ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
-;
-    
-CREATE INDEX entity_comments_entity_parent_pk_fk
-	ON  carbon_menu (category_id)
+	category_tag varchar(40) null,
+	constraint entity_menu_categories_entity_parent_pk_fk
+		foreign key (category_id) references carbon (entity_pk)
+			on update cascade on delete cascade
+)
 ;
 
+create index entity_comments_entity_parent_pk_fk
+	on carbon_category (category_id)
+;
+
+
+
 END;
+
     $db->exec($sql);
-    print '<br>Table `carbon_menu` Created';
+    print '<br>Table `carbon_category` Created';
 }
 
 
+
+########################### category_items     categories
+try {
+    $db->prepare('SELECT 1 FROM category_items LIMIT 1;')->execute();
+    print '<br>Table `category_items` already exists';
+} catch (PDOException $e) {
+    $sql = <<<END
+
+create table category_items
+(
+	item_id varchar(225) null,
+	item_name varchar(20) null,
+	item_description text null,
+	item_price varchar(6) null,
+	item_calories varchar(5) null,
+	constraint entity_menu_items_entity_parent_pk_fk
+		foreign key (item_id) references carbon (entity_pk)
+			on update cascade on delete cascade
+)
+;
+
+create index entity_menu_items_entity_parent_pk_fk
+	on category_items (item_id)
+;
+
+
+
+END;
+    $db->exec($sql);
+    print '<br>Table `category_items` Created';
+}
 
 
 ########################### carbon_orders
@@ -71,32 +108,35 @@ END;
 }
 
 
-########################### menu_items
 
+
+########################### carbon_cart
 try {
-    $db->prepare('SELECT 1 FROM menu_items LIMIT 1;')->execute();
-    print '<br>Table `menu_items` already exists';
+    $db->prepare('SELECT 1 FROM carbon_cart LIMIT 1;')->execute();
+    print '<br>Table `carbon_cart` already exists';
 } catch (PDOException $e) {
+
     $sql = <<<END
 
-create table menu_items
+create table carbon_cart
 (
-	item_id varchar(225) null,
-	item_name varchar(20) null,
-	item_description text null,
-	item_price varchar(6) null,
-	item_calories varchar(5) null,
-	CONSTRAINT entity_menu_items_entity_parent_pk_fk
-		FOREIGN KEY (item_id) REFERENCES carbon (entity_pk)
-			ON UPDATE CASCADE ON DELETE CASCADE
+	cart_id varchar(225) null,
+	cart_item varchar(225) not null,
+	session_id varchar(225) not null,
+	cart_notes text null,
+	CONSTRAINT carbon_cart_carbon_entity_pk_fk FOREIGN KEY (cart_id) REFERENCES carbon (entity_pk)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ;
 
 END;
 
     $db->exec($sql);
-    print '<br>Table `menu_items` Created';
+    print '<br>Table `carbon_cart` Created';
 }
+
+
+
+
 
 Try {
     $sql = <<<END
@@ -104,8 +144,10 @@ REPLACE INTO carbon_tags (tag_id, tag_description, tag_name) VALUES (?,?,?);
 END;
 
     $tag = [
-        [MENU,'','MENU'],
+        [CATEGORY,'','CATEGORY'],
         [ITEMS, '', 'ITEMS'],
+        [ORDER, '', 'ORDER'],
+        [CART, '', 'CART']
     ];
 
     foreach ($tag as $key => $value) {

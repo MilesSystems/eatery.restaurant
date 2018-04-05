@@ -9,9 +9,9 @@
 namespace Model;
 
 
-use Carbon\Request;
+use Model\Helpers\GlobalMap;
 
-class Kitchen extends Request
+class Kitchen extends GlobalMap
 {
     public function orders() {
 

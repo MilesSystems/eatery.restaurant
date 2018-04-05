@@ -9,7 +9,9 @@
 namespace Model;
 
 
-class Schedule
+use Model\Helpers\GlobalMap;
+
+class Schedule extends GlobalMap
 {
 
     public function schedule()

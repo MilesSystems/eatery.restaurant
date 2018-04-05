@@ -8,68 +8,81 @@
 
 namespace Model;
 
+use Carbon\Error\PublicAlert;
 use Model\Helpers\GlobalMap;
 use Table\Items;
-use Table\Menu;
+use Table\Category;
 
 class Manager extends GlobalMap
 {
 
-    public function accordion() {
+    public function accordion()
+    {
         global $json, $forum;
 
-        $json['categories'] = [];
-        Menu::All($json['categories'], '');
+        $json['menu'] = [];
+        Category::All($json['menu'], '');
         return true;
     }
 
-
-    public function menu($form)
+    public function MenuItems() {
+        return null;
+    }
+    public function menu($id)
     {
 
         global $json, $forum;
 
-        $json['categories'] = [];
-        Menu::All($json['categories'], '');
-        //sortDump($json);
+        $json['category'] = [];
+        Category::All($json['category'], '');
+        foreach ($json['category'] as $key => $value) {
+            $json['category'][$key]['item'] = array();
+            Items::All($json['category'][$key]['item'], $json['category'][$key]['category_id']);
+        }
 
-        if (empty($forum)) {
+        if (empty($_POST)) {
             return null;
         }
 
-        switch ($form) {
+        switch ($id) {
             case 1:
-                Menu::Post(
+                Category::Post(
                     [
                         'category_name' => $forum['category'],
                         'category_description' => $forum['description'],
                         'category_tag' => $forum['tag']
                     ]
                 );
-
-                return true;
+                break;
             case 2:
-                $id = self::fetch('SELECT category_id FROM RootPrerogative.carbon_menu WHERE category_name = ?',
-                    $forum['category']);
+                $id = self::fetch('SELECT category_id FROM RootPrerogative.carbon_category WHERE category_name = ? LIMIT 1',
+                        $forum['category'])['category_id'] ?? false;
 
-                sortDump($id);
+                if (!$id) {
+                    throw new PublicAlert('warning');
+                }
 
-                Items::Post([
-                    'item_name' => '',
-                    'item_description' => '',
-                    'item_price' => '',
-                    'item_calories' => '',
+                Items::Post(
+                    [
+                    'category_id' => $id,
+                    'item_name' => $forum['dish'],
+                    'item_description' => $forum['description'],
+                    'item_price' => $forum['price'],
+                    'item_calories' => $forum['calories']
+                    ]
+                );
 
-                ]);
-
-                return true;
             default:
         }
 
-        Menu::All($json, '');
+        $json['category'] = array();
+        Category::All($json['category'], '');
+        foreach ($json['category'] as $key => $value) {
+            $json['category'][$key]['item'] = array();
+            Items::All($json['category'][$key]['item'], $json['category'][$key]['category_id']);
+        }
 
-        sortDump($json);
-
+        return true;
     }
 
     public function Compensated()

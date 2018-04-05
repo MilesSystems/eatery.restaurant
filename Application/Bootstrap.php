@@ -5,6 +5,9 @@ namespace App;
 use Carbon\Error\PublicAlert;
 use Carbon\View;
 use Controller\User;
+use Model\Helpers\GlobalMap;
+use Table\Items;
+use Table\Category;
 
 class Bootstrap extends App
 {
@@ -16,21 +19,23 @@ class Bootstrap extends App
      */
     public function __construct($structure = null)
     {
-        global $json;
+        global $json, $alert;
 
-        $json = array();
-        $json['SITE'] = SITE;
-        $json['HTTP'] = HTTP;
-        $json['HTTPS'] = HTTPS;
-        $json['SOCKET'] = SOCKET;
-        $json['AJAX'] = AJAX;
-        $json['PJAX'] = PJAX;
-        $json['SITE_TITLE'] = SITE_TITLE;
-        $json['APP_VIEW'] = APP_VIEW;
-        $json['TEMPLATE'] = TEMPLATE;
-        $json['COMPOSER'] = COMPOSER;
-        $json['X_PJAX_Version'] = &$_SESSION['X_PJAX_Version'];
-        $json['FACEBOOK_APP_ID'] = FACEBOOK_APP_ID;
+        $json = [
+            'SITE' => SITE,
+            'HTTP' => HTTP,
+            'HTTPS' => HTTPS,
+            'SOCKET' => SOCKET,
+            'ALERT' => &$alert,
+            'AJAX' => AJAX,
+            'PJAX' => PJAX,
+            'SITE_TITLE' => SITE_TITLE,
+            'APP_VIEW' => APP_VIEW,
+            'TEMPLATE' => TEMPLATE,
+            'COMPOSER' => COMPOSER,
+            'X_PJAX_Version' => &$_SESSION['X_PJAX_Version'],
+            'FACEBOOK_APP_ID' => FACEBOOK_APP_ID
+        ];
 
         $this->userSettings();  // This is the current user state, if the user logs in or changes account types this will need to be refreshed
 
@@ -41,7 +46,7 @@ class Bootstrap extends App
      * @throws PublicAlert
      */
     public function userSettings()
-    {
+    { 
         global $user, $json;
 
         // If the user is signed in we need to get the
@@ -75,6 +80,12 @@ class Bootstrap extends App
 
             switch ($user[$_SESSION['id']]['user_type'] ?? false) {
                 case 'Customer':
+                    $json['category'] = [];
+                    Category::All($json['category'], '');
+                    foreach ($json['category'] as $key => $value) {
+                        $json['category'][$key]['item'] = array();
+                        Items::All($json['category'][$key]['item'], $json['category'][$key]['category_id']);
+                    }
                     $json['body-layout'] = 'skin-green fixed sidebar-mini sidebar-collapse';
                     $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Customer.hbs');
                     break;
@@ -112,6 +123,8 @@ class Bootstrap extends App
         // Sockets will not execute this
         View::$forceWrapper = true; // this will hard refresh the wrapper
 
+        // alert('default');
+
         if (!$_SESSION['id']):
             return MVC('User', 'login');
         else:
@@ -127,17 +140,45 @@ class Bootstrap extends App
     public function startApplication($uri = null): ? bool
     {
 
+        static $count;
+
+        if (empty($count)) {
+            $count = 0;
+        }
+
+        #GlobalMap::sendUpdate(session_id(), '/cartNotifications');
+
+        $count++;
+
         if (null !== $uri) {
             $this->userSettings();          // Update the current user
             $this->changeURI($uri);
         } else {
             if (empty($this->uri[0])) {
+
                 if (SOCKET) {
                     throw new PublicAlert('$_SERVER["REQUEST_URI"] MUST BE SET IN SOCKET REQUESTS');
                 }
                 $this->matched = true;
-                $this->defaultRoute();
+                return $this->defaultRoute();
             }
+        }
+
+
+
+        $this->match('/event', function () {
+            //GlobalMap::sendUpdate('');
+        });
+
+
+        #################################### Gold TEAM Static
+        $this->structure($this->wrap());    // TODO - cross over
+        if ($this->match('Home', 'GoldTeam/Static/Home.php')() ||
+            $this->match('About', 'GoldTeam/Static/About.php')() ||
+            $this->match('FAQ', 'GoldTeam/Static/FAQ.php')() ||
+            $this->match('Trial', 'GoldTeam/Static/Trial.php')() ||
+            $this->match('Features', 'GoldTeam/Static/Features.php')()) {
+            return true;
         }
 
         ################################### MVC
@@ -151,26 +192,25 @@ class Bootstrap extends App
                 $this->match('Recover/{user_email?}/{user_generated_string?}/', 'User', 'recover')();    // Recover $userId
 
         }
+
+
         ################################### TODO - Delete developer options
         $this->match('Developer/{AccountType}', 'User', 'accountType');
 
         ################################### Static / Logged IN
         global $user;
 
-        print_r($user[$_SESSION['id']]['user_type']);
-        print PHP_EOL;
-
         switch ($user[$_SESSION['id']]['user_type'] ?? false) {
             case 'Manager':
 
-                if ($this->structure($this->events('accordion'))->match('MenuAccordion', 'Manager', 'accordion')()) {
+                if ($this->structure($this->events('accordion'))->match('accordion', 'Manager', 'accordion')()) {
                     return true;
                 }
 
                 $this->structure($this->MVC());
 
                 if ($this->match('SalesReport', 'Manager', 'SalesReport')() ||
-                    $this->match('EditMenu','Manager', 'EditMenu')() ||
+                    $this->match('EditMenu', 'Manager', 'EditMenu')() ||
                     $this->match('Schedule', 'Schedule', 'Schedule')() ||
                     $this->match('Employees', 'Manager', 'Employees')() ||
                     $this->match('Costumers', 'Manager', 'Costumers')() ||
@@ -180,17 +220,26 @@ class Bootstrap extends App
                 }
 
             case 'Waiter':
-                if ($this->match('Tables/{tables?}/*', '', '')()){
+                if ($this->match('Tables/{tables?}/*', '', '')()) {
                     return true;
                 }
 
             case 'Kitchen':
-                if ($this->match('Kitchen','Kitchen', 'Orders')()){
+                if ($this->match('Kitchen', 'Kitchen', 'Orders')()) {
                     return true;
                 }
 
             case 'Customer' :
-                if ($this->match('Games/{game?}/', 'Customer', 'games')()) {
+
+                if ($this->structure($this->events('.orderCart'))->match('cartNotifications', 'Customer', 'cart')()) {
+                    return true;
+                }
+
+                $this->structure($this->MVC());
+                if ($this->match('Games/{game?}/', 'Customer', 'games')() ||
+                    $this->match('MenuItems/{game?}/', 'Customer', 'games')() ||
+                    $this->match('Item/{itemId}', 'Customer', 'Item')() ||
+                    $this->match('Order/{itemId}', 'Customer', 'order')()) {
                     return true;
                 }
 
@@ -202,7 +251,9 @@ class Bootstrap extends App
 
         if ($this->match('Profile/{user_uri?}/', 'User', 'profile')() ||   // Profile $user
             $this->match('Messages/*', 'Messages', 'messages')() ||
-            $this->match('Logout/*', function () { User::logout(); })()) {
+            $this->match('Logout/*', function () {
+                User::logout();
+            })()) {
             return true;          // Logout
         }
 
@@ -219,15 +270,6 @@ class Bootstrap extends App
         // $url->match('Notifications/*', 'notifications/notifications', ['widget' => '#NavNotifications']);
         // $url->match('tasks/*', 'tasks/tasks', ['widget' => '#NavTasks']);
 
-        #################################### Gold TEAM Static
-        $this->structure($this->wrap());    // TODO - cross over
-        if ($this->match('Home', 'GoldTeam/Static/Home.php')() ||
-            $this->match('About', 'GoldTeam/Static/About.php')() ||
-            $this->match('FAQ', 'GoldTeam/Static/FAQ.php')() ||
-            $this->match('Trial', 'GoldTeam/Static/Trial.php')() ||
-            $this->match('Features', 'GoldTeam/Static/Features.php')()) {
-            return true;
-        }
 
         return $this->structure($this->MVC())->match('Activate/{email?}/{email_code?}/', 'User', 'activate')() ||  // Activate $email $email_code
             $this->structure($this->wrap())->match('404/*', 'Error/404error.php')() ||

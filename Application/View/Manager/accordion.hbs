@@ -1,19 +1,38 @@
 <div class="box-group" id="accordion">
     <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-    {{#categories}}
+    {{#menu}}
         <div class="panel box box-success">
             <div class="box-header with-border">
                 <h4 class="box-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#{{shortName}}">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#{{category_tag}}">
                         <i class="fa fa-fw {{category_tag}}"></i> {{category_name}}
                     </a>
                 </h4>
             </div>
-            <div id="{{shortName}}" class="panel-collapse collapse">
+            <div id="{{category_tag}}" class="panel-collapse collapse">
                 <div class="box-body">
                     {{category_description}}
+                    <div class="box-group" id="accordion">
+                        <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                        {{#item}}
+                            <div class="panel box box-success">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#{{category_tag}}">
+                                            <i class="fa fa-fw {{category_tag}}"></i> {{category}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="{{category_tag}}" class="panel-collapse collapse">
+                                    <div class="box-body">
+                                        {{category_description}}
+                                    </div>
+                                </div>
+                            </div>
+                        {{/item}}
+                    </div>
                 </div>
             </div>
         </div>
-    {{/categories}}
+    {{/menu}}
 </div>

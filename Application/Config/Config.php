@@ -19,8 +19,10 @@ const ENTITY_PHOTOS = 7;
 
 ######### Tags below here are defined in the RootPrerogative.php config // database build file
 
-const MENU = 8;
+const CATEGORY = 8;
 const ITEMS = 9;
+const ORDER = 10;
+const CART = 11;
 
 // Template
 const COMPOSER = 'Data' . DS . 'Vendors' . DS;
@@ -100,8 +102,7 @@ function urlFacebook($request = null)
         // replace your website URL same as added in the developers.facebook.com/apps e.g. if you used http instead of https and you used non-www version or www version of your website then you must add the same here
         return $helper->getLoginUrl(SITE . 'oAuth/Facebook/' . $request . DS, [
             'public_profile', 'user_friends', 'email',
-            'user_about_me', 'user_birthday',
-            'user_education_history', 'user_hometown',
+            'user_birthday', 'user_hometown',
             'user_location', 'user_photos', 'user_friends']);
     }
 
@@ -163,11 +164,11 @@ function urlGoogle($request = null)
 return [
     'DATABASE' => [
 
-        'DB_DSN' => APP_LOCAL ? 'mysql:host=127.0.0.1;dbname=RootPrerogative;' : 'mysql:host=35.224.229.250;dbname=RootPrerogative',      // Host and Database get put here
+        'DB_DSN' => 'mysql:host=35.224.229.250;dbname=RootPrerogative',      // Host and Database get put here
 
         'DB_USER' => 'root',                 // User
 
-        'DB_PASS' => APP_LOCAL ? 'Huskies!99' : 'goldteamrules',          // Password goldteamrules
+        'DB_PASS' => 'goldteamrules',          // Password goldteamrules
 
         'DB_BUILD' => SERVER_ROOT . 'Application/Config/buildDatabase.php',
 
@@ -228,16 +229,17 @@ return [
         },
     ],
 
-    /*          TODO - finish building php websockets
+    /*  TODO - finish building php websockets in ssl
     'SOCKET' => [
-        'WEBSOCKETD' => false,  // if you'd like to use web
+        'WEBSOCKETD' => true,  // if you'd like to use web
         'PORT' => 8888,
         'DEV' => true,
+        /*
         'SSL' => [
             'KEY' => '',
             'CERT' => ''
         ]
-    ],  */
+    ],*/
 
 
     // ERRORS on point

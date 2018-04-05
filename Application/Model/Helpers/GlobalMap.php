@@ -73,8 +73,4 @@ abstract class GlobalMap extends Entities
         Pipe::send( $uri, SERVER_ROOT . 'Data/Temp/' . $id . '.fifo' );
     }
 
-    public static function sendSessionUpdate(string $id, string $uri) {
-        Pipe::send($uri, SERVER_ROOT . 'Data/Temp/' . $id . '.fifo' );
-    }
-
 }

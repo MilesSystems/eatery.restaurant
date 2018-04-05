@@ -15,18 +15,18 @@ use Carbon\Request;
 class Manager extends Request
 {
 
-    public function accordion() {
-
-        print 'fjsdklaf' . PHP_EOL;
-        return true;
-    }
-
-
-    public function Compensated() {
+    public function accordion()
+    {
         return null;
     }
 
-    public function menu($form)
+
+    public function Compensated()
+    {
+        return null;
+    }
+
+    public function menu($id)
     {
         if (empty($_POST)) {
             return true;
@@ -36,17 +36,8 @@ class Manager extends Request
 
         $forum = array();
 
-        switch ($this->set($form)->int(0,1)) {
-            case 2:
-                ################ New Item
+        switch ($this->set($id)->int(1, 2)) {
 
-                $forum['dish'] = $this->post('dish')->text();
-                $forum['category'] = $this->post('category')->text();
-
-                if (!$forum['category'] || !$forum['dish']) {
-                    throw new PublicAlert('Forum fields must be alpha numberic');
-                }
-                return 2;
             case 1:
                 ################ New Category
 
@@ -58,20 +49,37 @@ class Manager extends Request
                     throw new PublicAlert('The category name must be alpha numberic');
                 }
                 return 1;
+            case 2:
+                ################ New Item
+
+                $forum['dish'] = $this->post('dish')->text();
+                $forum['category'] = $this->post('category')->text();
+                $forum['description'] = $this->post('description')->text();
+                $forum['price'] = $this->post('price')->text();
+                $forum['calories'] = $this->post('calories')->text();
+
+                if (!$forum['category'] || !$forum['dish'] ||
+                    !$forum['description'] || !$forum['price'] || !$forum['calories']) {
+                    throw new PublicAlert('Forum fields must be alpha numeric');
+                }
+                return 2;
             default:
                 return null;
         }
     }
 
-    public function Employees() {
+    public function Employees()
+    {
         return null;
     }
 
-    public function Costumers() {
+    public function Costumers()
+    {
         return null;
     }
 
-    public function SalesReport() {
+    public function SalesReport()
+    {
         return null;  // SalesReport
     }
 }

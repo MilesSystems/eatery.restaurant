@@ -1,6 +1,6 @@
 <div id='facebook' class="login-box">
     <div class="login-logo">
-        <a href="{{site}}" style="color: #ffffff; font-size: 150%"><b>Root</b>Prerogative</a>
+        <a href="{{SITE}}" style="color: #ffffff; font-size: 150%"><b>Root</b>Prerogative</a>
     </div><!-- /.login-logo -->
     <div class="login-box-body" style="background-color: #ECF0F1; color: #0c0c0c; border: medium">
         <p class="login-box-msg">{{alert}}</p>
@@ -13,7 +13,7 @@
                     <p>Take me to Rootprerogative.com</p>
                 </div>
             </a>
-            <a href="{{site}}login/">
+            <a href="{{SITE}}login/">
                 <div class="callout callout-danger">
                     <h4>Don't link my {{service}} Account</h4>
 
@@ -26,14 +26,14 @@
 
 <div id="RegisterCB" class="login-box" style="display: none">
     <div class="login-logo">
-        <a href="{{site}}" style="color: #ffffff; font-size: 150%"><b>Root</b>Prerogative</a>
+        <a href="{{SITE}}" style="color: #ffffff; font-size: 150%"><b>Root</b>Prerogative</a>
     </div><!-- /.login-logo -->
     <div class="login-box-body" style="background-color: #ECF0F1; color: #0c0c0c; border: medium">
         <div class="box-body">
 
             <div id="alert"></div>
 
-            <form data-pjax action="{{site}}oAuth/{{service}}/SignUp/" method="post">
+            <form action="{{SITE}}oAuth/{{service}}/SignUp/" method="post">
 
                 <div class="form-group has-feedback">
                     <input type="text" class="form-control" placeholder="First Name" name="firstname"

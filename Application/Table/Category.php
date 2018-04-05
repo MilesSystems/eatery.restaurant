@@ -12,7 +12,7 @@ namespace Table;
 use Carbon\Entities;
 use Carbon\Interfaces\iTable;
 
-class Menu extends Entities implements iTable
+class Category extends Entities implements iTable
 {
 
 
@@ -23,9 +23,7 @@ class Menu extends Entities implements iTable
      */
     public static function All(array &$array, string $id): bool
     {
-        $array = self::fetch('SELECT m.*, i.* FROM RootPrerogative.carbon_menu AS m 
-                            LEFT JOIN RootPrerogative.carbon AS c ON m.category_id = c.entity_pk
-                            LEFT JOIN RootPrerogative.menu_items AS i ON i.item_id = c.entity_fk ');
+        $array = self::fetch('SELECT * FROM RootPrerogative.carbon_category');
 
         return true;
     }
@@ -57,8 +55,8 @@ class Menu extends Entities implements iTable
      */
     public static function Post(array $array): bool
     {
-        self::execute('INSERT INTO RootPrerogative.carbon_menu (category_id, category_name, category_description, category_tag) VALUES (?,?,?,?)',
-            self::beginTransaction(MENU),
+        self::execute('INSERT INTO RootPrerogative.carbon_category (category_id, category_name, category_description, category_tag) VALUES (?,?,?,?)',
+            self::beginTransaction(CATEGORY),
             $array['category_name'],
             $array['category_description'],
             $array['category_tag']);

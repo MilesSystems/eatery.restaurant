@@ -2,16 +2,18 @@
 /**
  * Created by IntelliJ IDEA.
  * User: richardmiles
- * Date: 3/30/18
- * Time: 7:36 PM
+ * Date: 4/2/18
+ * Time: 10:27 PM
  */
 
 namespace Table;
 
+
 use Carbon\Entities;
+use Carbon\Error\PublicAlert;
 use Carbon\Interfaces\iTable;
 
-class Items extends Entities implements iTable
+class Cart extends Entities implements iTable
 {
 
     /**
@@ -21,11 +23,7 @@ class Items extends Entities implements iTable
      */
     public static function All(array &$array, string $id): bool
     {
-            $array = self::fetch('SELECT i.* FROM RootPrerogative.category_items AS i 
-                            LEFT JOIN RootPrerogative.carbon AS c ON i.item_id = c.entity_pk
-                            LEFT JOIN RootPrerogative.carbon_category ON category_id = c.entity_fk
-                            WHERE category_id = ?', $id);
-        return true;
+        // TODO: Implement All() method.
     }
 
     /**
@@ -46,9 +44,8 @@ class Items extends Entities implements iTable
      */
     public static function Get(array &$array, string $id, array $argv): bool
     {
-        $array = self::fetch('SELECT * FROM RootPrerogative.category_items WHERE item_id = ?',
+        $array = self::fetch('SELECT * FROM RootPrerogative.carbon_cart WHERE session_id = ?',
             $id);
-        
         return true;
     }
 
@@ -58,15 +55,16 @@ class Items extends Entities implements iTable
      */
     public static function Post(array $array): bool
     {
-        //sortDump($array['category_id']);
-
-        self::execute('INSERT INTO RootPrerogative.category_items (item_id, item_name, item_description, item_price, item_calories) VALUES (?,?,?,?,?)',
-            self::beginTransaction(ITEMS, $array['category_id']),
-            $array['item_name'],
-            $array['item_description'],
-            $array['item_price'],
-            $array['item_calories']);
-        return self::commit();
+        self::execute('INSERT INTO RootPrerogative.carbon_cart (cart_id, session_id, cart_item, cart_notes) VALUES (?,?,?,?)',
+            self::beginTransaction(CART),
+            session_id(),
+            $array['id'],
+            $array['notes']
+            );
+        return self::commit(function () {
+            //sortDump('fdsa');
+            PublicAlert::success('added to order');
+        });
     }
 
     /**

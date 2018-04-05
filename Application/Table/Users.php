@@ -43,8 +43,8 @@ class Users extends Entities implements iTable
         $stmt = Database::database()->prepare($sql);
 
         $stmt->bindValue(':user_id', $key);
-        $stmt->bindValue(':user_type', $array['type'] ?? 'Athlete');
-        $stmt->bindValue(':user_sport', $array['sport'] ?? 'Golf');
+        $stmt->bindValue(':user_type', $array['type'] ?? 'Customer');
+        $stmt->bindValue(':user_sport', $array['sport'] ?? 'Customer');
         $stmt->bindValue(':user_session_id', session_id());
         $stmt->bindValue(':user_facebook_id', $array['facebook_id'] ?? null);
         $stmt->bindValue(':user_username', $array['username']);
