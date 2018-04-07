@@ -9,8 +9,11 @@
 namespace Table;
 
 
+use Carbon\Database;
 use Carbon\Entities;
+use Carbon\Error\PublicAlert;
 use Carbon\Interfaces\iTable;
+use Model\Helpers\GlobalMap;
 
 class Order extends Entities implements iTable
 {
@@ -22,7 +25,20 @@ class Order extends Entities implements iTable
      */
     public static function All(array &$array, string $id): bool
     {
-        // TODO: Implement All() method.
+        $array = self::fetch('SELECT * FROM RootPrerogative.carbon_orders WHERE carbon_orders.order_chef = ? OR order_finish IS NULL and order_chef IS NULL ',
+            session_id());
+
+        if (!$array[0] ?? false) {
+            $a = $array;
+            $array = [];
+            $array[] = $a;
+        }
+
+        foreach ($array as &$value) {
+            $value['order_items'] = !empty($value['order_items']) ? json_decode($value['order_items'], TRUE) : false;
+        }
+
+        return true;
     }
 
     /**
@@ -43,7 +59,12 @@ class Order extends Entities implements iTable
      */
     public static function Get(array &$array, string $id, array $argv): bool
     {
-        // TODO: Implement Get() method.
+        $array = self::fetch('SELECT * FROM RootPrerogative.carbon_orders WHERE order_session = ? AND order_finish IS NULL',
+            $id);
+
+        $array['order_items'] = !empty($array['order_items']) ? json_decode($array['order_items'], TRUE) : false;
+
+        return true;
     }
 
     /**
@@ -59,19 +80,37 @@ class Order extends Entities implements iTable
                               order_items, 
                               order_start, 
                               order_costumer, 
-                              order_server, 
-                              order_chef, 
-                              order_notes) VALUES (?,?,?,?,?,?,?,?,?)',
+                              order_server,  
+                              order_notes) VALUES (?,?,?,?,?,?,?,?)',
             self::beginTransaction(ORDER),
             session_id(),
             $array['order_total'],
             json_encode($array['order_items']),
             $array['order_start'],
-            $array['order_costumer'],
+            $_SESSION['id'] ?? '',
             $array['order_server'] ?? '',
             $array['order_notes'] ?? '');
 
-        return self::commit();
+        return self::commit(function () {
+            $cart = [];
+            Cart::Delete($cart, session_id());
+            PublicAlert::success('added to order');
+            Notifications::Post([
+                'text' => 'Your food is ready!',
+                'user_session' => session_id()
+            ]);
+
+            $kitchen_staff = self::fetchColumn('SELECT user_session_id FROM RootPrerogative.carbon_users WHERE user_type = \'kitchen\'');
+
+            foreach ($kitchen_staff as $staff) {
+                GlobalMap::sendUpdate($staff, 'kitchen');
+            }
+
+            GlobalMap::sendUpdate(session_id(), '/cartNotifications');
+            GlobalMap::sendUpdate(session_id(), '/notifications');
+            return true;
+        });
+
     }
 
     /**
@@ -82,6 +121,6 @@ class Order extends Entities implements iTable
      */
     public static function Put(array &$array, string $id, array $argv): bool
     {
-        // TODO: Implement Put() method.
+        return self::execute('UPDATE RootPrerogative.carbon_orders SET order_session = ? WHERE order_finish = ?', $id, date('m/d/Y', strtotime('+2 week',(new \DateTime())->getTimestamp())));
     }
 }

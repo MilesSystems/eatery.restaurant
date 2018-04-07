@@ -46,9 +46,9 @@ class Items extends Entities implements iTable
      */
     public static function Get(array &$array, string $id, array $argv): bool
     {
-        $array = self::fetch('SELECT * FROM RootPrerogative.category_items WHERE item_id = ?',
-            $id);
-        
+        $array = array_merge($array,self::fetch('SELECT * FROM RootPrerogative.category_items WHERE item_id = ?',
+            $id));
+
         return true;
     }
 

@@ -11,7 +11,7 @@ try {
 } catch (PDOException $e) {
     $sql = <<<END
 CREATE TABLE carbon_users
-(
+( 
 	user_id VARCHAR(225) NOT NULL 
 	PRIMARY KEY,
 	user_type VARCHAR(20) NOT NULL,
@@ -191,39 +191,70 @@ END;
 
 }
 
+
+
+
+
+
+
 try {
-    $db->prepare('SELECT 1 FROM user_messages LIMIT 1;')->execute();
-    print '<br>Table `user_messages` already exists';
+    $db->prepare('SELECT 1 FROM user_followers LIMIT 1;')->execute();
+    print '<br>Table `user_followers` already exists';
 } catch (PDOException $e) {
     $sql = <<<END
-CREATE TABLE user_messages
+CREATE TABLE user_followers
 (
-	message_id VARCHAR(225) NULL,
-	to_user_id VARCHAR(225) NULL,
-	message TEXT NOT NULL,
-	message_read TINYINT(1) DEFAULT '0' NULL,
-	CONSTRAINT messages_entity_entity_pk_fk
-		FOREIGN KEY (message_id) REFERENCES carbon (entity_pk)
+	follows_user_id VARCHAR(225) NOT NULL
+		PRIMARY KEY,
+	user_id VARCHAR(225) NOT NULL,
+	CONSTRAINT followers_entity_entity_follows_pk_fk
+		FOREIGN KEY (follows_user_id) REFERENCES carbon (entity_pk)
 			ON UPDATE CASCADE ON DELETE CASCADE,
-	CONSTRAINT messages_entity_user_from_pk_fk
-		FOREIGN KEY (to_user_id) REFERENCES carbon (entity_pk)
+	CONSTRAINT followers_entity_entity_pk_fk
+		FOREIGN KEY (user_id) REFERENCES carbon (entity_pk)
 			ON UPDATE CASCADE ON DELETE CASCADE
 )  ENGINE=InnoDB DEFAULT CHARSET=latin1
 ;
 
-CREATE INDEX messages_entity_entity_pk_fk
-	ON user_messages (message_id)
+CREATE INDEX followers_entity_entity_pk_fk
+	ON user_followers (user_id)
 ;
 
-CREATE INDEX messages_entity_user_from_pk_fk
-	ON user_messages (to_user_id)
-;
 
 
 END;
 
     $db->exec($sql);
-    print '<br>Table `user_messages` Created';
+    print '<br>Table `user_followers` Created';
+
+}
+
+
+
+
+
+
+try {
+    $db->prepare('SELECT 1 FROM carbon_notifications LIMIT 1;')->execute();
+    print '<br>Table `carbon_notifications` already exists';
+} catch (PDOException $e) {
+    $sql = <<<END
+create table carbon_notifications
+(
+	cart_item varchar(225) null,
+	cart_notes varchar(225) null,
+	cart_id varchar(225) null,
+	CONSTRAINT notifications_entity_entity_follows_pk_fk
+		FOREIGN KEY (cart_id) REFERENCES carbon (entity_pk)
+			ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+;
+ 
+
+END;
+
+    $db->exec($sql);
+    print '<br>Table `carbon_notifications` Created';
 
 }
 
@@ -285,7 +316,8 @@ END;
         [USER_MESSAGES, '', 'USER_MESSAGES'],
         [USER_TASKS, '', 'USER_TASKS'],
         [ENTITY_COMMENTS, '', 'ENTITY_COMMENTS'],
-        [ENTITY_PHOTOS, '', 'ENTITY_PHOTOS']
+        [ENTITY_PHOTOS, '', 'ENTITY_PHOTOS'],
+        [NOTIFICATIONS, '', 'NOTIFICATIONS']
     ];
 
     foreach ($tag as $key => $value) {

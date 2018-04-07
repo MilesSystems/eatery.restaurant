@@ -17,29 +17,46 @@ class Customer extends Request
 
     public function cart()
     {
-<<<<<<< HEAD
         return true;
-=======
+    }
+
+    /**
+     * @param $tableNumber
+     * @return bool
+     * @throws PublicAlert
+     */
+    public function refill($tableNumber) {
+        $this->set($tableNumber)->text();
+        if (!$tableNumber) {
+            throw new PublicAlert('Failed to find the table number!');
+        }
+        return true;
+    }
+
+    public function setTable($id) {
+
+        if ($id = $this->set($id)->alnum()) {
+            return $id;
+        }
         return null;
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
+
     }
 
-    public function order($itemId)
+    public function PlaceOrder()
     {
-        $itemId = $this->set($itemId)->alnum();
-
-        if (!$itemId) {
-            throw new PublicAlert('Could not add to order, please try again!');
-        }
-
-        if (!$_POST) {
-            return $itemId;
-        }
-        print 'ffjkldsa;fjkldsa;' . PHP_EOL . PHP_EOL;
-
-        return $itemId;
+        return true;
     }
 
+    public function ViewCheck()
+    {
+        global $json;
+
+        $json['DATE'] = date('m/d/Y', strtotime('+2 week',(new \DateTime())->getTimestamp()));
+
+        $json['winner'] = 5 === rand(0, 10);
+
+        return true;
+    }
 
     public function games($game)
     {

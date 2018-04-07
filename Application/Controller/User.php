@@ -9,11 +9,35 @@ use Table\Users;
 
 class User extends Request
 {
+    public function notifications() {
+        return true;
+    }
+
+    public function ClearTable() {
+        unset($_SESSION['table_number']);
+        startApplication(true);
+        return false;
+    }
+
+    public function Tables($number) {
+        global $json;
+
+        if (!$this->set($number)->int()) {
+            $json['tables'] = [];
+
+            for ($i = 0; $i < 17; $i++):
+                $json['tables'][$i]['name'] = $i;
+            endfor;
+
+            return null;
+        }
+        return $number;
+
+    }
 
     public function accountType($type) {
 
         $type = $this->set($type)->word();
-
 
         switch ($type) {            // Were just checking the input
             case 'Manager' :

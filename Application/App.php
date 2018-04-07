@@ -33,6 +33,10 @@ abstract class App extends Route
     public
     function wrap()
     {
+        /**
+         * @param string $file
+         * @return bool
+         */
         return function (string $file): bool {
             return View::content(APP_VIEW . $file);
         };

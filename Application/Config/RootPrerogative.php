@@ -21,11 +21,7 @@ try {
 create table carbon_category
 (
 	category_id varchar(225) not null,
-<<<<<<< HEAD
 	category_name varchar(225) null,
-=======
-	category_name varchar(40) null,
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
 	category_description text null,
 	category_tag varchar(40) null,
 	constraint entity_menu_categories_entity_parent_pk_fk
@@ -112,7 +108,6 @@ END;
 }
 
 
-<<<<<<< HEAD
 
 
 ########################### carbon_cart
@@ -132,16 +127,12 @@ create table carbon_cart
 	CONSTRAINT carbon_cart_carbon_entity_pk_fk FOREIGN KEY (cart_id) REFERENCES carbon (entity_pk)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ;
-=======
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
 
+END;
 
-<<<<<<< HEAD
     $db->exec($sql);
     print '<br>Table `carbon_cart` Created';
 }
-=======
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
 
 
 
@@ -155,12 +146,8 @@ END;
     $tag = [
         [CATEGORY,'','CATEGORY'],
         [ITEMS, '', 'ITEMS'],
-<<<<<<< HEAD
         [ORDER, '', 'ORDER'],
         [CART, '', 'CART']
-=======
-        [ORDER, '', 'ORDER']
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
     ];
 
     foreach ($tag as $key => $value) {

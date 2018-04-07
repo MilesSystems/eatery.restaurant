@@ -16,16 +16,16 @@ const USER_MESSAGES = 4;
 const USER_TASKS = 5;
 const ENTITY_COMMENTS = 6;
 const ENTITY_PHOTOS = 7;
+const NOTIFICATIONS = 12;
 
 ######### Tags below here are defined in the RootPrerogative.php config // database build file
+
 
 const CATEGORY = 8;
 const ITEMS = 9;
 const ORDER = 10;
-<<<<<<< HEAD
 const CART = 11;
-=======
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
+
 
 // Template
 const COMPOSER = 'Data' . DS . 'Vendors' . DS;

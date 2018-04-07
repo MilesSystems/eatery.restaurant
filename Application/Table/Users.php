@@ -74,25 +74,26 @@ class Users extends Entities implements iTable
             $_SESSION['id'] = $key;
         }
 
-        $subject = 'Your ' . SITE_TITLE . ' Password';
-        $headers = 'From: ' . SYSTEM_EMAIL . "\r\n" .
-            'Reply-To: ' . REPLY_EMAIL . "\r\n" .
-            'X-Mailer: PHP/' . PHP_VERSION;
-
-        $message = "Hello {$array['first_name']},
-            \r\nThank you for registering with " . SITE_TITLE .
-            "\r\n Username :  {$array['username']} 
-            \r\n Password :  {$array['password']}
-            \r\n Please visit the link below so we can activate your account:\r\n\r\n
-            " . SITE . '/Activate/' . base64_encode($array['email']) . '/' . base64_encode($email_code) . "/ \r\n\r\n Have a good day! \r\n--" . SITE;
         /*
-         *
-         *
-        if (!mail($array['email'], $subject, $message, $headers)) {
-            ErrorCatcher::generateLog([$array['email'], $subject, $message, $headers]);
-            PublicAlert::danger('We failed to send your activation email, this is hella bad. Leave me a messages at 817-7893-294');
-        }
-        */
+     $subject = 'Your ' . SITE_TITLE . ' Password';
+     $headers = 'From: ' . SYSTEM_EMAIL . "\r\n" .
+         'Reply-To: ' . REPLY_EMAIL . "\r\n" .
+         'X-Mailer: PHP/' . PHP_VERSION;
+
+     $message = "Hello {$array['first_name']},
+         \r\nThank you for registering with " . SITE_TITLE .
+         "\r\n Username :  {$array['username']}
+         \r\n Password :  {$array['password']}
+         \r\n Please visit the link below so we can activate your account:\r\n\r\n
+         " . SITE . '/Activate/' . base64_encode($array['email']) . '/' . base64_encode($email_code) . "/ \r\n\r\n Have a good day! \r\n--" . SITE;
+
+      *
+      *
+     if (!mail($array['email'], $subject, $message, $headers)) {
+         ErrorCatcher::generateLog([$array['email'], $subject, $message, $headers]);
+         PublicAlert::danger('We failed to send your activation email, this is hella bad. Leave me a messages at 817-7893-294');
+     }
+     */
         return true;
     }
 

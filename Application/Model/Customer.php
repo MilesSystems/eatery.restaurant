@@ -9,11 +9,8 @@
 namespace Model;
 
 
-<<<<<<< HEAD
+use Carbon\Error\PublicAlert;
 use Model\Helpers\GlobalMap;
-=======
-use Carbon\Request;
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
 use Table\Cart;
 use Table\Items;
 use Table\Order;
@@ -21,7 +18,45 @@ use Table\Order;
 class Customer extends GlobalMap
 {
 
-<<<<<<< HEAD
+    /**
+     * @return null
+     * @throws PublicAlert
+     */
+    public function refill($tableNumber) {
+
+        global $json;
+
+        $staff = self::fetch('SELECT user_id, user_tables FROM RootPrerogative.carbon_users WHERE user_type = \'Waiter\' AND user_tables IS NOT NULL');
+
+        if (empty($staff)) {
+            throw new PublicAlert('Sorry, an Error Has Occured');
+        }
+
+
+        if (!$staff[0] ?? false) {
+            $staff['user_tables'] = json_decode($staff['user_tables']);
+        } else {
+            foreach ($staff as $key => $employee) {
+                // TODO - implement
+            }
+        }
+
+        $staff['user_tables'] = json_decode($staff['user_tables']);
+
+        self::sendUpdate(session_id(), 'notifications/');
+
+        return null;
+    }
+
+
+    public function setTable($id) {
+
+        self::execute('UPDATE RootPrerogative.carbon_users SET user_tables = ? WHERE user_id = ?',
+            $id,
+            session_id());
+
+    }
+
     public function cart() {
         global $json;
         $json['items'] = [];
@@ -29,7 +64,7 @@ class Customer extends GlobalMap
         Cart::Get($json['items'], session_id(), []);
 
         if (empty($json['items'])) {
-            $json['items'] = null;
+            unset($json['items']);
             return null;
         }
 
@@ -41,37 +76,51 @@ class Customer extends GlobalMap
 
         $json['cartNotifications'] = \count($json['items']);
 
-        // sortDump($json['items']);
-
         foreach($json['items'] as $key => $value) {
             Items::Get($json['items'][$key], $value['cart_item'], []);
         }
 
-=======
-    public function cart($id) {
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
         return null;
     }
 
-    public function order($itemId){
+    /**
+     * @return null
+     * @throws PublicAlert
+     */
+    public function placeOrder(){
         global $json;
+
+        $json['items'] = [];
 
         $json['order'] = [];
 
-        Order::Get($json['order'], $itemId, []);
+        Cart::All($json['order'], session_id());
 
-        /*
-        Order::Post([
-            'order_total' => []],
-            'order_items' => [],
-            $array['order_start'],
-            $array['order_costumer'],
-            $array['order_server'],
-            $array['order_notes']);
-        ]);
-        */
+        if (!$json['order']) {
+            throw new PublicAlert('You must add items to your order first!');
+        }
 
-        return null;
+        $total = 0;
+        $notes = '';
+
+        foreach ($json['order'] as $key => $value) {
+            Items::Get($json['items'], $value['cart_item'], []);
+            $total += $json['items']['item_price'];
+            $notes .= PHP_EOL . ($json['items']['cart_notes'] ?? '');
+        }
+
+        if (!Order::Post([
+            'order_items' => $json['order'],
+            'order_total' => $total,
+            'order_start' =>  date('Y-m-d H:i:s'),
+            'order_notes' => $notes
+        ])) {
+            throw new PublicAlert('Could not post to Database :(');
+        }
+
+        Order::Get($json['order'], session_id(), []);
+
+        return true;
     }
 
     public function item($itemID){
@@ -87,24 +136,31 @@ class Customer extends GlobalMap
                 'notes' => $form['notes']
             ]);
         }
-<<<<<<< HEAD
 
         self::sendUpdate(session_id(), '/cartNotifications');
 
-=======
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
         return null;
     }
 
-    public function games($game) {
-        $game = $this->set($game)->word();
+    public function viewCheck() {
+       global $json;
 
-        switch ($game) {
-            case 'tetris':
-                break;
-            default:
-                $game = null;
+        $json['order'] = [];
+
+        Order::Get($json['order'], session_id(), []);
+
+        if (!$json['order']['order_items']) {
+            unset($json['order']);
+            return null;
         }
+
+        foreach($json['order']['order_items'] as $key => &$value) {
+            Items::Get($value, $value['cart_item'], []);
+        }
+
+        $json['order']['order_subtotal'] = $json['order']['order_total'];
+        $json['order']['tax'] = $json['order']['order_total'] * 0.08;
+        $json['order']['order_total'] = $json['order']['order_subtotal'] + $json['order']['tax'];
 
         return null;    // Skip the model and move to the view
     }

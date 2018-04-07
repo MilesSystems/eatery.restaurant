@@ -96,7 +96,7 @@
     Carbon(() =>
         $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/plugins/jQueryUI/jquery-ui.js', () =>
             $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/bower_components/moment/moment.js', () =>
-                $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.js', () => {
+                    $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.js', () => {
 
                     /* initialize the external events
                      -----------------------------------------------------------------*/

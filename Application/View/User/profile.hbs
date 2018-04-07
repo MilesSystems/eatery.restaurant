@@ -24,38 +24,7 @@
                         <h3 class="profile-username text-center">
                             {{user_first_last}}
                         </h3>
-                        <p class="text-muted text-center">Golfer</p>
-                        <ul class="list-group list-group-unbordered">
-                            <li class="list-group-item">
-                                <b>Number of items ordered:</b>
-                                <a class="pull-right">{{followers.count}}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Order details:</b>
-                                <a class="pull-right">{{following.count}}</a>
-                            </li>
-                        </ul>
-                        {{^myAccountBool}}
-                            <a style="display: {{#following}} none {{/following}}{{^following}}block{{/following}}"
-                               onclick="follow()"
-                               class="btn btn-primary btn-block" id="FollowUser"><b>Follow :)</b></a>
-                            <a style="display: {{#following}}block{{/following}}{{^following}}none{{/following}}"
-                               onclick="unfollow()"
-                               class="btn btn-success btn-block" id="UnfollowUser"><b>Unfollow :(</b></a>
-                            <script>
-                                function follow() {
-                                    $.fn.startApplication('{{ SITE }}Follow/{{ user_id }}');
-                                    document.getElementById('FollowUser').style.display = 'none';
-                                    document.getElementById('UnfollowUser').style.display = 'block';
-                                }
-
-                                function unfollow() {
-                                    $.fn.startApplication('{{ SITE }}Unfollow/{{ user_id }}/');
-                                    document.getElementById('FollowUser').style.display = 'block';
-                                    document.getElementById('UnfollowUser').style.display = 'none';
-                                }
-                            </script>
-                        {{/myAccountBool}}
+                        <p class="text-muted text-center">Human</p>
                         {{#myAccountBool}}
                             <a href="{{ SITE }}Messages/" class="btn btn-success btn-block">Messages</a>
                         {{/myAccountBool}}
@@ -83,12 +52,6 @@
                                 <dt>Birthday</dt>
                                 <dd>{{user_birthday}}</dd>
                                 <br>
-                                <dt>Education History</dt>
-                                <dd>{{user_education_history}}</dd>
-                                <br>
-                                <dt>Mutual Friends</dt>
-                                <dd>{{user_facebook_id}}{{^user_facebook_id}}
-                                    Connect to Facebook{{/user_facebook_id}}</dd>
                             </dl>
                         </div>
                         <!-- /.box-body -->

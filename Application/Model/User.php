@@ -4,6 +4,7 @@ namespace Model;
 
 use Carbon\Helpers\Serialized;
 use Model\Helpers\GlobalMap;
+use Table\Notifications;
 use Table\Users;
 use Table\Followers;
 use Table\Messages;
@@ -18,6 +19,26 @@ use Carbon\Request;
 class User extends GlobalMap
 {
 
+    public function Tables($number)
+    {
+        global $json;
+        $json['table_number'] = $_SESSION['table_number'] = $number;
+        startApplication('login');
+        return false;
+    }
+
+
+    public function Notifications()
+    {
+        global $json;
+
+        $json['notifications'] = [];
+
+        Notifications::All($json['notifications'], session_id());
+
+        return true;;
+    }
+
     /**
      *  This is for the developer menu at the moment.
      *  We need a functionality to allow the manager
@@ -26,14 +47,16 @@ class User extends GlobalMap
      * @return bool
      * @throws PublicAlert
      */
-    public function accountType($type) : bool {
+    public function accountType($type): bool
+    {
 
-        self::execute('UPDATE carbon_users SET user_type = ? WHERE user_id = ?', $type, $_SESSION['id']);
+        self::execute('UPDATE RootPrerogative.carbon_users SET user_type = ? WHERE user_id = ?', $type, $_SESSION['id']);
 
         startApplication(true);     // refresh the view and user data
 
         return false;
     }
+
     /**
      * User constructor.
      * @param string|null $id
@@ -85,6 +108,14 @@ class User extends GlobalMap
             }
             */
             $_SESSION['id'] = $data['user_id'];    // returning the user's id.
+
+
+            if ($_SESSION['table_number'] ?? false) {
+                self::execute('UPDATE RootPrerogative.carbon_users SET user_tables = ? WHERE user_session_id = ?',
+                        json_encode($_SESSION['table_number']),
+                        session_id());
+            }
+
         } else {
             throw new PublicAlert ('Sorry, the username and password combination you have entered is invalid.', 'warning');
         }
@@ -116,10 +147,7 @@ class User extends GlobalMap
 
         $service = "user_{$service}_id";
 
-<<<<<<< HEAD
         //sortDump($UserInfo);
-=======
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
 
         $sql = "SELECT user_id, $service FROM carbon_users WHERE user_email = ? OR $service = ?";
 

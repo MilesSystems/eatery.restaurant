@@ -21,8 +21,7 @@
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
                     <li id="NavMessages" class="dropdown messages-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                           onclick="this.removeChild(document.getElementById('NewMessagesSpan'))">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-envelope-o"></i>
                             {{#newMessages}}
                                 <span id="NewMessagesSpan" class="label label-success">{{newMessages}}</span>
@@ -140,18 +139,7 @@
                                     <small>Member since {{me.user_creation_date}}</small>
                                 </p>
                             </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="<?=SITE?>Rounds/">Rounds</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Following</a>
-                                </div>
-                            </li>
+
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
@@ -200,8 +188,7 @@
             <!-- search form -->
             <form action="/Search/" method="get" class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search..."
-                           onkeyup="$.fn.startApplication('{{ SITE }}Search/'+this.value)">
+                    <input type="text" class="form-control" placeholder="Search...">
                     <span class="input-group-btn">
                                 <button name="search" id="search-btn" class="btn btn-flat">
                                     <i class="fa fa-search"></i>
@@ -213,7 +200,7 @@
 
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu tree" data-widget="tree">
-                <li class="header">MAIN NAVIGATION</li>
+                <li class="header">MANAGER NAVIGATION</li>
 
                 <li>
                     <a href="/SalesReport/">

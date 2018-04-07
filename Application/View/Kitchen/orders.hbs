@@ -1,3 +1,20 @@
+<style>
+    .example-modal .modal {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        right: auto;
+        left: auto;
+        display: block;
+        z-index: 1;
+    }
+
+    .example-modal .modal {
+        background: transparent !important;
+    }
+</style>
+
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
@@ -21,21 +38,15 @@
 
             <h3 class="box-title">Orders On Deck</h3>
 
-            <div class="box-tools pull-right">
-                <ul class="pagination pagination-sm inline">
-                    <li><a href="#">« meh</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">»</a></li>
-                </ul>
-            </div>
         </div>
+
+
+
         <!-- /.box-header -->
         <div class="box-body">
             <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
             <ul class="todo-list ui-sortable">
-                {{#order}}
+                {{#orders}}
                     <li>
                         <!-- drag handle -->
                         <span class="handle ui-sortable-handle">
@@ -43,25 +54,45 @@
                         <i class="fa fa-ellipsis-v"></i>
                       </span>
                         <!-- checkbox -->
-                        <input type="checkbox" value="">
+                        <input onclick="$.fn.startApplication('StartOrder/{{order_id}}')" type="checkbox">
                         <!-- todo text -->
-                        <span class="text">{{value}}</span>
+                        <span class="text">{{order_session}}</span>
                         <!-- Emphasis label -->
-                        <small class="label label-danger"><i class="fa fa-clock-o"></i>{{time}} mins</small>
+                        <small class="label label-danger"><i class="fa fa-clock-o"></i>{{order_start}}</small>
                         <!-- General tools such as edit or delete-->
                         <div class="tools">
-                            <i class="fa fa-edit"></i>
+                            <i class="fa fa-edit" data-toggle="modal" data-target="#{{order_session}}"></i>
                             <i class="fa fa-trash-o"></i>
                         </div>
                     </li>
-                {{/order}}
+
+                    <div class="modal modal-info fade" id="{{order_session}}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">User Comments</h4>
+                            </div>
+                            <div class="modal-body">
+                               <p>{{order_notes}}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                {{/orders}}
             </ul>
         </div>
-        <!-- /.box-body -->
+        <!-- /.box-body
         <div class="box-footer clearfix no-border">
             <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item
             </button>
-        </div>
+        </div>-->
     </div>
     <!-- /.box -->
 
@@ -106,3 +137,9 @@
 
     });
 </script>
+
+
+{{#order}}
+
+
+{{/order}}

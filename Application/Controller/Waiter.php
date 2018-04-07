@@ -13,7 +13,20 @@ use Carbon\Request;
 
 class Waiter extends Request
 {
-    public function tables($tables) {
 
+    public function ViewTables($table_id)
+    {
+        global $json;
+
+        $json['tables'] = [];
+
+        for ($i = 0; $i < 17; $i++):
+            $json['tables'][$i]['name'] = $i;
+        endfor;
+
+        $json['tableNumber'] = $this->set($table_id)->int();
+
+        // sortDump($json['tables']);
+        return true;
     }
 }

@@ -1,7 +1,6 @@
 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
     <i class="fa fa-cart-plus"></i>
 
-<<<<<<< HEAD
     {{#cartNotifications}}
         <span class="label label-danger">{{cartNotifications}}</span>
     {{/cartNotifications}}
@@ -9,15 +8,6 @@
 </a>
 <ul class="dropdown-menu">
     <li class="header">You have {{cartNotifications}}{{^cartNotifications}}0{{/cartNotifications}} items</li>
-=======
-    {{#newTasks}}
-        <span class="label label-danger">{{newTasks}}</span>
-    {{/newTasks}}
-
-</a>
-<ul class="dropdown-menu">
-    <li class="header">You have {{total}}{{^total}}0{{/total}} tasks</li>
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
     <li>
         <!-- inner menu: contains the actual data -->
         <ul class="menu">
@@ -26,19 +16,8 @@
                     <a href="#">
                         <h3>
                             {{item_name}}
-<<<<<<< HEAD
                             <small class="pull-right"><i class="fa fa-fw fa-remove"></i></small>
                         </h3>
-=======
-                            <small class="pull-right">{{progress}}%</small>
-                        </h3>
-                        <div class="progress xs">
-                            <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0"
-                                 aria-valuemax="100">
-                                <span class="sr-only">{{progress}}% Complete</span>
-                            </div>
-                        </div>
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
                     </a>
                 </li>
                 <!-- end task item -->
@@ -47,10 +26,6 @@
         </ul>
     </li>
     <li class="footer">
-<<<<<<< HEAD
-        <a class="bg-green-active"><b style="color: white">PLACE ORDER</b></a>
-=======
-        <a onclick="$.fn.startApplication('/addToOrder')" class="bg-green-active"><b style="color: white">PLACE ORDER</b></a>
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
+        <a class="bg-green-active" onclick="$.fn.startApplication(/placeOrder/)"><b style="color: white">PLACE ORDER</b></a>
     </li>
 </ul>

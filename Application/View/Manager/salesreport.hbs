@@ -25,7 +25,6 @@
                         <tr>
                             <th>id</th>
                             <th>total</th>
-                            <th>items</th>
                             <th>time</th>
                             <th>costumer</th>
                             <th>server</th>
@@ -36,14 +35,13 @@
                         <tbody>
                         {{#order}}
                         <tr>
-                            <td>{{id}}</td>
-                            <td>{{total}}</td>
-                            <td>{{items}}</td>
-                            <td>{{time}}</td>
-                            <td>{{costumer}}</td>
-                            <td>{{server}}</td>
-                            <td>{{id}}</td>
-                            <td>{{notes}}</td>
+                            <td>{{order_id}}</td>
+                            <td>{{order_total}}</td>
+                            <td>{{order_start}}</td>
+                            <td>{{order_costumer}}</td>
+                            <td>{{order_server}}</td>
+                            <td>{{order_chef}}</td>
+                            <td>{{order_notes}}</td>
                         </tr>
                         {{/order}}
                         </tbody>
@@ -51,7 +49,6 @@
                         <tr>
                             <th>id</th>
                             <th>total</th>
-                            <th>items</th>
                             <th>time</th>
                             <th>costumer</th>
                             <th>server</th>

@@ -1,13 +1,12 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="{{ SITE }}Home/" class="logo hidden-md-down">
+    <a href="{{ SITE }}" class="logo hidden-md-down">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>R</b>R</span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg"><b>Restau</b>Rants<b>#</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
-
     <nav class="navbar navbar-static-top" role="navigation">
         <!-- Sidebar toggle button-->
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -29,24 +28,28 @@
                             {{/newMessages}}
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have {{newMessages}}{{^newMessages}}0{{/newMessages}} new messages</li>
+                            <li class="header">You have {{newMessages}}{{^newMessages}}0{{/newMessages}} new messages
+                            </li>
                             <!-- inner menu: contains the actual data -->
-                            <li><ul class="menu">
-                                {{#users}}
-                                    <li><!-- start message -->
-                                        <a href="{{user_uri}}">
-                                            <div class="pull-left">
-                                                <img src="{{user_profile_picture}}" class="img-circle" alt="User Image"/>
-                                            </div>
-                                            <h4>
-                                                {{first_name}} {{last_name}}
-                                                <small><i class="fa fa-clock-o"></i>{{creation_date}}</small>
-                                            </h4>
-                                            <p>{{message}}</p>
-                                        </a>
-                                    </li><!-- end message -->
-                                {{/users}}
-                            </ul></li>
+                            <li>
+                                <ul class="menu">
+                                    {{#users}}
+                                        <li><!-- start message -->
+                                            <a href="{{user_uri}}">
+                                                <div class="pull-left">
+                                                    <img src="{{user_profile_picture}}" class="img-circle"
+                                                         alt="User Image"/>
+                                                </div>
+                                                <h4>
+                                                    {{first_name}} {{last_name}}
+                                                    <small><i class="fa fa-clock-o"></i>{{creation_date}}</small>
+                                                </h4>
+                                                <p>{{message}}</p>
+                                            </a>
+                                        </li><!-- end message -->
+                                    {{/users}}
+                                </ul>
+                            </li>
                             <li class="footer"><a href="#">See All Messages</a></li>
                         </ul>
                     </li>
@@ -59,14 +62,16 @@
                             {{/newNotifications}}
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have {{newNotifications}}{{^newNotifications}}0{{/newNotifications}} notifications</li>
+                            <li class="header">You have {{newNotifications}}{{^newNotifications}}
+                                0{{/newNotifications}} notifications
+                            </li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
                                     {{#notifications}}
                                         <li>
                                             <a href="">
-                                                <i class="fa {{fa-icon}} text-red"></i> {{notification}}
+                                                <i class="fa {{fa-icon}} text-red"></i> {{notification_text}}
                                             </a>
                                         </li>
                                     {{/notifications}}
@@ -75,20 +80,41 @@
                             <li class="footer"><a href="">View all</a></li>
                         </ul>
                     </li>
-<<<<<<< HEAD
 
 
-=======
-
-                    <script>
-                        Carbon(() => {
-                            $.fn.startApplication('/addToOrder'); // This is a live refresh of the view
-                        });
-                    </script>
-
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
                     <!-- Tasks: style can be found in dropdown.less -->
-                    <li class="dropdown tasks-menu orderCart" id="NavTasks"></li> 
+                    <li class="dropdown tasks-menu orderCart" id="NavTasks"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-cart-plus"></i>
+
+                        {{#cartNotifications}}
+                            <span class="label label-danger">{{cartNotifications}}</span>
+                        {{/cartNotifications}}
+
+                    </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have {{cartNotifications}}{{^cartNotifications}}0{{/cartNotifications}} items</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    {{#items}}
+                                        <li><!-- Task item -->
+                                            <a href="#">
+                                                <h3>
+                                                    {{item_name}}
+                                                    <small class="pull-right"><i class="fa fa-fw fa-remove"></i></small>
+                                                </h3>
+                                            </a>
+                                        </li>
+                                        <!-- end task item -->
+                                    {{/items}}
+
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a class="bg-green-active"><b style="color: white">PLACE ORDER</b></a>
+                            </li>
+                        </ul>
+                    </li>
                     <!-- User Account: style can be found in dropdown.less -->
 
                     <li class="dropdown user user-menu">
@@ -105,22 +131,7 @@
                                     <small>Member since {{me.user_creation_date}}</small>
                                 </p>
                             </li>
-                            <!-- Menu Body -->
-<<<<<<< HEAD
 
-=======
-                            <li class="user-body">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="{{SITE}}/">Rounds</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Following</a>
-                                </div>
-                            </li>
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
@@ -140,12 +151,47 @@
             {{/me}}
             {{^me}}
                 <ul class="nav navbar-nav">
+                    <!-- Tasks: style can be found in dropdown.less -->
+                    <li class="dropdown tasks-menu orderCart" id="NavTasks"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-cart-plus"></i>
+
+                        {{#cartNotifications}}
+                            <span class="label label-danger">{{cartNotifications}}</span>
+                        {{/cartNotifications}}
+
+                    </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have {{cartNotifications}}{{^cartNotifications}}0{{/cartNotifications}} items</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    {{#items}}
+                                        <li><!-- Task item -->
+                                            <a href="#">
+                                                <h3>
+                                                    {{item_name}}
+                                                    <small class="pull-right"><i class="fa fa-fw fa-remove"></i></small>
+                                                </h3>
+                                            </a>
+                                        </li>
+                                        <!-- end task item -->
+                                    {{/items}}
+
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a class="bg-green-active"><b style="color: white">PLACE ORDER</b></a>
+                            </li>
+                        </ul>
+                    </li>
                     <li><a href="{{ SITE }}Table/{{table_number}}/login">Login</a></li>
                     <li><a href="{{SITE }}Register">Register</a></li>
+                    <li><a href="{{SITE }}ClearTable">Clear</a></li>
                 </ul>
             {{/me}}
 
         </div>
+
     </nav>
 </header>
 
@@ -178,7 +224,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree" id="left-sidebar-menu">
             <li>
-                <a href="{{ SITE }}">
+                <a href="/viewCheck/">
                     <i class="fa fa-edit"></i><span>View Check</span>
                 </a>
             </li>
@@ -196,7 +242,6 @@
 
                 </li>
             {{/category}}
-<<<<<<< HEAD
 
 
             <li class="treeview">
@@ -206,31 +251,21 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Game One</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Game Two</a></li>
+                    <li><a href="/CrappyBird-master/"><i class="fa fa-circle-o"></i>Crappy Bird</a></li>
+                    <li><a href="/JavaScript-Snake-master/"><i class="fa fa-circle-o"></i>Snake Master</a></li>
                 </ul>
             </li>
 
-=======
-
-
-
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-laptop"></i>
-                    <span>Account Overview</span>
-                    <i class="fa fa-angle-left pull-right"></i>
+            <li>
+                <a onclick="$.fn.startApplication('/requestRefill/')">
+                    <i class="fa fa-battery-quarter"></i><span>Request Refill</span>
                 </a>
-                <ul class="treeview-menu">
-                    <!--
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Tournament Finder</a></li>
-                    -->
-                    <li><a href="<?= SITE ?>Profile/" onclick=""><i class="fa fa-circle-o"></i> Profile
-                        Settings</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Lipsum</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Epselon</a></li>
-                </ul>
+            </li>
+
+            <li>
+                <a onclick="$.fn.startApplication('/requestRefill/')">
+                    <i class="fa fa-question"></i><span>Request Help</span>
+                </a>
             </li>
 
         </ul>

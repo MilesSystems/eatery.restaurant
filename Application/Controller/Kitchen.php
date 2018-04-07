@@ -14,7 +14,14 @@ use Carbon\Request;
 class Kitchen extends Request
 {
     public function orders() {
-        return null;
+        return true;
     }
+
+
+    public function StartOrder($orderId) {
+
+        return $orderId;
+    }
+
 
 }

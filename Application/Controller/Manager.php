@@ -11,9 +11,14 @@ namespace Controller;
 
 use Carbon\Error\PublicAlert;
 use Carbon\Request;
+use Table\Order;
 
 class Manager extends Request
 {
+
+    public function hideCategory($id) {
+        return $id;
+    }
 
     public function accordion()
     {
@@ -23,9 +28,14 @@ class Manager extends Request
 
     public function Compensated()
     {
-        return null;
+        return true;
     }
 
+    /**
+     * @param $id
+     * @return bool|int|null
+     * @throws PublicAlert
+     */
     public function menu($id)
     {
         if (empty($_POST)) {
@@ -60,7 +70,7 @@ class Manager extends Request
 
                 if (!$forum['category'] || !$forum['dish'] ||
                     !$forum['description'] || !$forum['price'] || !$forum['calories']) {
-                    throw new PublicAlert('Forum fields must be alpha numeric');
+                    throw new PublicAlert('Form fields must be alpha numeric');
                 }
                 return 2;
             default:
@@ -70,16 +80,46 @@ class Manager extends Request
 
     public function Employees()
     {
-        return null;
+        return true;
     }
 
-    public function Costumers()
+    public function Customer()
     {
-        return null;
+        return true;
+    }
+
+    /**
+     * @param $user_id
+     * @param $user_type
+     * @return array
+     * @throws PublicAlert
+     */
+    public function changeType($user_id, $user_type)
+    {
+
+        [$user_id, $user_type] = $this->set($user_id, $user_type)->text();
+
+        switch ($user_type) {
+            case 'Manager':
+            case 'Waiter':
+            case 'Kitchen':
+            case 'Customer' :
+                break;
+            default:
+                throw new PublicAlert('The User Type Appears Invalid');
+        }
+
+
+        if (!$user_id) {
+            throw new PublicAlert('The User ID Appears Invalid');
+        }
+
+
+        return [$user_id, $user_type];
     }
 
     public function SalesReport()
     {
-        return null;  // SalesReport
+        return true;  // SalesReport
     }
 }

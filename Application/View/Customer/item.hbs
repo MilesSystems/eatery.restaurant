@@ -6,7 +6,7 @@
             </div>
 
             <div class="box-body bg-gray">
-                <form class="form-horizontal" action="{{SITE}}item/{{item.item_id}}/" method="post"
+                <form class="form-horizontal" data-hbs action="{{SITE}}item/{{item.item_id}}/" method="post"
                       enctype="multipart/form-data">
 
                     <div class="col-md-12">
@@ -15,7 +15,6 @@
                             <!-- Add the bg color to the header using any of the bg-* classes -->
                             <div class="widget-user-header bg-aqua-active">
                                 <h3 class="widget-user-username">{{item.item_name}}</h3>
-                                <h5 class="widget-user-desc">Example &amp; Thing</h5>
                             </div>
                             <div class="widget-user-image">
                             </div>
@@ -72,11 +71,3 @@
     </div>
 </div>
 
-<<<<<<< HEAD
-=======
-<script>
-    function addToForum(a) {
-        $.fn.startApplication(a);
-    }
-</script>
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066

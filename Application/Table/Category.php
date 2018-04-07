@@ -23,7 +23,7 @@ class Category extends Entities implements iTable
      */
     public static function All(array &$array, string $id): bool
     {
-        $array = self::fetch('SELECT * FROM RootPrerogative.carbon_category');
+        $array = self::fetch('SELECT * FROM RootPrerogative.carbon_category WHERE category_hidden IS FALSE');
 
         return true;
     }
