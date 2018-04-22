@@ -16,7 +16,15 @@ use Table\Order;
 class Manager extends Request
 {
 
-    public function hideCategory($id) {
+    public function messages()
+    {
+        [$us_id, $messages] = $this->post('user_id', 'message')->alnum();
+        return [$us_id, $messages];
+
+    }
+
+    public function hideCategory($id)
+    {
         return $id;
     }
 
@@ -53,7 +61,7 @@ class Manager extends Request
 
                 $forum['category'] = $this->post('category')->text();
                 $forum['description'] = $this->post('description')->text();
-                $forum['tag'] = $this->post('tag')->text();
+                $forum['tag'] = trim($this->post('tag')->text());
 
                 if (!$forum['category']) {
                     throw new PublicAlert('The category name must be alpha numberic');
@@ -68,8 +76,8 @@ class Manager extends Request
                 $forum['price'] = $this->post('price')->text();
                 $forum['calories'] = $this->post('calories')->text();
 
-                if (!$forum['category'] || !$forum['dish'] ||
-                    !$forum['description'] || !$forum['price'] || !$forum['calories']) {
+                if (false === $forum['category'] || false === $forum['dish'] ||
+                    false === $forum['description'] || false === $forum['price'] || false === $forum['calories']) {
                     throw new PublicAlert('Form fields must be alpha numeric');
                 }
                 return 2;
@@ -83,7 +91,7 @@ class Manager extends Request
         return true;
     }
 
-    public function Customer()
+    public function customers()
     {
         return true;
     }

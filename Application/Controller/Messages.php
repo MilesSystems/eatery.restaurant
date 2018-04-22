@@ -59,9 +59,9 @@ class Messages extends Request
             PublicAlert::success('Thank you for reaching out, we will get back to you ASAP!');
         }
 
-        Reports::Post(['level' => 'Mail', 'report' => $message]);       //  TODO - send mail
+        #Reports::Post(['level' => 'Mail', 'report' => $message]);       //  TODO - send mail
 
-        // return false;   // There is nothing in the model to run
+        return false;   // There is nothing in the model to run
     }
 
 

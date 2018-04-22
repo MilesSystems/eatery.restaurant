@@ -10,7 +10,7 @@ $(function () {
     'use strict';
     <!-- jQuery UI 1.11.4 -->
 
-    $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/jquery-ui/jquery-ui.min.js", () => {
+    carbon.js("/Data/Vendors/almasaeed2010/adminlte/bower_components/jquery-ui/jquery-ui.min.js", () => {
         $.widget.bridge('uibutton', $.ui.button);
         // Make the dashboard widgets sortable Using jquery UI
         $('.connectedSortable').sortable({
@@ -35,9 +35,9 @@ $(function () {
 
     $.fn.load_wysihtml5('.textarea');
 
-    $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/moment/min/moment.min.js");
-    $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js");
-    $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js", () => {
+    carbon.js("/Data/Vendors/almasaeed2010/adminlte/bower_components/moment/min/moment.min.js");
+    carbon.js("/Data/Vendors/almasaeed2010/adminlte/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js");
+    carbon.js("/Data/Vendors/almasaeed2010/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js", () => {
         $('.daterange').daterangepicker({
             ranges: {
                 'Today': [moment(), moment()],
@@ -74,8 +74,8 @@ $(function () {
     // World map by jvectormap
 
     <!-- jvectormap -->
-    $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js", () =>
-        $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js", () => {
+    carbon.js("/Data/Vendors/almasaeed2010/adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js", () =>
+        carbon.js("/Data/Vendors/almasaeed2010/adminlte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js", () => {
             $('#world-map').vectorMap({
                 map: 'world_mill_en',
                 backgroundColor: 'transparent',
@@ -106,7 +106,7 @@ $(function () {
 
     // Sparkline charts
     <!-- Sparkline -->
-    $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js", () => {
+    carbon.js("/Data/Vendors/almasaeed2010/adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js", () => {
         var myvalues = [1000, 1200, 920, 927, 931, 1027, 819, 930, 1021];
         $('#sparkline-1').sparkline(myvalues, {
             type: 'line',
@@ -145,8 +145,8 @@ $(function () {
     // Sales chart
 
     <!-- Morris.js charts -->
-    $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/raphael/raphael.min.js", () =>
-        $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/morris.js/morris.min.js", () => {
+    carbon.js("/Data/Vendors/almasaeed2010/adminlte/bower_components/raphael/raphael.min.js", () =>
+        carbon.js("/Data/Vendors/almasaeed2010/adminlte/bower_components/morris.js/morris.min.js", () => {
 
             var area = new Morris.Area({
                 element: 'revenue-chart',

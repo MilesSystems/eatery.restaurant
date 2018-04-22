@@ -406,7 +406,7 @@
 
     Carbon(function () {
 
-        $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js", () => {
+        carbon.js("/Data/Vendors/almasaeed2010/adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js", () => {
             //INITIALIZE SPARKLINE CHARTS
             $(".sparkline").each(function () {
                 var $this = $(this);

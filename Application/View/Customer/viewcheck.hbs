@@ -33,7 +33,7 @@
                 <small class="pull-right">{{order_start}}</small>
             </h2>
         </div>
-        <!-- /.col -->
+        <!-- /.col -->`
     </div>
     <!-- info row -->
     <div class="row invoice-info">
@@ -73,7 +73,7 @@
                     <th>ID</th>
                     <th>Product</th>
                     <th>Description</th>
-                    <th>Subtotal</th>
+                    <th>Price</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -82,7 +82,7 @@
                     <td>{{cart_id}}</td>
                     <td>{{item_name}}</td>
                     <td>{{item_description}}</td>
-                    <td>{{cart_notes}}</td>
+                    <td>{{item_price}}</td>
                 </tr>
                 {{/order_items}}
                 </tbody>
@@ -121,11 +121,21 @@
                         <td>${{tax}}</td>
                     </tr>
                     <tr>
+                        <th>Tip</th>
+                        <td><input type="text" value="" class="slider form-control" data-slider-min="0"
+                                   data-slider-max="200"
+                                   data-slider-step="5" data-slider-value="{{tip}}"
+                                   data-slider-orientation="horizontal"
+                                   data-slider-selection="before" data-slider-tooltip="show" data-slider-id="red">
+                        </td>
+                    </tr>
+                    <tr>
                         <th>Total:</th>
                         <td>${{order_total}}</td>
                     </tr>
                     </tbody></table>
             </div>
+
         </div>
         <!-- /.col -->
     </div>
@@ -189,3 +199,11 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+<!-- Bootstrap slider -->
+<script>
+    Carbon(()=> {
+        carbon.js("/Data/Vendors/almasaeed2010/adminlte/plugins/bootstrap-slider/bootstrap-slider.js", ()=>
+                $('.slider').slider())
+    });
+</script>

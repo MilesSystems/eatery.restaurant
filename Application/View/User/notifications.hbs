@@ -1,31 +1,24 @@
 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-    <i class="fa fa-cart-plus"></i>
-
-    {{#cartNotifications}}
-        <span class="label label-danger">{{cartNotifications}}</span>
-    {{/cartNotifications}}
-
+    <i class="fa fa-bell-o"></i>
+    {{#newNotifications}}
+        <span class="label label-warning">{{newNotifications}}</span>
+    {{/newNotifications}}
 </a>
 <ul class="dropdown-menu">
-    <li class="header">You have {{cartNotifications}}{{^cartNotifications}}0{{/cartNotifications}} items</li>
+    <li class="header">You have {{newNotifications}}{{^newNotifications}}
+        0{{/newNotifications}} notifications
+    </li>
     <li>
         <!-- inner menu: contains the actual data -->
         <ul class="menu">
-            {{#items}}
-                <li><!-- Task item -->
-                    <a href="#">
-                        <h3>
-                            {{item_name}}
-                            <small class="pull-right"><i class="fa fa-fw fa-remove"></i></small>
-                        </h3>
+            {{#notifications}}
+                <li>
+                    <a href="">
+                        <i class="fa {{fa-icon}} text-red"></i> {{notification_text}}
                     </a>
                 </li>
-                <!-- end task item -->
-            {{/items}}
-
+            {{/notifications}}
         </ul>
     </li>
-    <li class="footer">
-        <a class="bg-green-active"><b style="color: white">PLACE ORDER</b></a>
-    </li>
+    <li class="footer"><a onclick="carbon.app('/clearnotifications')">Clear Notifications</a></li>
 </ul>

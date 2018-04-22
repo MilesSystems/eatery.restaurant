@@ -70,7 +70,7 @@ abstract class GlobalMap extends Entities
     }
 
     public static function sendUpdate(string $id, string $uri){
-        Pipe::send( $uri, SERVER_ROOT . 'Data/Temp/' . $id . '.fifo' );
+        Pipe::send( $uri, SERVER_ROOT . 'data/temp/' . $id . '.fifo' );
     }
 
 }

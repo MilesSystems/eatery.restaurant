@@ -9,6 +9,7 @@
 namespace Controller;
 
 
+use Carbon\Error\PublicAlert;
 use Carbon\Request;
 
 class Kitchen extends Request
@@ -19,9 +20,11 @@ class Kitchen extends Request
 
 
     public function StartOrder($orderId) {
-
         return $orderId;
     }
 
 
+    public function CompleteOrder($orderID) {
+        return $orderID;
+    }
 }

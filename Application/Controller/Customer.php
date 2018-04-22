@@ -53,7 +53,7 @@ class Customer extends Request
 
         $json['DATE'] = date('m/d/Y', strtotime('+2 week',(new \DateTime())->getTimestamp()));
 
-        $json['winner'] = 5 === rand(0, 10);
+        $json['winner'] = 5 === random_int(0, 10);
 
         return true;
     }

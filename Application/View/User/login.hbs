@@ -1,6 +1,6 @@
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{site}}" style="color: #ffffff; font-size: 150%"><b>Root</b>Prerogative</a>
+        <a href="/" style="color: #ffffff; font-size: 150%"><b>Root</b>Prerogative</a>
     </div><!-- /.login-logo -->
     <div class="login-box-body" style="background-color: #ECF0F1; color: #0c0c0c; border: medium">
         <p class="login-box-msg">Sign in to start your session</p>
@@ -8,7 +8,7 @@
         <div id="alert"></div>
 
         {{^UserName}}
-            <form data-pjax action="/login/" method="post"> <!-- return false; -->
+            <form action="/login/" method="post"> <!-- return false; -->
                 <div class="form-group has-feedback">
                     <input type="text" class="form-control" name="username" placeholder="Username" value="">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -98,21 +98,21 @@
             <!-- /.center -->
         {{/UserName}}
     </div><!-- /.login-box-body -->
+
+    <script>
+        Carbon(() => {
+            $('input').load_iCheck();
+            let wrapper = $('.wrapper');
+            wrapper.css('background-color', 'transparent');
+            let remove = (wrapper) => wrapper.css('background-color', 'rgba(0, 0, 0, 0.7)');
+            $(document).off("pjax:beforeSend", remove(wrapper)).on("pjax:beforeSend", remove(wrapper));
+
+            /*
+            $.fn.load_backStreach("/Application/View/img/augusta-master.jpg");
+            let remove=()=>{$.fn.load_backStreach()};
+            $(document).off("pjax:beforeSend", remove).on("pjax:beforeSend", remove)
+            */
+        });
+    </script>
+
 </div><!-- /.login-box -->
-
-<script>
-    Carbon(() => {
-        $.fn.load_iCheck('input');
-
-        $('.wrapper').css('background-color', 'transparent');
-        let remove = () => $('.wrapper').css('background-color', 'rgba(0, 0, 0, 0.7)');
-        $(document).off("pjax:beforeSend", remove).on("pjax:beforeSend", remove);
-
-        /*
-        $.fn.load_backStreach("/Application/View/img/augusta-master.jpg");
-        let remove=()=>{$.fn.load_backStreach()};
-        $(document).off("pjax:beforeSend", remove).on("pjax:beforeSend", remove)
-        */
-    });
-
-</script>

@@ -99,11 +99,11 @@
             //-- AJAX Pace -->
             loadJS("/bower_components/PACE/pace.js", () => $(document).ajaxStart(() => Pace.restart()));
 
-            $.fn.CarbonJS = (sc, cb) => (!JSLoaded.has(sc) ? loadJS(sc, cb) : cb());
+            carbon.js = (sc, cb) => (!JSLoaded.has(sc) ? loadJS(sc, cb) : cb());
 
 
             $.fn.load_backStreach = (img, selector) =>
-                $.fn.CarbonJS("/bower-asset/jquery-backstretch/jquery.backstretch.js", () =>
+                carbon.js("/bower-asset/jquery-backstretch/jquery.backstretch.js", () =>
                     $(selector).length ? $(selector).backstretch(img) : $.backstretch(img));
 
 
@@ -114,12 +114,12 @@
 
             //-- Select 2 -->
             $.fn.load_select2 = (select2) =>
-                $.fn.CarbonJS("/bower_components/select2/dist/js/select2.full.min.js", () =>
+                carbon.js("/bower_components/select2/dist/js/select2.full.min.js", () =>
                     $(select2).select2());
 
             //-- Data tables -->
             $.fn.load_datatables = (table) =>
-                $.fn.CarbonJS("/bower_components/datatables.net-bs/js/dataTables.bootstrap.js", () => {
+                carbon.js("/bower_components/datatables.net-bs/js/dataTables.bootstrap.js", () => {
                     try {
                         return $(table).DataTable()
                     } catch (err) {
@@ -129,7 +129,7 @@
 
             //-- iCheak -->
             $.fn.load_iCheck = (input) => {
-                $.fn.CarbonJS("/plugins/iCheck/icheck.min.js", () => {
+                carbon.js("/plugins/iCheck/icheck.min.js", () => {
                     $(input).iCheck({
                         checkboxClass: 'icheckbox_square-blue',
                         radioClass: 'iradio_square-blue',
@@ -140,7 +140,7 @@
 
             //-- Input Mask -->
             $.fn.load_inputmask = (mask) =>
-                $.fn.CarbonJS("/plugins/input-mask/jquery.inputmask.js", () => {
+                carbon.js("/plugins/input-mask/jquery.inputmask.js", () => {
                     loadJS("/plugins/input-mask/jquery.inputmask.date.extensions.js",
                         () => $(mask).inputmask());
                     loadJS("plugins/input-mask/jquery.inputmask.extensions.js",
@@ -150,19 +150,19 @@
 
             //-- Bootstrap Time Picker -->
             $.fn.load_timepicker = (timepicker) => {
-                $.fn.CarbonJS("/plugins/timepicker/bootstrap-timepicker.min.js", () => {
+                carbon.js("/plugins/timepicker/bootstrap-timepicker.min.js", () => {
                     $(timepicker).timepicker({showInputs: false});
                 });
             };
 
             //--Bootstrap Datepicker -->
             $.fn.load_datepicker = (datepicker) =>
-                $.fn.CarbonJS("/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js", () =>
+                carbon.js("/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js", () =>
                     $(datepicker).datepicker({autoclose: true}));
 
             //--Bootstrap Color Picker -->
             $.fn.load_colorpicker = (colorpicker) =>
-                $.fn.CarbonJS("/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js' ?>", () =>
+                carbon.js("/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js' ?>", () =>
                     $(colorpicker).colorpicker());
 
             //-- PJAX-->

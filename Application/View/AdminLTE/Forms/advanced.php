@@ -417,9 +417,9 @@
         $.fn.load_select2('.select2');
         //$('.select2').select2()
 
-        $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/plugins/input-mask/jquery.inputmask.js', () =>
-            $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/plugins/input-mask/jquery.inputmask.date.extensions.js', () =>
-                $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/plugins/input-mask/jquery.inputmask.extensions.js', () => {
+        carbon.js('/Data/Vendors/almasaeed2010/adminlte/plugins/input-mask/jquery.inputmask.js', () =>
+            carbon.js('/Data/Vendors/almasaeed2010/adminlte/plugins/input-mask/jquery.inputmask.date.extensions.js', () =>
+                carbon.js('/Data/Vendors/almasaeed2010/adminlte/plugins/input-mask/jquery.inputmask.extensions.js', () => {
                     //Datemask dd/mm/yyyy
                     $('#datemask').inputmask('dd/mm/yyyy', {'placeholder': 'dd/mm/yyyy'});
                     //Datemask2 mm/dd/yyyy
@@ -428,8 +428,8 @@
                     $('[data-mask]').inputmask();
                 })));
 
-        $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/bower_components/moment/moment.js', () =>
-            $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js", () => {
+        carbon.js('/Data/Vendors/almasaeed2010/adminlte/bower_components/moment/moment.js', () =>
+            carbon.js("/Data/Vendors/almasaeed2010/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js", () => {
                 //Date range picker
                 $('#reservation').daterangepicker()
                 //Date range picker with time picker
@@ -459,12 +459,12 @@
             }));
 
         //Date picker
-        $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js', () =>
+        carbon.js('/Data/Vendors/almasaeed2010/adminlte/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js', () =>
             $('#datepicker').datepicker({
                 autoclose: true
             }));
 
-        $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/plugins/iCheck/icheck.js', () => {
+        carbon.js('/Data/Vendors/almasaeed2010/adminlte/plugins/iCheck/icheck.js', () => {
             //iCheck for checkbox and radio inputs
             $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
                 checkboxClass: 'icheckbox_minimal-blue',
@@ -482,14 +482,14 @@
             });
         });
 
-        $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js', () => {
+        carbon.js('/Data/Vendors/almasaeed2010/adminlte/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js', () => {
             //Colorpicker
             $('.my-colorpicker1').colorpicker();
             //color picker with addon
             $('.my-colorpicker2').colorpicker();
         });
 
-        $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/plugins/timepicker/bootstrap-timepicker.js', () =>
+        carbon.js('/Data/Vendors/almasaeed2010/adminlte/plugins/timepicker/bootstrap-timepicker.js', () =>
             //Timepicker
             $('.timepicker').timepicker({
                 showInputs: false

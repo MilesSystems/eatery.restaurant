@@ -528,6 +528,6 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script>
     Carbon(()=> {
-        $.fn.CarbonJS("<?=SITE.APP_VIEW?>AdminLTE/Demo/dashboard.js");
+        carbon.js("<?=SITE.APP_VIEW?>AdminLTE/Demo/dashboard.js");
     });
 </script>

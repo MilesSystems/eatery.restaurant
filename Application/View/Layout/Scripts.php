@@ -20,39 +20,39 @@
     //-- JQuery -->
     loadJS("<?= SITE . TEMPLATE . 'bower_components/jquery/dist/jquery.min.js' ?>", () => {
 
-        $.fn.CarbonJS = (sc, cb) => (!JSLoaded.has(sc) ? loadJS(sc, cb) : cb());
+        carbon.js = (sc, cb) => (!JSLoaded.has(sc) ? loadJS(sc, cb) : cb());
 
         //-- Jquery Form -->
-        $.fn.CarbonJS('<?=  SITE . APP_VIEW . 'bower-asset/jquery-form/src/jquery.form.js'?>');
+        carbon.js('<?=  SITE . APP_VIEW . 'bower-asset/jquery-form/src/jquery.form.js'?>');
 
         //-- Bootstrap -->
-        $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'bower_components/bootstrap/dist/js/bootstrap.min.js' ?>", () =>
+        carbon.js("<?=  SITE . TEMPLATE . 'bower_components/bootstrap/dist/js/bootstrap.min.js' ?>", () =>
             //-- Slim Scroll -->
-            $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'bower_components/jquery-slimscroll/jquery.slimscroll.min.js' ?>", () =>
+            carbon.js("<?=  SITE . TEMPLATE . 'bower_components/jquery-slimscroll/jquery.slimscroll.min.js' ?>", () =>
 
                 //-- Fastclick -->
-                $.fn.CarbonJS("<?= SITE . TEMPLATE . 'bower_components/fastclick/lib/fastclick.js' ?>", () =>
+                carbon.js("<?= SITE . TEMPLATE . 'bower_components/fastclick/lib/fastclick.js' ?>", () =>
                     //-- Admin LTE -->
-                    $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'dist/js/adminlte.min.js' ?>", () => {
+                    carbon.js("<?=  SITE . TEMPLATE . 'dist/js/adminlte.min.js' ?>", () => {
 
                         $.fn.load_backStreach = (img, selector) =>
-                            $.fn.CarbonJS("<?=  SITE . APP_VIEW . 'Layout/jquery.backstretch.js' ?>", () =>
+                            carbon.js("<?=  SITE . APP_VIEW . 'Layout/jquery.backstretch.js' ?>", () =>
                                 $(selector).length ? $(selector).backstretch(img) : $.backstretch(img));
 
 
-                        $.fn.CarbonJS("<?=  SITE . APP_VIEW . 'bower-asset/jquery-backstretch/jquery.backstretch.min.js' ?>", () => {
+                        carbon.js("<?=  SITE . APP_VIEW . 'bower-asset/jquery-backstretch/jquery.backstretch.min.js' ?>", () => {
                             $.backstretch('<?=SITE . APP_VIEW?>Img/Carbon-white.png');
                         });
 
 
                         //-- Select 2 -->
                         $.fn.load_select2 = (select2) =>
-                            $.fn.CarbonJS("<?= SITE . TEMPLATE . 'bower_components/select2/dist/js/select2.full.min.js' ?>", () =>
+                            carbon.js("<?= SITE . TEMPLATE . 'bower_components/select2/dist/js/select2.full.min.js' ?>", () =>
                                 $(select2).select2());
 
                         //-- Data tables -->
                         $.fn.load_datatables = (table) =>
-                            $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'bower_components/datatables.net-bs/js/dataTables.bootstrap.js' ?>", () => {
+                            carbon.js("<?=  SITE . TEMPLATE . 'bower_components/datatables.net-bs/js/dataTables.bootstrap.js' ?>", () => {
                                 try {
                                     return $(table).DataTable()
                                 } catch (err) {
@@ -62,7 +62,7 @@
 
                         //-- iCheak -->
                         $.fn.load_iCheck = (input) => {
-                            $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'plugins/iCheck/icheck.min.js'?>", () => {
+                            carbon.js("<?=  SITE . TEMPLATE . 'plugins/iCheck/icheck.min.js'?>", () => {
                                 $(input).iCheck({
                                     checkboxClass: 'icheckbox_square-blue',
                                     radioClass: 'iradio_square-blue',
@@ -73,14 +73,14 @@
 
                         //-- WYSIHTML5 -->
                         $.fn.load_wysihtml5 = (input) => {
-                            $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'?>", () => {
+                            carbon.js("<?=  SITE . TEMPLATE . 'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'?>", () => {
                                 $(input).wysihtml5();
                             });
                         };
 
                         //-- Input Mask -->
                         $.fn.load_inputmask = (mask) =>
-                            $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'plugins/input-mask/jquery.inputmask.js' ?>", () => {
+                            carbon.js("<?=  SITE . TEMPLATE . 'plugins/input-mask/jquery.inputmask.js' ?>", () => {
                                 loadJS("<?=  SITE . TEMPLATE . 'plugins/input-mask/jquery.inputmask.date.extensions.js' ?>",
                                     () => $(mask).inputmask());
                                 loadJS("<?=  SITE . TEMPLATE . 'plugins/input-mask/jquery.inputmask.extensions.js' ?>",
@@ -89,7 +89,7 @@
 
                         //-- jQuery Knob -->
                         $.fn.load_knob = (knob) => {
-                            $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'bower_components/jquery-knob/js/jquery.knob.js' ?>", () => {
+                            carbon.js("<?=  SITE . TEMPLATE . 'bower_components/jquery-knob/js/jquery.knob.js' ?>", () => {
                                 $(knob).knob({
                                     draw: function () {
                                         // "tron" case
@@ -139,26 +139,26 @@
 
                         //-- Bootstrap Time Picker -->
                         $.fn.load_timepicker = (timepicker) => {
-                            $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'plugins/timepicker/bootstrap-timepicker.min.js' ?>", () => {
+                            carbon.js("<?=  SITE . TEMPLATE . 'plugins/timepicker/bootstrap-timepicker.min.js' ?>", () => {
                                 $(timepicker).timepicker({showInputs: false});
                             });
                         };
 
                         //--Bootstrap Datepicker -->
                         $.fn.load_datepicker = (datepicker) =>
-                            $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js' ?>", () =>
+                            carbon.js("<?=  SITE . TEMPLATE . 'bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js' ?>", () =>
                                 $(datepicker).datepicker({autoclose: true}));
 
                         //--Bootstrap Color Picker -->
                         $.fn.load_colorpicker = (colorpicker) =>
-                            $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js' ?>", () =>
+                            carbon.js("<?=  SITE . TEMPLATE . 'bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js' ?>", () =>
                                 $(colorpicker).colorpicker());
 
                         //-- PJAX-->
-                        $.fn.CarbonJS("<?=SITE . APP_VIEW?>AdminLTE/Demo/demo.js", () =>
-                            $.fn.CarbonJS("<?=  SITE . APP_VIEW . 'bower-asset/jquery-pjax/jquery.pjax.js' ?>", () =>
-                                $.fn.CarbonJS("<?=  SITE . APP_VIEW . 'bower-asset/mustache.js/mustache.js' ?>", () =>
-                                    $.fn.CarbonJS("<?=  SITE . COMPOSER . 'richardtmiles/carbonphp/Helpers/Carbon.js'?>", () => {
+                        carbon.js("<?=SITE . APP_VIEW?>AdminLTE/Demo/demo.js", () =>
+                            carbon.js("<?=  SITE . APP_VIEW . 'bower-asset/jquery-pjax/jquery.pjax.js' ?>", () =>
+                                carbon.js("<?=  SITE . APP_VIEW . 'bower-asset/mustache.js/mustache.js' ?>", () =>
+                                    carbon.js("<?=  SITE . COMPOSER . 'richardtmiles/carbonphp/Helpers/Carbon.js'?>", () => {
                                         CarbonJS('#pjax-content', '', false)
                                         //-- Activate Left Sidebar Tree Menu
                                         $('.sidebar-menu').tree()
@@ -166,7 +166,7 @@
                         // <!--?=($_SESSION['id'] ?? false) ? 'wss://stats.coach:8888/' : null?-->
 
                         //-- AJAX Pace -->
-                        $.fn.CarbonJS("<?=  SITE . TEMPLATE . 'bower_components/PACE/pace.js' ?>", () => $(document).ajaxStart(() => Pace.restart()));
+                        carbon.js("<?=  SITE . TEMPLATE . 'bower_components/PACE/pace.js' ?>", () => $(document).ajaxStart(() => Pace.restart()));
 
                     }))));
 

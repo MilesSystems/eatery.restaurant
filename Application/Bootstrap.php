@@ -9,6 +9,7 @@ use Model\Helpers\GlobalMap;
 use Table\Cart;
 use Table\Items;
 use Table\Category;
+use Table\Messages;
 use Table\Notifications;
 
 class Bootstrap extends App
@@ -23,22 +24,22 @@ class Bootstrap extends App
     {
         global $json, $alert;
 
-        $_SESSION['id'] = $_SESSION['id'] ?? false;
+        $_SESSION['id'] = $_SESSION['id'] ?? false;         // it is done.
 
         $json = [
-            'SITE' => SITE,
+            'ALERT' => &$alert,
+            'APP_VIEW' => APP_VIEW,
+            'AJAX' => AJAX,
+            'COMPOSER' => COMPOSER,
+            'FACEBOOK_APP_ID' => FACEBOOK_APP_ID,
             'HTTP' => HTTP,
             'HTTPS' => HTTPS,
-            'SOCKET' => SOCKET,
-            'ALERT' => &$alert,
-            'AJAX' => AJAX,
             'PJAX' => PJAX,
+            'SITE' => SITE,
             'SITE_TITLE' => SITE_TITLE,
-            'APP_VIEW' => APP_VIEW,
+            'SOCKET' => SOCKET,
             'TEMPLATE' => TEMPLATE,
-            'COMPOSER' => COMPOSER,
-            'X_PJAX_Version' => &$_SESSION['X_PJAX_Version'],
-            'FACEBOOK_APP_ID' => FACEBOOK_APP_ID
+            'X_PJAX_Version' => &$_SESSION['X_PJAX_Version']
         ];
 
         $this->userSettings();  // This is the current user state, if the user logs in or changes account types this will need to be refreshed
@@ -71,9 +72,13 @@ class Bootstrap extends App
             return $mustache->render(file_get_contents($path), $json);
         };
 
-        $json['notifications'] = [];
+        $json['messages'] = $json['notifications'] = [];
+
         Notifications::All($json['notifications'], session_id());
-        $json['newNotifications'] = (!empty($json['notifications']) ? \count($json['notifications']) : 0);
+
+        Messages::All($json['messages'], session_id());
+
+        $json['newNotifications'] = (!empty($json['notifications']) ? \count($json['notifications']) : null);
 
         // If the user is signed in we need to get the
         if (($_SESSION['id'] ?? false) || ($_SESSION['table_number'] ?? false)) {
@@ -82,10 +87,8 @@ class Bootstrap extends App
             $json['signedIn'] = true;
             $json['nav-bar'] = '';
             $json['user-layout'] = 'class="wrapper" style="background: rgba(0, 0, 0, 0.7)"';
+            $json['table_number'] = $_SESSION['table_number'] ?? false;
 
-            if ($_SESSION['table_number'] ?? false) {
-                $json['table_number'] = $_SESSION['table_number'];
-            }
 
             /**
              * Nows a good time to note which layout is for the full
@@ -99,20 +102,28 @@ class Bootstrap extends App
             switch ($user[$_SESSION['id']]['user_type'] ?? $_SESSION['table_number'] ?? false) {
                 default:
                     $json['body-layout'] = 'hold-transition skin-blue layout-top-nav';                // The general elements are top nav
-                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/General.hbs');
+                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'goldTeam/General.hbs');
                     // throw new PublicAlert('No user type found!!!!');
                     break;
                 case 'Waiter':
                     $json['body-layout'] = 'skin-purple fixed sidebar-mini sidebar-collapse';
-                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Waiter.hbs');
+                    if (!AJAX && !SOCKET) {
+                        $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'goldTeam/Waiter.hbs');
+                    }
                     break;
                 case 'Kitchen':
                     $json['body-layout'] = 'skin-red fixed sidebar-mini sidebar-collapse';
-                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Kitchen.hbs');
+                    if (!AJAX && !SOCKET) {
+                        $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'goldTeam/Kitchen.hbs');
+                    }
                     break;
                 case 'Manager':
                     $json['body-layout'] = 'skin-black fixed sidebar-mini sidebar-collapse';
-                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Manager.hbs');
+
+                    // TODO - is this a shitty fix for our problem?
+                    if (!AJAX && !SOCKET) {
+                        $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'goldTeam/Manager.hbs');
+                    }
                     break;
                 case 0:
                 case 1:
@@ -154,13 +165,13 @@ class Bootstrap extends App
                     }
 
                     $json['body-layout'] = 'skin-green fixed sidebar-mini sidebar-collapse';
-                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'GoldTeam/Customer.hbs');
+                    $json['header'] = $mustache(APP_ROOT . APP_VIEW . 'goldTeam/Customer.hbs');
                     break;
 
             }
         } else {
             $json['body-layout'] = 'stats-wrap';
-            $json['user-layout'] = 'class="container" id="pjax-content"';
+            $json['user-layout'] = 'class="container" id="pjax-content"';       // aka login menu // register
         }
     }
 
@@ -171,19 +182,13 @@ class Bootstrap extends App
      */
     public function defaultRoute()
     {
-        if (SOCKET) {
-            print 'Default Route Hit!' . PHP_EOL;
-        }
-
         // Sockets will not execute this
         View::$forceWrapper = true; // this will hard refresh the wrapper
-
-        // alert('default');
 
         if (!($_SESSION['id']) && !($_SESSION['table_number'] ?? false)):
             return MVC('User', 'login');
         else:
-            return $this->wrap()('GoldTeam/Static/Home.php');
+            return $this->wrap()('goldTeam/Static/Home.hbs');
         endif;
     }
 
@@ -204,11 +209,11 @@ class Bootstrap extends App
 
         if (null !== $uri) {
             $this->userSettings();          // Update the current user
-            $this->changeURI($uri);
+            $this->changeURI($uri);         // This is different from the uri change done in the startApplication fn
         } else {
             if (empty($this->uri[0])) {
                 if (SOCKET) {
-                    throw new PublicAlert('$_SERVER["REQUEST_URI"] MUST BE SET IN SOCKET REQUESTS');
+                    throw new PublicAlert('URI MUST BE SET IN SOCKET REQUESTS');
                 }
                 $this->matched = true;
                 return $this->defaultRoute();
@@ -220,19 +225,28 @@ class Bootstrap extends App
 
         #################################### Gold TEAM Static
         $this->structure($this->wrap());    // TODO - cross over
-        if ($this->match('Home', 'GoldTeam/Static/Home.php')() ||
-            $this->match('About', 'GoldTeam/Static/About.php')() ||
-            $this->match('FAQ', 'GoldTeam/Static/FAQ.php')() ||
-            $this->match('Trial', 'GoldTeam/Static/Trial.php')() ||
-            $this->match('Features', 'GoldTeam/Static/Features.php')()) {
+        if ($this->match('Home', 'goldTeam/Static/Home.php')() ||
+            $this->match('About', 'goldTeam/Static/About.php')() ||
+            $this->match('FAQ', 'goldTeam/Static/FAQ.php')() ||
+            $this->match('Trial', 'goldTeam/Static/Trial.php')() ||
+            $this->match('Features', 'goldTeam/Static/Features.php')()) {
             return true;
         }
 
         ################################### MVC
         $this->structure($this->MVC());
 
+        if ($this->match('clearnotifications', 'User', 'clearnotifications')()) {
+            return true;
+        }
+
+
         if (!$_SESSION['id']) {
             if ($_SESSION['table_number'] ?? false) {
+
+
+                ############################# we need to make sure the customers view is available when logged off
+
                 if ($this->structure($this->events('.orderCart'))->match('cartNotifications', 'Customer', 'cart')() ||
                     $this->structure($this->events('#NavNotifications'))->match('cartNotifications', 'Customer', 'refill')()) {
                     return true;
@@ -243,13 +257,14 @@ class Bootstrap extends App
                     $this->match('ViewCheck', 'Customer', 'ViewCheck')() ||
                     $this->match('ClearTable', 'User', 'ClearTable')() ||
                     $this->structure($this->wrap())->match('CrappyBird-master/', 'CrappyBird-master/index.html')() ||
-                    $this->structure($this->wrap())->match('JavaScript-Snake-master/', 'JavaScript-Snake-master/index.html')() ||
+                    $this->structure($this->fullPage())->match('javaScript/', 'javaScript/index.html')() ||
                     $this->structure($this->MVC())->match('MenuItems/{game?}/', 'Customer', 'games')() ||
                     $this->match('Item/{itemId}', 'Customer', 'Item')()) {
                     return true;
                 }
-                return false;
             }
+
+
 
             return $this->match('Login/*', 'User', 'login')() ||
                 $this->match('Tables/{number?}/*', 'User', 'Tables')() ||
@@ -264,7 +279,7 @@ class Bootstrap extends App
         ###################################  Logged IN
         global $user;
 
-        if ($this->structure($this->events('.notifications'))->match('notifications', 'User', 'notifications')()) {
+        if ($this->structure($this->events('#NavNotifications'))->match('notifications', 'User', 'notifications')()) {
             return true;
         }
 
@@ -278,13 +293,14 @@ class Bootstrap extends App
 
                 $this->structure($this->MVC());
 
-                if ($this->match('SalesReport', 'Manager', 'SalesReport')() ||
+                if ($this->match('Messages/*', 'Manager', 'messages')() ||
+                    $this->match('SalesReport', 'Manager', 'SalesReport')() ||
                     $this->match('changeType/{user_id}/{user_type}', 'Manager', 'changeType')() ||
                     $this->match('hideCategory/{category_id}', 'Manager', 'hideCategory')() ||
                     $this->match('EditMenu', 'Manager', 'EditMenu')() ||
                     $this->match('Schedule', 'Schedule', 'Schedule')() ||
                     $this->match('Employees', 'Manager', 'Employees')() ||
-                    $this->match('Customer', 'Manager', 'Customer')() ||
+                    $this->match('Costumers', 'Manager', 'customers')() ||
                     $this->match('Compensated', 'Manager', 'Compensated')() ||
                     $this->match('Menu/{forum?}/', 'Manager', 'Menu')()) {
                     return true;
@@ -296,20 +312,26 @@ class Bootstrap extends App
 
             case 'Kitchen':
                 if ($this->structure($this->MVC())->match('Kitchen', 'Kitchen', 'orders')() ||
-                    $this->match('StartOrder/{orderId}', 'Kitchen', 'StartOrder')()) {
+                    $this->match('StartOrder/{orderId}', 'Kitchen', 'StartOrder')() ||
+                    $this->match('CompleteOrder/{orderId}', 'Kitchen', 'CompleteOrder')()) {
                     return true;
                 }
 
             case 'Customer' :
 
-                if (($_SESSION['table_number'] ?? false) && $this->structure($this->MVC())->match('setTable/{tableNumber}', 'Customer', 'setTable')()) {
-                    $this->MVC()('setTable/{tableNumber}', 'Customer', 'setTable');
+                $_SESSION['table_number'] = 1;
+                if (!($_SESSION['table_number'] ?? false) && ($user[$_SESSION['id']]['user_type'] === 'Customer')) {
+                    if ($this->structure($this->MVC())->match('setTable/{tableNumber}', 'Customer', 'setTable')()) {
+                        return true;
+                    }
+                    $argv = ['0'];
+                    MVC('User', 'Tables', $argv);
                     return true;
                 }
 
+
                 if ($this->structure($this->events('.orderCart'))->match('cartNotifications', 'Customer', 'cart')() ||
-                    $this->structure($this->events('#NavNotifications'))->match('cartNotifications', 'Customer', 'refill')() ||
-                    $this->structure($this->events(''))->match('orderReady', 'Customer', 'orderReady')()
+                    $this->structure($this->events('#NavNotifications'))->match('cartNotifications', 'Customer', 'refill')()
                 ) {
                     return true;
                 }
@@ -318,7 +340,7 @@ class Bootstrap extends App
                 if ($this->match('PlaceOrder', 'Customer', 'PlaceOrder')() ||
                     $this->match('ViewCheck', 'Customer', 'ViewCheck')() ||
                     $this->structure($this->wrap())->match('CrappyBird-master/', 'CrappyBird-master/index.html')() ||
-                    $this->structure($this->wrap())->match('JavaScript-Snake-master/', 'JavaScript-Snake-master/index.html')() ||
+                    $this->structure($this->wrap())->match('javaScript/', 'javaScript/index.html')() ||
                     $this->structure($this->MVC())->match('MenuItems/{game?}/', 'Customer', 'games')() ||
                     $this->match('Item/{itemId}', 'Customer', 'Item')()) {
                     return true;
@@ -354,8 +376,8 @@ class Bootstrap extends App
 
 
         return $this->structure($this->MVC())->match('Activate/{email?}/{email_code?}/', 'User', 'activate')() ||  // Activate $email $email_code
-            $this->structure($this->wrap())->match('404/*', 'Error/404error.php')() ||
-            $this->match('500/*', 'Error/500error.php')();
+            $this->structure($this->wrap())->match('404/*', 'error/404error.php')() ||
+            $this->match('500/*', 'error/500error.php')();
     }
 
 }

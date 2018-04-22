@@ -475,7 +475,7 @@ if ( typeof Symbol === "function" ) {
 }
 
 // Populate the class2type map
-jQuery.each( "Boolean Number String Function Array Date RegExp Object Error Symbol".split( " " ),
+jQuery.each( "Boolean Number String Function Array Date RegExp Object error Symbol".split( " " ),
 function( i, name ) {
 	class2type[ "[object " + name + "]" ] = name.toLowerCase();
 } );
@@ -9300,7 +9300,7 @@ jQuery.extend( {
 			jqXHR.status = status;
 			jqXHR.statusText = ( nativeStatusText || statusText ) + "";
 
-			// Success/Error
+			// Success/error
 			if ( isSuccess ) {
 				deferred.resolveWith( callbackContext, [ success, statusText, jqXHR ] );
 			} else {

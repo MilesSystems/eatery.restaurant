@@ -18,14 +18,20 @@ use Carbon\Interfaces\iTable;
 class Users extends Entities implements iTable
 {
 
+    public static function userDefaults(array &$user, string $id)
+    {
+        $user['user_profile_pic'] = SITE . (!empty($user['user_profile_pic']) ? $user['user_profile_pic'] : APP_VIEW . 'img/defaults/avatar.png');
+        $user['user_profile_uri'] = $user['user_profile_uri'] ?: $id;
+        $user['user_cover_photo'] = SITE . ($user['user_cover_photo'] ?? DS . APP_VIEW . 'img/defaults/photo' . random_int(1, 3) . '.png');
+        $user['user_first_last'] = $user['user_full_name'] = $user['user_first_name'] . ' ' . $user['user_last_name'];
+        $user['user_id'] = $id;
+    }
+
+
     public static function Get(array &$array, string $id, array $argv): bool
     {
         $array = static::fetch('SELECT * FROM carbon_users WHERE user_id = ?', $id);
-        $array['user_profile_pic'] = SITE . (!empty($user['user_profile_pic']) ? $user['user_profile_pic'] : 'Data/Uploads/Pictures/Defaults/default_avatar.png');
-        $array['user_profile_uri'] = $array['user_profile_uri'] ?: $id;
-        $array['user_cover_photo'] = SITE . ($array['user_cover_photo'] ?? DS . APP_VIEW . 'Img/defaults/photo' . random_int(1, 3) . '.png');
-        $array['user_first_last'] = $array['user_full_name'] = $array['user_first_name'] . ' ' . $array['user_last_name'];
-        $array['user_id'] = $id;
+        self::userDefaults($array, $id);
         return true;
     }
 
@@ -38,7 +44,7 @@ class Users extends Entities implements iTable
     {
         $key = self::beginTransaction(USER);         // Begin transaction
 
-        $sql = 'INSERT INTO carbon_users (user_id, user_sport, user_type, user_session_id, user_facebook_id, user_username, user_first_name, user_last_name, user_profile_pic, user_profile_uri, user_cover_photo, user_birthday, user_gender, user_about_me, user_password, user_email, user_email_code, user_generated_string, user_last_login, user_ip, user_education_history, user_location, user_creation_date) VALUES 
+        $sql = 'INSERT INTO RootPrerogative.carbon_users (user_id, user_sport, user_type, user_session_id, user_facebook_id, user_username, user_first_name, user_last_name, user_profile_pic, user_profile_uri, user_cover_photo, user_birthday, user_gender, user_about_me, user_password, user_email, user_email_code, user_generated_string, user_last_login, user_ip, user_education_history, user_location, user_creation_date) VALUES 
         (:user_id, :user_sport, :user_type, :user_session_id, :user_facebook_id, :user_username, :user_first_name, :user_last_name, :user_profile_pic, :user_profile_uri, :user_cover_photo, :user_birthday, :user_gender, :user_about_me, :user_password, :user_email, :user_email_code, :user_generated_string, :user_last_login, :user_ip, :user_education_history, :user_location, :user_creation_date)';
         $stmt = Database::database()->prepare($sql);
 
@@ -118,24 +124,20 @@ class Users extends Entities implements iTable
      */
     public static function All(array &$user, string $id): bool
     {
-        $user = static::fetch('SELECT * FROM carbon_users LEFT JOIN carbon_tag ON entity_id = carbon_users.user_id WHERE carbon_users.user_id = ?', $id);
+        $user = static::fetch('SELECT * FROM RootPrerogative.carbon_users AS u LEFT JOIN RootPrerogative.carbon_tag ON entity_id = u.user_id WHERE u.user_id = ?', $id);
 
         if (empty($user)) {
             throw new PublicAlert('Could not find user  ' . $id, 'danger');
         }
 
-        $user['user_profile_pic'] = (!empty($user['user_profile_pic']) ? $user['user_profile_pic'] : SITE . 'Data/Uploads/Pictures/Defaults/default_avatar.png');
-        $user['user_profile_uri'] = $user['user_profile_uri'] ?? $id;
-        $user['user_cover_photo'] = ($user['user_cover_photo'] ??  DS . APP_VIEW . 'Img/defaults/photo' . random_int(1, 3) . '.png');
-        $user['user_first_last'] = $user['user_full_name'] = $user['user_first_name'] . ' ' . $user['user_last_name'];
-        $user['user_id'] = $id;
+        self::userDefaults($user, $id);
 
         return true;
     }
 
     public static function user_id_from_uri(string $user_uri)
     {
-        $stmt = Database::database()->prepare('SELECT user_id FROM carbon_users WHERE user_profile_uri = ? OR user_id = ?');
+        $stmt = Database::database()->prepare('SELECT user_id FROM RootPrerogative.carbon_users WHERE user_profile_uri = ? OR user_id = ?');
         $stmt->execute([$user_uri, $user_uri]);
         return $stmt->fetch(\PDO::FETCH_COLUMN);
     }
@@ -143,7 +145,7 @@ class Users extends Entities implements iTable
     public static function changeStatus($status = false)
     {
         global $user;
-        $sql = 'UPDATE carbon_sessions SET user_online_status = ? WHERE user_id = ?';
+        $sql = 'UPDATE RootPrerogative.sessions SET user_online_status = ? WHERE user_id = ?';
         $stmt = Database::database()->prepare($sql);
         $stmt->execute([$status, $_SESSION['id']]);
         return $user[$_SESSION['id']]['online'] = (bool)$stmt->fetchColumn();
@@ -152,25 +154,25 @@ class Users extends Entities implements iTable
     public static function change_password($password)
     {   /* Two create a Hash you do */
         $password = Bcrypt::genHash($password);
-        return Database::database()->prepare('UPDATE carbon_users SET user_password = ? WHERE user_id = ?')->execute([$password, $_SESSION['id']]);
+        return Database::database()->prepare('UPDATE RootPrerogative.carbon_users SET user_password = ? WHERE user_id = ?')->execute([$password, $_SESSION['id']]);
     }
 
     public static function onlineStatus($id): bool
     {
         global $user;
-        $sql = 'SELECT user_online_status FROM carbon_sessions WHERE user_id = ? LIMIT 1';
+        $sql = 'SELECT user_online_status FROM RootPrerogative.sessions WHERE user_id = ? LIMIT 1';
         self::fetch_into_class($user[$id], $sql, $id);
         return $user[$id]['user_online_status'];
     }
 
     public static function user_exists($username_or_id): bool
     {
-        return self::fetch('SELECT COUNT(*) FROM carbon_users WHERE user_username = ? OR user_id = ? LIMIT 1', $username_or_id, $username_or_id)['COUNT(*)'];
+        return self::fetch('SELECT COUNT(*) FROM RootPrerogative.carbon_users WHERE user_username = ? OR user_id = ? LIMIT 1', $username_or_id, $username_or_id)['COUNT(*)'];
     }
 
     public static function email_exists($email): bool
     {
-        $sql = 'SELECT COUNT(user_id) FROM carbon_users WHERE `user_email`= ? LIMIT 1';
+        $sql = 'SELECT COUNT(user_id) FROM RootPrerogative.carbon_users WHERE `user_email`= ? LIMIT 1';
         $stmt = Database::database()->prepare($sql);
         $stmt->execute(array($email));
         return $stmt->fetchColumn();
@@ -178,7 +180,7 @@ class Users extends Entities implements iTable
 
     public static function email_confirmed($username): bool
     {
-        $sql = 'SELECT user_email_confirmed FROM carbon_users WHERE user_username = ? LIMIT 1';
+        $sql = 'SELECT user_email_confirmed FROM RootPrerogative.carbon_users WHERE user_username = ? LIMIT 1';
         $stmt = Database::database()->prepare($sql);
         $stmt->execute([$username]);
         return $stmt->fetchColumn();

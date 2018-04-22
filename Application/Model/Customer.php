@@ -26,10 +26,10 @@ class Customer extends GlobalMap
 
         global $json;
 
-        $staff = self::fetch('SELECT user_id, user_tables FROM RootPrerogative.carbon_users WHERE user_type = \'Waiter\' AND user_tables IS NOT NULL');
+        $staff = self::fetch(' AND user_tables IS NOT NULL');
 
         if (empty($staff)) {
-            throw new PublicAlert('Sorry, an Error Has Occured');
+            throw new PublicAlert('Sorry, an error Has Occured');
         }
 
 
@@ -51,7 +51,7 @@ class Customer extends GlobalMap
 
     public function setTable($id) {
 
-        self::execute('UPDATE RootPrerogative.carbon_users SET user_tables = ? WHERE user_id = ?',
+        self::execute('UPDATE RootPrerogative.carbon_users SET user_table_number = ? WHERE user_id = ?',
             $id,
             session_id());
 
@@ -97,7 +97,8 @@ class Customer extends GlobalMap
         Cart::All($json['order'], session_id());
 
         if (!$json['order']) {
-            throw new PublicAlert('You must add items to your order first!');
+            PublicAlert::warning('You must add items to your order first!');
+            return false;
         }
 
         $total = 0;
@@ -119,6 +120,8 @@ class Customer extends GlobalMap
         }
 
         Order::Get($json['order'], session_id(), []);
+
+        PublicAlert::success('Added to cart!');
 
         return true;
     }
@@ -147,21 +150,20 @@ class Customer extends GlobalMap
 
         $json['order'] = [];
 
-        Order::Get($json['order'], session_id(), []);
-
-        if (!$json['order']['order_items']) {
-            unset($json['order']);
+        if (!Order::Get($json['order'], session_id(), [])) {
             return null;
         }
 
-        foreach($json['order']['order_items'] as $key => &$value) {
-            Items::Get($value, $value['cart_item'], []);
+        foreach ($json['order'] as &$order) {
+            foreach ($order['order_items'] as $key => &$value) {
+
+                Items::Get($value, $value['cart_item'], []);
+                $order['order_subtotal'] = $order['order_total'];
+                $order['tax'] = $order['order_total'] * 0.08;
+                $order['order_total'] = $order['order_subtotal'] + $order['tax'];
+
+            }
         }
-
-        $json['order']['order_subtotal'] = $json['order']['order_total'];
-        $json['order']['tax'] = $json['order']['order_total'] * 0.08;
-        $json['order']['order_total'] = $json['order']['order_subtotal'] + $json['order']['tax'];
-
         return null;    // Skip the model and move to the view
     }
 }

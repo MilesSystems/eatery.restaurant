@@ -9,6 +9,9 @@
  * I use this for tags in the carbon_tag
  * data table.
  */
+
+
+
 const USER = 1;
 const USER_FOLLOWERS = 2;
 const USER_NOTIFICATIONS = 3;
@@ -20,7 +23,6 @@ const NOTIFICATIONS = 12;
 
 ######### Tags below here are defined in the RootPrerogative.php config // database build file
 
-
 const CATEGORY = 8;
 const ITEMS = 9;
 const ORDER = 10;
@@ -28,7 +30,7 @@ const CART = 11;
 
 
 // Template
-const COMPOSER = 'Data' . DS . 'Vendors' . DS;
+const COMPOSER = 'data' . DS . 'vendors' . DS;
 const TEMPLATE = COMPOSER . 'almasaeed2010' . DS . 'adminlte' . DS;
 
 // Facebook
@@ -127,7 +129,7 @@ function urlGoogle($request = null)
 {
     //Call Google API
     $client = new Google_Client();
-    $client->setAuthConfig(APP_ROOT . 'Application/Config/gAuth.json');
+    $client->setAuthConfig(APP_ROOT . 'application/config/gAuth.json');
     $client->setRedirectUri(SITE . 'oAuth/Google/' . $request . DS);
     $client->setApplicationName('RootPrerogative.com');
     $client->setIncludeGrantedScopes(true);   // incremental auth
@@ -173,7 +175,7 @@ return [
 
         'DB_PASS' => 'goldteamrules',          // Password goldteamrules
 
-        'DB_BUILD' => SERVER_ROOT . 'Application/Config/buildDatabase.php',
+        'DB_BUILD' => SERVER_ROOT . 'application/config/buildDatabase.php',
 
         'REBUILD' => false                       // Initial Setup todo - remove this check
     ],
@@ -197,7 +199,7 @@ return [
 
         'REPLY_EMAIL' => 'support@carbonphp.com',
 
-        'BOOTSTRAP' => 'Application/Bootstrap.php',     // This file is executed when the startApplication() function is called
+        'BOOTSTRAP' => 'application/bootstrap.php',     // This file is executed when the startApplication() function is called
 
         'HTTP' => true   // I assume that HTTP is okay by default
     ],
@@ -257,9 +259,9 @@ return [
     ],
 
     'VIEW' => [
-        'VIEW' => 'Application/View/',  // This is where the MVC() function will map the HTML.PHP and HTML.HBS . See Carbonphp.com/mvc
+        'VIEW' => 'application/view/',  // This is where the MVC() function will map the HTML.PHP and HTML.HBS . See Carbonphp.com/mvc
 
-        'WRAPPER' => 'GoldTeam/Wrapper.hbs',     // View::content() will produce this
+        'WRAPPER' => 'goldTeam/Wrapper.hbs',     // View::content() will produce this
     ],
 
 ];

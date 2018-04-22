@@ -25,6 +25,10 @@ abstract class App extends Route
     public
     function fullPage() : callable
     {
+        if (SOCKET || AJAX) {
+            print 'Application Full Page Response Was reached';
+            exit(1);
+        }
         return catchErrors(function (string $file) {
             return include APP_VIEW . $file;
         });
@@ -64,12 +68,7 @@ abstract class App extends Route
                 $alert = 'Mustache Template Not Found ' . $file;
             }
 
-            if (!\is_array($alert)) {
-                $alert = array();
-            }
-
             $json = array_merge($json, [
-                'Alert' => $alert,
                 'Event' => 'Controller->Model',   // This doesn't do anything.. Its just a mental note when I look at the json's in console (controller->model only)
                 'Model' => $argv,
                 'Mustache' => DS . $file,
@@ -79,7 +78,7 @@ abstract class App extends Route
 
             #header('Content-Type: application/json'); // Send as JSON - not good for testing websocketd
 
-            print PHP_EOL . json_encode($json) . PHP_EOL . PHP_EOL; // new line ensures it sends through the socket
+            print json_encode($json) . PHP_EOL . PHP_EOL; // new line ensures it sends through the socket
 
             return true;
         };

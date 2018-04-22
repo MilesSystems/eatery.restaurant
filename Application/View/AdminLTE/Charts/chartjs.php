@@ -114,7 +114,7 @@
 
 <script>
     Carbon(()=>
-        $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/chart.js/Chart.js", () => {
+        carbon.js("/Data/Vendors/almasaeed2010/adminlte/bower_components/chart.js/Chart.js", () => {
         /* ChartJS
          * -------
          * Here we will create a few charts using ChartJS

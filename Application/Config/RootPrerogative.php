@@ -134,8 +134,26 @@ END;
     print '<br>Table `carbon_cart` Created';
 }
 
+########################### user_sessions
+try {
+    $db->prepare('SELECT 1 FROM user_sessions LIMIT 1;')->execute();
+    print '<br>Table `user_sessions` already exists';
+} catch (PDOException $e) {
 
+    $sql = <<<END
 
+CREATE TABLE user_sessions
+(
+	user_id VARCHAR(225) NULL,
+	time_in DATETIME NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+;
+
+END;
+
+    $db->exec($sql);
+    print '<br>Table `carbon_cart` Created';
+}
 
 
 Try {

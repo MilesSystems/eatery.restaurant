@@ -25,10 +25,13 @@ class Order extends Entities implements iTable
      */
     public static function All(array &$array, string $id): bool
     {
-        $array = self::fetch('SELECT * FROM RootPrerogative.carbon_orders WHERE carbon_orders.order_chef = ? OR order_finish IS NULL and order_chef IS NULL ',
-            session_id());
+        $array = self::fetch('SELECT * FROM RootPrerogative.carbon_orders WHERE order_chef IS NULL OR carbon_orders.order_chef = ? AND carbon_orders.order_finish IS NULL ',
+            $id);
 
-        if (!$array[0] ?? false) {
+        if (!($array[0] ?? false)) {
+            if (empty($array)) {
+                return false;
+            }
             $a = $array;
             $array = [];
             $array[] = $a;
@@ -62,7 +65,19 @@ class Order extends Entities implements iTable
         $array = self::fetch('SELECT * FROM RootPrerogative.carbon_orders WHERE order_session = ? AND order_finish IS NULL',
             $id);
 
-        $array['order_items'] = !empty($array['order_items']) ? json_decode($array['order_items'], TRUE) : false;
+
+        if (!$array[0] ?? false){
+            if (empty($array)) {
+                return false;
+            }
+            $a = $array;
+            $array = null;
+            $array[0]= $a;
+        }
+
+        foreach ($array as &$value) {
+            $value['order_items'] = !empty($value['order_items']) ? json_decode($value['order_items'], TRUE) : false;
+        }
 
         return true;
     }
@@ -96,15 +111,38 @@ class Order extends Entities implements iTable
             Cart::Delete($cart, session_id());
             PublicAlert::success('added to order');
             Notifications::Post([
-                'text' => 'Your food is ready!',
+                'text' => 'Your order has been received!',
                 'user_session' => session_id()
             ]);
 
             $kitchen_staff = self::fetchColumn('SELECT user_session_id FROM RootPrerogative.carbon_users WHERE user_type = \'kitchen\'');
 
             foreach ($kitchen_staff as $staff) {
-                GlobalMap::sendUpdate($staff, 'kitchen');
+                Notifications::Post([
+                    'text' => "Table {$_SESSION['table_number']} has placed an order.",
+                    'user_session' => $staff
+                ]);
+
+                GlobalMap::sendUpdate($staff, '/notifications');
+
+                GlobalMap::sendUpdate($staff, '/kitchen');
             }
+
+            $_SESSION['table_number'] = $_SESSION['table_number'] ?? null;
+
+            $waiters = self::fetchColumn('SELECT session_id FROM RootPrerogative.sessions JOIN RootPrerogative.carbon_waiter_tables AS w WHERE w.userID = user_id
+                                                      AND w.tableNumber = ?', $_SESSION['table_number']);
+
+            foreach ($waiters as $staff) {
+                Notifications::Post([
+                    'text' => "Table {$_SESSION['table_number']} has placed an order.",
+                    'user_session' => $staff
+                ]);
+
+                GlobalMap::sendUpdate($staff, '/notifications');
+            }
+
+
 
             GlobalMap::sendUpdate(session_id(), '/cartNotifications');
             GlobalMap::sendUpdate(session_id(), '/notifications');
@@ -121,6 +159,6 @@ class Order extends Entities implements iTable
      */
     public static function Put(array &$array, string $id, array $argv): bool
     {
-        return self::execute('UPDATE RootPrerogative.carbon_orders SET order_session = ? WHERE order_finish = ?', $id, date('m/d/Y', strtotime('+2 week',(new \DateTime())->getTimestamp())));
+        return self::execute('UPDATE RootPrerogative.carbon_orders SET order_id = ? WHERE order_finish = ?', $id, date('m/d/Y', strtotime('+2 week',(new \DateTime())->getTimestamp())));
     }
 }

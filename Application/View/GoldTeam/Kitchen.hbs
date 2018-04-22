@@ -78,7 +78,7 @@
                                     {{/notifications}}
                                 </ul>
                             </li>
-                            <li class="footer"><a href="">View all</a></li>
+                            <li class="footer"><a onclick="carbon.app('/clearnotifications')">Clear Notifications</a></li>
                         </ul>
                     </li>
                     <!-- Tasks: style can be found in dropdown.less -->
@@ -201,7 +201,7 @@
             <form action="/Search/" method="get" class="sidebar-form">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search..."
-                           onkeyup="$.fn.startApplication('{{ SITE }}Search/'+this.value)">
+                           onkeyup="carbon.app('{{ SITE }}Search/'+this.value)">
                     <span class="input-group-btn">
                                 <button name="search" id="search-btn" class="btn btn-flat">
                                     <i class="fa fa-search"></i>

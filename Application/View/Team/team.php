@@ -49,7 +49,7 @@ $imTheCoach = $myTeam['team_coach'] == $_SESSION['id'];
                         <div class="widget-user-header bg-green">
                             <div class="widget-user-image">
                                 <img class="img-circle"
-                                     src="<?= SITE . ((!empty( $myTeam['team_photo'] ) && ($myTeam['photo'][$myTeam['team_photo']] ?? false) && ($photo = $myTeam['photo'][$myTeam['team_photo']]['photo'] ?? false)) ? $photo : "Data/Uploads/Pictures/Defaults/team-icon.png") ?>"
+                                     src="<?= SITE . ((!empty( $myTeam['team_photo'] ) && ($myTeam['photo'][$myTeam['team_photo']] ?? false) && ($photo = $myTeam['photo'][$myTeam['team_photo']]['photo'] ?? false)) ? $photo : "Data/Uploads/pictures/Defaults/team-icon.png") ?>"
                                      alt="User Avatar">
                             </div>
                             <!-- /.widget-user-image -->
@@ -58,13 +58,13 @@ $imTheCoach = $myTeam['team_coach'] == $_SESSION['id'];
                                 <i class="fa fa-fw fa-coffee"></i>
                                 <a style="color: #ffffff" href="<?= SITE . 'Profile/' . $this->user[$myTeam['team_coach']]['user_profile_uri'] ?>/"><?= $this->user[$myTeam['team_coach']]['user_full_name'] ?></a></h5>
                             <?php if($imTheCoach): ?>
-                            <h6 class="widget-user-desc" onclick="Carbon($.fn.startApplication('Team/'))"><i class="fa fa-fw fa-cog"></i>Team Settings</h6>
+                            <h6 class="widget-user-desc" onclick="Carbon(carbon.app('Team/'))"><i class="fa fa-fw fa-cog"></i>Team Settings</h6>
                             <?php endif; ?>
                         </div>
                         <div class="box-footer no-padding">
                             <ul class="nav nav-stacked">
                                 <li><a href="">Team Code <span class="pull-right badge bg-blue"><?= $myTeam['team_code'] ?></span></a></li>
-                                <li><a onclick="$.fn.startApplication('Team/<?= $myTeam['team_id'] ?>/Members/')">Members <span
+                                <li><a onclick="carbon.app('Team/<?= $myTeam['team_id'] ?>/Members/')">Members <span
                                                 class="pull-right badge bg-aqua"><?= count( $myTeam['members'] ) ?></span></a></li>
                                 <li><a href="#">Rounds <span class="pull-right badge bg-green"><?=$rounds?></span></a></li>
                                 <li><a href="#">Tournaments <span class="pull-right badge bg-red"><?=$tournaments?></span></a></li>

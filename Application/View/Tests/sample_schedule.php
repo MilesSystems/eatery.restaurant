@@ -22,7 +22,7 @@ return [
  * {
   auto ps_iter = ps.find("key_name");
   if (ps_iter == ps.end()) {
-    // Error
+    // error
   }
 }
  */

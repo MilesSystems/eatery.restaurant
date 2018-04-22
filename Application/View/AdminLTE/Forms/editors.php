@@ -75,7 +75,7 @@
 <!-- /.content -->
 <script>
     Carbon(() => {
-        $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/bower_components/ckeditor/ckeditor.js', () =>
+        carbon.js('/Data/Vendors/almasaeed2010/adminlte/bower_components/ckeditor/ckeditor.js', () =>
             // Replace the <textarea id="editor1"> with a CKEditor
             // instance, using default configuration.
             CKEDITOR.replace('editor1'));

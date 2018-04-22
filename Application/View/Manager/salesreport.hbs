@@ -16,7 +16,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Orders Active</h3>
+                    <h3 class="box-title">Orders Placed</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -34,15 +34,15 @@
                         </thead>
                         <tbody>
                         {{#order}}
-                        <tr>
-                            <td>{{order_id}}</td>
-                            <td>{{order_total}}</td>
-                            <td>{{order_start}}</td>
-                            <td>{{order_costumer}}</td>
-                            <td>{{order_server}}</td>
-                            <td>{{order_chef}}</td>
-                            <td>{{order_notes}}</td>
-                        </tr>
+                            <tr>
+                                <td>{{order_id}}</td>
+                                <td>{{order_total}}</td>
+                                <td>{{order_start}}</td>
+                                <td>{{order_costumer}}</td>
+                                <td>{{order_server}}</td>
+                                <td>{{order_chef}}</td>
+                                <td>{{order_notes}}</td>
+                            </tr>
                         {{/order}}
                         </tbody>
                         <tfoot>
@@ -71,16 +71,15 @@
 <!-- page script -->
 <script>
     Carbon(() =>
-            $.fn.CarbonJS('{{SITE}}{{TEMPLATE}}/bower_components/datatables.net/js/jquery.dataTables.min.js', () =>
-            $.fn.CarbonJS("{{SITE}}{{TEMPLATE}}bower_components/datatables.net-bs/js/dataTables.bootstrap.js", () => {
-                $('#example1').DataTable()
-                $('#example2').DataTable({
-                    'paging': true,
-                    'lengthChange': false,
-                    'searching': false,
-                    'ordering': true,
-                    'info': true,
-                    'autoWidth': false
-                })
-            })));
+            carbon.js(TEMPLATE+'bower_components/datatables.net/js/jquery.dataTables.min.js', () =>
+                    carbon.js(TEMPLATE+'bower_components/datatables.net-bs/js/dataTables.bootstrap.js', () => {
+                        $('#example2').DataTable({
+                            'paging': true,
+                            'lengthChange': false,
+                            'searching': false,
+                            'ordering': true,
+                            'info': true,
+                            'autoWidth': false
+                        })
+                    })));
 </script>

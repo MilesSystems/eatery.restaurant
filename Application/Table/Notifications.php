@@ -23,6 +23,11 @@ class Notifications extends Entities implements iTable
     {
         $array = self::fetch('SELECT * FROM RootPrerogative.carbon_notifications WHERE notification_session = ?', $id);
 
+        if (empty($array)) {
+            $array = null;
+            return false;
+        }
+
         if(!($array[0] ?? false)) {
             $a = $array;
             $array = [];
@@ -33,13 +38,14 @@ class Notifications extends Entities implements iTable
     }
 
     /**
-     * @param $array - should be set to null on success
+     * @param array|null $array - should be set to null on success
      * @param $id - the rows primary key
      * @return bool
      */
     public static function Delete(array &$array, string $id): bool
     {
-        // TODO: Implement Delete() method.
+        $array = null;
+        return self::execute('DELETE FROM RootPrerogative.carbon_notifications WHERE notification_session = ?', $id);
     }
 
     /**

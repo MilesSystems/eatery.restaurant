@@ -15,7 +15,7 @@
                                 <a data-toggle="collapse" data-parent="#accordion" href="#{{category_tag}}">
                                     <i class="fa fa-fw {{category_tag}}"></i> {{category_name}}
                                 </a>
-                                <i onclick="$.fn.startApplication('hideCategory/{{category_id}}')" class="fa fa-fw fa-remove pull-right"></i>
+                                <i onclick="carbon.app('hideCategory/{{category_id}}')" class="fa fa-fw fa-remove pull-right"></i>
                             </h4>
                         </div>
                         <div id="{{category_tag}}" class="panel-collapse collapse">
@@ -30,7 +30,7 @@
                                                     <a data-toggle="collapse" data-parent="#accordion" href="#{{category_tag}}">
                                                         <i class="fa fa-fw {{category_tag}}"></i> {{item_name}}
                                                     </a>
-                                                    <i onclick="$.fn.startApplication('hideCategory/{{category_id}}')" class="fa fa-fw fa-remove pull-right"></i>
+                                                    <i onclick="carbon.app('hideCategory/{{category_id}}')" class="fa fa-fw fa-remove pull-right"></i>
                                                 </h4>
                                             </div>
                                             <div id="{{category_tag}}" class="panel-collapse collapse">
@@ -95,7 +95,7 @@
             <script>
                 Carbon(()=> {
                     function Collapsible_Accordion () {
-                        $.fn.startApplication('/accordion');
+                        carbon.app('/accordion');
                     }
                 })
             </script>

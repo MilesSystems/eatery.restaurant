@@ -15,7 +15,7 @@ $(function () {
     var salesChartCanvas = $('#salesChart').get(0).getContext('2d');
     // This will get the first returned node in the jQuery collection.
 
-    $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/chart.js/Chart.js", () => {
+    carbon.js("/Data/Vendors/almasaeed2010/adminlte/bower_components/chart.js/Chart.js", () => {
         var salesChart = new Chart(salesChartCanvas);
 
         var salesChartData = {
@@ -173,8 +173,8 @@ $(function () {
      */
 
     <!-- jvectormap -->
-    $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js", () =>
-        $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js", () => {
+    carbon.js("/Data/Vendors/almasaeed2010/adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js", () =>
+        carbon.js("/Data/Vendors/almasaeed2010/adminlte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js", () => {
             $('#world-map-markers').vectorMap({
                 map: 'world_mill_en',
                 normalizeFunction: 'polynomial',
@@ -244,7 +244,7 @@ $(function () {
     // - SPARKLINE BAR -
     // -----------------
     <!-- Sparkline -->
-    $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js", () => {
+    carbon.js("/Data/Vendors/almasaeed2010/adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js", () => {
         $('.sparkbar').each(function () {
             var $this = $(this);
             $this.sparkline('html', {

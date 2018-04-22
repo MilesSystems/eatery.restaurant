@@ -162,6 +162,22 @@
                                                           placeholder="{{user_about_me}}"></textarea>
                                             </div>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="inputExperience" class="col-sm-3 control-label">Table Name</label>
+                                            <div class="col-sm-8">
+                                                <textarea name="table_name" class="form-control" id="inputExperience"
+                                                          placeholder="{{user_table_name}}"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputExperience" class="col-sm-3 control-label">Table Number</label>
+                                            <div class="col-sm-8">
+                                                <textarea name="table_number" class="form-control" id="inputExperience"
+                                                          placeholder="{{user_table_number}}"></textarea>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
@@ -231,7 +247,7 @@
     <script>Carbon((e) => {
         $.fn.load_datepicker('#datepicker');
         {{^myAccountBool}}
-            $.fn.startApplication('/Messages/{{user_id}}/');        // TODO - make this dependant on whoes proifile were on
+            //carbon.app('/Messages/{{user_id}}/');        // TODO - make this dependant on who's profile were on
         {{/myAccountBool}}
     })</script>
 

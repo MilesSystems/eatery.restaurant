@@ -96,10 +96,10 @@
         <!-- accepted payments column -->
         <div class="col-xs-6">
             <p class="lead">Payment Methods:</p>
-            <img src="<?=SITE.TEMPLATE?>dist/img/credit/visa.png" alt="Visa">
-            <img src="<?=SITE.TEMPLATE?>dist/img/credit/mastercard.png" alt="Mastercard">
-            <img src="<?=SITE.TEMPLATE?>dist/img/credit/american-express.png" alt="American Express">
-            <img src="<?=SITE.TEMPLATE?>dist/img/credit/paypal2.png" alt="Paypal">
+            <img src="/{{TEMPLATE}}dist/img/credit/visa.png" alt="Visa">
+            <img src="/{{TEMPLATE}}dist/img/credit/mastercard.png" alt="Mastercard">
+            <img src="/{{TEMPLATE}}dist/img/credit/american-express.png" alt="American Express">
+            <img src="/{{TEMPLATE}}dist/img/credit/paypal2.png" alt="Paypal">
 
             <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
                 This page is an example invoice, and price points may very based on time spent, project complexity,
@@ -110,7 +110,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-6">
-            <p class="lead">Amount Due <?=$date?></p>
+            <p class="lead">Amount Due {{date}}</p>
 
             <div class="table-responsive">
                 <table class="table">

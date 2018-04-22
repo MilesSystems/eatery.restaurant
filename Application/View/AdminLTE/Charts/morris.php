@@ -114,8 +114,8 @@
 <script>
     <!-- Morris.js charts -->
     Carbon(() =>
-        $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/raphael/raphael.min.js", () =>
-            $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/morris.js/morris.min.js", () => {
+        carbon.js("/Data/Vendors/almasaeed2010/adminlte/bower_components/raphael/raphael.min.js", () =>
+            carbon.js("/Data/Vendors/almasaeed2010/adminlte/bower_components/morris.js/morris.min.js", () => {
                 "use strict";
 
                 // AREA CHART

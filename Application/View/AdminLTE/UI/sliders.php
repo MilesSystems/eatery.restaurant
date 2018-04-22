@@ -23,9 +23,9 @@
                 <div class="box-body">
                     <div class="row margin">
                         <div class="col-sm-6">
-                            <input type="text" value="" class="slider form-control" data-slider-min="-200"
+                            <input type="text" value="" class="slider form-control" data-slider-min="0"
                                    data-slider-max="200"
-                                   data-slider-step="5" data-slider-value="[-100,100]"
+                                   data-slider-step="5" data-slider-value="[0,100]"
                                    data-slider-orientation="horizontal"
                                    data-slider-selection="before" data-slider-tooltip="show" data-slider-id="red">
 
@@ -112,6 +112,6 @@
 
 <!-- Bootstrap slider -->
 <script>
-    Carbon(()=>$.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/plugins/bootstrap-slider/bootstrap-slider.js", ()=>
+    Carbon(()=>carbon.js("/Data/Vendors/almasaeed2010/adminlte/plugins/bootstrap-slider/bootstrap-slider.js", ()=>
             $('.slider').slider()));
 </script>

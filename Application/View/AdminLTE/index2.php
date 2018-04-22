@@ -872,7 +872,7 @@
 <!-- /.content -->
 <script>
     Carbon(()=> {
-        $.fn.CarbonJS("<?=SITE.APP_VIEW?>AdminLTE/Demo/dashboard2.js");
-        $.fn.CarbonJS("<?=SITE.APP_VIEW?>AdminLTE/Demo/demo.js");
+        carbon.js("<?=SITE.APP_VIEW?>AdminLTE/Demo/dashboard2.js");
+        carbon.js("<?=SITE.APP_VIEW?>AdminLTE/Demo/demo.js");
     });
 </script>

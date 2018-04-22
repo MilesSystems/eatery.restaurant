@@ -41,7 +41,6 @@
         </div>
 
 
-
         <!-- /.box-header -->
         <div class="box-body">
             <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
@@ -54,7 +53,7 @@
                         <i class="fa fa-ellipsis-v"></i>
                       </span>
                         <!-- checkbox -->
-                        <input onclick="$.fn.startApplication('StartOrder/{{order_id}}')" type="checkbox">
+                        <input onclick="carbon.app('StartOrder/{{order_id}}')" type="checkbox" checked="{{order_mine}}">
                         <!-- todo text -->
                         <span class="text">{{order_session}}</span>
                         <!-- Emphasis label -->
@@ -62,29 +61,34 @@
                         <!-- General tools such as edit or delete-->
                         <div class="tools">
                             <i class="fa fa-edit" data-toggle="modal" data-target="#{{order_session}}"></i>
-                            <i class="fa fa-trash-o"></i>
+                            <i class="fa fa-trash-o" onclick="carbon.app('CompleteOrder/{{order_id}}')"></i>
                         </div>
                     </li>
 
                     <div class="modal modal-info fade" id="{{order_session}}">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">User Comments</h4>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">User Comments</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{{order_notes}}</p>
+                                    {{#order_items}}
+                                        <p>{{item_name}}</p>
+                                        <p>{{order_notes}}</p>
+                                    {{/order_items}}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close
+                                    </button>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                               <p>{{order_notes}}</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                            </div>
+                            <!-- /.modal-content -->
                         </div>
-                        <!-- /.modal-content -->
+                        <!-- /.modal-dialog -->
                     </div>
-                    <!-- /.modal-dialog -->
-                </div>
                 {{/orders}}
             </ul>
         </div>
@@ -101,7 +105,7 @@
 
 <script>
     Carbon(() => {
-        $.fn.CarbonJS("/Data/Vendors/almasaeed2010/adminlte/bower_components/jquery-ui/jquery-ui.min.js", () => {
+        carbon.js(TEMPLATE+"bower_components/jquery-ui/jquery-ui.min.js", () => {
             $.widget.bridge('uibutton', $.ui.button);
             // Make the dashboard widgets sortable Using jquery UI
             $('.connectedSortable').sortable({
@@ -121,7 +125,6 @@
                 zIndx: 999999
             });
 
-
             /* The todo list plugin from jQuery*/
             $('.todo-list').todoList({
                 onCheck: function () {
@@ -133,13 +136,5 @@
             });
 
         });
-
-
     });
 </script>
-
-
-{{#order}}
-
-
-{{/order}}

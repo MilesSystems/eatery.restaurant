@@ -18,6 +18,25 @@ use Table\Users;
 class Manager extends GlobalMap
 {
 
+    public function messages($us_id, $messages) {
+
+        global $json, $user;
+
+        $json['widget'] = '#NavMessages';
+
+        foreach ($user as $id => $info) {
+            if ($id === $_SESSION['id'])
+                continue;
+            $json['users'][] = array(
+                'user_id' => $info['user_id'],
+                'user_profile_pic' => $info['user_profile_pic'],
+                'user_profile_url' => $info['user_profile_uri'],
+                'user_full_name' => $info['user_full_name'],
+                'user_last_login' => date('D, d M Y', $info['user_last_login'])
+            );
+        }
+    }
+
     public function hideCategory($id) {
         self::execute('UPDATE RootPrerogative.carbon_category SET category_hidden = TRUE WHERE category_id = ?', $id);
         self::sendUpdate(session_id(), 'Menu');
@@ -103,38 +122,48 @@ class Manager extends GlobalMap
         return true;
     }
 
-
     public function Employees()
     {
         global $json;
 
         $json['users'] = self::fetch('SELECT * FROM RootPrerogative.carbon_users WHERE user_type != \'Customer\'');
 
+        foreach ($json['users'] as &$user) {
+            Users::userDefaults($user, $user['user_id']);
+        }
+        unset($user);
+
+        $json['totalEmployees'] = \count($json['users']);
+
         return true;
     }
 
-    public function Customer()
+    public function customers()
     {
         global $json;
 
         $json['users'] = self::fetch('SELECT * FROM RootPrerogative.carbon_users WHERE user_type = \'Customer\'');
+
+        foreach ($json['users'] as &$user) {
+            Users::userDefaults($user, $user['user_id']);
+        }
+        unset($user);
+
+        $json['totalCustomers'] = \count($json['users']);
 
         return true;
     }
 
     public function changeType($user_id, $user_type)
     {
-
         self::execute('UPDATE RootPrerogative.carbon_users SET user_type = ? WHERE user_id = ?',
             $user_type,
             $user_id);
 
-        GlobalMap::sendUpdate(session_id(), 'Customer');
+        //GlobalMap::sendUpdate(session_id(), 'home');
 
-        return false;
-
+        return false;   // startApplication(true)
     }
-
 
     public function SalesReport(){
         global $json;

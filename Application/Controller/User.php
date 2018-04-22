@@ -13,6 +13,10 @@ class User extends Request
         return true;
     }
 
+    public function clearNotifications() {
+        return true;
+    }
+
     public function ClearTable() {
         unset($_SESSION['table_number']);
         startApplication(true);
@@ -85,6 +89,7 @@ class User extends Request
 
         $json['facebook_url'] = urlFacebook('SignIn');
 
+
         if (empty($_POST)) {
             return null;                    // returning null will show the view but not execute the model
         }  // If forum already submitted
@@ -92,6 +97,7 @@ class User extends Request
         $username = $this->post('username')->alnum();
 
         $password = $this->post('password')->value();
+
 
         if (!$username || !$password) {
             throw new PublicAlert('Sorry, but we need your username and password.');
@@ -118,13 +124,20 @@ class User extends Request
             $UserInfo = $_SESSION['UserInfo'];  // Pull this from the session
         }
 
+
         if (!\is_array($UserInfo)) {
+
             if ($service === 'google'){
                 $UserInfo = urlGoogle($request);
             } elseif ($service === 'facebook') {
                 $UserInfo = urlFacebook($request);
             } else {
                 throw new PublicAlert('HOLY FUCK');
+            }
+ 
+            if (!\is_array($UserInfo)) {
+                startApplication(true);                 // TODO - just reset for now
+                return false;
             }
 
             return [$service, &$request];    // return the view
@@ -134,7 +147,6 @@ class User extends Request
 
             [$username, $first_name, $last_name, $gender]
                 = $this->post('username', 'firstname', 'lastname', 'gender')->alnum();
-
 
             [$password, $verifyPass]
                 = $this->post('password', 'password2')->value();
@@ -334,7 +346,7 @@ class User extends Request
         }
 
         // Our forum variables get put in the public scope
-        global $first, $last, $email, $gender, $dob, $password, $profile_pic, $about_me;
+        global $first, $last, $email, $gender, $dob, $password, $profile_pic, $about_me, $table_name, $table_number;
 
         [$first, $last, $gender] = $this->post('first_name', 'last_name', 'gender')->word();
 
@@ -344,9 +356,9 @@ class User extends Request
 
         $password = $this->post('password')->value();
 
-        $about_me = $this->post('about_me')->text();
+        [$about_me, $table_name, $table_number] = $this->post('about_me', 'table_name', 'table_number')->text();
 
-        $profile_pic = $this->files('FileToUpload')->storeFiles('Data/Uploads/Pictures/Profile/');
+        $profile_pic = $this->files('FileToUpload')->storeFiles('Data/Uploads/pictures/Profile/');
 
         return true;
     }

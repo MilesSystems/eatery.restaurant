@@ -145,10 +145,10 @@
 <script>
 
     Carbon(() =>
-        $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/bower_components/Flot/jquery.flot.js', () =>
-            $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/bower_components/Flot/jquery.flot.resize.js', () =>
-                $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/bower_components/Flot/jquery.flot.pie.js', () =>
-                    $.fn.CarbonJS('/Data/Vendors/almasaeed2010/adminlte/bower_components/Flot/jquery.flot.categories.js', () => {
+        carbon.js('/Data/Vendors/almasaeed2010/adminlte/bower_components/Flot/jquery.flot.js', () =>
+            carbon.js('/Data/Vendors/almasaeed2010/adminlte/bower_components/Flot/jquery.flot.resize.js', () =>
+                carbon.js('/Data/Vendors/almasaeed2010/adminlte/bower_components/Flot/jquery.flot.pie.js', () =>
+                    carbon.js('/Data/Vendors/almasaeed2010/adminlte/bower_components/Flot/jquery.flot.categories.js', () => {
                         /*
                          * Flot Interactive Chart
                          * -----------------------

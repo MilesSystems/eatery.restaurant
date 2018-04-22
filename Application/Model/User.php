@@ -23,7 +23,17 @@ class User extends GlobalMap
     {
         global $json;
         $json['table_number'] = $_SESSION['table_number'] = $number;
-        startApplication('login');
+        startApplication(true);
+        return false;
+    }
+
+    public function clearNotifications()
+    {
+        global $json;
+        $json['notifications'] = [];
+        Notifications::Delete($json['notifications'], session_id());
+
+        startApplication('Notifications');
         return false;
     }
 
@@ -36,7 +46,7 @@ class User extends GlobalMap
 
         Notifications::All($json['notifications'], session_id());
 
-        return true;;
+        return true;
     }
 
     /**
@@ -95,26 +105,33 @@ class User extends GlobalMap
         }
 
         // We get this for the cookies
-        $sql = 'SELECT user_password, user_first_name, user_last_name, user_profile_pic, user_id FROM carbon_users WHERE user_username = ?';
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$username]);
-        $data = $stmt->fetch();
+        $data = self::fetch('SELECT user_password, user_first_name, user_last_name, user_profile_pic, user_id FROM RootPrerogative.carbon_users WHERE user_username = ?', $username);
 
         // using the verify method to compare the password with the stored hashed password.
         if (Bcrypt::verify($password, $data['user_password']) === true) {
             /* TODO - make sure email is sending
             if (!Users::email_confirmed($username)) {
                 throw new PublicAlert('Sorry, you need to activate your account. Please check your email!');
-            }
-            */
+            } */
+
             $_SESSION['id'] = $data['user_id'];    // returning the user's id.
 
 
+            self::execute('INSERT INTO RootPrerogative.user_sessions (user_id, time_in) VALUES (?, ?)',
+                $_SESSION['id'],
+                date('Y-m-d H:i:s')
+            );
+
             if ($_SESSION['table_number'] ?? false) {
-                self::execute('UPDATE RootPrerogative.carbon_users SET user_tables = ? WHERE user_session_id = ?',
-                        json_encode($_SESSION['table_number']),
-                        session_id());
+                self::execute('UPDATE RootPrerogative.carbon_users SET user_table_number = ? WHERE user_session_id = ?',
+                    json_encode($_SESSION['table_number']),
+                    session_id());
             }
+
+            if (empty($data['user_profile_pic'] ?? false)) {
+                $data['user_profile_pic'] = '';
+            }
+
 
         } else {
             throw new PublicAlert ('Sorry, the username and password combination you have entered is invalid.', 'warning');
@@ -147,11 +164,8 @@ class User extends GlobalMap
 
         $service = "user_{$service}_id";
 
-        //sortDump($UserInfo);
-
-        $sql = "SELECT user_id, $service FROM carbon_users WHERE user_email = ? OR $service = ?";
-
-        $sql = self::fetch($sql, $UserInfo['email'], $UserInfo['id']);
+        $sql = self::fetch("SELECT user_id, $service FROM RootPrerogative.carbon_users WHERE user_email = ? OR $service = ?",
+            $UserInfo['email'], $UserInfo['id']);
 
         $user_id = $sql['user_id'] ?? false;
 
@@ -265,11 +279,11 @@ class User extends GlobalMap
         ]);
 
 
-        Stats::Post([]);    // this works
+        // Stats::Post([]);    // this works
 
         PublicAlert::success('Welcome to Stats Coach. Please check your email to finish your registration.');
 
-        startApplication('home/');
+        startApplication(true);
 
         return false;
     }
@@ -377,10 +391,10 @@ class User extends GlobalMap
 
     /**
      * @param bool $user_uri
-     * @return User|null
+     * @return Bool|null
      * @throws PublicAlert
      */
-    public function profile($user_uri = false)
+    public function profile($user_uri = false): ?bool
     {
         if ($user_uri === 'DeleteAccount') {
             Users::Delete($this->user[$_SESSION['id']], $_SESSION['id']);
@@ -400,33 +414,40 @@ class User extends GlobalMap
 
         Users::All($this->user[$_SESSION['id']], $_SESSION['id']);
 
+        #################################### The user is updating content
         if (empty($_POST)) {
             return null;
         }
 
         // we can assume post is active then
-        global $first, $last, $email, $gender, $dob, $password, $profile_pic, $about_me;
+        global $first, $last, $email, $gender;
+        global $dob, $password, $profile_pic, $about_me;
+        global $table_name, $table_number;
 
         // $this->user === global $user
         $my = $this->user[$_SESSION['id']];
 
-        $sql = 'UPDATE carbon_users SET user_profile_pic = :user_profile_pic, user_first_name = :user_first_name, user_last_name = :user_last_name, user_birthday = :user_birthday, user_email = :user_email, user_email_confirmed = :user_email_confirmed,  user_gender = :user_gender, user_about_me = :user_about_me WHERE user_id = :user_id';
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':user_profile_pic', $profile_pic ?: $my['user_profile_pic']);
-        $stmt->bindValue(':user_first_name', $first ?: $my['user_first_name']);
-        $stmt->bindValue(':user_last_name', $last ?: $my['user_last_name']);
-        $stmt->bindValue(':user_birthday', $dob ?: $my['user_birthday']);
-        $stmt->bindValue(':user_gender', $gender ?: $my['user_gender']);
-        $stmt->bindValue(':user_email', $email ?: $my['user_email']);
-        $stmt->bindValue(':user_email_confirmed', $email ? 0 : $my['user_email_confirmed']);
-        $stmt->bindValue(':user_about_me', $about_me ?: $my['user_about_me']);
-        $stmt->bindValue(':user_id', $_SESSION['id']);
-        if (!$stmt->execute()) {
+        if (!self::execute(
+            'UPDATE RootPrerogative.carbon_users SET user_profile_pic = ?, user_table_name = ?, user_table_number = ?, user_first_name = ?, user_last_name = ?, user_birthday = ?, user_email = ?, user_email_confirmed = ?,  user_gender = ?, user_about_me = ? WHERE user_id = ?'
+            , $profile_pic ?: $my['user_profile_pic']
+            , $table_name ?: $my['user_table_name']
+            , $table_number ?: $my['user_table_number']
+            , $first ?: $my['user_first_name']
+            , $last ?: $my['user_last_name']
+            , $dob ?: $my['user_birthday']
+            , $gender ?: $my['user_gender']
+            , $email ?: $my['user_email']
+            , $email ? 0 : $my['user_email_confirmed']
+            , $about_me ?: $my['user_about_me']
+            , $_SESSION['id'])) {
+
             throw new PublicAlert('Sorry, we could not process your information at this time.', 'warning');
         }
         if (!empty($password)) {
             Users::change_password($password);
         }
+
+        // TODO - make profile picture update through table, make user profile pic a foreign key
         // Remove old picture
         if (!empty($profile_pic) && !empty($my['user_profile_pic']) && $profile_pic !== $my['user_profile_pic']) {
             unlink(SERVER_ROOT . $my['user_profile_pic']);
@@ -450,6 +471,7 @@ class User extends GlobalMap
             PublicAlert::success('Your account has been updated!');
         }
         startApplication(true);
+        return false;
     }
 
 }
