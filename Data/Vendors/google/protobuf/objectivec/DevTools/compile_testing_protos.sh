@@ -6,7 +6,7 @@ readonly OUTPUT_DIR="${PROJECT_DERIVED_FILE_DIR}/protos"
 # -----------------------------------------------------------------------------
 # Helper for bailing.
 die() {
-  echo "Error: $1"
+  echo "error: $1"
   exit 2
 }
 

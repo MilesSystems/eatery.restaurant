@@ -65,7 +65,7 @@ wrapped_make() {
   make $*
   MAKE_EXIT_STATUS=$?
   if [ ${MAKE_EXIT_STATUS} -ne 0 ]; then
-    echo "Error: 'make $*' exited with status ${MAKE_EXIT_STATUS}"
+    echo "error: 'make $*' exited with status ${MAKE_EXIT_STATUS}"
     exit ${MAKE_EXIT_STATUS}
   fi
   set -e

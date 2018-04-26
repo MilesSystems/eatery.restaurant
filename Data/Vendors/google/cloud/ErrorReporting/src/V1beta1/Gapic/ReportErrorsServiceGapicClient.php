@@ -223,7 +223,7 @@ class ReportErrorsServiceGapicClient
      *     @type CredentialsLoader $credentialsLoader
      *           A CredentialsLoader object created using the Google\Auth library.
      *     @type string[] $scopes A string array of scopes to use when acquiring credentials.
-     *                          Defaults to the scopes for the Stackdriver Error Reporting API.
+     *                          Defaults to the scopes for the Stackdriver error Reporting API.
      *     @type string $clientConfigPath
      *           Path to a JSON file containing client method configuration, including retry settings.
      *           Specify this setting to specify the retry behavior of all methods on the client.

@@ -49,7 +49,7 @@ class JobTrigger extends \Google\Protobuf\Internal\Message
      * Will return the last 100 errors. Whenever the JobTrigger is modified
      * this list will be cleared. Output only field.
      *
-     * Generated from protobuf field <code>repeated .google.privacy.dlp.v2.Error errors = 6;</code>
+     * Generated from protobuf field <code>repeated .google.privacy.dlp.v2.error errors = 6;</code>
      */
     private $errors;
     /**
@@ -223,7 +223,7 @@ class JobTrigger extends \Google\Protobuf\Internal\Message
      * Will return the last 100 errors. Whenever the JobTrigger is modified
      * this list will be cleared. Output only field.
      *
-     * Generated from protobuf field <code>repeated .google.privacy.dlp.v2.Error errors = 6;</code>
+     * Generated from protobuf field <code>repeated .google.privacy.dlp.v2.error errors = 6;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getErrors()
@@ -237,7 +237,7 @@ class JobTrigger extends \Google\Protobuf\Internal\Message
      * Will return the last 100 errors. Whenever the JobTrigger is modified
      * this list will be cleared. Output only field.
      *
-     * Generated from protobuf field <code>repeated .google.privacy.dlp.v2.Error errors = 6;</code>
+     * Generated from protobuf field <code>repeated .google.privacy.dlp.v2.error errors = 6;</code>
      * @param \Google\Cloud\Dlp\V2\Error[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */

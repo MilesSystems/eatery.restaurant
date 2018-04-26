@@ -48,7 +48,7 @@ class Google_Service_TPU extends Google_Service
   public function __construct(Google_Client $client)
   {
     parent::__construct($client);
-    $this->rootUrl = 'https://content-tpu.googleapis.com/';
+    $this->rootUrl = 'https://tpu.googleapis.com/';
     $this->servicePath = '';
     $this->version = 'v1alpha1';
     $this->serviceName = 'tpu';
@@ -120,10 +120,6 @@ class Google_Service_TPU extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'filter' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
@@ -135,6 +131,10 @@ class Google_Service_TPU extends Google_Service
                 'pageSize' => array(
                   'location' => 'query',
                   'type' => 'integer',
+                ),
+                'filter' => array(
+                  'location' => 'query',
+                  'type' => 'string',
                 ),
               ),
             ),
@@ -330,6 +330,10 @@ class Google_Service_TPU extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'filter' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
@@ -341,10 +345,6 @@ class Google_Service_TPU extends Google_Service
                 'pageSize' => array(
                   'location' => 'query',
                   'type' => 'integer',
-                ),
-                'filter' => array(
-                  'location' => 'query',
-                  'type' => 'string',
                 ),
               ),
             ),

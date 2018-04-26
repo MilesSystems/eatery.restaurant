@@ -939,7 +939,7 @@ function extractStacktrace( e, offset ) {
 	} else if (e.sourceURL) {
 		// Safari, PhantomJS
 		// hopefully one day Safari provides actual stacktraces
-		// exclude useless self-reference for generated Error objects
+		// exclude useless self-reference for generated error objects
 		if ( /qunit.js$/.test( e.sourceURL ) ) {
 			return;
 		}

@@ -14,7 +14,7 @@ namespace Monolog\Handler\FingersCrossed;
 use Monolog\Logger;
 
 /**
- * Channel and Error level based monolog activation strategy. Allows to trigger activation
+ * Channel and error level based monolog activation strategy. Allows to trigger activation
  * based on level per channel. e.g. trigger activation on level 'ERROR' by default, except
  * for records of the 'sql' channel; those should trigger activation on level 'WARN'.
  *

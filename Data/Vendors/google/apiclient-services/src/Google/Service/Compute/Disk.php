@@ -30,6 +30,7 @@ class Google_Service_Compute_Disk extends Google_Collection
   public $labels;
   public $lastAttachTimestamp;
   public $lastDetachTimestamp;
+  public $licenseCodes;
   public $licenses;
   public $name;
   public $options;
@@ -139,6 +140,14 @@ class Google_Service_Compute_Disk extends Google_Collection
   public function getLastDetachTimestamp()
   {
     return $this->lastDetachTimestamp;
+  }
+  public function setLicenseCodes($licenseCodes)
+  {
+    $this->licenseCodes = $licenseCodes;
+  }
+  public function getLicenseCodes()
+  {
+    return $this->licenseCodes;
   }
   public function setLicenses($licenses)
   {

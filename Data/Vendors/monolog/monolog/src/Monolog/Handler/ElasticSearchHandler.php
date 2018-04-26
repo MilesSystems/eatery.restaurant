@@ -121,7 +121,7 @@ class ElasticSearchHandler extends AbstractProcessingHandler
             $this->client->addDocuments($documents);
         } catch (ExceptionInterface $e) {
             if (!$this->options['ignore_error']) {
-                throw new \RuntimeException("Error sending messages to Elasticsearch", 0, $e);
+                throw new \RuntimeException("error sending messages to Elasticsearch", 0, $e);
             }
         }
     }

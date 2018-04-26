@@ -18,7 +18,6 @@ This client supports the following Google Cloud Platform services at a [General 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
 * [Cloud Firestore](#cloud-firestore-beta) (Beta)
-* [Google Bigtable](#google-bigtable-beta) (Beta)
 * [Google Cloud Container](#google-cloud-container-beta) (Beta)
 * [Google Cloud Dataproc](#google-cloud-dataproc-beta) (Beta)
 * [Google Cloud Natural Language](#google-cloud-natural-language-beta) (Beta)
@@ -30,6 +29,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [Google Stackdriver Monitoring](#google-stackdriver-monitoring-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
+* [Google Bigtable](#google-bigtable-alpha) (Alpha)
 * [Google Cloud Speech](#google-cloud-speech-alpha) (Alpha)
 * [Google Stackdriver Debugger](#google-stackdriver-debugger-alpha) (Alpha)
 * [Google Stackdriver Trace](#google-stackdriver-trace-alpha) (Alpha)
@@ -451,39 +451,6 @@ echo "Hello " . $snapshot['firstName'];
 $ composer require google/cloud-firestore
 ```
 
-## Google Bigtable (Beta)
-
-- [API Documentation](http://googlecloudplatform.github.io/google-cloud-php/#/docs/latest/bigtable/readme)
-- [Official Documentation](https://cloud.google.com/bigtable/docs)
-
-#### Preview
-
-```php
-require 'vendor/autoload.php';
-
-use Google\Cloud\Bigtable\V2\BigtableClient;
-
-$bigtableClient = new BigtableClient();
-$formattedTableName = $bigtableClient->tableName('[PROJECT]', '[INSTANCE]', '[TABLE]');
-
-try {
-    $stream = $bigtableClient->readRows($formattedTableName);
-    foreach ($stream->readAll() as $element) {
-        // doSomethingWith($element);
-    }
-} finally {
-    $bigtableClient->close();
-}
-```
-
-#### google/cloud-bigtable
-
-[Google Bigtable](https://github.com/GoogleCloudPlatform/google-cloud-php-bigtable) can be installed separately by requiring the [`google/cloud-bigtable`](https://packagist.org/packages/google/cloud-bigtable) composer package:
-
-```
-$ composer require google/cloud-bigtable
-```
-
 ## Google Cloud Container (Beta)
 
 - [API Documentation](http://googlecloudplatform.github.io/google-cloud-php/#/docs/latest/monitoring/readme)
@@ -859,6 +826,39 @@ try {
 $ composer require google/cloud-monitoring
 ```
 
+## Google Bigtable (Alpha)
+
+- [API Documentation](http://googlecloudplatform.github.io/google-cloud-php/#/docs/latest/bigtable/readme)
+- [Official Documentation](https://cloud.google.com/bigtable/docs)
+
+#### Preview
+
+```php
+require 'vendor/autoload.php';
+
+use Google\Cloud\Bigtable\V2\BigtableClient;
+
+$bigtableClient = new BigtableClient();
+$formattedTableName = $bigtableClient->tableName('[PROJECT]', '[INSTANCE]', '[TABLE]');
+
+try {
+    $stream = $bigtableClient->readRows($formattedTableName);
+    foreach ($stream->readAll() as $element) {
+        // doSomethingWith($element);
+    }
+} finally {
+    $bigtableClient->close();
+}
+```
+
+#### google/cloud-bigtable
+
+[Google Bigtable](https://github.com/GoogleCloudPlatform/google-cloud-php-bigtable) can be installed separately by requiring the [`google/cloud-bigtable`](https://packagist.org/packages/google/cloud-bigtable) composer package:
+
+```
+$ composer require google/cloud-bigtable
+```
+
 ## Google Cloud Speech (Alpha)
 
 - [API Documentation](http://googlecloudplatform.github.io/google-cloud-php/#/docs/latest/speech/speechclient)
@@ -1001,6 +1001,21 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter;
 $cache = new ArrayAdapter();
 
 $storage = new StorageClient([
+    'authCache' => $cache
+]);
+```
+
+This library provides a PSR-6 implementation with the SystemV shared memory at `Google\Auth\Cache\SysVCacheItemPool`. This implementation is only available on *nix machines, but it's the one of the fastest implementations and you can share the cache among multiple processes. The following example shows how to use it.
+
+```php
+require __DIR__ . '/vendor/autoload.php';
+
+use Google\Cloud\Spanner\SpannerClient;
+use Google\Auth\Cache\SysVCacheItemPool;
+
+$cache = new SysVCacheItemPool();
+
+$spanner = new SpannerClient([
     'authCache' => $cache
 ]);
 ```

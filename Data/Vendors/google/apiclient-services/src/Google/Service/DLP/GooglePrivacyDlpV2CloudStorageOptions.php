@@ -15,11 +15,13 @@
  * the License.
  */
 
-class Google_Service_DLP_GooglePrivacyDlpV2CloudStorageOptions extends Google_Model
+class Google_Service_DLP_GooglePrivacyDlpV2CloudStorageOptions extends Google_Collection
 {
+  protected $collection_key = 'fileTypes';
   public $bytesLimitPerFile;
   protected $fileSetType = 'Google_Service_DLP_GooglePrivacyDlpV2FileSet';
   protected $fileSetDataType = '';
+  public $fileTypes;
 
   public function setBytesLimitPerFile($bytesLimitPerFile)
   {
@@ -42,5 +44,13 @@ class Google_Service_DLP_GooglePrivacyDlpV2CloudStorageOptions extends Google_Mo
   public function getFileSet()
   {
     return $this->fileSet;
+  }
+  public function setFileTypes($fileTypes)
+  {
+    $this->fileTypes = $fileTypes;
+  }
+  public function getFileTypes()
+  {
+    return $this->fileTypes;
   }
 }

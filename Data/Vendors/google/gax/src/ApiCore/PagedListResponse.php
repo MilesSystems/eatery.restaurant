@@ -159,7 +159,7 @@ class PagedListResponse
         $pageSize = $request->$pageSizeGetMethod();
         if (is_null($pageSize)) {
             throw new ValidationException(
-                "Error while expanding Page to FixedSizeCollection: No page size " .
+                "error while expanding Page to FixedSizeCollection: No page size " .
                 "parameter found. The page size parameter must be set in the API " .
                 "optional arguments array, and must be less than the collectionSize " .
                 "parameter, in order to create a FixedSizeCollection object."
@@ -167,7 +167,7 @@ class PagedListResponse
         }
         if ($pageSize > $collectionSize) {
             throw new ValidationException(
-                "Error while expanding Page to FixedSizeCollection: collectionSize " .
+                "error while expanding Page to FixedSizeCollection: collectionSize " .
                 "parameter is less than the page size optional argument specified in " .
                 "the API call. collectionSize: $collectionSize, page size: $pageSize"
             );

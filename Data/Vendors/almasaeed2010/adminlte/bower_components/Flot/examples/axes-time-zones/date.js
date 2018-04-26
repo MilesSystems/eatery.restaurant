@@ -429,7 +429,7 @@
           return true;
         },
         error : function () {
-          throw new Error('Error retrieving "' + url + '" zoneinfo files');
+          throw new Error('error retrieving "' + url + '" zoneinfo files');
         }
       });
     }
@@ -854,7 +854,7 @@
             case 'Link':
               //No zones for these should already exist.
               if (_this.zones[arr[1]]) {
-                throw new Error('Error with Link ' + arr[1] + '. Cannot create link of a preexisted zone.');
+                throw new Error('error with Link ' + arr[1] + '. Cannot create link of a preexisted zone.');
               }
               //Create the link.
               _this.zones[arr[1]] = arr[0];

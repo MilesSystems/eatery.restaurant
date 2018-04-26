@@ -416,7 +416,7 @@ var wysihtml5 = {
         },
 
         createError: function(msg) {
-            return new Error("Error in Rangy " + this.name + " module: " + msg);
+            return new Error("error in Rangy " + this.name + " module: " + msg);
         }
     };
     
@@ -7129,7 +7129,7 @@ wysihtml5.dom.replaceWithChildNodes = function(node) {
         // TODO: apparently this doesn't work in IE9!
         // TODO: figure out and bind the errors logic for contenteditble mode
         /*iframeWindow.onerror = function(errorMessage, fileName, lineNumber) {
-          throw new Error("wysihtml5.Sandbox: " + errorMessage, fileName, lineNumber);
+          throw new error("wysihtml5.Sandbox: " + errorMessage, fileName, lineNumber);
         }
         */
         this.loaded = true;

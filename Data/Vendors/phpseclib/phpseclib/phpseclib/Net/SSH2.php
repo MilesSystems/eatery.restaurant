@@ -178,7 +178,7 @@ class SSH2
     var $bitmap = 0;
 
     /**
-     * Error information
+     * error information
      *
      * @see self::getErrors()
      * @see self::getLastError()
@@ -1119,7 +1119,7 @@ class SSH2
             $this->fsock = @fsockopen($this->host, $this->port, $errno, $errstr, $this->curTimeout == 0 ? 100000 : $this->curTimeout);
             if (!$this->fsock) {
                 $host = $this->host . ':' . $this->port;
-                user_error(rtrim("Cannot connect to $host. Error $errno. $errstr"));
+                user_error(rtrim("Cannot connect to $host. error $errno. $errstr"));
                 return false;
             }
             $elapsed = microtime(true) - $start;
@@ -3258,7 +3258,7 @@ class SSH2
         while ($remaining_length > 0) {
             $temp = stream_get_contents($this->fsock, $remaining_length);
             if ($temp === false || feof($this->fsock)) {
-                user_error('Error reading from socket');
+                user_error('error reading from socket');
                 $this->bitmap = 0;
                 return false;
             }
@@ -3277,7 +3277,7 @@ class SSH2
         if ($this->hmac_check !== false) {
             $hmac = stream_get_contents($this->fsock, $this->hmac_size);
             if ($hmac === false || strlen($hmac) != $this->hmac_size) {
-                user_error('Error reading socket');
+                user_error('error reading socket');
                 $this->bitmap = 0;
                 return false;
             } elseif ($hmac != $this->hmac_check->hash(pack('NNCa*', $this->get_seq_no, $packet_length, $padding_length, $payload . $padding))) {
@@ -3798,7 +3798,7 @@ class SSH2
                 case NET_SSH2_MSG_CHANNEL_EOF:
                     break;
                 default:
-                    user_error('Error reading channel data');
+                    user_error('error reading channel data');
                     return $this->_disconnect(NET_SSH2_DISCONNECT_BY_APPLICATION);
             }
         }

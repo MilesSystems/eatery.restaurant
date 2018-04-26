@@ -9,7 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Error details for WriteLogEntries with partial success.
+ * error details for WriteLogEntries with partial success.
  *
  * Generated from protobuf message <code>google.logging.v2.WriteLogEntriesPartialErrors</code>
  */

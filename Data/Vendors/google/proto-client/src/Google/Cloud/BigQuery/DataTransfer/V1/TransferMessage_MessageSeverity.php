@@ -30,7 +30,7 @@ class TransferMessage_MessageSeverity
      */
     const WARNING = 2;
     /**
-     * Error message.
+     * error message.
      *
      * Generated from protobuf enum <code>ERROR = 3;</code>
      */

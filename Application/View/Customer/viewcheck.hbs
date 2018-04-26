@@ -45,10 +45,10 @@
             From
             <address>
                 <strong><small>RestauRants</small></strong><br>
-                4906 Wimberly ln<br>
-                Bayton, TX 76201<br>
+                Union Cir<br>
+                Denton, TX 76205<br>
                 Phone: (817) 789-3294<br>
-                Email: Richard@Miles.Systems
+                Email: Gold@Team.Rules
             </address>
         </div>
          <!-- /.col -->
@@ -57,8 +57,7 @@
             <br>
             <b>Order ID:</b> 4F3S8J<br>
             <b>Payment Due:</b>{{DATE}}<br>
-            <b>Account:</b> 968-34567-{{order_server}}
-
+            <b>Account:</b> {{order_server}}
         </div>
         <!-- /.col -->
     </div>
@@ -173,13 +172,22 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
                 <button data-toggle="modal" data-target="#modal-success" type="button" class="btn btn-outline" data-dismiss="modal">Flip Coin</button>
-                <button  type="button" class="btn btn-outline" data-dismiss="modal">Submit Payment</button>
+                <button  type="submit" class="btn btn-outline" data-dismiss="modal">Submit Payment</button>
             </div>
         </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+
+
+
+</form>
+
+
+
+
 
 <div class="modal modal-{{#winner}}success{{/winner}}{{^winner}}info{{/winner}} fade" id="modal-success">
     <div class="modal-dialog">

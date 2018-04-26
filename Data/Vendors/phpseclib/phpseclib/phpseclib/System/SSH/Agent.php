@@ -133,7 +133,7 @@ class Agent
 
         $this->fsock = fsockopen('unix://' . $address, 0, $errno, $errstr);
         if (!$this->fsock) {
-            user_error("Unable to connect to ssh-agent (Error $errno: $errstr)");
+            user_error("Unable to connect to ssh-agent (error $errno: $errstr)");
         }
     }
 

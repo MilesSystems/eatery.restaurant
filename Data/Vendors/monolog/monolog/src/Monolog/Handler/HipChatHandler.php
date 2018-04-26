@@ -249,7 +249,7 @@ class HipChatHandler extends SocketHandler
     }
 
     /**
-     * Combines multiple records into one. Error level of the combined record
+     * Combines multiple records into one. error level of the combined record
      * will be the highest level from the given records. Datetime will be taken
      * from the first record.
      *

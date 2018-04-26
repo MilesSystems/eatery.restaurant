@@ -1036,7 +1036,7 @@ function twig_escape_filter(Twig_Environment $env, $string, $strategy = 'html', 
                  * While HTML supports far more named entities, the lowest common denominator
                  * has become HTML5's XML Serialisation which is restricted to the those named
                  * entities that XML supports. Using HTML entities would result in this error:
-                 *     XML Parsing Error: undefined entity
+                 *     XML Parsing error: undefined entity
                  */
                 static $entityMap = array(
                     34 => 'quot', /* quotation mark */

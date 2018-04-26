@@ -518,7 +518,7 @@ public class DescriptorsTest extends TestCase {
     FileDescriptorProto barProto = FileDescriptorProto.newBuilder()
         .setName("boo.proto")
         .addDependency("foo.proto")
-        .addPublicDependency(1)  // Error, should be 0.
+        .addPublicDependency(1)  // error, should be 0.
         .build();
     FileDescriptor fooFile = Descriptors.FileDescriptor.buildFrom(fooProto,
         new FileDescriptor[0]);

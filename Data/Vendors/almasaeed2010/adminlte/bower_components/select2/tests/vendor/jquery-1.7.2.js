@@ -7533,7 +7533,7 @@ jQuery.extend({
 			jqXHR.status = status;
 			jqXHR.statusText = "" + ( nativeStatusText || statusText );
 
-			// Success/Error
+			// Success/error
 			if ( isSuccess ) {
 				deferred.resolveWith( callbackContext, [ success, statusText, jqXHR ] );
 			} else {

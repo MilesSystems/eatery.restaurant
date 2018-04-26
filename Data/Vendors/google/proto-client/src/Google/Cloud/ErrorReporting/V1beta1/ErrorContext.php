@@ -31,7 +31,7 @@ class ErrorContext extends \Google\Protobuf\Internal\Message
      * uniquely identifies the user.
      * When sending an error report, leave this field empty if the user was not
      * logged in. In this case the
-     * Error Reporting system will use other data, such as remote IP address, to
+     * error Reporting system will use other data, such as remote IP address, to
      * distinguish affected users. See `affected_users_count` in
      * `ErrorGroupStats`.
      *
@@ -89,7 +89,7 @@ class ErrorContext extends \Google\Protobuf\Internal\Message
      * uniquely identifies the user.
      * When sending an error report, leave this field empty if the user was not
      * logged in. In this case the
-     * Error Reporting system will use other data, such as remote IP address, to
+     * error Reporting system will use other data, such as remote IP address, to
      * distinguish affected users. See `affected_users_count` in
      * `ErrorGroupStats`.
      *
@@ -107,7 +107,7 @@ class ErrorContext extends \Google\Protobuf\Internal\Message
      * uniquely identifies the user.
      * When sending an error report, leave this field empty if the user was not
      * logged in. In this case the
-     * Error Reporting system will use other data, such as remote IP address, to
+     * error Reporting system will use other data, such as remote IP address, to
      * distinguish affected users. See `affected_users_count` in
      * `ErrorGroupStats`.
      *

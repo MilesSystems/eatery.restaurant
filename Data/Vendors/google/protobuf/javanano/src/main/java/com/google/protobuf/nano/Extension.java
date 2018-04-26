@@ -235,12 +235,12 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
             }
         } catch (InstantiationException e) {
             throw new IllegalArgumentException(
-                    "Error creating instance of class " + messageType, e);
+                    "error creating instance of class " + messageType, e);
         } catch (IllegalAccessException e) {
             throw new IllegalArgumentException(
-                    "Error creating instance of class " + messageType, e);
+                    "error creating instance of class " + messageType, e);
         } catch (IOException e) {
-            throw new IllegalArgumentException("Error reading extension field", e);
+            throw new IllegalArgumentException("error reading extension field", e);
         }
     }
 
@@ -359,7 +359,7 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
             try {
               return input.readPrimitiveField(type);
             } catch (IOException e) {
-                throw new IllegalArgumentException("Error reading extension field", e);
+                throw new IllegalArgumentException("error reading extension field", e);
             }
         }
 
@@ -375,7 +375,7 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
                 try {
                     buffer.pushLimit(buffer.readRawVarint32()); // length limit
                 } catch (IOException e) {
-                    throw new IllegalArgumentException("Error reading extension field", e);
+                    throw new IllegalArgumentException("error reading extension field", e);
                 }
                 while (!buffer.isAtEnd()) {
                     resultList.add(readData(buffer));

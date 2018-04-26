@@ -42,7 +42,7 @@ class Google_Service_DLP_Resource_ProjectsDlpJobs extends Google_Service_Resourc
     return $this->call('cancel', array($params), "Google_Service_DLP_GoogleProtobufEmpty");
   }
   /**
-   * Creates a new job to inspect storage or calculate risk metrics [How-to
+   * Creates a new job to inspect storage or calculate risk metrics. [How-to
    * guide](/dlp/docs/compute-risk-analysis). (dlpJobs.create)
    *
    * @param string $parent The parent resource name, for example projects/my-

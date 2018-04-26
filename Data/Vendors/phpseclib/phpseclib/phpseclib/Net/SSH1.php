@@ -543,7 +543,7 @@ class SSH1
     {
         $this->fsock = @fsockopen($this->host, $this->port, $errno, $errstr, $this->connectionTimeout);
         if (!$this->fsock) {
-            user_error(rtrim("Cannot connect to {$this->host}:{$this->port}. Error $errno. $errstr"));
+            user_error(rtrim("Cannot connect to {$this->host}:{$this->port}. error $errno. $errstr"));
             return false;
         }
 
@@ -673,7 +673,7 @@ class SSH1
         $data = pack('C2a*na*N', NET_SSH1_CMSG_SESSION_KEY, $cipher, $anti_spoofing_cookie, 8 * strlen($double_encrypted_session_key), $double_encrypted_session_key, 0);
 
         if (!$this->_send_binary_packet($data)) {
-            user_error('Error sending SSH_CMSG_SESSION_KEY');
+            user_error('error sending SSH_CMSG_SESSION_KEY');
             return false;
         }
 
@@ -736,7 +736,7 @@ class SSH1
         $data = pack('CNa*', NET_SSH1_CMSG_USER, strlen($username), $username);
 
         if (!$this->_send_binary_packet($data)) {
-            user_error('Error sending SSH_CMSG_USER');
+            user_error('error sending SSH_CMSG_USER');
             return false;
         }
 
@@ -756,7 +756,7 @@ class SSH1
         $data = pack('CNa*', NET_SSH1_CMSG_AUTH_PASSWORD, strlen($password), $password);
 
         if (!$this->_send_binary_packet($data)) {
-            user_error('Error sending SSH_CMSG_AUTH_PASSWORD');
+            user_error('error sending SSH_CMSG_AUTH_PASSWORD');
             return false;
         }
 
@@ -825,7 +825,7 @@ class SSH1
         $data = pack('CNa*', NET_SSH1_CMSG_EXEC_CMD, strlen($cmd), $cmd);
 
         if (!$this->_send_binary_packet($data)) {
-            user_error('Error sending SSH_CMSG_EXEC_CMD');
+            user_error('error sending SSH_CMSG_EXEC_CMD');
             return false;
         }
 
@@ -872,7 +872,7 @@ class SSH1
         $data = pack('CNa*N4C', NET_SSH1_CMSG_REQUEST_PTY, strlen('vt100'), 'vt100', 24, 80, 0, 0, self::TTY_OP_END);
 
         if (!$this->_send_binary_packet($data)) {
-            user_error('Error sending SSH_CMSG_REQUEST_PTY');
+            user_error('error sending SSH_CMSG_REQUEST_PTY');
             return false;
         }
 
@@ -889,7 +889,7 @@ class SSH1
         $data = pack('C', NET_SSH1_CMSG_EXEC_SHELL);
 
         if (!$this->_send_binary_packet($data)) {
-            user_error('Error sending SSH_CMSG_EXEC_SHELL');
+            user_error('error sending SSH_CMSG_EXEC_SHELL');
             return false;
         }
 
@@ -979,7 +979,7 @@ class SSH1
         $data = pack('CNa*', NET_SSH1_CMSG_STDIN_DATA, strlen($cmd), $cmd);
 
         if (!$this->_send_binary_packet($data)) {
-            user_error('Error sending SSH_CMSG_STDIN');
+            user_error('error sending SSH_CMSG_STDIN');
             return false;
         }
 

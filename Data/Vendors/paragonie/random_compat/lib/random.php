@@ -110,7 +110,7 @@ if (!is_callable('random_bytes')) {
             &&
             @is_readable('/dev/urandom')
         ) {
-            // Error suppression on is_readable() in case of an open_basedir
+            // error suppression on is_readable() in case of an open_basedir
             // or safe_mode failure. All we care about is whether or not we
             // can read it at this point. If the PHP environment is going to
             // panic over trying to see if the file can be read in the first
@@ -203,8 +203,9 @@ if (!is_callable('random_bytes')) {
          * and hope the developer won't let it fail silently.
          *
          * @param mixed $length
-         * @return void
+         * @psalm-suppress MissingReturnType
          * @throws Exception
+         * @return string
          */
         function random_bytes($length)
         {
@@ -212,6 +213,7 @@ if (!is_callable('random_bytes')) {
             throw new Exception(
                 'There is no suitable CSPRNG installed on your system'
             );
+            return '';
         }
     }
 }

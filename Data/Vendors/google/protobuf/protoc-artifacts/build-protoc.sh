@@ -143,7 +143,7 @@ checkDependencies ()
   if [[ $ret == 0 ]]; then
     fail "found unexpected dependencies (listed above)."
   elif [[ $ret != 1 ]]; then
-    fail "Error when checking dependencies."
+    fail "error when checking dependencies."
   fi  # grep returns 1 when "not found", which is what we expect
   echo "Dependencies look good."
   echo

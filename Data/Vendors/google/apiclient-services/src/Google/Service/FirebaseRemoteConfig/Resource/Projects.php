@@ -67,7 +67,7 @@ class Google_Service_FirebaseRemoteConfig_Resource_Projects extends Google_Servi
    * call should update the backend if there are no validation/interal errors).
    * May be set to true to indicate that, should no validation errors occur, the
    * call should return a "200 OK" instead of performing the update. Note that
-   * other error messages (500 Internal Error, 412 Version Mismatch, etc) may
+   * other error messages (500 Internal error, 412 Version Mismatch, etc) may
    * still result after flipping to false, even if getting a "200 OK" when calling
    * with true.
    * @return Google_Service_FirebaseRemoteConfig_RemoteConfig

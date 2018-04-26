@@ -18,7 +18,7 @@
 namespace Google\Cloud\ErrorReporting;
 
 /**
- * auto_prepend_file for Stackdriver Error Reporting. Put this file as
+ * auto_prepend_file for Stackdriver error Reporting. Put this file as
  * `auto_prepend_file` php configuration directive to enable automatic error
  * reporting.
  *

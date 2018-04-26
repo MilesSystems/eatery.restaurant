@@ -290,6 +290,14 @@ class Google_Service_Compute_Resource_Instances extends Google_Service_Resource
    *
    * The request ID must be a valid UUID with the exception that zero UUID is not
    * supported (00000000-0000-0000-0000-000000000000).
+   * @opt_param string sourceInstanceTemplate Specifies instance template to
+   * create the instance.
+   *
+   * This field is optional. It can be a full or partial URL. For example, the
+   * following are all valid URLs to an instance template:   - https://www.googlea
+   * pis.com/compute/v1/projects/project/global/global/instanceTemplates/instanceT
+   * emplate  - projects/project/global/global/instanceTemplates/instanceTemplate
+   * - global/instancesTemplates/instanceTemplate
    * @return Google_Service_Compute_Operation
    */
   public function insert($project, $zone, Google_Service_Compute_Instance $postBody, $optParams = array())

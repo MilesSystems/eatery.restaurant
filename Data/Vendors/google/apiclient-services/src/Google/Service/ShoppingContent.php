@@ -235,6 +235,11 @@ class Google_Service_ShoppingContent extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'destinations' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
+                ),
               ),
             ),'list' => array(
               'path' => '{merchantId}/accountstatuses',
@@ -244,6 +249,11 @@ class Google_Service_ShoppingContent extends Google_Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ),
+                'destinations' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
                 ),
                 'maxResults' => array(
                   'location' => 'query',
@@ -366,6 +376,25 @@ class Google_Service_ShoppingContent extends Google_Service
             ),'delete' => array(
               'path' => '{merchantId}/datafeeds/{datafeedId}',
               'httpMethod' => 'DELETE',
+              'parameters' => array(
+                'merchantId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'datafeedId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'dryRun' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
+              ),
+            ),'fetchnow' => array(
+              'path' => '{merchantId}/datafeeds/{datafeedId}/fetchNow',
+              'httpMethod' => 'POST',
               'parameters' => array(
                 'merchantId' => array(
                   'location' => 'path',
@@ -1315,6 +1344,11 @@ class Google_Service_ShoppingContent extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'destinations' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
+                ),
                 'includeAttributes' => array(
                   'location' => 'query',
                   'type' => 'boolean',
@@ -1328,6 +1362,11 @@ class Google_Service_ShoppingContent extends Google_Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ),
+                'destinations' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
                 ),
                 'includeAttributes' => array(
                   'location' => 'query',

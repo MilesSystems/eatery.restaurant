@@ -40,7 +40,7 @@ class GPBDecodeException extends \Exception
         \Exception $previous = null)
     {
         parent::__construct(
-            "Error occurred during parsing: " . $message,
+            "error occurred during parsing: " . $message,
             $code,
             $previous);
     }

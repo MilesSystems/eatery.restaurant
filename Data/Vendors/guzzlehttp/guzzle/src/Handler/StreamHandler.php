@@ -243,7 +243,7 @@ class StreamHandler
         restore_error_handler();
 
         if (!$resource) {
-            $message = 'Error creating resource: ';
+            $message = 'error creating resource: ';
             foreach ($errors as $err) {
                 foreach ($err as $key => $value) {
                     $message .= "[$key] $value" . PHP_EOL;

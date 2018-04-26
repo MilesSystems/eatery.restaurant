@@ -19,8 +19,10 @@ namespace Google\Cloud\Dev\ComponentIntegration\Command;
 
 use Google\Cloud\Dev\GetComponentsTrait;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use vierbergenlars\SemVer\version;
 
@@ -49,7 +51,11 @@ class ComponentIntegration extends Command
     protected function configure()
     {
         $this->setName('integration')
-            ->setDescription('Test each component individually.');
+            ->setDescription('Test each component individually.')
+            ->addOption('umbrella', 'u', InputOption::VALUE_NONE, 'If set, umbrella version update check will be skipped.')
+            ->addOption('preserve', 'p', InputOption::VALUE_NONE, 'If set, testing directory will not be deleted if an error occurs. ' .
+                'This may be a useful tool when debugging problems.'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -66,7 +72,22 @@ class ComponentIntegration extends Command
         $this->tmpDir = $dest;
         @mkdir($dest);
 
+        // If `--preserve|-p` is not provided, .testing will be deleted if an error occurs.
+        if (!$input->getOption('preserve')) {
+            register_shutdown_function(function () use ($dest) {
+                $this->deleteTmp($dest);
+            });
+        }
+
         $guzzle = new Client;
+
+        // Check that the umbrella version is updated.
+        $skipUmbrellaCheck = $input->getOption('umbrella');
+        $isUmbrellaUpdated = $this->checkUmbrellaUpdate($guzzle, $rootPath, $manifestPath);
+
+        if (!$skipUmbrellaCheck && !$isUmbrellaUpdated) {
+            throw new \RuntimeException('Umbrella package version has not been updated!');
+        }
 
         // do setup on components -- copy to tmp directory and check version info
         foreach ($components as &$component) {
@@ -97,6 +118,15 @@ class ComponentIntegration extends Command
         }
 
         $this->deleteTmp($dest);
+    }
+
+    private function checkUmbrellaUpdate(Client $guzzle, $rootPath, $manifestPath)
+    {
+        $component = $this->getComponentComposer($rootPath, 'google-cloud', $rootPath .'/composer.json');
+        $localLatestVersion = $this->getComponentVersion($manifestPath, $component['id']);
+        $remoteLatestVersion = $this->getRemoteLatestVersion($guzzle, $component);
+
+        return version::gt($localLatestVersion, $remoteLatestVersion);
     }
 
     private function copyComponent($rootPath, $dest, array $component)
@@ -150,7 +180,11 @@ class ComponentIntegration extends Command
             $uri .= '?access_token='. getenv('GH_OAUTH_TOKEN');
         }
 
-        $res = $guzzle->get($uri);
+        try {
+            $res = $guzzle->get($uri);
+        } catch (RequestException $e) {
+            return '0.0.0';
+        }
 
         $release = json_decode((string) $res->getBody(), true);
 
@@ -183,7 +217,11 @@ class ComponentIntegration extends Command
             $composerFile = $component['tmpDir'] . DIRECTORY_SEPARATOR .'composer.json';
             $composer = json_decode(file_get_contents($composerFile), true);
             if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new \RuntimeException('Could not decode composer file '. $composerFile);
+                throw new \RuntimeException(sprintf(
+                    'Could not decode composer file %s. Got error %s',
+                    $composerFile,
+                    json_last_error_msg()
+                ));
             }
 
             foreach ($aliases as $alias) {

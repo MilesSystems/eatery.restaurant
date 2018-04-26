@@ -57,12 +57,12 @@ class ErrorHandler
         E_USER_WARNING => 'User Warning',
         E_COMPILE_WARNING => 'Compile Warning',
         E_CORE_WARNING => 'Core Warning',
-        E_USER_ERROR => 'User Error',
-        E_RECOVERABLE_ERROR => 'Catchable Fatal Error',
-        E_COMPILE_ERROR => 'Compile Error',
-        E_PARSE => 'Parse Error',
+        E_USER_ERROR => 'User error',
+        E_RECOVERABLE_ERROR => 'Catchable Fatal error',
+        E_COMPILE_ERROR => 'Compile error',
+        E_PARSE => 'Parse error',
         E_ERROR => 'Error',
-        E_CORE_ERROR => 'Core Error',
+        E_CORE_ERROR => 'Core error',
     );
 
     private $loggers = array(
@@ -201,7 +201,7 @@ class ErrorHandler
     /**
      * Sets a logger for each error level.
      *
-     * @param array $loggers Error levels to [LoggerInterface|null, LogLevel::*] map
+     * @param array $loggers error levels to [LoggerInterface|null, LogLevel::*] map
      *
      * @return array The previous map
      *
@@ -547,14 +547,15 @@ class ErrorHandler
                 }
             }
         }
+        $exceptionHandler = $this->exceptionHandler;
+        $this->exceptionHandler = null;
         try {
-            if (null !== $this->exceptionHandler) {
-                return \call_user_func($this->exceptionHandler, $exception);
+            if (null !== $exceptionHandler) {
+                return \call_user_func($exceptionHandler, $exception);
             }
             $handlerException = $handlerException ?: $exception;
         } catch (\Throwable $handlerException) {
         }
-        $this->exceptionHandler = null;
         if ($exception === $handlerException) {
             self::$reservedMemory = null; // Disable the fatal error handler
             throw $exception; // Give back $exception to the native handler

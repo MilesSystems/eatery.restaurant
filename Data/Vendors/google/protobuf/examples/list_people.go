@@ -49,7 +49,7 @@ func main() {
 	// Read the existing address book.
 	in, err := ioutil.ReadFile(fname)
 	if err != nil {
-		log.Fatalln("Error reading file:", err)
+		log.Fatalln("error reading file:", err)
 	}
 	book := &pb.AddressBook{}
 	if err := proto.Unmarshal(in, book); err != nil {

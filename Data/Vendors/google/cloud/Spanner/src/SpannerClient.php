@@ -34,6 +34,7 @@ use Google\Cloud\Spanner\Batch\BatchClient;
 use Google\Cloud\Spanner\Connection\Grpc;
 use Google\Cloud\Spanner\Connection\LongRunningConnection;
 use Google\Cloud\Spanner\V1\SpannerClient as GapicSpannerClient;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\Http\StreamInterface;
 
 /**
@@ -76,7 +77,7 @@ class SpannerClient
     use LROTrait;
     use ValidateTrait;
 
-    const VERSION = '1.3.0';
+    const VERSION = '1.3.3';
 
     const FULL_CONTROL_SCOPE = 'https://www.googleapis.com/auth/spanner.data';
     const ADMIN_SCOPE = 'https://www.googleapis.com/auth/spanner.admin';
@@ -100,6 +101,9 @@ class SpannerClient
      *
      *     @type string $projectId The project ID from the Google Developer's
      *           Console.
+     *     @type CacheItemPoolInterface $authCache A cache for storing access
+     *           tokens. **Defaults to** a simple in memory implementation.
+     *     @type array $authCacheOptions Cache configuration options.
      *     @type callable $authHttpHandler A handler used to deliver Psr7
      *           requests specifically for authentication.
      *     @type FetchAuthTokenInterface $credentialsFetcher A credentials

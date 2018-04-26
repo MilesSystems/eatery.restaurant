@@ -21,7 +21,7 @@ use Google\Cloud\Core\Batch\BatchDaemonTrait;
 use Google\Cloud\Core\Batch\BatchRunner;
 use Google\Cloud\Core\Batch\BatchTrait;
 use Google\Cloud\Core\ExponentialBackoff;
-use Google\Cloud\Core\Exceptions\ServiceException;
+use Google\Cloud\Core\Exception\ServiceException;
 use Google\Cloud\Core\SysvTrait;
 use Google\Cloud\Debugger\BreakpointStorage\BreakpointStorageInterface;
 use Google\Cloud\Debugger\BreakpointStorage\FileBreakpointStorage;
@@ -85,20 +85,23 @@ class Agent
      *            **Defaults to** the directory of the calling file.
      *      @type LoggerInterface $logger PSR-3 compliant logger used to write
      *            logpoint records. **Defaults to** a new Stackdriver logger.
+     *      @type array $daemonOptions Additional options to provide to the
+     *            Daemon when registering.
      * }
      */
     public function __construct(array $options = [])
     {
-        $storage = isset($options['storage'])
-            ? $options['storage']
-            : $this->defaultStorage();
-
-        $this->sourceRoot = isset($options['sourceRoot'])
-            ? $options['sourceRoot']
-            : dirname(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1)[0]['file']);
+        $options += [
+            'daemonOptions' => [],
+            'storage' => null,
+            'sourceRoot' => null
+        ];
+        $storage = $options['storage'] ?: $this->defaultStorage();
+        $this->sourceRoot = $options['sourceRoot']
+            ?: dirname(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1)[0]['file']);
 
         if ($this->shouldStartDaemon()) {
-            $daemon = new Daemon([
+            $daemon = new Daemon($options['daemonOptions'] + [
                 'sourceRoot' => $this->sourceRoot,
                 'storage' => $storage,
                 'register' => true
@@ -143,7 +146,6 @@ class Agent
 
             switch ($breakpoint->action()) {
                 case Breakpoint::ACTION_CAPTURE:
-                    $this->invalidateOpcache($breakpoint);
                     stackdriver_debugger_add_snapshot(
                         $sourceLocation->path(),
                         $sourceLocation->line(),
@@ -157,7 +159,6 @@ class Agent
                     );
                     break;
                 case Breakpoint::ACTION_LOG:
-                    $this->invalidateOpcache($breakpoint);
                     stackdriver_debugger_add_logpoint(
                         $sourceLocation->path(),
                         $sourceLocation->line(),
@@ -263,15 +264,6 @@ class Agent
             ? self::DEFAULT_APP_ENGINE_LOG_NAME
             : self::DEFAULT_LOGPOINT_LOG_NAME;
         return LoggingClient::psrBatchLogger($logName);
-    }
-
-    private function invalidateOpcache($breakpoint)
-    {
-        if (!extension_loaded('Zend OPcache') || ini_get('opcache.enable') != '1') {
-            return false;
-        }
-
-        return opcache_invalidate($this->sourceRoot . DIRECTORY_SEPARATOR . $breakpoint->location()->path(), true);
     }
 
     private function shouldStartDaemon()

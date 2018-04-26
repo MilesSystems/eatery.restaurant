@@ -19,7 +19,7 @@
 namespace Google\Cloud\Dlp\V2;
 
 /**
- * The DLP API is a service that allows clients
+ * The Cloud Data Loss Prevention (DLP) API is a service that allows clients
  * to detect the presence of Personally Identifiable Information (PII) and other
  * privacy-sensitive data in user-supplied, unstructured data streams, like text
  * blocks or images.
@@ -87,7 +87,7 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Re-identify content that has been de-identified.
+     * Re-identifies content that has been de-identified.
      * @param \Google\Cloud\Dlp\V2\ReidentifyContentRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -101,7 +101,9 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Returns sensitive information types DLP supports.
+     * Returns a list of the sensitive information types that the DLP API
+     * supports. For more information, see [Listing supported predefined
+     * infoTypes](/dlp/docs/listing-infotypes).
      * @param \Google\Cloud\Dlp\V2\ListInfoTypesRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -115,7 +117,7 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Creates an inspect template for re-using frequently used configuration
+     * Creates an InspectTemplate for re-using frequently used configuration
      * for inspecting content, images, and storage.
      * @param \Google\Cloud\Dlp\V2\CreateInspectTemplateRequest $argument input argument
      * @param array $metadata metadata
@@ -130,7 +132,7 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Updates the inspect template.
+     * Updates the InspectTemplate.
      * @param \Google\Cloud\Dlp\V2\UpdateInspectTemplateRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -144,7 +146,7 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Gets an inspect template.
+     * Gets an InspectTemplate.
      * @param \Google\Cloud\Dlp\V2\GetInspectTemplateRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -158,7 +160,7 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Lists inspect templates.
+     * Lists InspectTemplates.
      * @param \Google\Cloud\Dlp\V2\ListInspectTemplatesRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -172,7 +174,7 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Deletes inspect templates.
+     * Deletes an InspectTemplate.
      * @param \Google\Cloud\Dlp\V2\DeleteInspectTemplateRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -186,8 +188,8 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Creates an Deidentify template for re-using frequently used configuration
-     * for Deidentifying content, images, and storage.
+     * Creates a DeidentifyTemplate for re-using frequently used configuration
+     * for de-identifying content, images, and storage.
      * @param \Google\Cloud\Dlp\V2\CreateDeidentifyTemplateRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -201,7 +203,7 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Updates the inspect template.
+     * Updates the DeidentifyTemplate.
      * @param \Google\Cloud\Dlp\V2\UpdateDeidentifyTemplateRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -215,7 +217,7 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Gets an inspect template.
+     * Gets a DeidentifyTemplate.
      * @param \Google\Cloud\Dlp\V2\GetDeidentifyTemplateRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -229,7 +231,7 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Lists inspect templates.
+     * Lists DeidentifyTemplates.
      * @param \Google\Cloud\Dlp\V2\ListDeidentifyTemplatesRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -243,7 +245,7 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Deletes inspect templates.
+     * Deletes a DeidentifyTemplate.
      * @param \Google\Cloud\Dlp\V2\DeleteDeidentifyTemplateRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -257,8 +259,8 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Creates a job to run DLP actions such as scanning storage for sensitive
-     * information on a set schedule.
+     * Creates a job trigger to run DLP actions such as scanning storage for
+     * sensitive information on a set schedule.
      * @param \Google\Cloud\Dlp\V2\CreateJobTriggerRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -328,8 +330,8 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Create a new job to inspect storage or calculate risk metrics [How-to
-     * guide](/dlp/docs/compute-risk-analysis).
+     * Creates a new job to inspect storage or calculate risk metrics.
+     * [How-to guide](/dlp/docs/compute-risk-analysis).
      * @param \Google\Cloud\Dlp\V2\CreateDlpJobRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -387,7 +389,7 @@ class DlpServiceGrpcClient extends \Grpc\BaseStub {
     }
 
     /**
-     * Starts asynchronous cancellation on a long-running DlpJob.  The server
+     * Starts asynchronous cancellation on a long-running DlpJob. The server
      * makes a best effort to cancel the DlpJob, but success is not
      * guaranteed.
      * @param \Google\Cloud\Dlp\V2\CancelDlpJobRequest $argument input argument

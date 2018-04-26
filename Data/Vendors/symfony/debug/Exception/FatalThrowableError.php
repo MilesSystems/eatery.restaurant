@@ -12,7 +12,7 @@
 namespace Symfony\Component\Debug\Exception;
 
 /**
- * Fatal Throwable Error.
+ * Fatal Throwable error.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */

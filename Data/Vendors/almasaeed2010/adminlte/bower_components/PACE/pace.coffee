@@ -137,7 +137,7 @@ getFromDOM = (key='options', json=true) ->
   try
     return JSON.parse data
   catch e
-    console?.error "Error parsing inline pace options", e
+    console?.error "error parsing inline pace options", e
 
 class Evented
   on: (event, handler, ctx, once=false) ->

@@ -102,7 +102,7 @@ func main() {
 		if os.IsNotExist(err) {
 			fmt.Printf("%s: File not found.  Creating new file.\n", fname)
 		} else {
-			log.Fatalln("Error reading file:", err)
+			log.Fatalln("error reading file:", err)
 		}
 	}
 
@@ -116,7 +116,7 @@ func main() {
 	// Add an address.
 	addr, err := promptForAddress(os.Stdin)
 	if err != nil {
-		log.Fatalln("Error with address:", err)
+		log.Fatalln("error with address:", err)
 	}
 	book.People = append(book.People, addr)
 	// [END_EXCLUDE]

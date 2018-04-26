@@ -14,7 +14,7 @@ namespace Monolog\Handler\FingersCrossed;
 use Monolog\Logger;
 
 /**
- * Error level based activation strategy.
+ * error level based activation strategy.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */

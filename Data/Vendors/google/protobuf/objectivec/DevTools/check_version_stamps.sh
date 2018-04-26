@@ -12,7 +12,7 @@ readonly ScriptDir=$(dirname "$(echo $0 | sed -e "s,^\([^/]\),$(pwd)/\1,")")
 readonly ProtoRootDir="${ScriptDir}/../.."
 
 die() {
-    echo "Error: $1"
+    echo "error: $1"
     exit 1
 }
 

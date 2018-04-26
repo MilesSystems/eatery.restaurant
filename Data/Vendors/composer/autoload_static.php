@@ -81,9 +81,11 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
             'Google\\Cloud\\Monitoring\\' => 24,
             'Google\\Cloud\\Logging\\' => 21,
             'Google\\Cloud\\Language\\' => 22,
+            'Google\\Cloud\\Iot\\' => 17,
             'Google\\Cloud\\Firestore\\' => 23,
             'Google\\Cloud\\ErrorReporting\\' => 28,
             'Google\\Cloud\\Dlp\\' => 17,
+            'Google\\Cloud\\Dialogflow\\' => 24,
             'Google\\Cloud\\Debugger\\' => 22,
             'Google\\Cloud\\Datastore\\' => 23,
             'Google\\Cloud\\Dataproc\\' => 22,
@@ -111,7 +113,7 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
             'Controller\\' => 11,
             'Carbon\\Interfaces\\' => 18,
             'Carbon\\Helpers\\' => 15,
-            'Carbon\\Error\\' => 13,
+            'Carbon\\error\\' => 13,
             'Carbon\\' => 7,
         ),
         'A' => 
@@ -127,7 +129,7 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
         ),
         'View\\' => 
         array (
-            0 => __DIR__ . '/../../..' . '/Application/View',
+            0 => __DIR__ . '/../../..' . '/application/view',
         ),
         'Twig\\' => 
         array (
@@ -135,7 +137,7 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
         ),
         'Table\\' => 
         array (
-            0 => __DIR__ . '/../../..' . '/Application/Table',
+            0 => __DIR__ . '/../../..' . '/application/table',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -187,7 +189,7 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
         ),
         'Model\\' => 
         array (
-            0 => __DIR__ . '/../../..' . '/Application/Model',
+            0 => __DIR__ . '/../../..' . '/application/model',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -285,6 +287,10 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
         array (
             0 => __DIR__ . '/..' . '/google/cloud/Language/src',
         ),
+        'Google\\Cloud\\Iot\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Iot/src',
+        ),
         'Google\\Cloud\\Firestore\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/cloud/Firestore/src',
@@ -296,6 +302,10 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
         'Google\\Cloud\\Dlp\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/cloud/Dlp/src',
+        ),
+        'Google\\Cloud\\Dialogflow\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/cloud/Dialogflow/src',
         ),
         'Google\\Cloud\\Debugger\\' => 
         array (
@@ -331,8 +341,8 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
         ),
         'Google\\Cloud\\' => 
         array (
-            0 => __DIR__ . '/..' . '/google/cloud/src',
-            1 => __DIR__ . '/..' . '/google/gax/src/Cloud',
+            0 => __DIR__ . '/..' . '/google/gax/src/Cloud',
+            1 => __DIR__ . '/..' . '/google/cloud/src',
         ),
         'Google\\Auth\\' => 
         array (
@@ -372,7 +382,7 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
         ),
         'Controller\\' => 
         array (
-            0 => __DIR__ . '/../../..' . '/Application/Controller',
+            0 => __DIR__ . '/../../..' . '/application/controller',
         ),
         'Carbon\\Interfaces\\' => 
         array (
@@ -382,7 +392,7 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
         array (
             0 => __DIR__ . '/..' . '/richardtmiles/carbonphp/Helpers',
         ),
-        'Carbon\\Error\\' => 
+        'Carbon\\error\\' =>
         array (
             0 => __DIR__ . '/..' . '/richardtmiles/carbonphp/Error',
         ),
@@ -392,7 +402,7 @@ class ComposerStaticInitaa712040fb9446997fce28caea1536d8
         ),
         'App\\' => 
         array (
-            0 => __DIR__ . '/../../..' . '/Application',
+            0 => __DIR__ . '/../../..' . '/application',
         ),
     );
 

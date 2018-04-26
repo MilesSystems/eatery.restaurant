@@ -186,7 +186,7 @@ function extractStacktrace( e, offset ) {
 	// Support: Safari <=6 only
 	} else if ( e.sourceURL ) {
 
-		// Exclude useless self-reference for generated Error objects
+		// Exclude useless self-reference for generated error objects
 		if ( /qunit.js$/.test( e.sourceURL ) ) {
 			return;
 		}
@@ -200,7 +200,7 @@ function sourceFromStacktrace( offset ) {
 	var error = new Error();
 
 	// Support: Safari <=7 only, IE <=10 - 11 only
-	// Not all browsers generate the `stack` property for `new Error()`, see also #636
+	// Not all browsers generate the `stack` property for `new error()`, see also #636
 	if ( !error.stack ) {
 		try {
 			throw error;
@@ -510,7 +510,7 @@ extend( QUnit, {
 				return;
 			}
 
-			// Throw an Error if start is called more often than stop
+			// Throw an error if start is called more often than stop
 			if ( config.current.semaphore < 0 ) {
 				config.current.semaphore = 0;
 
@@ -1594,11 +1594,11 @@ QUnit.assert = Assert.prototype = {
 			} else if ( expectedType === "string" ) {
 				ok = expected === errorString( actual );
 
-			// Expected is a constructor, maybe an Error constructor
+			// Expected is a constructor, maybe an error constructor
 			} else if ( expectedType === "function" && actual instanceof expected ) {
 				ok = true;
 
-			// Expected is an Error object
+			// Expected is an error object
 			} else if ( expectedType === "object" ) {
 				ok = actual instanceof expected.constructor &&
 					actual.name === expected.name &&
@@ -2048,7 +2048,7 @@ QUnit.dump = ( function() {
 				window: "[Window]",
 				document: "[Document]",
 				error: function( error ) {
-					return "Error(\"" + error.message + "\")";
+					return "error(\"" + error.message + "\")";
 				},
 				unknown: "[Unknown]",
 				"null": "null",
@@ -2084,7 +2084,7 @@ QUnit.dump = ( function() {
 						keys.push( key );
 					}
 
-					// Some properties are not always enumerable on Error objects.
+					// Some properties are not always enumerable on error objects.
 					nonEnumerableProperties = [ "message", "name" ];
 					for ( i in nonEnumerableProperties ) {
 						key = nonEnumerableProperties[ i ];

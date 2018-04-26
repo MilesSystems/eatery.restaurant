@@ -147,7 +147,7 @@ class ElasticSearchHandlerTest extends TestCase
     public function providerTestConnectionErrors()
     {
         return array(
-            array(false, array('RuntimeException', 'Error sending messages to Elasticsearch')),
+            array(false, array('RuntimeException', 'error sending messages to Elasticsearch')),
             array(true, false),
         );
     }

@@ -66,7 +66,7 @@ use JsonSerializable;
  * $key = $datastore->key('Grandparents', 'Barb');
  * $key->pathElement('Parents', 'Joe');
  * $key->pathElement('Person');
- * $key->pathElement('Child', 'Dave'); // Error here.
+ * $key->pathElement('Child', 'Dave'); // error here.
  * ```
  *
  * @see https://cloud.google.com/datastore/reference/rest/v1/Key Key

@@ -69,7 +69,7 @@ public class ProtoBench {
   }
 
   /**
-   * Runs a single test. Error messages are displayed to stderr, and the return value
+   * Runs a single test. error messages are displayed to stderr, and the return value
    * indicates general success/failure.
    */
   public static boolean runTest(String type, String file) {
@@ -146,7 +146,7 @@ public class ProtoBench {
       System.out.println();
       return true;
     } catch (Exception e) {
-      System.err.println("Error: " + e.getMessage());
+      System.err.println("error: " + e.getMessage());
       System.err.println("Detailed exception information:");
       e.printStackTrace(System.err);
       return false;

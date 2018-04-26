@@ -67,9 +67,9 @@ public final class MessageNanoPrinter {
         try {
             print(null, message, new StringBuffer(), buf);
         } catch (IllegalAccessException e) {
-            return "Error printing proto: " + e.getMessage();
+            return "error printing proto: " + e.getMessage();
         } catch (InvocationTargetException e) {
-            return "Error printing proto: " + e.getMessage();
+            return "error printing proto: " + e.getMessage();
         }
         return buf.toString();
     }

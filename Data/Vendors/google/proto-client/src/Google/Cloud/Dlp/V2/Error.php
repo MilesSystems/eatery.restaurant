@@ -13,7 +13,7 @@ use Google\Protobuf\Internal\GPBUtil;
  * the results of an unsuccessful activation of the JobTrigger.
  * Output only field.
  *
- * Generated from protobuf message <code>google.privacy.dlp.v2.Error</code>
+ * Generated from protobuf message <code>google.privacy.dlp.v2.error</code>
  */
 class Error extends \Google\Protobuf\Internal\Message
 {

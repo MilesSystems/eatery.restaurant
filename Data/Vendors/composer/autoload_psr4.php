@@ -7,9 +7,9 @@ $baseDir = dirname(dirname($vendorDir));
 
 return array(
     'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
-    'View\\' => array($baseDir . '/Application/View'),
+    'View\\' => array($baseDir . '/application/view'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
-    'Table\\' => array($baseDir . '/Application/Table'),
+    'Table\\' => array($baseDir . '/application/table'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
     'Symfony\\Component\\Filesystem\\' => array($vendorDir . '/symfony/filesystem'),
@@ -22,7 +22,7 @@ return array(
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
-    'Model\\' => array($baseDir . '/Application/Model'),
+    'Model\\' => array($baseDir . '/application/model'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
@@ -47,9 +47,11 @@ return array(
     'Google\\Cloud\\Monitoring\\' => array($vendorDir . '/google/cloud/Monitoring/src'),
     'Google\\Cloud\\Logging\\' => array($vendorDir . '/google/cloud/Logging/src'),
     'Google\\Cloud\\Language\\' => array($vendorDir . '/google/cloud/Language/src'),
+    'Google\\Cloud\\Iot\\' => array($vendorDir . '/google/cloud/Iot/src'),
     'Google\\Cloud\\Firestore\\' => array($vendorDir . '/google/cloud/Firestore/src'),
     'Google\\Cloud\\ErrorReporting\\' => array($vendorDir . '/google/cloud/ErrorReporting/src'),
     'Google\\Cloud\\Dlp\\' => array($vendorDir . '/google/cloud/Dlp/src'),
+    'Google\\Cloud\\Dialogflow\\' => array($vendorDir . '/google/cloud/Dialogflow/src'),
     'Google\\Cloud\\Debugger\\' => array($vendorDir . '/google/cloud/Debugger/src'),
     'Google\\Cloud\\Datastore\\' => array($vendorDir . '/google/cloud/Datastore/src'),
     'Google\\Cloud\\Dataproc\\' => array($vendorDir . '/google/cloud/Dataproc/src'),
@@ -58,11 +60,7 @@ return array(
     'Google\\Cloud\\Bigtable\\' => array($vendorDir . '/google/cloud/Bigtable/src'),
     'Google\\Cloud\\BigQuery\\DataTransfer\\' => array($vendorDir . '/google/cloud/BigQueryDataTransfer/src'),
     'Google\\Cloud\\BigQuery\\' => array($vendorDir . '/google/cloud/BigQuery/src'),
-<<<<<<< HEAD
-    'Google\\Cloud\\' => array($vendorDir . '/google/cloud/src', $vendorDir . '/google/gax/src/Cloud'),
-=======
     'Google\\Cloud\\' => array($vendorDir . '/google/gax/src/Cloud', $vendorDir . '/google/cloud/src'),
->>>>>>> 5a50d70ff35c37d473decaf542cf34f01c638066
     'Google\\Auth\\' => array($vendorDir . '/google/auth/src'),
     'Google\\Api\\' => array($vendorDir . '/google/gax/src/Api'),
     'Google\\ApiCore\\' => array($vendorDir . '/google/gax/src/ApiCore'),
@@ -72,10 +70,10 @@ return array(
     'GPBMetadata\\' => array($vendorDir . '/google/proto-client/src/GPBMetadata'),
     'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     'Facebook\\' => array($vendorDir . '/facebook/graph-sdk/src/Facebook'),
-    'Controller\\' => array($baseDir . '/Application/Controller'),
+    'Controller\\' => array($baseDir . '/application/controller'),
     'Carbon\\Interfaces\\' => array($vendorDir . '/richardtmiles/carbonphp/Interfaces'),
     'Carbon\\Helpers\\' => array($vendorDir . '/richardtmiles/carbonphp/Helpers'),
-    'Carbon\\Error\\' => array($vendorDir . '/richardtmiles/carbonphp/Error'),
+    'Carbon\\error\\' => array($vendorDir . '/richardtmiles/carbonphp/error'),
     'Carbon\\' => array($vendorDir . '/richardtmiles/carbonphp/Structure'),
-    'App\\' => array($baseDir . '/Application'),
+    'App\\' => array($baseDir . '/application'),
 );

@@ -176,7 +176,7 @@ class ErrorHandler
         if ($lastError && in_array($lastError['type'], self::$fatalErrors, true)) {
             $this->logger->log(
                 $this->fatalLevel === null ? LogLevel::ALERT : $this->fatalLevel,
-                'Fatal Error ('.self::codeToString($lastError['type']).'): '.$lastError['message'],
+                'Fatal error ('.self::codeToString($lastError['type']).'): '.$lastError['message'],
                 array('code' => $lastError['type'], 'message' => $lastError['message'], 'file' => $lastError['file'], 'line' => $lastError['line'])
             );
 

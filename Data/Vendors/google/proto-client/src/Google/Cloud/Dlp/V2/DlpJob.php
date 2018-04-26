@@ -61,7 +61,7 @@ class DlpJob extends \Google\Protobuf\Internal\Message
     /**
      * A stream of errors encountered running the job.
      *
-     * Generated from protobuf field <code>repeated .google.privacy.dlp.v2.Error errors = 11;</code>
+     * Generated from protobuf field <code>repeated .google.privacy.dlp.v2.error errors = 11;</code>
      */
     private $errors;
     protected $details;
@@ -310,7 +310,7 @@ class DlpJob extends \Google\Protobuf\Internal\Message
     /**
      * A stream of errors encountered running the job.
      *
-     * Generated from protobuf field <code>repeated .google.privacy.dlp.v2.Error errors = 11;</code>
+     * Generated from protobuf field <code>repeated .google.privacy.dlp.v2.error errors = 11;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getErrors()
@@ -321,7 +321,7 @@ class DlpJob extends \Google\Protobuf\Internal\Message
     /**
      * A stream of errors encountered running the job.
      *
-     * Generated from protobuf field <code>repeated .google.privacy.dlp.v2.Error errors = 11;</code>
+     * Generated from protobuf field <code>repeated .google.privacy.dlp.v2.error errors = 11;</code>
      * @param \Google\Cloud\Dlp\V2\Error[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */

@@ -70,7 +70,7 @@ class RequestException extends TransferException
     ) {
         if (!$response) {
             return new self(
-                'Error completing request',
+                'error completing request',
                 $request,
                 null,
                 $previous,
@@ -93,7 +93,7 @@ class RequestException extends TransferException
         $uri = $request->getUri();
         $uri = static::obfuscateUri($uri);
 
-        // Client Error: `GET /` resulted in a `404 Not Found` response:
+        // Client error: `GET /` resulted in a `404 Not Found` response:
         // <html> ... (truncated)
         $message = sprintf(
             '%s: `%s %s` resulted in a `%s %s` response',

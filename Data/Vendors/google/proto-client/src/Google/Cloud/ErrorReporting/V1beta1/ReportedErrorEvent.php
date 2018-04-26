@@ -9,7 +9,7 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * An error event which is reported to the Error Reporting system.
+ * An error event which is reported to the error Reporting system.
  *
  * Generated from protobuf message <code>google.devtools.clouderrorreporting.v1beta1.ReportedErrorEvent</code>
  */
@@ -18,7 +18,7 @@ class ReportedErrorEvent extends \Google\Protobuf\Internal\Message
     /**
      * [Optional] Time when the event occurred.
      * If not provided, the time when the event was received by the
-     * Error Reporting system will be used.
+     * error Reporting system will be used.
      *
      * Generated from protobuf field <code>.google.protobuf.Timestamp event_time = 1;</code>
      */
@@ -53,7 +53,7 @@ class ReportedErrorEvent extends \Google\Protobuf\Internal\Message
     /**
      * [Optional] Time when the event occurred.
      * If not provided, the time when the event was received by the
-     * Error Reporting system will be used.
+     * error Reporting system will be used.
      *
      * Generated from protobuf field <code>.google.protobuf.Timestamp event_time = 1;</code>
      * @return \Google\Protobuf\Timestamp
@@ -66,7 +66,7 @@ class ReportedErrorEvent extends \Google\Protobuf\Internal\Message
     /**
      * [Optional] Time when the event occurred.
      * If not provided, the time when the event was received by the
-     * Error Reporting system will be used.
+     * error Reporting system will be used.
      *
      * Generated from protobuf field <code>.google.protobuf.Timestamp event_time = 1;</code>
      * @param \Google\Protobuf\Timestamp $var

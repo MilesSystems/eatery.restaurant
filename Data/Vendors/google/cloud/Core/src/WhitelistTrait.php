@@ -32,7 +32,7 @@ trait WhitelistTrait
      */
     private function modifyWhitelistedError(NotFoundException $e)
     {
-        $e->setMessage('NOTE: Error may be due to Whitelist Restriction. ' . $e->getMessage());
+        $e->setMessage('NOTE: error may be due to Whitelist Restriction. ' . $e->getMessage());
 
         return $e;
     }

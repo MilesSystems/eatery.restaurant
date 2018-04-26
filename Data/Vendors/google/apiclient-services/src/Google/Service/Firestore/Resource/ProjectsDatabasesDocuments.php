@@ -161,10 +161,10 @@ class Google_Service_Firestore_Resource_ProjectsDatabasesDocuments extends Googl
    * Document.create_time, or Document.update_time set.
    *
    * Requests with `show_missing` may not specify `where` or `order_by`.
-   * @opt_param string mask.fieldPaths The list of field paths in the mask. See
-   * Document.fields for a field path syntax reference.
    * @opt_param string pageToken The `next_page_token` value returned from a
    * previous List request, if any.
+   * @opt_param string mask.fieldPaths The list of field paths in the mask. See
+   * Document.fields for a field path syntax reference.
    * @opt_param int pageSize The maximum number of documents to return.
    * @opt_param string transaction Reads documents in a transaction.
    * @return Google_Service_Firestore_ListDocumentsResponse
@@ -216,14 +216,14 @@ class Google_Service_Firestore_Resource_ProjectsDatabasesDocuments extends Googl
    * @param Google_Service_Firestore_Document $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool currentDocument.exists When set to `true`, the target
-   * document must exist. When set to `false`, the target document must not exist.
    * @opt_param string updateMask.fieldPaths The list of field paths in the mask.
    * See Document.fields for a field path syntax reference.
    * @opt_param string mask.fieldPaths The list of field paths in the mask. See
    * Document.fields for a field path syntax reference.
    * @opt_param string currentDocument.updateTime When set, the target document
    * must exist and have been last updated at that time.
+   * @opt_param bool currentDocument.exists When set to `true`, the target
+   * document must exist. When set to `false`, the target document must not exist.
    * @return Google_Service_Firestore_Document
    */
   public function patch($name, Google_Service_Firestore_Document $postBody, $optParams = array())

@@ -35,7 +35,7 @@ class Code
      * an error space that is not known in this address space.  Also
      * errors raised by APIs that do not return enough error information
      * may be converted to this error.
-     * HTTP Mapping: 500 Internal Server Error
+     * HTTP Mapping: 500 Internal Server error
      *
      * Generated from protobuf enum <code>UNKNOWN = 2;</code>
      */
@@ -173,7 +173,7 @@ class Code
      * Internal errors.  This means that some invariants expected by the
      * underlying system have been broken.  This error code is reserved
      * for serious errors.
-     * HTTP Mapping: 500 Internal Server Error
+     * HTTP Mapping: 500 Internal Server error
      *
      * Generated from protobuf enum <code>INTERNAL = 13;</code>
      */
@@ -191,7 +191,7 @@ class Code
     const UNAVAILABLE = 14;
     /**
      * Unrecoverable data loss or corruption.
-     * HTTP Mapping: 500 Internal Server Error
+     * HTTP Mapping: 500 Internal Server error
      *
      * Generated from protobuf enum <code>DATA_LOSS = 15;</code>
      */

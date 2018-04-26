@@ -48,8 +48,8 @@
         "monolog/monolog": "~1",
         "psr/http-message": "1.0.*",
         "ramsey/uuid": "~3",
-        "google/gax": "^0.30",
-        "google/proto-client": "^0.34"
+        "google/gax": "^0.31.1",
+        "google/proto-client": "^0.37"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8|^5.0",
@@ -65,34 +65,35 @@
         "opis/closure": "^3.0"
     },
     "replace": {
-        "google/cloud-bigquery": "1.1.0",
-        "google/cloud-bigquerydatatransfer": "0.3.1",
-        "google/cloud-bigtable": "0.3.0",
-        "google/cloud-container": "0.3.0",
-        "google/cloud-core": "1.19.0",
-        "google/cloud-dataproc": "0.3.0",
-        "google/cloud-datastore": "1.4.0",
-        "google/cloud-dlp": "0.7.0",
-        "google/cloud-error-reporting": "0.9.1",
-        "google/cloud-firestore": "0.6.0",
-        "google/cloud-language": "0.13.0",
-        "google/cloud-logging": "1.10.0",
-        "google/cloud-monitoring": "0.9.0",
-        "google/cloud-oslogin": "0.3.0",
-        "google/cloud-pubsub": "1.1.0",
-        "google/cloud-spanner": "1.3.0",
-        "google/cloud-speech": "0.12.0",
+        "google/cloud-bigquery": "1.2.0",
+        "google/cloud-bigquerydatatransfer": "0.4.0",
+        "google/cloud-bigtable": "0.3.3",
+        "google/cloud-container": "0.3.3",
+        "google/cloud-core": "1.19.2",
+        "google/cloud-dataproc": "0.3.3",
+        "google/cloud-datastore": "1.4.2",
+        "google/cloud-debugger": "0.7.0",
+        "google/cloud-dialogflow": "0.1.0",
+        "google/cloud-dlp": "0.8.0",
+        "google/cloud-error-reporting": "0.9.4",
+        "google/cloud-firestore": "0.8.1",
+        "google/cloud-iot": "0.1.2",
+        "google/cloud-language": "0.13.3",
+        "google/cloud-logging": "1.10.3",
+        "google/cloud-monitoring": "0.9.3",
+        "google/cloud-oslogin": "0.3.3",
+        "google/cloud-pubsub": "1.1.3",
+        "google/cloud-spanner": "1.3.3",
+        "google/cloud-speech": "0.12.3",
         "google/cloud-storage": "1.4.0",
-        "google/cloud-trace": "0.7.0",
+        "google/cloud-trace": "0.7.3",
         "google/cloud-translate": "1.2.0",
-        "google/cloud-videointelligence": "0.10.0",
-        "google/cloud-vision": "0.11.0",
-        "google/cloud-debugger": "0.6.0"
+        "google/cloud-videointelligence": "0.10.3",
+        "google/cloud-vision": "0.11.3"
     },
     "suggest": {
         "opis/closure": "May be used to serialize closures to process jobs in the batch daemon. Please require version ^3.",
-        "phpseclib/phpseclib": "May be used in place of OpenSSL for creating signed Cloud Storage URLs. Please require version ^2.",
-        "google/cloud-bigquerydatatransfer": "Client library for the BigQuery Data Transfer API."
+        "phpseclib/phpseclib": "May be used in place of OpenSSL for creating signed Cloud Storage URLs. Please require version ^2."
     },
     "autoload": {
         "psr-4": {
@@ -105,9 +106,11 @@
             "Google\\Cloud\\Dataproc\\": "Dataproc/src",
             "Google\\Cloud\\Datastore\\": "Datastore/src",
             "Google\\Cloud\\Debugger\\": "Debugger/src",
+            "Google\\Cloud\\Dialogflow\\": "Dialogflow/src",
             "Google\\Cloud\\Dlp\\": "Dlp/src",
             "Google\\Cloud\\ErrorReporting\\": "ErrorReporting/src",
             "Google\\Cloud\\Firestore\\": "Firestore/src",
+            "Google\\Cloud\\Iot\\": "Iot/src",
             "Google\\Cloud\\Language\\": "Language/src",
             "Google\\Cloud\\Logging\\": "Logging/src",
             "Google\\Cloud\\Monitoring\\": "Monitoring/src",
@@ -134,9 +137,11 @@
             "Google\\Cloud\\Dataproc\\Tests\\": "Dataproc/tests",
             "Google\\Cloud\\Datastore\\Tests\\": "Datastore/tests",
             "Google\\Cloud\\Debugger\\Tests\\": "Debugger/tests",
+            "Google\\Cloud\\Dialogflow\\Tests\\": "Dialogflow/tests",
             "Google\\Cloud\\Dlp\\Tests\\": "Dlp/tests",
             "Google\\Cloud\\ErrorReporting\\Tests\\": "ErrorReporting/tests",
             "Google\\Cloud\\Firestore\\Tests\\": "Firestore/tests",
+            "Google\\Cloud\\Iot\\Tests\\": "Iot/tests",
             "Google\\Cloud\\Language\\Tests\\": "Language/tests",
             "Google\\Cloud\\Logging\\Tests\\": "Logging/tests",
             "Google\\Cloud\\Monitoring\\Tests\\": "Monitoring/tests",
@@ -152,7 +157,9 @@
         }
     },
     "scripts": {
-        "google-cloud": "dev/google-cloud"
+        "google-cloud": "dev/google-cloud",
+        "style": "dev/sh/style",
+        "tests": "dev/sh/tests"
     },
     "bin": [
         "Core/bin/google-cloud-batch",
@@ -161,7 +168,7 @@
     "extra": {
         "component": {
             "id": "google-cloud",
-            "target": "git@github.com:GoogleCloudPlatform/google-cloud-php.git",
+            "target": "GoogleCloudPlatform/google-cloud-php.git",
             "path": "src",
             "entry": [
                 "Version.php",

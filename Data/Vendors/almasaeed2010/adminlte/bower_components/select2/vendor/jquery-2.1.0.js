@@ -530,7 +530,7 @@
     });
 
 // Populate the class2type map
-    jQuery.each("Boolean Number String Function Array Date RegExp Object Error".split(" "), function(i, name) {
+    jQuery.each("Boolean Number String Function Array Date RegExp Object error".split(" "), function(i, name) {
         class2type[ "[object " + name + "]" ] = name.toLowerCase();
     });
 
@@ -8178,7 +8178,7 @@
                 jqXHR.status = status;
                 jqXHR.statusText = ( nativeStatusText || statusText ) + "";
 
-                // Success/Error
+                // Success/error
                 if ( isSuccess ) {
                     deferred.resolveWith( callbackContext, [ success, statusText, jqXHR ] );
                 } else {
@@ -8716,7 +8716,8 @@
 // data: string of html
 // context (optional): If specified, the fragment will be created in this context, defaults to document
 // keepScripts (optional): If true, will include scripts passed in the html string
-    jQuery.parseHTML = function( data, context, keepScripts ) {
+
+  jQuery.parseHTML = function( data, context, keepScripts ) {
         if ( !data || typeof data !== "string" ) {
             return null;
         }

@@ -124,7 +124,7 @@ function readBuffer(bytes) {
         return onEof(totalRead)
       } else if (e.code == 'EAGAIN') {
       } else {
-        throw "conformance_nodejs: Error reading from stdin." + e;
+        throw "conformance_nodejs: error reading from stdin." + e;
       }
     }
 

@@ -34,7 +34,7 @@ class ErrorListenerTest extends TestCase
         $logger
             ->expects($this->once())
             ->method('error')
-            ->with('Error thrown while running command "{command}". Message: "{message}"', array('error' => $error, 'command' => 'test:run --foo=baz buzz', 'message' => 'An error occurred'))
+            ->with('error thrown while running command "{command}". Message: "{message}"', array('error' => $error, 'command' => 'test:run --foo=baz buzz', 'message' => 'An error occurred'))
         ;
 
         $listener = new ErrorListener($logger);

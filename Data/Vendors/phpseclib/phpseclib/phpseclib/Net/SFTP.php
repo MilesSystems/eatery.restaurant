@@ -183,7 +183,7 @@ class SFTP extends SSH2
     var $packet_log = array();
 
     /**
-     * Error information
+     * error information
      *
      * @see self::getSFTPErrors()
      * @see self::getLastSFTPError()

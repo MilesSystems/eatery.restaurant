@@ -43,7 +43,7 @@ class WhitelistTraitTest extends TestCase
         $this->assertInstanceOf(NotFoundException::class, $res);
         $this->assertEquals(
             $res->getMessage(),
-            'NOTE: Error may be due to Whitelist Restriction. hello world'
+            'NOTE: error may be due to Whitelist Restriction. hello world'
         );
     }
 }

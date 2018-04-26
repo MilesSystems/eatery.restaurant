@@ -54,7 +54,7 @@ class LogSeverity
      */
     const WARNING = 400;
     /**
-     * (500) Error events are likely to cause problems.
+     * (500) error events are likely to cause problems.
      *
      * Generated from protobuf enum <code>ERROR = 500;</code>
      */

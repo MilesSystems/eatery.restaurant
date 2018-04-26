@@ -1183,7 +1183,7 @@ class ApplicationTest extends TestCase
 
         try {
             $tester->run(array('command' => 'dym'));
-            $this->fail('Error expected.');
+            $this->fail('error expected.');
         } catch (\Error $e) {
             $this->assertSame('dymerr', $e->getMessage());
         }
@@ -1306,7 +1306,7 @@ class ApplicationTest extends TestCase
 
         $tester = new ApplicationTester($application);
         $tester->run(array('command' => 'dym'));
-        $this->assertContains('before.dym.error.after.', $tester->getDisplay(), 'The PHP Error did not dispached events');
+        $this->assertContains('before.dym.error.after.', $tester->getDisplay(), 'The PHP error did not dispached events');
     }
 
     /**
@@ -1326,7 +1326,7 @@ class ApplicationTest extends TestCase
 
         $tester = new ApplicationTester($application);
         $tester->run(array('command' => 'dym'));
-        $this->assertContains('before.dym.error.after.', $tester->getDisplay(), 'The PHP Error did not dispached events');
+        $this->assertContains('before.dym.error.after.', $tester->getDisplay(), 'The PHP error did not dispached events');
     }
 
     /**

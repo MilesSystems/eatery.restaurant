@@ -71,11 +71,11 @@ class ProcessTest extends TestCase
         if ('\\' === DIRECTORY_SEPARATOR) {
             $this->markTestSkipped('This test is transient on Windows');
         }
-        @trigger_error('Test Error', E_USER_NOTICE);
+        @trigger_error('Test error', E_USER_NOTICE);
         $process = $this->getProcessForCode('sleep(3)');
         $process->run();
         $actualError = error_get_last();
-        $this->assertEquals('Test Error', $actualError['message']);
+        $this->assertEquals('Test error', $actualError['message']);
         $this->assertEquals(E_USER_NOTICE, $actualError['type']);
     }
 

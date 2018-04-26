@@ -48,7 +48,7 @@ goog.require('jspb.BinaryWriter');
  */
 function assertFails(func) {
   var e = assertThrows(func);
-  //assertNotNull(e.toString().match(/Error/));
+  //assertNotNull(e.toString().match(/error/));
 }
 
 

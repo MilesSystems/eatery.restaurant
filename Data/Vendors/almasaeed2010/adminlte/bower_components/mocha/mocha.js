@@ -2689,9 +2689,9 @@ function HTML(runner, root) {
         str = test.err.message + '\n' + str;
       }
 
-      // <=IE7 stringifies to [Object Error]. Since it can be overloaded, we
+      // <=IE7 stringifies to [Object error]. Since it can be overloaded, we
       // check for the result of the stringifying.
-      if ('[object Error]' == str) str = test.err.message;
+      if ('[object error]' == str) str = test.err.message;
 
       // Safari doesn't give you a stack. Let's at least provide a source line.
       if (!test.err.stack && test.err.sourceURL && test.err.line !== undefined) {
@@ -4317,8 +4317,8 @@ Runnable.prototype.run = function(fn){
   if (this.async) {
     try {
       this.fn.call(ctx, function(err){
-        if (err instanceof Error || toString.call(err) === "[object Error]") return done(err);
-        if (null != err) return done(new Error('done() invoked with non-Error: ' + err));
+        if (err instanceof Error || toString.call(err) === "[object error]") return done(err);
+        if (null != err) return done(new Error('done() invoked with non-error: ' + err));
         done();
       });
     } catch (err) {
@@ -4544,7 +4544,7 @@ Runner.prototype.fail = function(test, err){
   test.state = 'failed';
 
   if ('string' == typeof err) {
-    err = new Error('the string "' + err + '" was thrown, throw an Error :)');
+    err = new Error('the string "' + err + '" was thrown, throw an error :)');
   }
 
   this.emit('fail', test, err);
@@ -5753,7 +5753,7 @@ Mocha.Runner.immediately = function(callback) {
 /**
  * Function to allow assertion libraries to throw errors directly into mocha.
  * This is useful when running tests in a browser because window.onerror will
- * only receive the 'message' attribute of the Error.
+ * only receive the 'message' attribute of the error.
  */
 mocha.throwError = function(err) {
   Mocha.utils.forEach(uncaughtExceptionHandlers, function (fn) {
