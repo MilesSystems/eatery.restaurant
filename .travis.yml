@@ -56,5 +56,5 @@ before_script:
 
 script:
   # PHP tests
-  - data/vendors/bin/phpunit --bootstrap data/vendors/autoload.php --testdox tests
+  - data/vendors/bin/phpunit --configuration phpunit.xml --coverage-text
 
