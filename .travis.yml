@@ -63,18 +63,10 @@ before_script:
   # show some versions and env information
   - php --version
   - composer --version
-  - |
-    if [ $TASK_TESTS_PHP == 1 ]; then
-      php -r "echo INTL_ICU_VERSION . \"\n\";"
-      php -r "echo INTL_ICU_DATA_VERSION . \"\n\";"
-      psql --version
-      mysql --version
-    fi
+  - mysql --version
+
 
 
 script:
   # PHP tests
-  - |
-    if [ $TASK_TESTS_PHP == 1 ]; then
-      vendor/bin/phpunit --verbose $PHPUNIT_FLAGS --exclude-group mssql,oci,wincache,xcache,zenddata,cubrid
-    fi
+  - data/vendors/bin/phpunit --verbose $PHPUNIT_FLAGS --exclude-group mssql,oci,wincache,xcache,zenddata,cubrid
