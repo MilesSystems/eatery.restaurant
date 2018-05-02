@@ -56,5 +56,6 @@ before_script:
 
 script:
   # PHP tests
-  - data/vendors/bin/phpunit --configuration phpunit.xml --coverage-text
+  - data/vendors/bin/phpunit --configuration phpunit.xml --testdox tests
+
 
