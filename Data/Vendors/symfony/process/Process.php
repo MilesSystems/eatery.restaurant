@@ -1615,7 +1615,7 @@ class Process implements \IteratorAggregate
             }
             if (!$ok) {
                 if ($throwException) {
-                    throw new RuntimeException(sprintf('error while sending signal `%s`.', $signal));
+                    throw new RuntimeException(sprintf('Error while sending signal `%s`.', $signal));
                 }
 
                 return false;

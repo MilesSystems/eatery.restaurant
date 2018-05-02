@@ -27,7 +27,7 @@ use Google\Cloud\Core\Testing\System\SystemTestCase;
  */
 class WhitelistTest extends SystemTestCase
 {
-    const MESSAGE = 'NOTE: error may be due to Whitelist Restriction.';
+    const MESSAGE = 'NOTE: Error may be due to Whitelist Restriction.';
     const TESTING_PREFIX = 'gcloud_whitelist_testing_';
 
     private $keyFilePath;

@@ -8,6 +8,7 @@ $baseDir = dirname(dirname($vendorDir));
 return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Rize\\UriTemplate' => array($vendorDir . '/rize/uri-template/src'),
+    'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'Mustache' => array($vendorDir . '/mustache/mustache/src'),
     'Google_Service_' => array($vendorDir . '/google/apiclient-services/src'),
     'Google_' => array($vendorDir . '/google/apiclient/src'),

@@ -13,40 +13,76 @@ use Carbon\Error\PublicAlert;
 use Model\Helpers\GlobalMap;
 use Table\Cart;
 use Table\Items;
+use Table\Notifications;
 use Table\Order;
 
 class Customer extends GlobalMap
 {
 
+    public function completeOrder($orderId, $tip) {
+
+       self::execute('UPDATE RootPrerogative.carbon_orders SET order_tip = ? and order_total = order_total + ? and order_finish = ? WHERE order_id = ?',
+           $tip,
+           $tip,
+           date('Y-m-d H:i:s'),
+           $orderId
+           );
+
+        startApplication('viewCheck');
+
+        return false;
+    }
+
+
+
     /**
      * @return null
      * @throws PublicAlert
      */
-    public function refill($tableNumber) {
-
-        global $json;
-
-        $staff = self::fetch(' AND user_tables IS NOT NULL');
-
-        if (empty($staff)) {
-            throw new PublicAlert('Sorry, an error Has Occured');
-        }
+    public function refill() {
 
 
-        if (!$staff[0] ?? false) {
-            $staff['user_tables'] = json_decode($staff['user_tables']);
-        } else {
-            foreach ($staff as $key => $employee) {
-                // TODO - implement
-            }
-        }
+        $staff = self::fetch('SELECT user_id FROM RootPrerogative.carbon_users JOIN RootPrerogative.carbon_waiter_tables ON userID = user_id AND tableNumber = ?',
+            $_SESSION['table_number']);
 
-        $staff['user_tables'] = json_decode($staff['user_tables']);
+        Notifications::Post([
+            'text' => 'A waiter is on the way!',
+            'user_session' => session_id()
+        ]);
+
+
 
         self::sendUpdate(session_id(), 'notifications/');
 
-        return null;
+        startApplication(true);
+        return false;
     }
+
+
+
+
+    public function help() {
+
+        global $json;
+
+        $staff = self::fetch('SELECT user_id FROM RootPrerogative.carbon_users JOIN RootPrerogative.carbon_waiter_tables ON userID = user_id AND tableNumber = ?',
+            $_SESSION['table_number']);
+
+        Notifications::Post([
+            'text' => 'A waiter is on the way!',
+            'user_session' => session_id()
+        ]);
+
+        self::sendUpdate(session_id(), 'notifications/');
+
+        startApplication(true);
+
+        return false;
+    }
+
+
+
+
 
 
     public function setTable($id) {
@@ -55,6 +91,9 @@ class Customer extends GlobalMap
             $id,
             session_id());
 
+        $_SESSION['table_number'] = $id;
+
+        startApplication(true);
     }
 
     public function cart() {

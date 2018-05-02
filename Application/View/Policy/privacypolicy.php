@@ -28,7 +28,11 @@
                 <h1>We are committed to student success, developing leaders, <br>
                     and encouraging lifelong wellness.</h1>
 
-                <h2>Stats Coach </h2> ("us", "we", or "our") operates https://Stats.Coach (the "Site"). This page informs you of our policies regarding the
+
+                <h2>In development, denoted by a blue box box which will appear on every page you've logged into, we have the right to all
+                    information you provide to this website directly or indirectly. </h2>
+
+                <h2>Stats Coach </h2> ("us", "we", or "our") operates https://rootPrerogative.com (the "Site"). This page informs you of our policies regarding the
                 collection, use and disclosure of Personal Information we receive from users of the Site.
                 We use your Personal Information only for providing and improving the Site. By using the Site, you agree to the collection and use of
                 information in accordance with this policy.

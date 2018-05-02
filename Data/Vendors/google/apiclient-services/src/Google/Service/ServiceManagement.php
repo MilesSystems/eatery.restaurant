@@ -191,10 +191,6 @@ class Google_Service_ServiceManagement extends Google_Service
               'path' => 'v1/services',
               'httpMethod' => 'GET',
               'parameters' => array(
-                'producerProjectId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
                 'consumerId' => array(
                   'location' => 'query',
                   'type' => 'string',
@@ -206,6 +202,10 @@ class Google_Service_ServiceManagement extends Google_Service
                 'pageSize' => array(
                   'location' => 'query',
                   'type' => 'integer',
+                ),
+                'producerProjectId' => array(
+                  'location' => 'query',
+                  'type' => 'string',
                 ),
               ),
             ),'setIamPolicy' => array(

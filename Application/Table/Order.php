@@ -66,7 +66,7 @@ class Order extends Entities implements iTable
             $id);
 
 
-        if (!$array[0] ?? false){
+        if (!($array[0] ?? false)){
             if (empty($array)) {
                 return false;
             }

@@ -8,6 +8,7 @@
 
 namespace App;
 
+use Carbon\Error\PublicAlert;
 use Carbon\Route;
 use Carbon\View;
 
@@ -25,10 +26,10 @@ abstract class App extends Route
     public
     function fullPage() : callable
     {
-        if (SOCKET || AJAX) {
+        /*if (SOCKET || AJAX) {
             print 'Application Full Page Response Was reached';
             exit(1);
-        }
+        }*/
         return catchErrors(function (string $file) {
             return include APP_VIEW . $file;
         });
@@ -58,20 +59,23 @@ abstract class App extends Route
     function events($selector = '')
     {
         return function ($class, $method, $argv) use ($selector) {
-            global $alert, $json;
+            global $json;
 
             if (false === $argv = CM($class, $method, $argv)) {
                 return false;
             }
 
             if (!file_exists(SERVER_ROOT . $file = (APP_VIEW . $class . DS . $method . '.hbs'))) {
-                $alert = 'Mustache Template Not Found ' . $file;
+                PublicAlert::warning('Mustache Template Not Found ' . $file);
+            } else {
+                $json = array_merge($json, [
+                   'Mustache' => DS . $file,
+                ]);
             }
 
             $json = array_merge($json, [
                 'Event' => 'Controller->Model',   // This doesn't do anything.. Its just a mental note when I look at the json's in console (controller->model only)
                 'Model' => $argv,
-                'Mustache' => DS . $file,
                 'Widget' => $selector,
                 'URI' => $_SERVER['REQUEST_URI']
             ]);

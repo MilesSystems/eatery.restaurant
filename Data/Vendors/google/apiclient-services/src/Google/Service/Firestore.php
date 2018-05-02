@@ -227,6 +227,10 @@ class Google_Service_Firestore extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'currentDocument.exists' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
                 'updateMask.fieldPaths' => array(
                   'location' => 'query',
                   'type' => 'string',
@@ -240,10 +244,6 @@ class Google_Service_Firestore extends Google_Service
                 'currentDocument.updateTime' => array(
                   'location' => 'query',
                   'type' => 'string',
-                ),
-                'currentDocument.exists' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
                 ),
               ),
             ),'rollback' => array(

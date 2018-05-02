@@ -12,7 +12,7 @@
 namespace Symfony\Component\Debug\Exception;
 
 /**
- * Data Object that represents a Silenced error.
+ * Data Object that represents a Silenced Error.
  *
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  */

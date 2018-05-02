@@ -35,6 +35,9 @@ class Google_Service_Genomics_Resource_ReferencesBases extends Google_Service_Re
    * @param string $referenceId The ID of the reference.
    * @param array $optParams Optional parameters.
    *
+   * @opt_param int pageSize The maximum number of bases to return in a single
+   * page. If unspecified, defaults to 200Kbp (kilo base pairs). The maximum value
+   * is 10Mbp (mega base pairs).
    * @opt_param string start The start position (0-based) of this query. Defaults
    * to 0.
    * @opt_param string end The end position (0-based, exclusive) of this query.
@@ -42,9 +45,6 @@ class Google_Service_Genomics_Resource_ReferencesBases extends Google_Service_Re
    * @opt_param string pageToken The continuation token, which is used to page
    * through large result sets. To get the next page of results, set this
    * parameter to the value of `nextPageToken` from the previous response.
-   * @opt_param int pageSize The maximum number of bases to return in a single
-   * page. If unspecified, defaults to 200Kbp (kilo base pairs). The maximum value
-   * is 10Mbp (mega base pairs).
    * @return Google_Service_Genomics_ListBasesResponse
    */
   public function listReferencesBases($referenceId, $optParams = array())

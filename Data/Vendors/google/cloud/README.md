@@ -29,11 +29,13 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [Google Stackdriver Monitoring](#google-stackdriver-monitoring-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
+* [Dialogflow API](#dialogflow-api-alpha) (Alpha)
 * [Google Bigtable](#google-bigtable-alpha) (Alpha)
+* [Google Cloud BigQuery Data Transfer](#google-cloud-bigquery-data-transfer-alpha) (Alpha)
+* [Google Cloud IoT](#google-cloud-iot-alpha) (Alpha)
 * [Google Cloud Speech](#google-cloud-speech-alpha) (Alpha)
 * [Google Stackdriver Debugger](#google-stackdriver-debugger-alpha) (Alpha)
 * [Google Stackdriver Trace](#google-stackdriver-trace-alpha) (Alpha)
-* [Google Cloud BigQuery Data Transfer](#google-cloud-bigquery-data-transfer-alpha) (Alpha)
 
 If you need support for other Google APIs, please check out the [Google APIs Client Library for PHP](https://github.com/google/google-api-php-client).
 
@@ -689,29 +691,32 @@ $ composer require google/cloud-vision
 ```php
 require 'vendor/autoload.php';
 
-use Google\Cloud\Dlp\V2beta1\DlpServiceClient;
-use Google\Cloud\Dlp\V2beta1\ContentItem;
-use Google\Cloud\Dlp\V2beta1\InfoType;
-use Google\Cloud\Dlp\V2beta1\InspectConfig;
+use Google\Cloud\Dlp\V2\DlpServiceClient;
+use Google\Cloud\Dlp\V2\ContentItem;
+use Google\Cloud\Dlp\V2\InfoType;
+use Google\Cloud\Dlp\V2\InspectConfig;
 
 $dlpServiceClient = new DlpServiceClient();
-$name = 'EMAIL_ADDRESS';
-$infoTypesElement = new InfoType();
-$infoTypesElement->setName($name);
-$infoTypes = [$infoTypesElement];
-$inspectConfig = new InspectConfig();
-$inspectConfig->setInfoTypes($infoTypes);
-$type = 'text/plain';
-$value = 'My email is example@example.com.';
-$itemsElement = new ContentItem();
-$itemsElement->setType($type);
-$itemsElement->setValue($value);
-$items = [$itemsElement];
+$infoTypesElement = (new InfoType())
+    ->setName('EMAIL_ADDRESS');
+$inspectConfig = (new InspectConfig())
+    ->setInfoTypes([$infoTypesElement]);
+$item = (new ContentItem())
+    ->setValue('My email is example@example.com.');
+$formattedParent = $dlpServiceClient
+    ->projectName('[PROJECT_ID]');
 
-try {
-    $response = $dlpServiceClient->inspectContent($inspectConfig, $items);
-} finally {
-    $dlpServiceClient->close();
+$response = $dlpServiceClient->inspectContent($formattedParent, [
+    'inspectConfig' => $inspectConfig,
+    'item' => $item
+]);
+
+$findings = $response->getResult()
+    ->getFindings();
+
+foreach ($findings as $finding) {
+    print $finding->getInfoType()
+        ->getName() . PHP_EOL;
 }
 ```
 
@@ -826,6 +831,43 @@ try {
 $ composer require google/cloud-monitoring
 ```
 
+## Dialogflow API (Alpha)
+
+- [API Documentation](http://googlecloudplatform.github.io/google-cloud-php/#/docs/latest/dialogflow/readme)
+- [Official Documentation](https://cloud.google.com/dialogflow-enterprise/docs/)
+
+#### Preview
+
+```php
+require 'vendor/autoload.php';
+
+use Google\Cloud\Dialogflow\V2\EntityTypesClient;
+
+$entityTypesClient = new EntityTypesClient();
+$projectId = '[MY_PROJECT_ID]';
+$entityTypeId = '[ENTITY_TYPE_ID]';
+$formattedEntityTypeName = $entityTypesClient->entityTypeName($projectId, $entityTypeId);
+
+$entityType = $entityTypesClient->getEntityType($formattedEntityTypeName);
+foreach ($entityType->getEntities() as $entity) {
+    print(PHP_EOL);
+    printf('Entity value: %s' . PHP_EOL, $entity->getValue());
+    print('Synonyms: ');
+    foreach ($entity->getSynonyms() as $synonym) {
+        print($synonym . "\t");
+    }
+    print(PHP_EOL);
+}
+```
+
+#### google/cloud-dialogflow
+
+[Dialogflow](https://github.com/GoogleCloudPlatform/google-cloud-php-dialogflow) can be installed separately by requiring the [`google/cloud-dialogflow`](https://packagist.org/packages/google/cloud-dialogflow) composer package:
+
+```
+$ composer require google/cloud-dialogflow
+```
+
 ## Google Bigtable (Alpha)
 
 - [API Documentation](http://googlecloudplatform.github.io/google-cloud-php/#/docs/latest/bigtable/readme)
@@ -857,6 +899,68 @@ try {
 
 ```
 $ composer require google/cloud-bigtable
+```
+
+## Google Cloud BigQuery Data Transfer (Alpha)
+
+- [API Documentation](http://googlecloudplatform.github.io/google-cloud-php/#/docs/latest/bigquerydatatransfer/readme)
+- [Official Documentation](https://cloud.google.com/bigquery/docs/transfer-service-overview)
+
+#### Preview
+
+```php
+require 'vendor/autoload.php';
+
+use Google\Cloud\BigQuery\DataTransfer\V1\DataTransferServiceClient;
+
+$dataTransferServiceClient = new DataTransferServiceClient();
+$projectId = '[MY_PROJECT_ID]';
+$location = 'us-central1';
+$formattedLocation = $dataTransferServiceClient->locationName($projectId, $location);
+$dataSources = $dataTransferServiceClient->listDataSources($formattedLocation);
+```
+
+#### google/cloud-bigquerydatatransfer
+
+[Google Cloud BigQuery Data Transfer](https://github.com/GoogleCloudPlatform/google-cloud-php-bigquerydatatransfer) can be installed separately by requiring the [`google/cloud-bigquerydatatransfer`](https://packagist.org/packages/google/cloud-bigquerydatatransfer) composer package:
+
+```
+$ composer require google/cloud-bigquerydatatransfer
+```
+
+## Google Cloud IoT (Alpha)
+
+- [API Documentation](http://googlecloudplatform.github.io/google-cloud-php/#/docs/latest/iot/readme)
+- [Official Documentation](https://cloud.google.com/iot/docs/)
+
+#### Preview
+
+```php
+require 'vendor/autoload.php';
+
+use Google\Cloud\Iot\V1\DeviceManagerClient;
+
+$deviceManager = new DeviceManagerClient();
+
+$projectId = '[MY_PROJECT_ID]';
+$location = 'us-central1';
+$registryId = '[MY_REGISTRY_ID]';
+$registryName = $deviceManager->registryName($projectId, $location, $registryId);
+$devices = $deviceManager->listDevices($registryName);
+foreach ($devices->iterateAllElements() as $device) {
+    printf('Device: %s : %s' . PHP_EOL,
+        $device->getNumId(),
+        $device->getId()
+    );
+}
+```
+
+#### google/cloud-iot
+
+[Google Cloud IoT](https://github.com/GoogleCloudPlatform/google-cloud-php-iot) can be installed separately by requiring the [`google/cloud-iot`](https://packagist.org/packages/google/cloud-iot) composer package:
+
+```
+$ composer require google/cloud-iot
 ```
 
 ## Google Cloud Speech (Alpha)
@@ -956,33 +1060,6 @@ foreach($traceClient->traces() as $trace) {
 
 ```
 $ composer require google/cloud-trace
-```
-
-## Google Cloud BigQuery Data Transfer (Alpha)
-
-- [API Documentation](http://googlecloudplatform.github.io/google-cloud-php/#/docs/latest/bigquerydatatransfer/readme)
-- [Official Documentation](https://cloud.google.com/bigquery/docs/transfer-service-overview)
-
-#### Preview
-
-```php
-require 'vendor/autoload.php';
-
-use Google\Cloud\BigQuery\DataTransfer\V1\DataTransferServiceClient;
-
-$dataTransferServiceClient = new DataTransferServiceClient();
-$projectId = '[MY_PROJECT_ID]';
-$location = 'us-central1';
-$formattedLocation = $dataTransferServiceClient->locationName($projectId, $location);
-$dataSources = $dataTransferServiceClient->listDataSources($formattedLocation);
-```
-
-#### google/cloud-bigquerydatatransfer
-
-[Google Cloud BigQuery Data Transfer](https://github.com/GoogleCloudPlatform/google-cloud-php-bigquerydatatransfer) can be installed separately by requiring the [`google/cloud-bigquerydatatransfer`](https://packagist.org/packages/google/cloud-bigquerydatatransfer) composer package:
-
-```
-$ composer require google/cloud-bigquerydatatransfer
 ```
 
 ## Caching Access Tokens

@@ -7,6 +7,8 @@ $baseDir = dirname(dirname($vendorDir));
 
 return array(
     'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
+    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/type-resolver/src', $vendorDir . '/phpdocumentor/reflection-docblock/src'),
+    'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'View\\' => array($baseDir . '/application/view'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
     'Table\\' => array($baseDir . '/application/table'),
@@ -70,10 +72,12 @@ return array(
     'GPBMetadata\\' => array($vendorDir . '/google/proto-client/src/GPBMetadata'),
     'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     'Facebook\\' => array($vendorDir . '/facebook/graph-sdk/src/Facebook'),
+    'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
+    'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
     'Controller\\' => array($baseDir . '/application/controller'),
     'Carbon\\Interfaces\\' => array($vendorDir . '/richardtmiles/carbonphp/Interfaces'),
     'Carbon\\Helpers\\' => array($vendorDir . '/richardtmiles/carbonphp/Helpers'),
-    'Carbon\\error\\' => array($vendorDir . '/richardtmiles/carbonphp/error'),
+    'Carbon\\Error\\' => array($vendorDir . '/richardtmiles/carbonphp/Error'),
     'Carbon\\' => array($vendorDir . '/richardtmiles/carbonphp/Structure'),
     'App\\' => array($baseDir . '/application'),
 );

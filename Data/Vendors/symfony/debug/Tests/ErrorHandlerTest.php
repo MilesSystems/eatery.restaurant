@@ -169,7 +169,7 @@ class ErrorHandlerTest extends TestCase
             try {
                 $handler->handleError(4, 'foo', 'foo.php', 12, array());
             } catch (\ErrorException $e) {
-                $this->assertSame('Parse error: foo', $e->getMessage());
+                $this->assertSame('Parse Error: foo', $e->getMessage());
                 $this->assertSame(4, $e->getSeverity());
                 $this->assertSame('foo.php', $e->getFile());
                 $this->assertSame(12, $e->getLine());
@@ -425,7 +425,7 @@ class ErrorHandlerTest extends TestCase
             $logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
             $logArgCheck = function ($level, $message, $context) {
-                $this->assertEquals('Fatal Parse error: foo', $message);
+                $this->assertEquals('Fatal Parse Error: foo', $message);
                 $this->assertArrayHasKey('exception', $context);
                 $this->assertInstanceOf(\Exception::class, $context['exception']);
             };

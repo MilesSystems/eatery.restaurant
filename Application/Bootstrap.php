@@ -319,9 +319,9 @@ class Bootstrap extends App
 
             case 'Customer' :
 
-                $_SESSION['table_number'] = 1;
-                if (!($_SESSION['table_number'] ?? false) && ($user[$_SESSION['id']]['user_type'] === 'Customer')) {
-                    if ($this->structure($this->MVC())->match('setTable/{tableNumber}', 'Customer', 'setTable')()) {
+                // $_SESSION['table_number'] = 1;
+                if (!array_key_exists('table_number',$_SESSION) && ($user[$_SESSION['id']]['user_type'] === 'Customer')) {
+                    if ($this->structure($this->MVC())->match('Tables/{tableNumber}', 'Customer', 'setTable')()) {
                         return true;
                     }
                     $argv = ['0'];
@@ -331,13 +331,15 @@ class Bootstrap extends App
 
 
                 if ($this->structure($this->events('.orderCart'))->match('cartNotifications', 'Customer', 'cart')() ||
-                    $this->structure($this->events('#NavNotifications'))->match('cartNotifications', 'Customer', 'refill')()
+                    $this->structure($this->events('#NavNotifications'))->match('requestHelp', 'Customer', 'help')()||
+                    $this->structure($this->events('#NavNotifications'))->match('requestRefill', 'Customer', 'refill')()
                 ) {
                     return true;
                 }
 
                 $this->structure($this->MVC());
-                if ($this->match('PlaceOrder', 'Customer', 'PlaceOrder')() ||
+                if ($this->match('completeOrder/{order_id}/', 'Customer','completeOrder')() ||
+                    $this->match('PlaceOrder', 'Customer', 'PlaceOrder')() ||
                     $this->match('ViewCheck', 'Customer', 'ViewCheck')() ||
                     $this->structure($this->wrap())->match('CrappyBird-master/', 'CrappyBird-master/index.html')() ||
                     $this->structure($this->wrap())->match('javaScript/', 'javaScript/index.html')() ||

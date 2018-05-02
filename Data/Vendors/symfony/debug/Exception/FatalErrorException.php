@@ -12,7 +12,7 @@
 namespace Symfony\Component\Debug\Exception;
 
 /**
- * Fatal error Exception.
+ * Fatal Error Exception.
  *
  * @author Konstanton Myakshin <koc-dp@yandex.ru>
  */

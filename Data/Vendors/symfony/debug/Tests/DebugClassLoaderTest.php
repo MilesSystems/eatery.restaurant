@@ -17,7 +17,7 @@ use Symfony\Component\Debug\DebugClassLoader;
 class DebugClassLoaderTest extends TestCase
 {
     /**
-     * @var int error reporting level before running tests
+     * @var int Error reporting level before running tests
      */
     private $errorReporting;
 

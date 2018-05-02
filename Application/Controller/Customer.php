@@ -15,25 +15,32 @@ use Carbon\Request;
 class Customer extends Request
 {
 
+
+    public function completeOrder($orderId) {
+
+        $orderId = $this->set($orderId)->alnum();
+
+        $tip = $this->post('')->int();
+
+        return [$orderId, $tip];
+    }
+
     public function cart()
     {
         return true;
     }
 
-    /**
-     * @param $tableNumber
-     * @return bool
-     * @throws PublicAlert
-     */
-    public function refill($tableNumber) {
-        $this->set($tableNumber)->text();
-        if (!$tableNumber) {
-            throw new PublicAlert('Failed to find the table number!');
-        }
+    public function refill() {
+        return true;
+    }
+
+    public function help() {
         return true;
     }
 
     public function setTable($id) {
+
+        alert('hello');
 
         if ($id = $this->set($id)->alnum()) {
             return $id;
