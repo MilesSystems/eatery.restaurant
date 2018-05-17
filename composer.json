@@ -5,15 +5,15 @@
   "prefer-stable": true,
   "license": "MIT",
   "config": {
-    "vendor-dir": "data/vendors"
+    "vendor-dir": "../vendor"
   },
   "autoload": {
     "psr-4": {
-      "App\\":"application/",
-      "View\\": "application/view/",
-      "Controller\\": "application/controller/",
-      "Model\\": "application/model/",
-      "Table\\": "application/table/"
+      "App\\":"",
+      "View\\": "view/",
+      "Controller\\": "controller/",
+      "Model\\": "model/",
+      "Table\\": "table/"
     }
   },
   "authors": [
