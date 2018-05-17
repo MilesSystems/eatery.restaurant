@@ -264,6 +264,51 @@ END;
 }
 
 
+
+
+
+
+
+try {
+    $db->prepare('SELECT 1 FROM user_messages LIMIT 1;')->execute();
+    print '<br>Table `user_messages` already exists';
+} catch (PDOException $e) {
+    $sql = <<<END
+
+create table user_messages
+(
+    message_id varchar(225) null,
+	to_user_id varchar(225) null,
+	message text not null,
+	message_read tinyint(1) default '0' null,
+	constraint messages_entity_entity_pk_fk
+		foreign key (message_id) references carbon (entity_pk)
+			on update cascade on delete cascade,
+	constraint messages_entity_user_from_pk_fk
+		foreign key (to_user_id) references carbon (entity_pk)
+			on update cascade on delete cascade
+)
+;
+
+create index messages_entity_entity_pk_fk
+	on user_messages (message_id)
+;
+
+create index messages_entity_user_from_pk_fk
+	on user_messages (to_user_id)
+;
+
+END;
+
+    $db->exec($sql);
+    print '<br>Table `user_messages` Created';
+
+}
+
+
+
+
+
 try {
     $db->prepare('SELECT 1 FROM user_tasks LIMIT 1;')->execute();
     print '<br>Table `user_tasks` already exists';
