@@ -1,0 +1,31 @@
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <i class="fa fa-cart-plus"></i>
+
+    {{#cartNotifications}}
+        <span class="label label-danger">{{cartNotifications}}</span>
+    {{/cartNotifications}}
+
+</a>
+<ul class="dropdown-menu">
+    <li class="header">You have {{cartNotifications}}{{^cartNotifications}}0{{/cartNotifications}} items</li>
+    <li>
+        <!-- inner menu: contains the actual data -->
+        <ul class="menu">
+            {{#items}}
+                <li><!-- Task item -->
+                    <a href="#">
+                        <h3>
+                            {{item_name}}
+                            <small class="pull-right"><i class="fa fa-fw fa-remove"></i></small>
+                        </h3>
+                    </a>
+                </li>
+                <!-- end task item -->
+            {{/items}}
+
+        </ul>
+    </li>
+    <li class="footer">
+        <a class="bg-green-active" onclick="carbon.app('placeOrder')"><b style="color: white">PLACE ORDER</b></a>
+    </li>
+</ul>

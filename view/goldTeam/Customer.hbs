@@ -1,0 +1,380 @@
+<header class="main-header">
+    <!-- Logo -->
+    <a href="{{ SITE }}" class="logo hidden-md-down">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini">{{table_number}}</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>Restau</b>Rants<b>#{{table_number}}</b></span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+
+        <div class="navbar-custom-menu">
+            {{#me}}
+                <ul class="nav navbar-nav">
+                    <!-- Messages: style can be found in dropdown.less-->
+                    <li id="NavMessages" class="dropdown messages-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-envelope-o"></i>
+                            {{#newMessages}}
+                                <span id="NewMessagesSpan" class="label label-success">{{newMessages}}</span>
+                            {{/newMessages}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have {{newMessages}}{{^newMessages}}0{{/newMessages}} new messages
+                            </li>
+                            <!-- inner menu: contains the actual data -->
+                            <li>
+                                <ul class="menu">
+                                    {{#users}}
+                                        <li><!-- start message -->
+                                            <a href="{{user_uri}}">
+                                                <div class="pull-left">
+                                                    <img src="{{user_profile_picture}}" class="img-circle"
+                                                         alt="User Image"/>
+                                                </div>
+                                                <h4>
+                                                    {{first_name}} {{last_name}}
+                                                    <small><i class="fa fa-clock-o"></i>{{creation_date}}</small>
+                                                </h4>
+                                                <p>{{message}}</p>
+                                            </a>
+                                        </li><!-- end message -->
+                                    {{/users}}
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">See All Messages</a></li>
+                        </ul>
+                    </li>
+                    <!-- Notifications: style can be found in dropdown.less -->
+                    <li id="NavNotifications" class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            {{#newNotifications}}
+                                <span class="label label-warning">{{newNotifications}}</span>
+                            {{/newNotifications}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have {{newNotifications}}{{^newNotifications}}
+                                0{{/newNotifications}} notifications
+                            </li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    {{#notifications}}
+                                        <li>
+                                            <a href="">
+                                                <i class="fa {{fa-icon}} text-red"></i> {{notification_text}}
+                                            </a>
+                                        </li>
+                                    {{/notifications}}
+                                </ul>
+                            </li>
+                            <li class="footer"><a onclick="carbon.app('/clearnotifications')">Clear Notifications</a></li>
+                        </ul>
+                    </li>
+
+
+                    <!-- Tasks: style can be found in dropdown.less -->
+                    <li class="dropdown tasks-menu orderCart" id="NavTasks"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-cart-plus"></i>
+
+                        {{#cartNotifications}}
+                            <span class="label label-danger">{{cartNotifications}}</span>
+                        {{/cartNotifications}}
+
+                    </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have {{cartNotifications}}{{^cartNotifications}}0{{/cartNotifications}} items</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    {{#items}}
+                                        <li><!-- Task item -->
+                                            <a href="#">
+                                                <h3>
+                                                    {{item_name}}
+                                                    <small class="pull-right"><i class="fa fa-fw fa-remove"></i></small>
+                                                </h3>
+                                            </a>
+                                        </li>
+                                        <!-- end task item -->
+                                    {{/items}}
+
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a onclick="carbon.app('/placeOrder')" class="bg-green-active"><b style="color: white">PLACE ORDER</b></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- User Account: style can be found in dropdown.less -->
+
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{me.user_profile_pic}}" class="user-image" alt="User Image"/>
+                            <span class="hidden-xs">{{me.user_first_last}}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="{{me.user_profile_pic}}" class="img-circle" alt="User Image"/>
+                                <p>
+                                    {{me.user_first_last}} - {{me.user_sport}}
+                                    <small>Member since {{me.user_creation_date}}</small>
+                                </p>
+                            </li>
+
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="{{SITE}}Profile/" class="btn btn-default btn-flat">Profile</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="{{SITE}}Logout/" class="btn btn-default btn-flat">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Control Sidebar Toggle Button -->
+                    <!--li>
+                        <a href="" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    </li-->
+                </ul>
+            {{/me}}
+            {{^me}}
+                <ul class="nav navbar-nav">
+                    <li id="NavNotifications" class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            {{#newNotifications}}
+                                <span class="label label-warning">{{newNotifications}}</span>
+                            {{/newNotifications}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have {{newNotifications}}{{^newNotifications}}
+                                0{{/newNotifications}} notifications
+                            </li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    {{#notifications}}
+                                        <li>
+                                            <a href="">
+                                                <i class="fa {{fa-icon}} text-red"></i> {{notification_text}}
+                                            </a>
+                                        </li>
+                                    {{/notifications}}
+                                </ul>
+                            </li>
+                            <li class="footer"><a onclick="carbon.app('clearNotifications')">Clear Notifications</a></li>
+                        </ul>
+                    </li>
+                    <!-- Tasks: style can be found in dropdown.less -->
+                    <li class="dropdown tasks-menu orderCart" id="NavTasks"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-cart-plus"></i>
+
+                        {{#cartNotifications}}
+                            <span class="label label-danger">{{cartNotifications}}</span>
+                        {{/cartNotifications}}
+
+                    </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have {{cartNotifications}}{{^cartNotifications}}0{{/cartNotifications}} items</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    {{#items}}
+                                        <li><!-- Task item -->
+                                            <a href="#">
+                                                <h3>
+                                                    {{item_name}}
+                                                    <small class="pull-right"><i class="fa fa-fw fa-remove"></i></small>
+                                                </h3>
+                                            </a>
+                                        </li>
+                                        <!-- end task item -->
+                                    {{/items}}
+
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a class="bg-green-active"><b style="color: white">PLACE ORDER</b></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/Register">Register</a></li>
+                    <li><a href="/ClearTable">Clear</a></li>
+                </ul>
+            {{/me}}
+
+        </div>
+
+    </nav>
+</header>
+
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        {{#me}}
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{{user_profile_pic}}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>{{user_first_last}}</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+        {{/me}}
+        <!-- search form -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input id="search-input" type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+        </form>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree" id="left-sidebar-menu">
+            <li>
+                <a href="/viewCheck/">
+                    <i class="fa fa-edit"></i><span>View Check</span>
+                </a>
+            </li>
+
+
+            {{#category}}
+                <li class="treeview"><a href="#"><i class="fa {{category_tag}}"></i><span>{{category_name}}</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+
+                    <ul class="treeview-menu">
+                        {{#item}}
+                        <li><a href="/item/{{item_id}}/"><i class="fa fa-circle-o"></i> {{item_name}} </a></li>
+                        {{/item}}
+                    </ul>
+
+                </li>
+            {{/category}}
+
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-gamepad"></i>
+                    <span>Games</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/CrappyBird-master/"><i class="fa fa-circle-o"></i>Crappy Bird</a></li>
+                    <li><a href="/JavaScript-Snake-master/"><i class="fa fa-circle-o"></i>Snake Master</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a onclick="carbon.app('/requestRefill/')">
+                    <i class="fa fa-battery-quarter"></i><span>Request Refill</span>
+                </a>
+            </li>
+
+            <li>
+                <a onclick="carbon.app('/requestHelp/')">
+                    <i class="fa fa-question"></i><span>Request Help</span>
+                </a>
+            </li>
+
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
+
+<script>//--  Sidebar Search Engine
+Carbon(() => {
+
+    // carbon.app('/cartNotifications'); // This is a live refresh of the view
+
+    let $menu = $('#left-sidebar-menu' + ' li');
+
+    let activity = function () {
+        $("li a").filter(function () {
+            $menu.removeClass('active');
+            return this.href === location.href.replace(/#.*/, "");
+        }).parent().addClass("active");
+    };
+
+    activity();
+
+    $menu.click(function () {
+        $menu.removeClass('active');
+        $(this).addClass('active');
+    });
+
+    $('#mytitle').click(function () {
+        $menu.removeClass('active');
+    });
+
+    $('#sidebar-form').on('submit', function (e) {
+        e.preventDefault();
+    });
+
+    $('#left-sidebar-menu li.active').data('lte.pushmenu.active', true);
+
+    $('#search-input').on('keyup', function () {
+        let term = $('#search-input').val().trim(),
+                sidebar = $('#left-sidebar-menu li');
+
+        if (term.length === 0) {
+            sidebar.each(function () {
+                $(this).show(0);
+                $(this).removeClass('active');
+                if ($(this).data('lte.pushmenu.active')) {
+                    $(this).addClass('active');
+                }
+            });
+            return;
+        }
+
+        sidebar.each(function () {
+            if ($(this).text().toLowerCase().indexOf(term.toLowerCase()) === -1) {
+                $(this).hide(0);
+                $(this).removeClass('pushmenu-search-found', false);
+
+                if ($(this).is('.treeview')) {
+                    $(this).removeClass('active');
+                }
+            } else {
+                $(this).show(0);
+                $(this).addClass('pushmenu-search-found');
+
+                if ($(this).is('.treeview')) {
+                    $(this).addClass('active');
+                }
+
+                let parent = $(this).parents('li').first();
+                if (parent.is('.treeview')) {
+                    parent.show(0);
+                }
+            }
+
+            if ($(this).is('.header')) {
+                $(this).show();
+            }
+        });
+
+        $('#left-sidebar-menu li.pushmenu-search-found.treeview').each(function () {
+            $(this).find('.pushmenu-search-found').show(0);
+        });
+    });
+})
+</script>
