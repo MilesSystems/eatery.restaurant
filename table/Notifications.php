@@ -21,7 +21,7 @@ class Notifications extends Entities implements iTable
      */
     public static function All(array &$array, string $id): bool
     {
-        $array = self::fetch('SELECT * FROM RootPrerogative.carbon_notifications WHERE notification_session = ?', $id);
+        $array = self::fetch('SELECT * FROM carbon_notifications WHERE notification_session = ?', $id);
 
         if (empty($array)) {
             $array = null;
@@ -45,7 +45,7 @@ class Notifications extends Entities implements iTable
     public static function Delete(array &$array, string $id): bool
     {
         $array = null;
-        return self::execute('DELETE FROM RootPrerogative.carbon_notifications WHERE notification_session = ?', $id);
+        return self::execute('DELETE FROM carbon_notifications WHERE notification_session = ?', $id);
     }
 
     /**
@@ -54,7 +54,7 @@ class Notifications extends Entities implements iTable
      */
     public static function Post(array $array): bool
     {
-        self::execute('INSERT INTO RootPrerogative.carbon_notifications (notification_dismissed, notification_text, notification_session, notification_id) VALUES (?,?,?,?)',
+        self::execute('INSERT INTO carbon_notifications (notification_dismissed, notification_text, notification_session, notification_id) VALUES (?,?,?,?)',
                 0,
                 $array['text'],
                 $array['user_session'],
