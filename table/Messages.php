@@ -24,7 +24,7 @@ class Messages extends Entities implements iTable
         if (!$to_user) {
             throw new \InvalidArgumentException('Cannot get messages from a non-user.');
         }
-        $array['messages'] = self::fetch('SELECT * FROM RootPrerogative.user_messages INNER JOIN RootPrerogative.carbon_tag ON entity_id = message_id WHERE 
+        $array['messages'] = self::fetch('SELECT * FROM user_messages INNER JOIN carbon_tag ON entity_id = message_id WHERE 
                     user_messages.to_user_id = ? AND carbon_tag.user_id = ? OR 
                     user_messages.to_user_id = ? AND carbon_tag.user_id = ?', $id, $_SESSION['id'], $_SESSION['id'], $id);
 
@@ -33,7 +33,7 @@ class Messages extends Entities implements iTable
 
     public static function All(array &$array, string $id): bool   // signed in user
     {
-        $users = self::fetch('SELECT user_id, to_user_id FROM RootPrerogative.user_messages INNER JOIN RootPrerogative.carbon_tag ON entity_id = message_id WHERE 
+        $users = self::fetch('SELECT user_id, to_user_id FROM user_messages INNER JOIN carbon_tag ON entity_id = message_id WHERE 
                     user_messages.to_user_id = ? OR carbon_tag.user_id = ?',$id, $id);
 
         foreach ($users as $message => $userId) {
