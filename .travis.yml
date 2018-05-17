@@ -18,8 +18,6 @@ group: edge
 #  only:
 #    - master
 #    - 2.1
-
-
 #
 # Test Matrix
 #
