@@ -241,15 +241,20 @@ try {
     $sql = <<<END
 create table carbon_notifications
 (
-	cart_item varchar(225) null,
-	cart_notes varchar(225) null,
-	cart_id varchar(225) null,
-	CONSTRAINT notifications_entity_entity_follows_pk_fk
-		FOREIGN KEY (cart_id) REFERENCES carbon (entity_pk)
-			ON UPDATE CASCADE ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+	notification_dismissed tinyint(1) null,
+	notification_text varchar(225) null,
+	notification_id varchar(225) null,
+	notification_session varchar(225) null,
+	constraint notifications_entity_entity_follows_pk_fk
+		foreign key (notification_id) references carbon (entity_pk)
+			on update cascade on delete cascade
+)
 ;
- 
+
+create index notifications_entity_entity_follows_pk_fk
+	on carbon_notifications (notification_id)
+;
+
 
 END;
 
