@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "3056b9c98b3d99da0297f6ac5180b8c2",
@@ -295,16 +295,16 @@
         },
         {
             "name": "google/cloud",
-            "version": "v0.64.0",
+            "version": "v0.65.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/GoogleCloudPlatform/google-cloud-php.git",
-                "reference": "5edbb1ad732af282ba4a1560c30305ddea8f5650"
+                "reference": "12b2203fff7f37888a75be1de796a4ea22fe123e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GoogleCloudPlatform/google-cloud-php/zipball/5edbb1ad732af282ba4a1560c30305ddea8f5650",
-                "reference": "5edbb1ad732af282ba4a1560c30305ddea8f5650",
+                "url": "https://api.github.com/repos/GoogleCloudPlatform/google-cloud-php/zipball/12b2203fff7f37888a75be1de796a4ea22fe123e",
+                "reference": "12b2203fff7f37888a75be1de796a4ea22fe123e",
                 "shasum": ""
             },
             "require": {
@@ -323,9 +323,9 @@
                 "google/cloud-bigquerydatatransfer": "0.4.1",
                 "google/cloud-bigtable": "0.3.4",
                 "google/cloud-container": "0.3.4",
-                "google/cloud-core": "1.20.1",
+                "google/cloud-core": "1.20.2",
                 "google/cloud-dataproc": "0.3.4",
-                "google/cloud-datastore": "1.5.1",
+                "google/cloud-datastore": "1.5.2",
                 "google/cloud-debugger": "0.8.0",
                 "google/cloud-dialogflow": "0.1.1",
                 "google/cloud-dlp": "0.8.1",
@@ -337,10 +337,10 @@
                 "google/cloud-monitoring": "0.9.4",
                 "google/cloud-oslogin": "0.3.4",
                 "google/cloud-pubsub": "1.1.4",
-                "google/cloud-redis": "0.1.0",
+                "google/cloud-redis": "0.1.1",
                 "google/cloud-spanner": "1.4.1",
                 "google/cloud-speech": "0.13.1",
-                "google/cloud-storage": "1.4.0",
+                "google/cloud-storage": "1.5.0",
                 "google/cloud-trace": "0.7.4",
                 "google/cloud-translate": "1.2.0",
                 "google/cloud-videointelligence": "0.10.4",
@@ -452,7 +452,7 @@
                 "translation",
                 "vision"
             ],
-            "time": "2018-05-08T16:06:53+00:00"
+            "time": "2018-05-17T16:38:58+00:00"
         },
         {
             "name": "google/gax",
@@ -588,16 +588,16 @@
         },
         {
             "name": "grpc/grpc",
-            "version": "1.10.0",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/grpc/grpc-php.git",
-                "reference": "741f59bac86c7b5e45818c8f2eec6980921bce23"
+                "reference": "ad3f6a2bb47475a32a7cdf23da3f67957e0e5aab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/741f59bac86c7b5e45818c8f2eec6980921bce23",
-                "reference": "741f59bac86c7b5e45818c8f2eec6980921bce23",
+                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/ad3f6a2bb47475a32a7cdf23da3f67957e0e5aab",
+                "reference": "ad3f6a2bb47475a32a7cdf23da3f67957e0e5aab",
                 "shasum": ""
             },
             "require": {
@@ -625,7 +625,7 @@
             "keywords": [
                 "rpc"
             ],
-            "time": "2018-03-28T22:54:08+00:00"
+            "time": "2018-05-15T22:09:16+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2201,12 +2201,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/RichardTMiles/CarbonPHP.git",
-                "reference": "e767b218a85c67dad2bd19a0210e08f980ee8cd2"
+                "reference": "17dd543779dc240b5b7c1693962bd5b1316c5a40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RichardTMiles/CarbonPHP/zipball/e767b218a85c67dad2bd19a0210e08f980ee8cd2",
-                "reference": "e767b218a85c67dad2bd19a0210e08f980ee8cd2",
+                "url": "https://api.github.com/repos/RichardTMiles/CarbonPHP/zipball/17dd543779dc240b5b7c1693962bd5b1316c5a40",
+                "reference": "17dd543779dc240b5b7c1693962bd5b1316c5a40",
                 "shasum": ""
             },
             "require": {
@@ -2250,7 +2250,7 @@
                 "pipes",
                 "sockets"
             ],
-            "time": "2018-05-15T04:05:53+00:00"
+            "time": "2018-05-15T16:00:16+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

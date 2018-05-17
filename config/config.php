@@ -169,16 +169,17 @@ function urlGoogle($request = null)
 return [
     'DATABASE' => [
 
-        'DB_DSN' => 'mysql:host=35.224.229.250;dbname=RootPrerogative',      // Host and Database get put here
+        'DB_DSN' => APP_LOCAL ? 'mysql:host=127.0.0.1;dbname=C6;' : 'mysql:host=35.224.229.250;dbname=RootPrerogative',      // Host and Database get put here
 
         'DB_USER' => 'root',                 // User
 
-        'DB_PASS' => 'goldteamrules',          // Password goldteamrules
+        'DB_PASS' => APP_LOCAL ? '' : 'goldteamrules',          // Password goldteamrules
 
         'DB_BUILD' => SERVER_ROOT . 'config/buildDatabase.php',
 
         'REBUILD' => false                       // Initial Setup todo - remove this check
     ],
+
 
     'SITE' => [
         'URL' => 'rootprerogative.com',    // Evaluated and if not the accurate redirect. Local php server okay. Remove for any domain
