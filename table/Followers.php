@@ -9,10 +9,10 @@
 namespace Table;
 
 
-use Carbon\Database;
-use Carbon\Entities;
-use Carbon\Error\PublicAlert;
-use Carbon\Interfaces\iTable;
+use CarbonPHP\Database;
+use CarbonPHP\Entities;
+use CarbonPHP\Error\PublicAlert;
+use CarbonPHP\Interfaces\iTable;
 
 class Followers extends Entities implements iTable
 {

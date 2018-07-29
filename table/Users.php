@@ -8,14 +8,12 @@
 
 namespace Table;
 
-use Carbon\Database;
-use Carbon\Error\ErrorCatcher;
-use Carbon\Error\PublicAlert;
-use Carbon\Helpers\Bcrypt;
-use Carbon\Entities;
-use Carbon\Interfaces\iTable;
+use CarbonPHP\Database;
+use CarbonPHP\Error\PublicAlert;
+use CarbonPHP\Helpers\Bcrypt;
+use CarbonPHP\Entities;
 
-class Users extends Entities implements iTable
+class Users extends Entities
 {
 
     public static function userDefaults(array &$user, string $id)

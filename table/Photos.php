@@ -9,12 +9,11 @@
 namespace Table;
 
 
-use Carbon\Database;
-use Carbon\Entities;
-use Carbon\Error\PublicAlert;
-use Carbon\Interfaces\iTable;
+use CarbonPHP\Database;
+use CarbonPHP\Entities;
+use CarbonPHP\Error\PublicAlert;
 
-class Photos extends Entities implements iTable
+class Photos extends Entities
 {
     static function Get(array &$array, string $id, array $arg) : bool
     {

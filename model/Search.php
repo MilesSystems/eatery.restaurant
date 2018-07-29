@@ -3,7 +3,7 @@
 namespace Model;
 
 
-use Carbon\Error\PublicAlert;
+use CarbonPHP\Error\PublicAlert;
 use Model\Helpers\GlobalMap;
 
 class Search extends GlobalMap

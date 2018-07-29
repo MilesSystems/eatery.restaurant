@@ -7,14 +7,14 @@ define('APP_ROOT', __DIR__ . DS);  // Set our root folder for the application
 
 const SERVER_ROOT = APP_ROOT;        // I would like to change to only using app_root soon
 
-if (false === (include '../vendor/autoload.php'))
+if (false === (include __DIR__ .'/vendor/autoload.php'))
 {
     // Load the autoload() for composer dependencies located in the Services folder
-    print '<h1>Loading Composer Failed. See Carbonphp.com for documentation.</h1>' and die;
+    print '<h1>Loading Composer Failed. See CarbonPHP.com for documentation.</h1>' and die;
     // Composer autoload
 }
 
-$app = new Carbon\Carbon(APP_ROOT . 'config/config.php');
+$app = new CarbonPHP\CarbonPHP(APP_ROOT . 'config/config.php');
 
 
 /** At one point I returned the invocation of $app to show that

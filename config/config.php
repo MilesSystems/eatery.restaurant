@@ -37,6 +37,11 @@ const TEMPLATE = COMPOSER . 'almasaeed2010' . DS . 'adminlte' . DS;
 const FACEBOOK_APP_ID = '2036943173195849';
 const FACEBOOK_APP_SECRET = '3c04808a12f5388e8668b49c3668e414';
 
+/**
+ * @param null $request
+ * @return array|string
+ * @throws \Facebook\Exceptions\FacebookSDKException
+ */
 function urlFacebook($request = null)
 {
     $fb = new Facebook\Facebook([
@@ -111,7 +116,7 @@ function urlFacebook($request = null)
             'user_location', 'user_photos', 'user_friends']);
     }
 
-    \Carbon\Request::changeURI(SITE . 'oAuth/Facebook/');  // clear GET data.
+    \CarbonPHP\Request::changeURI(SITE . 'oAuth/Facebook/');  // clear GET data.
 
     return array(
         'id' => $profile['id'],
@@ -125,6 +130,11 @@ function urlFacebook($request = null)
 
 }
 
+/**
+ * @param null $request
+ * @return array
+ * @throws \CarbonPHP\Error\PublicAlert
+ */
 function urlGoogle($request = null)
 {
     //Call Google API
@@ -163,7 +173,7 @@ function urlGoogle($request = null)
             'link' => $gpUserProfile['link']
         );
     }
-    throw new \Carbon\Error\PublicAlert('failed to get access token');
+    throw new \CarbonPHP\Error\PublicAlert('failed to get access token');
 }
 
 return [

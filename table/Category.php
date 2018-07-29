@@ -9,10 +9,9 @@
 namespace Table;
 
 
-use Carbon\Entities;
-use Carbon\Interfaces\iTable;
+use CarbonPHP\Entities;
 
-class Category extends Entities implements iTable
+class Category extends Entities
 {
 
 

@@ -2,9 +2,9 @@
 
 namespace Controller;
 
-use Carbon\Error\PublicAlert;
-use Carbon\Request;
-use Carbon\Session;
+use CarbonPHP\Error\PublicAlert;
+use CarbonPHP\Request;
+use CarbonPHP\Session;
 use Table\Users;
 
 class User extends Request

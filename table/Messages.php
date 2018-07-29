@@ -8,15 +8,13 @@
 
 namespace Table;
 
-use Carbon\Database;
-use Carbon\Error\PublicAlert;
+use CarbonPHP\Database;
+use CarbonPHP\Error\PublicAlert;
 use Model\Helpers\GlobalMap;
 use Model\User;
-use Carbon\Entities;
-use Carbon\Interfaces\iTable;
-use Carbon\Helpers\Pipe;
+use CarbonPHP\Entities;
 
-class Messages extends Entities implements iTable
+class Messages extends Entities
 {
     public static function Get(array &$array, string $id, array $argv): bool
     {

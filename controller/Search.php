@@ -8,7 +8,7 @@
 
 namespace Controller;
 
-use Carbon\Request;
+use CarbonPHP\Request;
 
 
 class Search extends Request

@@ -52,8 +52,8 @@
 
 namespace Model\Helpers;
 
-use Carbon\Entities;
-use Carbon\Helpers\Pipe;
+use CarbonPHP\Entities;
+use CarbonPHP\Helpers\Pipe;
 
 abstract class GlobalMap extends Entities
 {

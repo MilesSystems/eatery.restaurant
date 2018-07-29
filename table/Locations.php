@@ -9,12 +9,11 @@
 namespace Table;
 
 
-use Carbon\Database;
-use Carbon\Entities;
-use Carbon\Error\PublicAlert;
-use Carbon\Interfaces\iTable;
+use CarbonPHP\Database;
+use CarbonPHP\Entities;
+use CarbonPHP\Error\PublicAlert;
 
-class Locations extends Entities implements iTable
+class Locations extends Entities
 {
     public static function Get(array &$array, string $id, array $argv): bool
     {

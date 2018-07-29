@@ -8,7 +8,7 @@
 
 namespace Model;
 
-use Carbon\Error\PublicAlert;
+use CarbonPHP\Error\PublicAlert;
 use Model\Helpers\GlobalMap;
 use Table\Items;
 use Table\Category;

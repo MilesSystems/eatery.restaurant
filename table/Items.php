@@ -8,12 +8,10 @@
 
 namespace Table;
 
-use Carbon\Entities;
-use Carbon\Interfaces\iTable;
+use CarbonPHP\Entities;
 
-class Items extends Entities implements iTable
+class Items extends Entities
 {
-
     /**
      * @param $array - values received will be placed in this array
      * @param $id - the rows primary key

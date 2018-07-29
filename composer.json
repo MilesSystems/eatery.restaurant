@@ -5,7 +5,7 @@
   "prefer-stable": true,
   "license": "MIT",
   "config": {
-    "vendor-dir": "../vendor"
+    "vendor-dir": "vendor"
   },
   "autoload": {
     "psr-4": {
@@ -22,18 +22,21 @@
       "email": "RichardMiles@Stats.Coach"
     }
   ],
-
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/RichardTMiles/CarbonPHP"
+    }
+  ],
   "require-dev": {
-    "richardtmiles/carbonphp" : "dev-master",
+    "richardtmiles/carbonphp" : "dev-carbon#bf605f65e9bb7e1b743b78c6abc4f042c2f88524",
     "google/cloud-tools": "^0.6",
     "phpunit/phpunit": "^7"
   },
   "require": {
     "php": ">=7.1",
-    "google/cloud": ">=0.21",
+    "google/cloud": "0.65",
     "facebook/graph-sdk": "^5.6.1",
-    "google/apiclient": "dev-master",
-    "mustache/mustache": "dev-master",
     "almasaeed2010/adminlte":"v2.4.0"
   }
 }

@@ -9,13 +9,11 @@
 namespace Table;
 
 
-use Carbon\Database;
-use Carbon\Entities;
-use Carbon\Error\PublicAlert;
-use Carbon\Interfaces\iTable;
+use CarbonPHP\Entities;
+use CarbonPHP\Error\PublicAlert;
 use Model\Helpers\GlobalMap;
 
-class Order extends Entities implements iTable
+class Order extends Entities
 {
 
     /**

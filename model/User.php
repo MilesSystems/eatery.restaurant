@@ -2,15 +2,15 @@
 
 namespace Model;
 
-use Carbon\Helpers\Serialized;
+use CarbonPHP\Helpers\Serialized;
 use Model\Helpers\GlobalMap;
 use Table\Notifications;
 use Table\Users;
 use Table\Followers;
 use Table\Messages;
-use Carbon\Error\PublicAlert;
-use Carbon\Helpers\Bcrypt;
-use Carbon\Request;
+use CarbonPHP\Error\PublicAlert;
+use CarbonPHP\Helpers\Bcrypt;
+use CarbonPHP\Request;
 
 /**
  * Class User
@@ -70,7 +70,6 @@ class User extends GlobalMap
     /**
      * User constructor.
      * @param string|null $id
-     * @throws \Carbon\Error\PublicAlert
      */
     public function __construct(string $id = null)
     {

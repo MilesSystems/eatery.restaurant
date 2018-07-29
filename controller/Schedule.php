@@ -9,7 +9,7 @@
 namespace Controller;
 
 
-use Carbon\Request;
+use CarbonPHP\Request;
 
 class Schedule extends Request
 {

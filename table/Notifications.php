@@ -8,10 +8,9 @@
 
 namespace Table;
 
-use Carbon\Entities;
-use Carbon\Interfaces\iTable;
+use CarbonPHP\Entities;
 
-class Notifications extends Entities implements iTable
+class Notifications extends Entities
 {
 
     /**

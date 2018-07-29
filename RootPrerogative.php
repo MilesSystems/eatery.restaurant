@@ -2,11 +2,10 @@
 
 namespace App;
 
-use Carbon\Application;
-use Carbon\Error\PublicAlert;
-use Carbon\View;
+use CarbonPHP\Application;
+use CarbonPHP\Error\PublicAlert;
+use CarbonPHP\View;
 use Controller\User;
-use Model\Helpers\GlobalMap;
 use Table\Cart;
 use Table\Items;
 use Table\Category;
@@ -19,7 +18,7 @@ class RootPrerogative extends Application
      * Bootstrap constructor. Places basic variables
      * in our json response that will be needed by many pages.
      * @param null $structure
-     * @throws \Carbon\Error\PublicAlert
+     * @throws \CarbonPHP\Error\PublicAlert
      */
     public function __construct($structure = null)
     {
@@ -57,21 +56,21 @@ class RootPrerogative extends Application
 
         //
         $mustache = function ($path) {      // This is our mustache template engine implemented in php, used for rendering user content
-            global $json;
-            static $mustache;
+        global $json;
+        static $mustache;
 
-            if (SOCKET) {
-                return 'SOCKET MUSTACHE (BOOTSTRAP -> userSettings)';
-            }
+        if (SOCKET) {
+            return 'SOCKET MUSTACHE (BOOTSTRAP -> userSettings)';
+        }
 
-            if (empty($mustache)) {
-                $mustache = new \Mustache_Engine();
-            }
-            if (!file_exists($path)) {
-                print "<script>Carbon(() => $.fn.bootstrapAlert('Content Buffer Failed ($path), Does Not Exist!', 'danger'))</script>";
-            }
-            return $mustache->render(file_get_contents($path), $json);
-        };
+        if (empty($mustache)) {
+            $mustache = new \Mustache_Engine();
+        }
+        if (!file_exists($path)) {
+            print "<script>Carbon(() => carbon.alert('Content Buffer Failed ($path), Does Not Exist!', 'danger'))</script>";
+        }
+        return $mustache->render(file_get_contents($path), $json);
+    };
 
         $json['messages'] = $json['notifications'] = [];
 
@@ -180,6 +179,7 @@ class RootPrerogative extends Application
     /** This will be executed if the uri is null, or
      *  if startApplication does not match the uri
      * @return mixed
+     * @throws \Exception
      */
     public function defaultRoute()
     {
@@ -196,7 +196,8 @@ class RootPrerogative extends Application
     /** we dont use this return value for anything
      * @param null $uri
      * @return bool
-     * @throws \Carbon\Error\PublicAlert
+     * @throws PublicAlert
+     * @throws \Exception
      */
     public function startApplication($uri = null): bool
     {
@@ -214,7 +215,8 @@ class RootPrerogative extends Application
         } else {
             if (empty($this->uri[0])) {
                 if (SOCKET) {
-                    throw new PublicAlert('URI MUST BE SET IN SOCKET REQUESTS');
+                    print'URI MUST BE SET IN SOCKET REQUESTS';
+                    exit(1);
                 }
                 $this->matched = true;
                 return $this->defaultRoute();
