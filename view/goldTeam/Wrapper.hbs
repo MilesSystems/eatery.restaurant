@@ -122,63 +122,62 @@
     {{/signedIn}}
 
 </div>
-<script src="/{{TEMPLATE}}bower_components/jquery/dist/jquery.min.js"></script>
-<script src="/{{APP_VIEW}}bower-asset/jquery-pjax/jquery.pjax.js"></script>
-<script src="/{{APP_VIEW}}bower-asset/mustache.js/mustache.js"></script>
-<script src="/{{COMPOSER}}richardtmiles/carbonphp/Helpers/Carbon.js"></script>
+<script src="/node_modules/admin-lte/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/jquery-pjax/jquery.pjax.js"></script>
+<script src="/node_modules/mustache/mustache.js"></script>
+<script src="/vendor/richardtmiles/carbonphp/helpers/Carbon.js"></script>
 
 <script>
-    const TEMPLATE = "/{{TEMPLATE}}", APP_VIEW = "/{{APP_VIEW}}", COMPOSER = "/{{COMPOSER}}";
+    const TEMPLATE = "/node_modules/admin-lte/", APP_VIEW = "/view/", COMPOSER = "/vendor/";
 
-    const carbon = new $.carbon;
+    const carbon = new CarbonPHP();
 
-    carbon.start('#pjax-content', 'ws://rootprerogative.com:8888/', false);
+    carbon.invoke('#pjax-content', 'ws://rootprerogative.com:8888/', false);
 
-    //-- JQuery -->
-    carbon.js(TEMPLATE + 'bower_components/jquery/dist/jquery.min.js', () => {
-        //-- Jquery Form -->
-        carbon.js(APP_VIEW + 'bower-asset/jquery-form/src/jquery.form.js');
+    // carbon.start('#pjax-content'); // , 'ws://rootprerogative.com:8888/', false
 
-        //-- Bootstrap -->
-        carbon.js(TEMPLATE + 'bower_components/bootstrap/dist/js/bootstrap.min.js', () => {
-            //-- Slim Scroll -->
-            carbon.js(TEMPLATE + 'bower_components/jquery-slimscroll/jquery.slimscroll.min.js', () => {
+    //-- Jquery Form -->
+    carbon.js('/node_modules/jquery-form/src/jquery.form.js');
 
-                //-- Fastclick -->
-                carbon.js(TEMPLATE + 'bower_components/fastclick/lib/fastclick.js', () => {
-                    //-- Admin LTE -->
-                    carbon.js(TEMPLATE + 'dist/js/adminlte.min.js', () => {
+    //-- Bootstrap -->
+    carbon.js(TEMPLATE + 'bower_components/bootstrap/dist/js/bootstrap.min.js', () => {
+        //-- Slim Scroll -->
+        carbon.js(TEMPLATE + 'bower_components/jquery-slimscroll/jquery.slimscroll.min.js', () => {
 
-                        carbon.js(COMPOSER + 'richardtmiles/carbonphp/Helpers/asynchronous.js', () => {
-                            carbon.event("Carbon");
+            //-- Fastclick -->
+            carbon.js(TEMPLATE + 'bower_components/fastclick/lib/fastclick.js', () => {
+                //-- Admin LTE -->
+                carbon.js(TEMPLATE + 'dist/js/adminlte.min.js', () => {
 
-                            $(document).on('pjax:complete', function () {
-                                let boxes = $(".box");
+                    carbon.js(COMPOSER + 'richardtmiles/carbonphp/helpers/asynchronous.js', () => {
+                        carbon.event("Carbon");
 
-                                if (!boxes.exists()){
-                                    return;
-                                }
+                        $(document).on('pjax:complete', function () {
+                            let boxes = $(".box");
 
-                                boxes.boxWidget({
-                                    animationSpeed: 500,
-                                    collapseTrigger: '[data-widget="collapse"]',
-                                    removeTrigger: '[data-widget="remove"]',
-                                    collapseIcon: 'fa-minus',
-                                    expandIcon: 'fa-plus',
-                                    removeIcon: 'fa-times'
-                                });
-                                $('#my-box-widget').boxRefresh('load');
+                            if (!boxes.exists()) {
+                                return;
+                            }
+
+                            boxes.boxWidget({
+                                animationSpeed: 500,
+                                collapseTrigger: '[data-widget="collapse"]',
+                                removeTrigger: '[data-widget="remove"]',
+                                collapseIcon: 'fa-minus',
+                                expandIcon: 'fa-plus',
+                                removeIcon: 'fa-times'
                             });
-
-                            $.load_backStretch(APP_VIEW + 'img/unsplash.png');
-                            $('.sidebar-menu').tree();
+                            $('#my-box-widget').boxRefresh('load');
                         });
 
-                        carbon.js(APP_VIEW + 'AdminLTE/Demo/demo.js');
-                        //-- AJAX Pace -->
-                        carbon.js(TEMPLATE + 'bower_components/PACE/pace.js', () => $(document).ajaxStart(() => Pace.restart()));
+                        $.load_backStretch(APP_VIEW + 'img/unsplash.png');
+                        $('.sidebar-menu').tree();
+                    });
 
-                    })
+                    //carbon.js(APP_VIEW + 'AdminLTE/Demo/demo.js');
+                    //-- AJAX Pace -->
+                    carbon.js(TEMPLATE + 'bower_components/PACE/pace.js', () => $(document).ajaxStart(() => Pace.restart()));
+
                 })
             })
         })

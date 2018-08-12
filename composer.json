@@ -1,7 +1,6 @@
 {
-  "name": "richardtmiles/c6",
+  "name": "richardtmiles/rootprerogative.com",
   "description": "The best MVC framework",
-  "minimum-stability": "dev",
   "prefer-stable": true,
   "license": "MIT",
   "config": {
@@ -29,7 +28,7 @@
     }
   ],
   "require-dev": {
-    "richardtmiles/carbonphp" : "dev-carbon#bf605f65e9bb7e1b743b78c6abc4f042c2f88524",
+    "richardtmiles/carbonphp" : "dev-carbon#664d9d2b2f2e7f9e17cc0bc5d78dc72c6ee812ac",
     "google/cloud-tools": "^0.6",
     "phpunit/phpunit": "^7"
   },
@@ -37,6 +36,7 @@
     "php": ">=7.1",
     "google/cloud": "0.65",
     "facebook/graph-sdk": "^5.6.1",
-    "almasaeed2010/adminlte":"v2.4.0"
+    "almasaeed2010/adminlte":"v2.4.0",
+    "google/apiclient": "^2.0"
   }
 }

@@ -30,8 +30,8 @@ const CART = 11;
 
 
 // Template 'data' . DS . 'vendors' .
-const COMPOSER = '';
-const TEMPLATE = COMPOSER . 'almasaeed2010' . DS . 'adminlte' . DS;
+const COMPOSER = 'vendor' . DS;
+const TEMPLATE = 'node_modules' . DS . 'admin-lte' . DS;
 
 // Facebook
 const FACEBOOK_APP_ID = '2036943173195849';
@@ -132,8 +132,9 @@ function urlFacebook($request = null)
 
 /**
  * @param null $request
- * @return array
+ * @return string|array
  * @throws \CarbonPHP\Error\PublicAlert
+ * @throws Google_Exception
  */
 function urlGoogle($request = null)
 {
@@ -194,7 +195,7 @@ return [
     'SITE' => [
         'URL' => 'rootprerogative.com',    // Evaluated and if not the accurate redirect. Local php server okay. Remove for any domain
 
-        'ROOT' => SERVER_ROOT,     // This was defined in our ../index.php
+        'ROOT' => APP_ROOT,     // This was defined in our ../index.php
 
         'ALLOWED_EXTENSIONS' => 'png|jpg|gif|jpeg|bmp|icon|js|css|woff|woff2|map|hbs|eotv',     // File ending in these extensions will be served
 
@@ -211,6 +212,12 @@ return [
         'REPLY_EMAIL' => 'support@carbonphp.com',
 
         'BOOTSTRAP' => 'application/bootstrap.php',     // This file is executed when the startApplication() function is called
+
+        'CACHE_CONTROL' => [
+            'ico|pdf|flv' => 'Cache-Control: max-age=29030400, public',
+            'jpg|jpeg|png|gif|swf|xml|txt|css|js|woff2|tff' => 'Cache-Control: max-age=604800, public',
+            'html|htm|php|hbs' => 'Cache-Control: max-age=0, private, public',
+        ],
 
         'HTTP' => true   // I assume that HTTP is okay by default
     ],
@@ -245,18 +252,16 @@ return [
         },
     ],
 
-    /*  TODO - finish building php websockets in ssl
+    /*  TODO - finish building php websockets in ssl */
     'SOCKET' => [
         'WEBSOCKETD' => true,  // if you'd like to use web
         'PORT' => 8888,
         'DEV' => true,
-        /*
         'SSL' => [
-            'KEY' => '',
-            'CERT' => ''
+            'KEY' => '/etc/letsencrypt/live/rootprerogative.com/privkey.pem',
+            'CERT' => '/etc/letsencrypt/live/rootprerogative.com/fullchain.pem'
         ]
-    ],*/
-
+    ],
 
     // ERRORS on point
     'ERROR' => [

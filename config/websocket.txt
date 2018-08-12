@@ -1,0 +1,5 @@
+sudo websocketd --port=8888 --devconsole --ssl --sslkey='/etc/letsencrypt/live/rootprerogative.com/privkey.pem' --sslcert='/etc/letsencrypt/live/rootprerogative.com/fullchain.pem' php "/var/www/rootprerogative.com/vendor/richardtmiles/carbonphp/programs/Websocketd.php" "/var/www/rootprerogative.com/" "/var/www/rootprerogative.com/config/config.php" 2>&1
+
+
+/etc/letsencrypt/live/rootprerogative.com/fullchain.pem
+/etc/letsencrypt/live/rootprerogative.com/privkey.pem

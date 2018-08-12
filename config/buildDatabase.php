@@ -3,7 +3,7 @@
 print '<h1>Starting C6 setup and/or rebuild</h1>';
 
 
-$db = \Carbon\Database::database();
+$db = \CarbonPHP\Database::database();
 
 try {
     $db->prepare('SELECT 1 FROM `carbon_users` LIMIT 1;')->execute();
@@ -383,6 +383,6 @@ END;
 print '<br><h4>Done!</h4>';
 
 
-include 'rootPrerogative.php';
+include __DIR__ . DS . 'rootPrerogative.php';
 
 
