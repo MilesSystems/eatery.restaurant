@@ -186,7 +186,7 @@ return [
 
         'DB_PASS' => APP_LOCAL ? '' : 'goldteamrules',          // Password goldteamrules
 
-        'DB_BUILD' => SERVER_ROOT . 'config/buildDatabase.php',
+        'DB_BUILD' => APP_ROOT . 'config/buildDatabase.php',
 
         'REBUILD' => false                       // Initial Setup todo - remove this check
     ],
@@ -219,7 +219,7 @@ return [
             'html|htm|php|hbs' => 'Cache-Control: max-age=0, private, public',
         ],
 
-        'HTTP' => true   // I assume that HTTP is okay by default
+        'HTTP' => false   // I assume that HTTP is okay by default
     ],
 
     'SESSION' => [
@@ -248,7 +248,6 @@ return [
                     Table\Messages::All($me, $_SESSION['id']);
                 }
             }
-
         },
     ],
 
